@@ -1,0 +1,69 @@
+.HomeWrap{
+    font-size: 1.3rem;
+}
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+}
+
+.Content1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.Nav{
+    background-color: lightgrey;
+    align-items: center;
+    text-align: right;
+    height: 10vh;
+    font-size: 50px;
+    margin-bottom: 0 auto;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-menu li {
+    text-align: left;
+    cursor: pointer;
+    background-color: #ED8C37;
+}
+
+
+.home_textbox {
+    position: relative;
+    left: 15vw;
+    flex: 1;
+    font-size: 1.67em;
+}
+
+.Moodlets {
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    padding: 1.2em;
+    width: 10%;
+    height: 18vh;
+    position: relative;
+    right: 18vw;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.RootineArr {
+    margin-top: 10em;
+    color: #ED8C37;
+    margin-top: 20px; 
+    text-align: center;
+}
