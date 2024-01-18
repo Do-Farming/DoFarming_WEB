@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/Routine/Routine.css";
+import { AiOutlineUser, AiOutlineMenu } from "react-icons/ai";
 
 const Routine = () => {
 
@@ -7,7 +8,7 @@ const Routine = () => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    fetch('/api/v1/user') 
+    fetch('/api/v1/user') // 서버의 API 엔드포인트에 맞게 경로를 수정해야 합니다.
       .then(response => response.json())
       .then(data => setUser(data.user))
       .catch(error => console.log(error));
