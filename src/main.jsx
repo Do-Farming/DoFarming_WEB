@@ -12,6 +12,7 @@ import MakeRoutine from "./Pages/Home/MakeRoutine";
 import "./Styles/Login/Login.css";
 import "./Styles/Routine/Routine.css";
 
+
 import "./assets/fonts/Gowun_Dodum/font.css";
 
 const root = document.getElementById("root");
