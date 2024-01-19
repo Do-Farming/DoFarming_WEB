@@ -29,6 +29,7 @@ rootElement.render(
       <Route path="/Home" element={<Home />} />
       <Route path="/Routine" element={<Routine />} />
       <Route path="/MakeRoutine" element={<MakeRoutine />} />
+
     </Routes>
   </Router>,
 );
