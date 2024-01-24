@@ -8,8 +8,10 @@ import Home from "./Pages/Home/Home";
 import Routine from "./Pages/Routine/Routine";
 import MakeRoutine from "./Pages/Home/MakeRoutine";
 
+
 import "./Styles/Login/Login.css";
 import "./Styles/Routine/Routine.css";
+
 
 import "./assets/fonts/Gowun_Dodum/font.css";
 
@@ -27,6 +29,7 @@ rootElement.render(
       <Route path="/Home" element={<Home />} />
       <Route path="/Routine" element={<Routine />} />
       <Route path="/MakeRoutine" element={<MakeRoutine />} />
+
     </Routes>
   </Router>,
 );
