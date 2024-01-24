@@ -26,12 +26,13 @@ const Login3 = () => {
 
       const apiUrl = "http://192.168.1.59:8080/api/v1/user/keywords";
 
+      const keywords = {};
+      selectedOptions.forEach((option, index) => {
+        keywords[`keyword${index + 1}`] = option;
+      });
+
       const data = {
-        keywords: {
-          keyword1: selectedOptions[0] || "",
-          keyword2: selectedOptions[1] || "",
-          keyword3: selectedOptions[2] || "",
-        },
+        keywords: keywords,
       };
 
       const response = await axios.patch(apiUrl, data, {

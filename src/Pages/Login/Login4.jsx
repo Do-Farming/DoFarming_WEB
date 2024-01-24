@@ -21,14 +21,15 @@ const Login4 = () => {
     if (input.length >= 0 && input.length <= 12 && (eng.test(input) || kor.test(input) || num.test(input) || !spc.test(input))) {
       setNickname(input);
     } else {
-      console.error("닉네임은 영문, 한글, 숫자를 포함한 12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
+      alert("닉네임은 영문, 한글, 숫자를 포함한 12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
     }
   };
 
   const AgeCheck = (e) => {
     const input = e.target.value;
+  
     if (isNaN(input)) {
-      console.error("숫자만 입력하세요");
+      alert("숫자만 입력하세요");
     } else {
       setAge(input);
     }

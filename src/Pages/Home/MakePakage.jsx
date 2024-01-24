@@ -1,34 +1,33 @@
-import React, { useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { FiAlignJustify } from "react-icons/fi";
-import "../../Styles/Home/Home.css";
+import React, { useState } from 'react';
 
-const MakeRoutine = () => {
-  const [isNavVisible, setIsNavVisible] = useState(false);
+const MakePackage = ({ onAdd }) => {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
 
-  const toggleNav = () => {
-    setIsNavVisible(!isNavVisible);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onAdd({ name, message });
+    setName('');
+    setMessage('');
   };
 
-
-
   return (
-    <div className="HomeWrap">
-      <div className="Nav">
-        <AiOutlineUser />
-        <FiAlignJustify onClick={toggleNav} />
-        {isNavVisible && (
-          <ul className="nav-menu">
-            <li>홈</li>
-            <li>루틴</li>
-            <li>전문가와의 상담</li>
-            <li>고민 노크</li>
-          </ul>
-        )}
-      </div>
-
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Package name"
+      />
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Message"
+      />
+      <button type="submit">Add</button>
+    </form>
   );
 };
 
-export default MakeRoutine;
+export default MakePackage;

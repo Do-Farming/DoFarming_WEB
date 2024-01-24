@@ -1,13 +1,10 @@
-// Home.jsx
-
 import React, { useState } from "react";
-import { AiOutlineUser } from "react-icons/ai";
 import { CgAdd } from "react-icons/cg";
-import { FiAlignJustify } from "react-icons/fi";
 import "../../Styles/Home/Home.css";
 import "../../Styles/Home/MakeRoutine.css";
 import "../../Styles/Home/HomeModal.css";
 import { Link } from "react-router-dom";
+import NavBar from "../Nav/Nav.jsx";
 
 const Home = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -30,25 +27,13 @@ const Home = () => {
   const handleDivClick = (divNumber) => {
     setSelectedDiv(divNumber);
 
-    const selectedDivColor = getComputedStyle(document.querySelector(`.${divNumber}`)).backgroundColor;
-    document.querySelector('.Moodlets').style.backgroundColor = selectedDivColor;
+    const selectedDivImage = getComputedStyle(document.querySelector(`.${divNumber}`)).backgroundImage;
+    document.querySelector('.Moodlets').style.backgroundImage = selectedDivImage;
   };
 
   return (
     <div className="HomeWrap">
-      <div className="Nav">
-        <AiOutlineUser />
-        <FiAlignJustify onClick={toggleNav} />
-        {isNavVisible && (
-          <ul className="nav-menu">
-            <li>홈</li>
-            <li>루틴</li>
-            <li>전문가와의 상담</li>
-            <li>고민 노크</li>
-          </ul>
-        )}
-      </div>
-
+         <NavBar />
       <div className="Content1">
         <div className="home_textbox">
           <p>님 반가워요 </p>
@@ -60,15 +45,15 @@ const Home = () => {
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="div1" onClick={() => handleDivClick("div1")}></div>
-            <div className="div2" onClick={() => handleDivClick("div2")}></div>
-            <div className="div3" onClick={() => handleDivClick("div3")}></div>
-            <div className="div4" onClick={() => handleDivClick("div4")}></div>
-            <div className="div5" onClick={() => handleDivClick("div5")}></div>
-            <div className="div6" onClick={() => handleDivClick("div6")}></div>
-            <div className="div7" onClick={() => handleDivClick("div7")}></div>
-            <div className="div8" onClick={() => handleDivClick("div8")}></div>
-            <div className="div9" onClick={() => handleDivClick("div9")}></div>
+          <div className="div1" onClick={() => handleDivClick("div1")} style={{ backgroundImage: 'url("/emotion1.png")' }}></div>
+<div className="div2" onClick={() => handleDivClick("div2")} style={{ backgroundImage: 'url("/emotion2.png")' }}></div>
+<div className="div3" onClick={() => handleDivClick("div3")} style={{ backgroundImage: 'url("/emotion3.png")' }}></div>
+<div className="div4" onClick={() => handleDivClick("div4")} style={{ backgroundImage: 'url("/emotion4.png")' }}></div>
+<div className="div5" onClick={() => handleDivClick("div5")} style={{ backgroundImage: 'url("/emotion5.png")' }}></div>
+<div className="div6" onClick={() => handleDivClick("div6")} style={{ backgroundImage: 'url("/emotion6.png")' }}></div>
+<div className="div7" onClick={() => handleDivClick("div7")} style={{ backgroundImage: 'url("/emotion7.png")' }}></div>
+<div className="div8" onClick={() => handleDivClick("div8")} style={{ backgroundImage: 'url("/emotion8.png")' }}></div>
+<div className="div9" onClick={() => handleDivClick("div9")} style={{ backgroundImage: 'url("/emotion9.png")' }}></div>
             
             <p className="close-modal-button" onClick={closeModal}>x</p>
           </div>
@@ -81,7 +66,7 @@ const Home = () => {
           <Link to="/MakeRoutine">
             <button>
               <CgAdd />
-            </button>
+            </button> 
           </Link>
         </div>
       )}

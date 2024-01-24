@@ -45,10 +45,10 @@ body {
     position: relative;
     bottom: 6vh;
     font-size: 0.625rem;
-    width: 40vw;
+    width: 100vw;
     margin-top: 8vh;
     line-height: 2.2vh;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.1px;
 }
 
 #login1_submit_btn {
@@ -280,10 +280,7 @@ input[type='text'] {
 
 button[type="submit"]:enabled {
     cursor: pointer;
-}
-
-button[type="submit"]:enabled:hover {
-    border: solid 2px blue;
+    background-color: #ED8C37;
 }
 
 form #myInfo {
