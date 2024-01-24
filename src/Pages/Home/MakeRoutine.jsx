@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiAlignJustify } from "react-icons/fi";
 import "../../Styles/Home/Home.css";
@@ -27,8 +28,10 @@ const MakeRoutine = () => {
         )}
       </div>
     <p>아침루틴</p>
-    <p>아직 트랙이 없습니다</p>
-      <p>루틴을 만들러 이동해 볼까요?</p>
+    <p>아직 트랙이 없습니다</p> 
+    <Link to="/Routine">
+      <p id="goRoutine">루틴을 만들러 이동해 볼까요?</p>
+    </Link>
     </div>
   );
 };
