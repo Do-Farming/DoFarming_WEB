@@ -19,6 +19,7 @@ import { Depression1 } from "../Components/Depression1";
 import { Frustration } from "../Components/Frustration";
 import { Rest } from "../Components/Rest";
 import { GoToRoutine } from '../Components/GoToRoutine';
+import NavBar from "../Nav/Nav.jsx";
 
 
 const Routine = () => {
@@ -155,8 +156,6 @@ const Routine = () => {
   };
 
 
-  
-
   // useEffect(() => {
   //   fetch('/api/v1/user') 
   //     .then(response => response.json())
@@ -187,12 +186,13 @@ const Routine = () => {
 
   return(
     <div className="Routine_wrap">
-      <div className="nav">
+      {/* <div className="nav">
         <div className="navBtn1"><AiOutlineUser size="24" color="black" /></div>
         <div className="navBtn2"><AiOutlineMenu size="24" color="black" /></div>
-      </div>
+      </div> */}
+      <NavBar />
       <div className="main">
-      <hr />
+      {/* <hr /> */}
         <div className="txt">
           <p className="txt1">나를 가꾸는 시간</p>
           <p className="txt2">우리 모두에게는 시간이라는 공평한 것이 주어진다</p>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineUser } from 'react-icons/ai';
-import { FiAlignJustify } from 'react-icons/fi';
+import { AiOutlineUser, AiOutlineMenu } from 'react-icons/ai';
+// import { FiAlignJustify } from 'react-icons/fi';
 import "../../Styles/Home/Nav.css";
 
 const NavBar = () => {
@@ -19,7 +19,7 @@ const NavBar = () => {
     return (
         <div className="Nav">
             <AiOutlineUser className='MypageIcon' size='24' onClick={LinktomyPage} />
-            <FiAlignJustify size='24' onClick={toggleNav} /> 
+            <AiOutlineMenu size='24' onClick={toggleNav} className='NavIcon'/> 
             {isNavVisible && (
                 <ul className="nav-menu">
                     <Link to="/home"><li>홈</li></Link>

@@ -9,6 +9,7 @@ import Routine from "./Pages/Routine/Routine";
 import MakeRoutine from "./Pages/Home/MakeRoutine";
 import MakePakage from "./Pages/Home/MakePakage";
 import MyPage from "./Pages/Mypage/MyPage";
+import Map from "./Pages/Map/Map";
 
 
 
@@ -34,6 +35,7 @@ rootElement.render(
       <Route path="/MakeRoutine" element={<MakeRoutine />} />
       <Route path="/MakePakage" element={<MakePakage />} />
       <Route path="/MyPage" element={<MyPage />} />
+      <Route path="/Map" element={<Map />} />
     </Routes>
   </Router>,
 );
