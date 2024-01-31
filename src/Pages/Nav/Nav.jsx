@@ -27,7 +27,7 @@ const NavBar = () => {
                     <Link to="/home"><li>홈</li></Link>
                     <Link to="/routine"><li>루틴</li></Link>
                     <Link to="/Map"><li>장소 추천</li></Link>
-                    <Link to="/knock"><li>고민 노크</li></Link>
+                    <Link to="/"><li>고민 노크</li></Link>
                 </ul>
             )}
         </div>
