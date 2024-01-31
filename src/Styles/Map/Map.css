@@ -1,7 +1,11 @@
 .container_map {
     margin: auto 0;
     padding: 0;
+<<<<<<< HEAD
+    overflow-y: visible;
+=======
     overflow: visible;
+>>>>>>> origin
     overflow-x: hidden;
 }
 

@@ -21,7 +21,7 @@ const Login2 = () => {
       const token = localStorage.getItem('authToken');
       if (token) {
         // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-        const apiUrl = "/api/v1/user/keywords";
+        const apiUrl = "https://dofarming.duckdns.org";
         try {
           const response = await axios.get(apiUrl, {
             headers: {
@@ -57,7 +57,7 @@ const Login2 = () => {
       localStorage.setItem('authToken', token);
 
       // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-      const apiUrl = "/api/v1/user/keywords";
+      const apiUrl = "https://dofarming.duckdns.org";
       const response = await axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`
