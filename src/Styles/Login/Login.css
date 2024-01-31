@@ -6,7 +6,6 @@
 body {
     margin: 0 auto;
     overflow: hidden;
-    font-family: "GowunDodum";
 }
 
 .login1_wrap {
@@ -349,4 +348,6 @@ form #myInfo {
     #gender {
         width: 84%;
     }
-};
+}
+
+;
