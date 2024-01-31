@@ -114,9 +114,9 @@ const Home = () => {
       {packages.length > 0 ? (
         packages.map((pkg, index) => (
           <div key={index}>
-            <strong>패키지 이름:</strong> {pkg.name}
+            <strong>패키지 이름 </strong> {pkg.name}
             <br />
-            <strong>패키지 상태:</strong> {pkg.status}
+            <strong>패키지 상태 </strong> {pkg.status}
             <button onClick={() => handleDeletePackage(index)}>삭제</button> 
             <hr />
           </div>
