@@ -24,7 +24,7 @@ const Login3 = () => {
         return;
       }
 
-      const apiUrl = "http://192.168.1.59:8080/api/v1/user/keywords";
+      const apiUrl = "/api/v1/user/keywords";
 
       const keywords = {};
       selectedOptions.forEach((option, index) => {
