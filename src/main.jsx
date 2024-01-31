@@ -7,9 +7,8 @@ import Login4 from "./Pages/Login/Login4";
 import Home from "./Pages/Home/Home";
 import Routine from "./Pages/Routine/Routine";
 import MakeRoutine from "./Pages/Home/MakeRoutine";
-import MakePakage from "./Pages/Home/MakePakage";
 import MyPage from "./Pages/Mypage/MyPage";
-
+import RoutineEdit from "./Pages/Home/PackageEdit";
 
 
 import "./Styles/Login/Login.css";
@@ -32,8 +31,8 @@ rootElement.render(
       <Route path="/Home" element={<Home />} />
       <Route path="/Routine" element={<Routine />} />
       <Route path="/MakeRoutine" element={<MakeRoutine />} />
-      <Route path="/MakePakage" element={<MakePakage />} />
       <Route path="/MyPage" element={<MyPage />} />
+      <Route path="/RoutineEdit" element={<RoutineEdit />} />
     </Routes>
   </Router>,
 );
