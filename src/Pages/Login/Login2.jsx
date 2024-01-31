@@ -1,4 +1,4 @@
-import "../../styles/login/Login.css";
+import "../../Styles/Login/Login.css";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleAuthProvider, signInWithPopup, getIdToken } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-config";

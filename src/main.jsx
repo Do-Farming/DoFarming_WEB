@@ -6,12 +6,8 @@ import Login3 from "./Pages/Login/Login3";
 import Login4 from "./Pages/Login/Login4";
 import Home from "./Pages/Home/Home";
 import Routine from "./Pages/Routine/Routine";
-import MakeRoutine from "./Pages/Home/MakeRoutine";
 import MyPage from "./Pages/Mypage/MyPage";
 import Map from "./Pages/Map/Map";
-
-
-import RoutineEdit from "./Pages/Home/PackageEdit";
 
 
 import "./Styles/Login/Login.css";

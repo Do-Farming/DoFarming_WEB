@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/Routine/Routine.css";
-import { AiOutlineUser, AiOutlineMenu } from "react-icons/ai";
+import "../../Styles/Routine/Routine.css";
 import ButtonGroup from '../Components/ButtonGroup';
 import { MiracleMorning } from "../Components/MiracleMorning";
 import { DayStart } from "../Components/DayStart";
@@ -20,6 +19,7 @@ import { Frustration } from "../Components/Frustration";
 import { Rest } from "../Components/Rest";
 import { GoToRoutine } from '../Components/GoToRoutine';
 import NavBar from "../Nav/Nav.jsx";
+
 
 
 const Routine = () => {
