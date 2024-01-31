@@ -1,5 +1,3 @@
-/* HomeModal.css */
-
 .modal-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -26,7 +24,7 @@
   }
   
   .div1 {
-    background-color: #ffcccb; /* 각 div에 다른 색 적용 */
+    background-color: #ffcccb; 
   }
   
   .div2 {
