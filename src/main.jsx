@@ -8,14 +8,14 @@ import Home from "./Pages/Home/Home";
 import Routine from "./Pages/Routine/Routine";
 import MakeRoutine from "./Pages/Home/MakeRoutine";
 import MyPage from "./Pages/Mypage/MyPage";
+import Map from "./Pages/Map/Map";
+
+
 import RoutineEdit from "./Pages/Home/PackageEdit";
 
 
 import "./Styles/Login/Login.css";
 import "./Styles/Routine/Routine.css";
-
-
-import "./assets/fonts/Gowun_Dodum/font.css";
 
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
@@ -30,9 +30,8 @@ rootElement.render(
       <Route path="/login4" element={<Login4 />} />
       <Route path="/Home" element={<Home />} />
       <Route path="/Routine" element={<Routine />} />
-      <Route path="/MakeRoutine" element={<MakeRoutine />} />
       <Route path="/MyPage" element={<MyPage />} />
-      <Route path="/RoutineEdit" element={<RoutineEdit />} />
+      <Route path="/Map" element={<Map />} />
     </Routes>
   </Router>,
 );
