@@ -16,9 +16,6 @@ import Map from "./Pages/Map/Map";
 import "./Styles/Login/Login.css";
 import "./Styles/Routine/Routine.css";
 
-
-import "./assets/fonts/Gowun_Dodum/font.css";
-
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
 
