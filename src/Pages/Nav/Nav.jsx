@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser, AiOutlineMenu } from 'react-icons/ai';
-// import { FiAlignJustify } from 'react-icons/fi';
 import "../../Styles/Home/Nav.css";
 import Logo from './로고.jpeg';
 
