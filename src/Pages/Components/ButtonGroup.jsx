@@ -1,4 +1,3 @@
-// ButtonGroup.js
 import React from 'react';
 
 const ButtonGroup = ({ activeBtn, handleBtnClick }) => (
