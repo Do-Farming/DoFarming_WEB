@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "../../Styles/Login/Login.css";
 
-
 const Login3 = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -19,7 +18,7 @@ const Login3 = () => {
 
   const handleButtonClick = async () => {
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem("authToken");
 
       if (!token) {
         console.error("인증 토큰이 없습니다.");
@@ -27,11 +26,7 @@ const Login3 = () => {
       }
 
       const apiUrl = "/api/v1/user/keywords";
-
-      const keywords = {};
-      selectedOptions.forEach((option, index) => {
-        keywords[`keyword${index + 1}`] = option;
-      });
+      const keywords = selectedOptions.join(",");
 
       const data = {
         keywords: keywords,
