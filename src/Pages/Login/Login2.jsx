@@ -57,7 +57,7 @@ const Login2 = () => {
       localStorage.setItem('authToken', token);
 
       // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-      const apiUrl = "https://dofarming.duckdns.org";
+      const apiUrl = `${process.env.REACT_APP_API_URL}`;
       const response = await axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`

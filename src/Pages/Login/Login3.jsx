@@ -29,7 +29,7 @@ const Login3 = () => {
         return;
       }
 
-      const apiUrl = 'https://dofarming.duckdns.org/api/v1/user/keywords';
+      const apiUrl = `${process.env.REACT_APP_API_URL}keywords`;
 
       const keywordsObj = {};
       selectedOptions.forEach((option, index) => {
