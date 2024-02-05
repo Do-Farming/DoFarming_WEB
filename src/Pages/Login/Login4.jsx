@@ -53,7 +53,7 @@ const Login4 = () => {
         age: Age,
       };
 
-      const apiUrl = `${process.env.REACT_APP_API_URL}info`;
+      const apiUrl = "https://dofarming.duckdns.org/api/v1/user/info";
 
       const response = await axios.patch(apiUrl, data, {
         headers: {

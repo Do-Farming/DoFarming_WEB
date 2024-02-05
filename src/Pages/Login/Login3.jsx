@@ -5,6 +5,7 @@ import "../../Styles/Login/Login.css";
 
 const Login3 = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [keywords, setKeywords] = useState({});
 
   const toggleOption = (option) => {
     setSelectedOptions((prevOptions) => {
@@ -17,7 +18,13 @@ const Login3 = () => {
   };
 
   const handleSelectCompleteClick = () => {
+    const keywordsObj = {};
+    selectedOptions.forEach((option, index) => {
+      keywordsObj[`keyword${index + 1}`] = option;
+    });
+    setKeywords(keywordsObj);
     console.log("선택된 옵션: ", selectedOptions);
+    console.log("서버에 전송될 데이터: ", keywordsObj);
   };
 
   const handleNextClick = async () => {
@@ -29,16 +36,9 @@ const Login3 = () => {
         return;
       }
 
-      const apiUrl = `${process.env.REACT_APP_API_URL}keywords`;
+      const apiUrl = 'https://dofarming.duckdns.org/api/v1/user/keywords';
 
-      const keywordsObj = {};
-      selectedOptions.forEach((option, index) => {
-        keywordsObj[`keyword${index + 1}`] = option;
-      });
-
-      console.log("서버에 전송될 데이터: ", keywordsObj);
-
-      const response = await axios.patch(apiUrl, keywordsObj, {
+      const response = await axios.patch(apiUrl, keywords, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

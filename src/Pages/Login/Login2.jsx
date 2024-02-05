@@ -9,8 +9,8 @@ import React, { useState, useEffect } from "react";
 // Login2 컴포넌트 정의
 const Login2 = () => {
   // useNavigate 훅을 사용하여 라우터 제어
-  const navigate = useNavigate();
-
+  const navigate = useNavigate(); 
+  
   // 사용자 데이터를 저장할 상태
   const [userData, setUserData] = useState(null);
 
@@ -21,7 +21,7 @@ const Login2 = () => {
       const token = localStorage.getItem('authToken');
       if (token) {
         // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-        const apiUrl = "process.env.API_URL";
+        const apiUrl = "https://dofarming.duckdns.org";
         try {
           const response = await axios.get(apiUrl, {
             headers: {
@@ -47,7 +47,7 @@ const Login2 = () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-
+      
       // 로그인 결과에서 사용자 정보 추출
       const user = result.user;
       setUserData(user);
@@ -57,7 +57,7 @@ const Login2 = () => {
       localStorage.setItem('authToken', token);
 
       // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-      const apiUrl = `${process.env.REACT_APP_API_URL}`;
+      const apiUrl = "https://dofarming.duckdns.org";
       const response = await axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -97,6 +97,3 @@ const Login2 = () => {
 
 // 컴포넌트 내보내기
 export default Login2;
-
-// 콘솔에 토큰 출력
-console.log(localStorage.getItem('authToken'));
