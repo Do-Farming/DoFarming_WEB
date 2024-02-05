@@ -8,6 +8,8 @@ import Home from "./Pages/Home/Home";
 import Routine from "./Pages/Routine/Routine";
 import MyPage from "./Pages/Mypage/MyPage";
 import Map from "./Pages/Map/Map";
+import Profile from "./Pages/Mypage/Profile";
+import Reset from "./Pages/Mypage/Reset";
 
 
 import "./Styles/Login/Login.css";
@@ -28,6 +30,8 @@ rootElement.render(
       <Route path="/Routine" element={<Routine />} />
       <Route path="/MyPage" element={<MyPage />} />
       <Route path="/Map" element={<Map />} />
+      <Route path="/Profile" element={<Profile />} />
+      <Route path="/Reset" element={<Reset />} />
     </Routes>
   </Router>,
 );

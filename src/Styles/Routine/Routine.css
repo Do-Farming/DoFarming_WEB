@@ -71,6 +71,7 @@ hr {
     display: flex;
     justify-content: space-between;
     margin: 6vw;
+    color: black;
 }
 
 .inactive {
@@ -79,6 +80,7 @@ hr {
     background-color: white;
     width: 18vw;
     height: 4.5vh;
+    color: black;
 }
 
 .inactive:hover {
@@ -95,6 +97,7 @@ hr {
     border-radius: 50px;
     width: 18vw;
     height: 4.5vh;
+    color: white;
 }
 
 .go {
