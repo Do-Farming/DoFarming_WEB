@@ -1,4 +1,4 @@
-.HomeWrap{
+.HomeWrap {
     font-size: 1.3rem;
 }
 
@@ -7,7 +7,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100000000vh; 
+    height: 100000000vh;
 }
 
 .Content1 {
@@ -40,11 +40,11 @@
 .RootineArr {
     margin-top: 10em;
     color: #ED8C37;
-    margin-top: 20px; 
+    margin-top: 20px;
     text-align: center;
 }
 
-button{
+button {
     border: none;
     color: white;
 }

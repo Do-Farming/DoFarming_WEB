@@ -76,6 +76,7 @@
     border: none;
     cursor: pointer;
     background-color: white;
+    color: #ED8C37;
     font-weight: bold;
     flex: 1;
 }
