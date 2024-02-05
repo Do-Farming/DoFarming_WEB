@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-//import { GoogleMap, LoadScript, Marker, InfoWindow, StandaloneSearchBox } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow, StandaloneSearchBox } from '@react-google-maps/api';
 import dot from './제목_없는_아트워크.png';
 import NavBar from "../Nav/Nav.jsx";
 import '../../Styles/Map/Map.css'
 import { FaPhoneAlt } from "react-icons/fa";
-//import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Collapse, List, ListItem } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Collapse, List, ListItem } from '@material-ui/core';
 
 const containerStyle = {
   width: '90vw',
