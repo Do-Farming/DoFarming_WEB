@@ -53,7 +53,7 @@ const Login4 = () => {
         age: Age,
       };
 
-      const apiUrl = "http://192.168.1.59:8080/api/v1/user/info";
+      const apiUrl = "https://dofarming.duckdns.org/api/v1/user/info";
 
       const response = await axios.patch(apiUrl, data, {
         headers: {

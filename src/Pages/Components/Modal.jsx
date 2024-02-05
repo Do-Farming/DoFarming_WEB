@@ -11,8 +11,7 @@ const Modal = ({ onClose }) => {
         </div>
         <div className="modal-body">
           <select className="modal-select">
-            <option value="workout">운동 루틴</option>
-            <option value="study">공부 루틴</option>
+            <option value="myPackage"></option>
           </select>
           {/* 선택하는 값(밸류값)은 메인 홈에서 받아오기 */}
         </div>
