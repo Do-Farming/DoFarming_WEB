@@ -65,6 +65,7 @@ body {
     width: 25vw;
     align-items: center;
     margin: 10vh auto;
+    color: black;
 }
 
 @media screen and (max-width: 768px) {

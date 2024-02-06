@@ -1,4 +1,5 @@
 import React from 'react';
+import "../../Styles/Routine/Routine.css"
 
 const ButtonGroup = ({ activeBtn, handleBtnClick }) => (
   <div className="btn">
