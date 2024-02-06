@@ -10,6 +10,9 @@ import MyPage from "./Pages/Mypage/MyPage";
 import Map from "./Pages/Map/Map";
 import Profile from "./Pages/Mypage/Profile";
 import Reset from "./Pages/Mypage/Reset";
+import MakeRoutine from "./Pages/Home/MakeRoutine";
+import Home9 from "./Pages/Home/Home9";
+
 
 
 import "./Styles/Login/Login.css";
@@ -32,6 +35,8 @@ rootElement.render(
       <Route path="/Map" element={<Map />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/Reset" element={<Reset />} />
+      <Route path="/MakeRoutine" element={<MakeRoutine />} />
+      <Route path="/Home9" element={<Home9 />} />
     </Routes>
   </Router>,
 );

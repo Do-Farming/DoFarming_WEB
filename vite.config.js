@@ -16,6 +16,15 @@ export default {
             external: ["@react-google-maps/api", "@material-ui/core"],
         },
     },
+  },
+  scripts: {
+    "clean-release": "clean"
+  },
+  define: {
+    'process.env': {},
+    global: {},
+  }
+};
     scripts: {
         "clean-release": "clean"
     }

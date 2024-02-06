@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser, AiOutlineMenu } from 'react-icons/ai';
-// import { FiAlignJustify } from 'react-icons/fi';
 import "../../Styles/Home/Nav.css";
 import Logo from './로고.jpeg';
 
 const NavBar = () => {
-    const [isNavVisible, setIsNavVisible] = useState(false); 
-    const navigate = useNavigate(); 
+    const [isNavVisible, setIsNavVisible] = useState(false);
+    const navigate = useNavigate();
 
     const toggleNav = () => {
-        setIsNavVisible(!isNavVisible); 
+        setIsNavVisible(!isNavVisible);
+    };
+
+    const handleLogoClick = () => {
+        navigate("/");
     };
 
     const LinktomyPage = () => {
         navigate("/MyPage");
-    }
+    };
 
     return (
         <div className="Nav">
-            <img src={Logo} alt="" className='Logo_nav'/>
+            <Link to="/home" onClick={handleLogoClick}>
+                <img src={Logo} alt="" className='Logo_nav' />
+            </Link>
             <AiOutlineUser className='MypageIcon' size='24' onClick={LinktomyPage} />
-            <AiOutlineMenu size='24' onClick={toggleNav} className='NavIcon'/> 
+            <AiOutlineMenu size='24' onClick={toggleNav} className='NavIcon' />
             {isNavVisible && (
                 <ul className="nav-menu">
                     <Link to="/home"><li>홈</li></Link>
