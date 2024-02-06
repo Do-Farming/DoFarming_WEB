@@ -4,18 +4,25 @@ import { TiTrash } from 'react-icons/ti';
 import "../../styles/Home/Home2_1_1.css";
 
 const Home2_1_1 = () => {
-  const [routineList, setRoutineList] = useState([{ name: "아침루틴", completed: false }]);
+  const [routineList, setRoutineList] = useState([]);
 
   const addRoutine = () => {
-    const newRoutine = prompt("추가할 루틴을 입력하세요:");
-    if (newRoutine) {
-      setRoutineList([...routineList, { name: newRoutine, completed: false }]);
-    }
+    const newRoutine = { name: "", completed: false };
+    setRoutineList([...routineList, newRoutine]);
   };
 
   const deleteRoutine = (index) => {
     const newList = [...routineList];
     newList.splice(index, 1);
+    setRoutineList(newList);
+  };
+
+  const updateRoutineName = (index, newName) => {
+    const newList = [...routineList];
+    newList[index] = {
+      ...newList[index],
+      name: newName
+    };
     setRoutineList(newList);
   };
 
@@ -30,7 +37,7 @@ const Home2_1_1 = () => {
 
   const renderRoutineList = () => {
     return routineList.map((routine, index) => (
-      <div className="MyRou" key={index}>
+      <div className={`MyRou ${routine.completed ? 'completed' : ''}`} key={index}>
         <div className="checkbox-container">
           <input
             type="checkbox"
@@ -39,7 +46,12 @@ const Home2_1_1 = () => {
           />
           <span className="checkmark"></span>
         </div>
-        <p style={{ textDecoration: routine.completed ? "line-through" : "none" }}>{routine.name}</p>
+        <input
+          type="text"
+          value={routine.name}
+          onChange={(e) => updateRoutineName(index, e.target.value)}
+          style={{ textDecoration: routine.completed ? 'line-through' : 'none' }}
+        />
         <button onClick={() => deleteRoutine(index)}>
           <TiTrash />
         </button>
@@ -48,11 +60,12 @@ const Home2_1_1 = () => {
   };
 
   return (
-    <div>
+    <div id="Btn2_2_1Wrap"> 
       <NavBar />
+      <h1>아침 루틴</h1>
       <div id="RouList">
         {renderRoutineList()}
-        <button onClick={addRoutine}>나만의 루틴 추가</button>
+        <button id="Btn2_2_1"onClick={addRoutine}>+ 루틴 추가하기</button>
       </div>
     </div>
   );
