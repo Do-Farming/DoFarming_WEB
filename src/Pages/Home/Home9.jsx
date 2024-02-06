@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaCalendarAlt } from 'react-icons/fa';
 import '../../Styles/Home/Home9.css';
+import TextInput from './TextInput'; 
+import '../../Styles/Home/EditableBox.css';
 
 function Home9() {
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
@@ -23,8 +25,8 @@ function Home9() {
 
   return (
     <div>
-      <h1>아침루틴</h1>
-      <h2>끄적끄적</h2>
+      <TextInput className=''init="아침루틴" /> 
+      <TextInput init="끄적끄적" /> 
       <h2>시작일자와 종료일자</h2>
       <DatePicker
         ref={ref}
