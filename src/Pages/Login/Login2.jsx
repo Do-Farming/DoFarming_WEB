@@ -95,7 +95,7 @@ const Login2 = () => {
             fontSize: "1rem", // 글자 크기 변경
             borderRadius: "5px", // 테두리 둥글게
             textAlign: "center",
-            width: "85vw",
+            width: "300px",
           }}
           onClick={handleGoogleLogin}/>
         </div>

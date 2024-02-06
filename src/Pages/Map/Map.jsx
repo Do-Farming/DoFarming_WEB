@@ -154,7 +154,7 @@ const MyComponent = () => {
               style={{
                 boxSizing: `border-box`,
                 border: `1px solid transparent`,
-                width: `240px`,
+                width: `280px`,
                 height: `32px`,
                 marginTop: `27px`,
                 padding: `0 12px`,
@@ -165,7 +165,7 @@ const MyComponent = () => {
                 textOverflow: `ellipses`,
                 position: "absolute",
                 left: "50%",
-                marginLeft: "-120px"
+                marginLeft: "-140px"
               }}
               onChange={e => setSearchTerm(e.target.value)}
             />

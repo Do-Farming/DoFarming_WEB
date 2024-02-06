@@ -11,8 +11,8 @@ const Login1 = () => {
 
   return (
     <div className="login1 wrap">
-      <div className="container">
-        <div className="maintxt">
+      <div className="Login1container">
+        <div className="login1maintxt">
           <p className="Login1txt1">
             우리에게 주어진<br></br>공평한 하루
           </p>

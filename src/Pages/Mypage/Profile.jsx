@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "../../Styles/Home/Home.css";
+import "../../Styles/Mypage/Profile.css";
 import NavBar from "../Nav/Nav.jsx";
 import myimg from "./기본이미지.png";
 
@@ -57,50 +57,58 @@ const Profile = () => {
   return (
     <div className="ProfileWrap">
       <NavBar />
-      <div>
-          <div>Profile</div>
-      <div>
-          {/* 이미지를 표시할 곳 */}
-          {image ? (
-            <img onClick={handleCustomButtonClick} src={image} alt="Uploaded" style={{ width: "200px", height: "200px" }} />
-          ) : (
-            <img onClick={handleCustomButtonClick} src={myimg} alt="Default" style={{ width: "200px", height: "200px" }} />
-          )}
-        </div>
-        <div>
-          {/* 숨겨진 파일 입력 */}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-            style={{ display: "none" }}
-          />
-        </div>
-        <div>
+
+      <div className="ProfileContainer">
+
+        <div className="ProfileTxt">Profile</div>
+        <div className="ProfileContent">
+        {/* 이미지, 닉네임 수정 */}
+        <div className="imgnic">
+          <div className="ProfileimgWrap">
+              {/* 이미지를 표시할 곳 */}
+              {image ? (
+                <img onClick={handleCustomButtonClick} src={image} alt="Uploaded" className="Profileimg" />
+              ) : (
+                <img onClick={handleCustomButtonClick} src={myimg} alt="Default" className="Profileimg" />
+              )}
+              <div>
+                {/* 숨겨진 파일 입력 */}
+                <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} style={{ display: "none" }}/>
+              </div>
+            </div>
+          </div>
+
+        <div className="Profileinputnic">
           {editingNickname ? (
-            <div>
-              <input type="text" value={newNickname} onChange={handleNicknameChange} />
-              <button onClick={handleSaveNickname}>저장</button>
+            <div className="dis">
+              <input type="text" value={newNickname} onChange={handleNicknameChange} className="inputnicChange1"/>
+              <button onClick={handleSaveNickname} className="Profilebtn1">확인</button>
             </div>
           ) : (
-            <div>
-              <span>{nickname}</span>
-              <button onClick={handleEditNickname}>수정</button>
+            <div className="border2">
+              <div className="border1">
+              <span className="inputnicChange1">{nickname}</span>
+              </div>
+              <button onClick={handleEditNickname} className="Profilebtn1">수정</button>
             </div>
           )}
         </div>
-        <div>
-          <label>성별:</label>
-          <select value={gender} onChange={handleGenderChange}>
-            <option value="Male">남성</option>
-            <option value="Female">여성</option>
+
+        <div className="Profileinput">
+          <label>성별</label>
+          <select value={gender} onChange={handleGenderChange} className="Profilegender">
+            <option value="Male">값호출</option>
+            <option value="Female">값호출</option>
           </select>
         </div>
-        <div>
-          <label>나이:</label>
-          <input type="number" value={age} onChange={handleAgeChange} />
+
+        <div className="Profileinput">
+          <label>나이</label>
+          <input type="number" value={age}값호출 onChange={handleAgeChange} className="Profileage"/>
         </div>
+        <button className="Profilesubmit">저장</button>
+        </div>
+        
       </div>
     </div>
   );

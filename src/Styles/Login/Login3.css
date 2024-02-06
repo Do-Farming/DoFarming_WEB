@@ -6,6 +6,14 @@ body {
 
 /* login 3 */
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
 .Login3_txt1 {
     text-align: center;
     font-size: 2.2rem;
@@ -62,7 +70,6 @@ strong {
     margin: 0 auto;
     margin-bottom: 6vh;
     width: 65vw;
-    cursor: pointer;
 }
 
 #SelectclearBtn:disabled {
@@ -83,13 +90,13 @@ strong {
         margin: 0 auto;
     }
     #SelectclearBtn {
-        width: 20vw;
+        width: 250px;
         cursor: pointer;
     }
     #SelectclearBtn:disabled {
         background-color: grey;
         color: white;
-        width: 20vw;
+        width: 250px;
         cursor: pointer;
     }
 }

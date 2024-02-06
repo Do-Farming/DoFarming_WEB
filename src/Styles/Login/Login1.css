@@ -5,33 +5,24 @@ body {
     overflow: hidden;
 }
 
-.login1_wrap {
+.Login1container {
     display: flex;
     flex-direction: column;
-    align-items: left;
-    justify-content: center;
-    height: 80vh;
-    text-align: left;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
     height: 100vh;
 }
 
-.maintxt {
+.login1maintxt {
     text-align: left;
-    margin-top: 4vh;
-    margin-left: 92vh;
+    margin-top: 6vh;
+    margin-left: 35vw;
     margin-bottom: 0.2vh;
 }
 
 .Login1txt1 {
     font-size: 2.5rem;
-    width: 70vw;
+    width: 30vw;
     font-weight: 730;
     margin-bottom: 0.3vh;
     letter-spacing: 1px;
@@ -58,7 +49,7 @@ body {
     cursor: pointer;
     border-radius: 50px;
     margin-bottom: 10vh;
-    width: 25vw;
+    width: 430px;
     align-items: center;
     margin: 10vh auto;
     color: white;
@@ -69,17 +60,22 @@ body {
     color: white;
 }
 
-@media screen and (max-width: 768px) {
-    .maintxt {
-        margin-right: 211vw;
+
+/* 스마트폰 세로: 0px ~ 480px */
+
+@media screen and (max-width: 873px) {
+    .login1maintxt {
+        margin-top: 6vh;
+        margin-left: 15vw;
+        margin-bottom: 0.2vh;
     }
-    .txt1 {
-        width: 80vw;
+    .Login1txt1 {
+        width: 70vw;
     }
-    .txt2 {
-        width: 80vw;
+    .Login1txt2 {
+        width: 70vw;
     }
     #login1_submit_btn {
-        width: 80vw;
+        width: 300px;
     }
 }
