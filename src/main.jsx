@@ -9,6 +9,7 @@ import Routine from "./Pages/Routine/Routine";
 import MyPage from "./Pages/Mypage/MyPage";
 import Map from "./Pages/Map/Map";
 import MakeRoutine from "./Pages/Home/MakeRoutine";
+import Home9 from "./Pages/Home/Home9";
 
 
 
@@ -31,6 +32,7 @@ rootElement.render(
       <Route path="/MyPage" element={<MyPage />} />
       <Route path="/Map" element={<Map />} />
       <Route path="/MakeRoutine" element={<MakeRoutine />} />
+      <Route path="/Home9" element={<Home9 />} />
 
     </Routes>
   </Router>,
