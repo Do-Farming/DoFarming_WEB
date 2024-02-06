@@ -1,4 +1,4 @@
-import "../../Styles/Login/Login.css";
+import "../../Styles/Login/Login2.css";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleAuthProvider, signInWithPopup, getIdToken } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-config";
@@ -82,13 +82,22 @@ const Login2 = () => {
       <div className="login2_wrap">
         <div className="login2_textbox">
           <p>
-            <span className="bold_text">몸</span>과{" "}
-            <span className="bold_text">마음</span>
+            <strong>몸</strong>과 <strong>마음</strong><br />
+            건강하게 챙기는 첫 단계!
           </p>
-          <p>건강하게 챙기는 첫 단계!</p>
+          
         </div>
         <div className="Gloginbox">
-          <GoogleLoginButton onClick={handleGoogleLogin} />
+          <GoogleLoginButton
+          style={{
+            backgroundColor: "white", // 배경색 변경
+            color: "black", // 글자색 변경
+            fontSize: "1rem", // 글자 크기 변경
+            borderRadius: "5px", // 테두리 둥글게
+            textAlign: "center",
+            width: "300px",
+          }}
+          onClick={handleGoogleLogin}/>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import "../../Styles/Routine/Routine.css"
 
 const ButtonGroup = ({ activeBtn, handleBtnClick }) => (
-  <div className="btn">
+  <div className="Routinebtn">
       
     <button className={activeBtn === 'morning' ? 'active' : 'inactive'} onClick={() => handleBtnClick('morning')}>아침</button>
 

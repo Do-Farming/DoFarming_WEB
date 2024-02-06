@@ -194,9 +194,9 @@ const Routine = () => {
       <div className="main">
       {/* <hr /> */}
         <div className="txt">
-          <p className="txt1">나를 가꾸는 시간</p>
-          <p className="txt2">우리 모두에게는 시간이라는 공평한 것이 주어진다</p>
-          <p className="txt3"># {user} 님을 위한 추천</p>
+          <div className="txt1">나를 가꾸는 시간</div>
+          <div className="txt2">우리 모두에게는 <strong>시간</strong>이라는<br />공평한 것이 주어진다</div>
+          <div className="txt3"># {user}값받아오기 님을 위한 추천</div>
         </div>
         <ButtonGroup activeBtn={activeBtn} handleBtnClick={handleBtnClick} />
 
