@@ -15,7 +15,7 @@ import Home9 from "./Pages/Home/Home9";
 
 
 
-import "./Styles/Login/Login.css";
+// import "./Styles/Login/Login.css";
 import "./Styles/Routine/Routine.css";
 
 const root = document.getElementById("root");

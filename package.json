@@ -50,7 +50,7 @@
     "prettier": "3.1.1",
     "rollup": "^4.9.6",
     "rollup-plugin-css-only": "^4.5.2",
-    "vite": "^5.0.10",
+    "vite": "^5.0.12",
     "webpack": "^5.90.1",
     "webpack-cli": "^5.1.4"
   },

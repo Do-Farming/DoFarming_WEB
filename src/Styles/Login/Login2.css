@@ -1,0 +1,25 @@
+body {
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.login2_wrap {
+    height: 80vh;
+}
+
+.login2_textbox {
+    font-size: 2rem;
+    margin-top: 7vh;
+    margin-left: 7vw;
+    margin-bottom: 28vh;
+}
+
+.Gloginbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Gloginbox:hover {
+    cursor: pointer;
+}
