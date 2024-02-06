@@ -47,11 +47,6 @@ h2 {
   cursor: pointer;
 }
 
-#UserPK{
-  
-    
-}
-
 /* 적응형 스타일 추가 */
 @media only screen and (max-width: 1200px) {
   .Home9Wrap {
