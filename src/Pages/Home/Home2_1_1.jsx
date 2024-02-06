@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../Nav/Nav";
 import { TiTrash } from 'react-icons/ti';
 import "../../styles/Home/Home2_1_1.css";
 
-const Home2_1_1 = () => {
+const Home2_1_1 = ({ pageId }) => {
   const [routineList, setRoutineList] = useState([]);
+
+  useEffect(() => {
+    const storedRoutineList = localStorage.getItem(`routineList_${pageId}`);
+    if (storedRoutineList) {
+      setRoutineList(JSON.parse(storedRoutineList));
+    }
+  }, [pageId]);
+
+  useEffect(() => {
+    localStorage.setItem(`routineList_${pageId}`, JSON.stringify(routineList));
+  }, [routineList, pageId]);
 
   const addRoutine = () => {
     const newRoutine = { name: "", completed: false };
@@ -62,13 +73,13 @@ const Home2_1_1 = () => {
   return (
     <div id="Btn2_2_1Wrap"> 
       <NavBar />
-      <h1>아침 루틴</h1>
+      <h1>아침 루틴{pageId}</h1>
       <div id="RouList">
         {renderRoutineList()}
-        <button id="Btn2_2_1"onClick={addRoutine}>+ 루틴 추가하기</button>
+        <button id="Btn2_2_1" onClick={addRoutine}>+ 루틴 추가하기</button>
       </div>
     </div>
   );
 };
 
-export default Home2_1_1;
+export default  Home2_1_1;
