@@ -5,6 +5,8 @@
         import TextInput from './TextInput'; 
         import '../../Styles/Home/Home9.css';
         import NavBar from '../Nav/Nav.jsx';
+        import { Link } from 'react-router-dom';
+
 
         function Home9() {
         const [dateRange, setDateRange] = useState([new Date(), new Date()]);

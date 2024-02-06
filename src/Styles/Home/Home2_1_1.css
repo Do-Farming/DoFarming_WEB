@@ -1,0 +1,31 @@
+
+#RouList {
+    margin-top: 20px;
+  }
+  
+  .MyRou {
+    border: 1px solid black; 
+    border-radius: 10px; 
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .MyRou input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .MyRou button {
+    margin-left: auto; 
+    cursor: pointer;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .MyRou button:hover {
+    cursor: pointer;
+  }
+  

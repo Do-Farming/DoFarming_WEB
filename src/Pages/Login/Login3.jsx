@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -5,7 +7,6 @@ import "../../Styles/Login/Login.css";
 
 const Login3 = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [keywords, setKeywords] = useState({});
 
   const toggleOption = (option) => {
     setSelectedOptions((prevOptions) => {
@@ -17,17 +18,12 @@ const Login3 = () => {
     });
   };
 
-  const handleSelectCompleteClick = () => {
-    const keywordsObj = {};
+  const handleButtonClick = async () => {
+    const keywords = {};
     selectedOptions.forEach((option, index) => {
-      keywordsObj[`keyword${index + 1}`] = option;
+      keywords[`keyword${index + 1}`] = option;
     });
-    setKeywords(keywordsObj);
-    console.log("선택된 옵션: ", selectedOptions);
-    console.log("서버에 전송될 데이터: ", keywordsObj);
-  };
 
-  const handleNextClick = async () => {
     try {
       const token = localStorage.getItem("authToken");
 
@@ -78,15 +74,14 @@ const Login3 = () => {
           </div>
         ))}
       </div>
-      <button
-        id="SelectclearBtn"
-        onClick={handleSelectCompleteClick}
-        disabled={selectedOptions.length === 0}
-      >
-        선택 완료
-      </button>
-      <Link to="/Login4" onClick={handleNextClick}>
-        <button id="SelectclearBtn">다음으로</button>
+      <Link to="/Home">
+        <button
+          id="SelectclearBtn"
+          onClick={handleButtonClick}
+          disabled={selectedOptions.length === 0}
+        >
+          선택 완료
+        </button>
       </Link>
     </div>
   );

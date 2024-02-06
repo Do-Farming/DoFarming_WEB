@@ -12,6 +12,7 @@ import Profile from "./Pages/Mypage/Profile";
 import Reset from "./Pages/Mypage/Reset";
 import MakeRoutine from "./Pages/Home/MakeRoutine";
 import Home9 from "./Pages/Home/Home9";
+import Home2_1_1 from "./Pages/Home/Home2_1_1";
 
 
 
@@ -37,6 +38,7 @@ rootElement.render(
       <Route path="/Reset" element={<Reset />} />
       <Route path="/MakeRoutine" element={<MakeRoutine />} />
       <Route path="/Home9" element={<Home9 />} />
+      <Route path="/Home2_1_1" element={<Home2_1_1 />} />
     </Routes>
   </Router>,
 );
