@@ -16,7 +16,7 @@ import Home2_1_1 from "./Pages/Home/Home2_1_1";
 
 
 
-import "./Styles/Login/Login.css";
+// import "./Styles/Login/Login.css";
 import "./Styles/Routine/Routine.css";
 
 const root = document.getElementById("root");

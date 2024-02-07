@@ -11,54 +11,25 @@ body {
     text-align: center;
 }
 
-
-/* 
-.nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.navBtn1,
-.navBtn2 {
-    padding-top: 3vh;
-    padding-bottom: 1.5vh;
-    margin-left: auto;
-}
-
-.navBtn2 {
-    margin-left: 4vw;
-    margin-right: 4vw;
-}
-
-hr {
-    border: 0.5px solid black;
-} */
-
-.txt {
-    width: 80vw;
-    height: 19vh;
-}
-
 .txt1 {
     font-size: 1.56rem;
     margin-left: 6vw;
+    margin-top: 4vh;
     text-align: left;
+    font-weight: bold;
+    padding-bottom: 4vh;
 }
 
 .txt2 {
     font-size: 0.8rem;
-    width: 40vw;
     margin-left: 6vw;
-    margin-top: 6vh;
-    margin-bottom: 0vh;
     text-align: left;
+    padding-bottom: 60px;
 }
 
 .txt3 {
     font-size: 1.25rem;
     color: #BFBABA;
-    margin-top: 0vh;
     margin-left: 6vw;
     text-align: left;
 }
@@ -67,15 +38,15 @@ hr {
     margin-left: 6vw;
 }
 
-.btn {
+.Routinebtn {
     display: flex;
     justify-content: space-between;
-    margin: 6vw;
+    margin: 3vh 6vw;
     color: black;
 }
 
 .inactive {
-    border: 0.5px solid black;
+    border: 0.2px solid rgb(131, 131, 131);
     border-radius: 50px;
     background-color: white;
     width: 18vw;
@@ -93,7 +64,7 @@ hr {
 
 .active {
     background-color: #ED8C37;
-    border: 0.3px solid black;
+    border: 0.2px solid black;
     border-radius: 50px;
     width: 18vw;
     height: 4.5vh;
@@ -138,6 +109,7 @@ hr {
     font-size: 0.8rem;
     color: #5B5B5B;
     padding-bottom: 4vh;
+    padding-top: 2px;
 }
 
 .selectbox {
@@ -151,7 +123,7 @@ hr {
 
 .txtbox {
     font-size: 20px;
-    width: 65vw;
+    width: 90%;
     height: 3.8vh;
     margin-left: 20px;
     margin-top: 1.6vh;
@@ -162,7 +134,7 @@ hr {
     background-color: #D9D9D9;
     border: none;
     height: 3.8vh;
-    width: 12.5vw;
+    width: 50px;
     border-radius: 20px;
     margin-top: 1.6vh;
     margin-right: 2vw;
