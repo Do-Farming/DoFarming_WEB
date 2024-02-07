@@ -16,14 +16,14 @@ function TextInput({ init, onSave }) {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       setEditable(false);
-      onSave(text); // 수정된 텍스트 저장
+      onSave(text);
     }
   };
 
   const handleClickOutside = (e) => {
-    if (editable && !ref.current.contains(e.target)) {
+    if (editable && ref.current && !ref.current.contains(e.target)) {
       setEditable(false);
-      onSave(text); // 수정된 텍스트 저장
+      onSave(text);
     }
   };
 
@@ -37,7 +37,12 @@ function TextInput({ init, onSave }) {
   return (
     <div ref={ref}>
       {editable ? (
-        <input type="text" value={text} onChange={handleChange} onKeyDown={handleKeyDown} />
+        <input
+          type="text"
+          value={text}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
       ) : (
         <div onClick={editOn}>{text}</div>
       )}
