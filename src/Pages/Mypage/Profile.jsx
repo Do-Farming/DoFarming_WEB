@@ -1,117 +1,218 @@
-import React, { useState, useRef } from "react";
-import "../../Styles/Mypage/Profile.css";
+import React, { useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, MarkerF, InfoWindowF, StandaloneSearchBox } from '@react-google-maps/api';
+import dot from './제목_없는_아트워크.png';
 import NavBar from "../Nav/Nav.jsx";
-import myimg from "./기본이미지.png";
+import '../../Styles/Map/Map.css'
+import { FaPhoneAlt } from "react-icons/fa";
+import {  Button, Collapse, List, ListItem } from '@material-ui/core';
 
-const Profile = () => {
-  // 상태 관리
-  const [nickname, setNickname] = useState("닉네임"); // 서버에서 사용자 닉네임 가져오기
-  const [gender, setGender] = useState("Male"); //서버에서 사용자 성별 가져오기
-  const [age, setAge] = useState(25); //서버에서 사용자 나이 가져오기
-  const [image, setImage] = useState(null);
-  const [editingNickname, setEditingNickname] = useState(false);
-  const [newNickname, setNewNickname] = useState("");
+const containerStyle = {
+  width: '90vw',
+  height: '50vh',
+  margin: '0'
+};
 
-  // input 요소에 대한 참조
-  const fileInputRef = useRef(null);
+const libraries = ["places"];
+
+const MyComponent = () => {
+  const [initialLocation, setInitialLocation] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [searchBox, setSearchBox] = useState(null);
+  const [map, setMap] = useState(null);
+  const [places, setPlaces] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [openHours, setOpenHours] = useState({});
+
+  const toggleOpeningHours = (placeId) => {
+    setOpenHours(prevState => ({
+      ...prevState,
+      [placeId]: !prevState[placeId]
+    }));
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setInitialLocation({ lat: latitude, lng: longitude });
+        setUserLocation({ lat: latitude, lng: longitude });
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }, []);
+
+  const onLoad = ref => setSearchBox(ref);
+  const onPlacesChanged = () => {
+  const location = searchBox.getPlaces()[0].geometry.location;
+  setUserLocation(location.toJSON());
+
+  const service = new window.google.maps.places.PlacesService(map);
+  service.textSearch(
+    {
+      location: location,
+      radius: 5000,
+      query: searchTerm
+    },
+    (results, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        const promises = results.map((result, i) => {
+          return new Promise((resolve, reject) => {
+            const { place_id } = result;
+            service.getDetails({ placeId: place_id }, (place, status) => {
+              if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                results[i] = {
+                  ...results[i],
+                  phone: place.formatted_phone_number,
+                  opening_hours: place.opening_hours ? place.opening_hours.weekday_text : [],
+                };
+                resolve(results[i]);
+              } else {
+                reject(status);
+              }
+            });
+          });
+        });
+
+        Promise.all(promises)
+          .then((places) => {
+            setPlaces(places);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    }
+  );
+}
 
 
-  // 파일 입력 변경 핸들러
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setImage(URL.createObjectURL(selectedImage));
-  };
 
-  // 커스텀 버튼 클릭 핸들러
-  const handleCustomButtonClick = () => {
-    fileInputRef.current.click();
-  };
 
-  // 닉네임 수정 버튼 클릭 핸들러
-  const handleEditNickname = () => {
-    setEditingNickname(true);
-    setNewNickname(nickname);
-  };
 
-  // 닉네임 변경 핸들러
-  const handleNicknameChange = (e) => {
-    setNewNickname(e.target.value);
-  };
-
-  // 닉네임 저장 핸들러
-  const handleSaveNickname = () => {
-    setNickname(newNickname);
-    setEditingNickname(false);
-  };
-
-  // 성별 변경 핸들러
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
-  };
-
-  // 나이 변경 핸들러
-  const handleAgeChange = (e) => {
-    setAge(e.target.value);
-  };
 
   return (
-    <div className="ProfileWrap">
+    <div className='container_map'>
       <NavBar />
-
-      <div className="ProfileContainer">
-
-        <div className="ProfileTxt">Profile</div>
-        <div className="ProfileContent">
-        {/* 이미지, 닉네임 수정 */}
-        <div className="imgnic">
-          <div className="ProfileimgWrap">
-              {/* 이미지를 표시할 곳 */}
-              {image ? (
-                <img onClick={handleCustomButtonClick} src={image} alt="Uploaded" className="Profileimg" />
-              ) : (
-                <img onClick={handleCustomButtonClick} src={myimg} alt="Default" className="Profileimg" />
-              )}
-              <div>
-                {/* 숨겨진 파일 입력 */}
-                <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} style={{ display: "none" }}/>
-              </div>
-            </div>
-          </div>
-
-        <div className="Profileinputnic">
-          {editingNickname ? (
-            <div className="dis">
-              <input type="text" value={newNickname} onChange={handleNicknameChange} className="inputnicChange1"/>
-              <button onClick={handleSaveNickname} className="Profilebtn1">확인</button>
-            </div>
-          ) : (
-            <div className="border2">
-              <div className="border1">
-              <span className="inputnicChange1">{nickname}</span>
-              </div>
-              <button onClick={handleEditNickname} className="Profilebtn1">수정</button>
-            </div>
-          )}
-        </div>
-
-        <div className="Profileinput">
-          <label>성별</label>
-          <select value={gender} onChange={handleGenderChange} className="Profilegender">
-            <option value="Male">값호출</option>
-            <option value="Female">값호출</option>
-          </select>
-        </div>
-
-        <div className="Profileinput">
-          <label>나이</label>
-          <input type="number" value={age}값호출 onChange={handleAgeChange} className="Profileage"/>
-        </div>
-        <button className="Profilesubmit">저장</button>
-        </div>
-        
+      <div className='txt_map'>
+        <div className='txt1'>내 마음을 두드리는 공간</div>
+        <div className='txt2'>도움을 청해봐요</div>
+        {/* 문구 수정 */}
+        <div className='txt3'>#주변 전문의를 찾아봐요</div>
       </div>
+      <LoadScript
+        googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}
+        libraries={libraries}
+      >
+        <div className='gMap'>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={userLocation ? userLocation : { lat: 37.566535, lng: 126.9779692 }}
+          zoom={15}
+          onLoad={ref => setMap(ref)}
+        >
+          {initialLocation && (
+            <MarkerF
+              position={initialLocation}
+              icon={{ 
+                url: dot,
+                scaledSize: new window.google.maps.Size(37, 37)
+              }}
+            />
+          )}
+          {places.slice(0, 5).map((place, i) => (
+            <MarkerF
+              key={i}
+              position={place.geometry.location}
+              onClick={() => {
+                setSelectedPlace(place);
+              }}
+            />
+          ))}
+          {selectedPlace && (
+            <InfoWindowF
+              position={{ lat: selectedPlace.geometry.location.lat(), lng: selectedPlace.geometry.location.lng() }}
+              onCloseClick={() => {
+                setSelectedPlace(null);
+              }}
+            >
+              <div>
+                <h2>{selectedPlace.name}</h2>
+                <p>{selectedPlace.formatted_address}</p>
+              </div>
+            </InfoWindowF>
+          )}
+          <StandaloneSearchBox
+            onLoad={onLoad}
+            onPlacesChanged={onPlacesChanged}
+          >
+            <input
+              type="text"
+              placeholder="추천 키워드: 정신, 심리, 상담, 건강 증진 센터"
+              style={{
+                boxSizing: `border-box`,
+                border: `1px solid transparent`,
+                width: `280px`,
+                height: `32px`,
+                marginTop: `27px`,
+                padding: `0 12px`,
+                borderRadius: `3px`,
+                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                fontSize: `14px`,
+                outline: `none`,
+                textOverflow: `ellipses`,
+                position: "absolute",
+                left: "50%",
+                marginLeft: "-140px"
+              }}
+              onChange={e => setSearchTerm(e.target.value)}
+            />
+          </StandaloneSearchBox>
+        </GoogleMap>
+        </div>
+        <ul className='ul_map'>
+          {places.slice(0, 5).map((place, i) => (
+            <li key={i} className='li_map'>
+              <div className='li_wrap'>
+                <div className="place-name">{place.name}</div>
+                <div className="place-rating">별점: {place.rating}/5</div>
+                <div className="place-address">{place.formatted_address}</div>
+                <Button style={{ color: '#ED8C37' }} variant="text" onClick={() => toggleOpeningHours(place.place_id)}>
+            영업 시간 {openHours[place.place_id] ? '숨기기' : '보기'}
+          </Button>
+          <Collapse in={openHours[place.place_id]}>
+            <List>
+              {place.opening_hours.length > 0 ? place.opening_hours.map((hour, index) => (
+                <ListItem key={index}>
+                  {hour}
+                </ListItem>
+              )) : (
+                <ListItem>
+                  정보 없음
+                </ListItem>
+              )}
+            </List>
+          </Collapse>
+              </div>
+              {place.phone && (
+                <button className="place-phone">
+                  <a href={`tel:${place.phone}`} className='a_map'>
+                  <FaPhoneAlt size={30} color='#ED8C37'/>
+                  <br />
+                  <br />
+                  통화
+                  </a>
+                </button>
+      )}
+            </li>
+          ))}
+        </ul>
+
+      </LoadScript>
     </div>
   );
 };
 
-export default Profile;
+export default React.memo(MyComponent);

@@ -36,7 +36,6 @@ const MakePackage = () => {
 
   return (
     <div>
-      <h2>패키지 만들기</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -54,21 +53,25 @@ const MakePackage = () => {
         <input type="text" name="status" placeholder="패키지 상태" required />
         <button type="submit">{editingPackageId ? "수정" : "추가"}</button>
       </form>
-      {packages.map((pkg) => (
-        <div key={pkg.id}>
-          {editingPackageId === pkg.id ? (
-            <PackageEdit
-              packageInfo={pkg}
-              handleEditPackage={handleEditPackage}
-            />
-          ) : (
-            <PackageDelete
-              packageInfo={pkg}
-              handleDeletePackage={handleDeletePackage}
-            />
-          )}
-        </div>
-      ))}
+      {packages.length === 0 ? (
+        <div><p>아직 루틴이 없습니다 </p><p>루틴을 추가하세요.</p></div>
+      ) : (
+        packages.map((pkg) => (
+          <div key={pkg.id}>
+            {editingPackageId === pkg.id ? (
+              <PackageEdit
+                packageInfo={pkg}
+                handleEditPackage={handleEditPackage}
+              />
+            ) : (
+              <PackageDelete
+                packageInfo={pkg}
+                handleDeletePackage={handleDeletePackage}
+              />
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };
