@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import MakePackage from "./MakePackage";
-import "../../Styles/Home/Home.css";
-import "../../Styles/Home/MakeRoutine.css";
-import "../../Styles/Home/HomeModal.css";
+import "../../Style/Home/Home.css";
+import "../../Style/Home/MakeRoutine.css";
+import "../../Style/Home/HomeModal.css";
 import NavBar from "../Nav/Nav.jsx";
 
 const Home = () => {

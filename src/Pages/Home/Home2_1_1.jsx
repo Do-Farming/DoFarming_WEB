@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Nav/Nav";
 import { TiTrash } from 'react-icons/ti';
-import "../../styles/Home/Home2_1_1.css";
+import "../../Style/Home/Home2_1_1.css";
 
 const Home2_1_1 = ({ pageId }) => {
   const [routineList, setRoutineList] = useState([]);

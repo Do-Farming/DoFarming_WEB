@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../Styles/Mypage/Reset.css";
+import "../../Style/Mypage/Reset.css";
 import NavBar from "../Nav/Nav.jsx";
 import ResetModal from "./ResetModal"; // ResetModal 컴포넌트 import
 
