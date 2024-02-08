@@ -15,7 +15,6 @@ const Profile = () => {
   // input 요소에 대한 참조
   const fileInputRef = useRef(null);
 
-
   // 파일 입력 변경 핸들러
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -54,61 +53,98 @@ const Profile = () => {
     setAge(e.target.value);
   };
 
+  const handleButtonClick = () => {
+    alert("저장되었습니다!");
+};
+
   return (
     <div className="ProfileWrap">
       <NavBar />
 
       <div className="ProfileContainer">
-
         <div className="ProfileTxt">Profile</div>
         <div className="ProfileContent">
-        {/* 이미지, 닉네임 수정 */}
-        <div className="imgnic">
-          <div className="ProfileimgWrap">
+          {/* 이미지, 닉네임 수정 */}
+          <div className="imgnic">
+            <div className="ProfileimgWrap">
               {/* 이미지를 표시할 곳 */}
               {image ? (
-                <img onClick={handleCustomButtonClick} src={image} alt="Uploaded" className="Profileimg" />
+                <img
+                  onClick={handleCustomButtonClick}
+                  src={image}
+                  alt="Uploaded"
+                  className="Profileimg"
+                />
               ) : (
-                <img onClick={handleCustomButtonClick} src={myimg} alt="Default" className="Profileimg" />
+                <img
+                  onClick={handleCustomButtonClick}
+                  src={myimg}
+                  alt="Default"
+                  className="Profileimg"
+                />
               )}
               <div>
                 {/* 숨겨진 파일 입력 */}
-                <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} style={{ display: "none" }}/>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                />
               </div>
             </div>
           </div>
 
-        <div className="Profileinputnic">
-          {editingNickname ? (
-            <div className="dis">
-              <input type="text" value={newNickname} onChange={handleNicknameChange} className="inputnicChange1"/>
-              <button onClick={handleSaveNickname} className="Profilebtn1">확인</button>
-            </div>
-          ) : (
-            <div className="border2">
-              <div className="border1">
-              <span className="inputnicChange1">{nickname}</span>
+          <div className="Profileinputnic">
+            {editingNickname ? (
+              <div className="dis">
+                <input
+                  type="text"
+                  value={newNickname}
+                  onChange={handleNicknameChange}
+                  className="inputnicChange1"
+                />
+                <button onClick={handleSaveNickname} className="Profilebtn1">
+                  확인
+                </button>
               </div>
-              <button onClick={handleEditNickname} className="Profilebtn1">수정</button>
-            </div>
-          )}
-        </div>
+            ) : (
+              <div className="border2">
+                <div className="border1">
+                  <span className="inputnicChange1">{nickname}</span>
+                </div>
+                <button onClick={handleEditNickname} className="Profilebtn1">
+                  수정
+                </button>
+              </div>
+            )}
+          </div>
 
-        <div className="Profileinput">
-          <label>성별</label>
-          <select value={gender} onChange={handleGenderChange} className="Profilegender">
-            <option value="Male">값호출</option>
-            <option value="Female">값호출</option>
-          </select>
-        </div>
+          <div className="Profileinput">
+            <label>성별</label>
+            <select
+              value={gender}
+              onChange={handleGenderChange}
+              className="Profilegender"
+            >
+              <option value="Male">값호출</option>
+              <option value="Female">값호출</option>
+            </select>
+          </div>
 
-        <div className="Profileinput">
-          <label>나이</label>
-          <input type="number" value={age}값호출 onChange={handleAgeChange} className="Profileage"/>
+          <div className="Profileinput">
+            <label>나이</label>
+            <input
+              type="number"
+              value={age}
+              값호출
+              onChange={handleAgeChange}
+              className="Profileage"
+            />
+          </div>
+          <button className="Profilesubmit" onClick={handleButtonClick}>저장</button>
         </div>
-        <button className="Profilesubmit">저장</button>
-        </div>
-        
       </div>
     </div>
   );
