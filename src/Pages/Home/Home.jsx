@@ -4,11 +4,19 @@ import "../../Style/Home/Home.css";
 import "../../Style/Home/MakeRoutine.css";
 import "../../Style/Home/HomeModal.css";
 import NavBar from "../Nav/Nav.jsx";
+import { FaCirclePlus } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [packages, setPackages] = useState([]);
   const [selectedDiv, setSelectedDiv] = useState("");
+  const navigate = useNavigate();
+
+  const LinktoHome9 = () => {
+    navigate("/Home9");
+  };
 
   const handleAddPackage = (newPackage) => {
     setPackages([...packages, newPackage]);
@@ -122,6 +130,8 @@ const Home = () => {
           </div>
         ))
       ) : null}
+
+      <FaCirclePlus className="ToHome9" onClick={LinktoHome9}/>
     </div>
   );
 };
