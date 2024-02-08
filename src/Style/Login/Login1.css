@@ -53,6 +53,7 @@ body {
     align-items: center;
     margin: 10vh auto;
     color: white;
+    border: none;
 }
 
 #login1_submit_btn:hover {
@@ -66,7 +67,7 @@ body {
 @media screen and (max-width: 873px) {
     .login1maintxt {
         margin-top: 6vh;
-        margin-left: 15vw;
+        margin-left: 10vw;
         margin-bottom: 0.2vh;
     }
     .Login1txt1 {
