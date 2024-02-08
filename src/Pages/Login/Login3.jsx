@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "../../Styles/Login/Login3.css";
+import "../../Style/Login/Login3.css";
 
 const Login3 = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);

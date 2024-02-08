@@ -14,11 +14,6 @@ import MakeRoutine from "./Pages/Home/MakeRoutine";
 import Home9 from "./Pages/Home/Home9";
 import Home2_1_1 from "./Pages/Home/Home2_1_1";
 
-
-
-// import "./Styles/Login/Login.css";
-import "./Styles/Routine/Routine.css";
-
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
 

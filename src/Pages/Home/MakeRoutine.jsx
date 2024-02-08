@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../Styles/Home/Home.css";
+import "../../Style/Home/Home.css";
 import "../../Pages/Nav/Nav.jsx";
 import NavBar from "../../Pages/Nav/Nav.jsx";
 

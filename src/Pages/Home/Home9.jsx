@@ -1,9 +1,9 @@
 import React, { useState, useRef, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaCalendarAlt } from 'react-icons/fa';
-import '../../Styles/Home/Calendar.css';
+import '../../Style/Home/Calendar.css';
 import TextInput from './TextInput'; 
-import '../../Styles/Home/Home9.css';
+import '../../Style/Home/Home9.css';
 import NavBar from '../Nav/Nav.jsx';
 import { Link } from 'react-router-dom';
 
