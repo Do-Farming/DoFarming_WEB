@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../Nav/Nav";
-import { TiTrash } from 'react-icons/ti';
-import "../../Style/Home/Home2_1_1.css";
+import { IoTrashSharp } from "react-icons/io5";
+import "../../Style/Home/Todo.css";
 
-const Home2_1_1 = ({ pageId }) => {
+const TodoSection2 = ({ pageId }) => {
   const [routineList, setRoutineList] = useState([]);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const Home2_1_1 = ({ pageId }) => {
     const newList = [...routineList];
     newList[index] = {
       ...newList[index],
-      name: newName
+      name: newName,
     };
     setRoutineList(newList);
   };
@@ -41,45 +40,57 @@ const Home2_1_1 = ({ pageId }) => {
     const newList = [...routineList];
     newList[index] = {
       ...newList[index],
-      completed: !newList[index].completed
+      completed: !newList[index].completed,
     };
     setRoutineList(newList);
   };
 
   const renderRoutineList = () => {
     return routineList.map((routine, index) => (
-      <div className={`MyRou ${routine.completed ? 'completed' : ''}`} key={index}>
+      <div
+        className={`MyRou ${routine.completed ? "completed" : ""}`}
+        key={index}
+      >
         <div className="checkbox-container">
+          <div className="Check1">
           <input
             type="checkbox"
             checked={routine.completed}
             onChange={() => toggleComplete(index)}
+            id={`check${index}`}
+            disabled={routine.name.trim() === ""}
           />
-          <span className="checkmark"></span>
+            <label htmlFor={`check${index}`}></label>
+          </div>
+          <input
+            type="text"
+            value={routine.name}
+            onChange={(e) => updateRoutineName(index, e.target.value)}
+            style={{
+              textDecoration: routine.completed ? "line-through" : "none",
+              textDecorationThickness: routine.completed ? "1px" : "initial"
+            }}
+            placeholder="할 일을 입력하세요"
+            className="TodoSection2Routine"
+          />
+          <button onClick={() => deleteRoutine(index)} className="TodoDelete">
+            <IoTrashSharp size={20} />
+          </button>
         </div>
-        <input
-          type="text"
-          value={routine.name}
-          onChange={(e) => updateRoutineName(index, e.target.value)}
-          style={{ textDecoration: routine.completed ? 'line-through' : 'none' }}
-        />
-        <button onClick={() => deleteRoutine(index)}>
-          <TiTrash />
-        </button>
       </div>
     ));
   };
 
   return (
-    <div id="Btn2_2_1Wrap"> 
-      <NavBar />
-      <h1>아침 루틴{pageId}</h1>
+    <div className="TodoSection2Wrap">
       <div id="RouList">
         {renderRoutineList()}
-        <button id="Btn2_2_1" onClick={addRoutine}>+ 루틴 추가하기</button>
+        <button className="TodoAddRoutineBtn" onClick={addRoutine}>
+          + 루틴 추가하기
+        </button>
       </div>
     </div>
   );
 };
 
-export default  Home2_1_1;
+export default TodoSection2;

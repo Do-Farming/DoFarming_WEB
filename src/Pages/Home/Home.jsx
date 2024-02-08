@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import MakePackage from "./MakePackage";
 import "../../Style/Home/Home.css";
-import "../../Style/Home/MakeRoutine.css";
 import "../../Style/Home/HomeModal.css";
 import NavBar from "../Nav/Nav.jsx";
 import { FaCirclePlus } from "react-icons/fa6";
@@ -40,7 +39,7 @@ const Home = () => {
             <strong>패키지 이름 </strong> {pkg.name}
             <br />
             <strong>패키지 상태 </strong> {pkg.status}
-            <button onClick={() => handleDeletePackage(index)}>삭제</button>
+            <button onClick={() => handleDeletePackage(index)} className="HomeBtn">삭제</button> 
             <hr />
           </div>
         ))

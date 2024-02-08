@@ -44,7 +44,7 @@ const PackageDelete = ({ packageInfo, handleDeletePackage }) => {
               <div id="mmodal">
                 <p>삭제하시겠습니까?</p>
                 <div h2_2_1Btns>
-                <button onClick={handleConfirmDelete}>확인</button>
+                <button onClick={handleConfirmDelete} className='PackageDeleteBtn'>확인</button>
                 <button onClick={handleCancelDelete}>취소</button>
                 </div>
               </div>
