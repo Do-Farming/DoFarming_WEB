@@ -35,7 +35,7 @@ const Profile = () => {
       setNewNickname(input);
       setNickname(input);
     } else {
-      alert("닉네임은 영문, 한글, 숫자를 포함한 12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
+      alert("닉네임은 영문, 한글, 숫자를 포함한 1글자 이상~12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
     }
   };
 
