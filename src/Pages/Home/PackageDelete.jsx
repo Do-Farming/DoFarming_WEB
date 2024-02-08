@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
-import '../../Styles/Home/PackageDelete.css';
+import '../../Style/Home/PackageDelete.css';
 
 const PackageDelete = ({ packageInfo, handleDeletePackage }) => {
   const { id, name, status } = packageInfo;

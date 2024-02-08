@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser, AiOutlineMenu } from 'react-icons/ai';
-import "../../Styles/Home/Nav.css";
+import "../../Style/Home/Nav.css";
 import Logo from './로고.jpeg';
 
 const NavBar = () => {
@@ -32,7 +32,7 @@ const NavBar = () => {
                     <Link to="/home"><li>홈</li></Link>
                     <Link to="/routine"><li>루틴</li></Link>
                     <Link to="/Map"><li>전문가 찾기</li></Link>
-                    <Link to="/"><li>고민 노크</li></Link>
+                    {/* <Link to="/"><li>고민 노크 (삭제)</li></Link> */}
                 </ul>
             )}
         </div>

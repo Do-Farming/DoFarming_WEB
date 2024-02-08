@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import MakePackage from "./MakePackage";
-import "../../Styles/Home/Home.css";
-import "../../Styles/Home/MakeRoutine.css";
-import "../../Styles/Home/HomeModal.css";
+import "../../Style/Home/Home.css";
+import "../../Style/Home/MakeRoutine.css";
+import "../../Style/Home/HomeModal.css";
 import NavBar from "../Nav/Nav.jsx";
 
 const Home = () => {
@@ -43,7 +43,7 @@ const Home = () => {
       <NavBar />
       <div className="Content1">
         <div className="home_textbox">
-          <p>님 반가워요</p>
+          <p>닉네임값님 반가워요</p>
           <p>오늘도 활기차게 하루를 시작해봐요!</p>
         </div>
         <div
