@@ -154,6 +154,7 @@
     cursor: pointer;
     border-radius: 50px;
     width: 200px;
+    border: none;
 }
 
 .Profilesubmit:hover {

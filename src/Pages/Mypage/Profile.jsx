@@ -11,7 +11,6 @@ const Profile = () => {
   const [image, setImage] = useState(null);
   const [editingNickname, setEditingNickname] = useState(false);
   const [newNickname, setNewNickname] = useState("");
-  const [nicknameError, setNicknameError] = useState("");
 
   // input 요소에 대한 참조
   const fileInputRef = useRef(null);
@@ -35,20 +34,14 @@ const Profile = () => {
 
   // 닉네임 변경 핸들러
   const handleNicknameChange = (e) => {
-    const newNickname = e.target.value;
-    setNewNickname(newNickname);
-    setNicknameError(validateNickname(newNickname));
+    setNewNickname(e.target.value);
+    setNickname(e.target.value);
   };
 
   // 닉네임 저장 핸들러
   const handleSaveNickname = () => {
-    const error = validateNickname(newNickname);
-    if (error) {
-      setNicknameError(error);
-    } else {
-      setNickname(newNickname);
-      setEditingNickname(false);
-    }
+    setNickname(newNickname);
+    setEditingNickname(false);
   };
 
   // 성별 변경 핸들러
@@ -64,21 +57,6 @@ const Profile = () => {
   const handleButtonClick = () => {
     alert("저장되었어요!");
 };
-  };
-
-  // 닉네임 유효성 검사
-  const eng = /[a-zA-Z]/;
-  const kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-  const num = /[0-9]/;
-  const spc = /[~!@#$%^&*()_+|<>?:{}]/;
-
-  const validateNickname = ({ target: { value: input } }) => {
-    if (input.length >= 0 && input.length <= 12 && (eng.test(input) || kor.test(input) || num.test(input) || !spc.test(input))) {
-      setNickname(input);
-    } else {
-      alert("닉네임은 영문, 한글, 숫자를 포함한 12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
-    }
-  };
 
   return (
     <div className="ProfileWrap">
@@ -107,6 +85,7 @@ const Profile = () => {
                 />
               )}
               <div>
+                {/* 숨겨진 파일 입력 */}
                 <input
                   type="file"
                   accept="image/*"
@@ -119,26 +98,14 @@ const Profile = () => {
           </div>
 
           <div className="Profileinputnic">
-            {!editingNickname ? (
-              <div className="Profilenickname" onClick={handleEditNickname}>
-                {nickname}
-              </div>
-            ) : (
-              <div>
-                <input
-                  type="text"
-                  value={newNickname}
-                  onChange={handleNicknameChange}
-                  onBlur={handleNicknameChange}
-                  className="Profilenickname"
-                />
-                {nicknameError && (
-                  <div className="Error">{nicknameError}</div>
-                )}
-                <button onClick={handleSaveNickname}>저장</button>
-              </div>
-            )}
-          </div>
+            <input
+              type="text"
+              value={nickname}
+              onChange={handleNicknameChange}
+              onBlur={handleNicknameChange}
+              className="Profilenickname"
+            />
+        </div>
 
           <div className="Profileinput">
             <label>성별</label>
@@ -157,13 +124,12 @@ const Profile = () => {
             <input
               type="number"
               value={age}
+              값호출
               onChange={handleAgeChange}
               className="Profileage"
             />
           </div>
-          <button className="Profilesubmit" onClick={handleButtonClick}>
-            저장
-          </button>
+          <button className="Profilesubmit" onClick={handleButtonClick}>저장</button>
         </div>
       </div>
     </div>

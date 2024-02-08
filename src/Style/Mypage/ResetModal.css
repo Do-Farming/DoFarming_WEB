@@ -34,6 +34,8 @@
     width: 50%;
     height: auto;
     padding: 15px;
+    border-bottom: none;
+    border-left: none;
 }
 
 .resetmodalbtnno {
@@ -45,6 +47,9 @@
     width: 50%;
     height: auto;
     padding: 15px;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
 }
 
 .resetmodalbtnyes:hover {

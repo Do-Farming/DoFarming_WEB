@@ -125,8 +125,8 @@
         height: 5vh;
         font-size: 1.2rem;
         text-align: center;
-        width: 10vw;
-        margin-left: 18vw;
+        width: 14vw;
+        margin-left: 16vw;
     }
     .selectbox_btn:hover {
         cursor: pointer;
@@ -255,7 +255,7 @@
         width: 90%;
         height: 3.8vh;
         margin-left: 20px;
-        margin-top: 1.6vh;
+        margin-top: 2.2vh;
     }
     .selectbox_btn {
         color: #595656;
@@ -404,7 +404,7 @@
         width: 90%;
         height: 3.8vh;
         margin-left: 20px;
-        margin-top: 1.6vh;
+        margin-top: 2.2vh;
     }
     .selectbox_btn {
         color: #595656;
@@ -442,11 +442,11 @@
 
 @media all and (max-width:479px) {
     body {
-        margin: 0 auto;
         overflow: visible;
         font-family: "GowunDodum";
     }
     .Routine_wrap {
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -553,7 +553,7 @@
         width: 90%;
         height: 3.8vh;
         margin-left: 20px;
-        margin-top: 1.6vh;
+        margin-top: 2.2vh;
     }
     .selectbox_btn {
         color: #595656;
