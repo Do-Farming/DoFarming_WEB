@@ -6,8 +6,8 @@ import myimg from "./기본이미지.png";
 const Profile = () => {
   // 상태 관리
   const [nickname, setNickname] = useState("닉네임"); // 서버에서 사용자 닉네임 가져오기
-  const [gender, setGender] = useState("Male"); //서버에서 사용자 성별 가져오기
-  const [age, setAge] = useState(25); //서버에서 사용자 나이 가져오기
+  const [gender, setGender] = useState("값호출"); //서버에서 사용자 성별 가져오기
+  const [age, setAge] = useState("값호출"); //서버에서 사용자 나이 가져오기
   const [image, setImage] = useState(null);
   const [editingNickname, setEditingNickname] = useState(false);
   const [newNickname, setNewNickname] = useState("");
@@ -35,6 +35,7 @@ const Profile = () => {
   // 닉네임 변경 핸들러
   const handleNicknameChange = (e) => {
     setNewNickname(e.target.value);
+    setNickname(e.target.value);
   };
 
   // 닉네임 저장 핸들러
@@ -97,29 +98,14 @@ const Profile = () => {
           </div>
 
           <div className="Profileinputnic">
-            {editingNickname ? (
-              <div className="dis">
-                <input
-                  type="text"
-                  value={newNickname}
-                  onChange={handleNicknameChange}
-                  className="inputnicChange1"
-                />
-                <button onClick={handleSaveNickname} className="Profilebtn1">
-                  확인
-                </button>
-              </div>
-            ) : (
-              <div className="border2">
-                <div className="border1">
-                  <span className="inputnicChange1">{nickname}</span>
-                </div>
-                <button onClick={handleEditNickname} className="Profilebtn1">
-                  수정
-                </button>
-              </div>
-            )}
-          </div>
+            <input
+              type="text"
+              value={nickname}
+              onChange={handleNicknameChange}
+              onBlur={handleNicknameChange}
+              className="Profilenickname"
+            />
+        </div>
 
           <div className="Profileinput">
             <label>성별</label>
