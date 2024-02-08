@@ -28,8 +28,8 @@ const Home = () => {
     <div className="HomeWrap">
       <div className="Content1">
         <div className="home_textbox">
-          <p>닉네임값님 반가워요</p>
-          <p>오늘도 활기차게 하루를 시작해봐요!</p>
+          <p id="hello_user">닉네임값님 반가워요</p>
+          <p id="fighting">오늘도 활기차게 하루를 시작해봐요!</p>
         </div>
         <div
           className="Moodlets"
