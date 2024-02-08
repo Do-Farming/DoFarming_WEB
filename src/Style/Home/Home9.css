@@ -1,113 +1,46 @@
 .Home9Wrap {
-    margin: 0 auto;
-    padding: 0;
-    padding: 10vh 5vw;
-    box-sizing: border-box;
-    font-size: 1.3rem;
-    font-weight: bold;
+    width: 50vw;
+    margin-left: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#RouName,
-#SangMe {
-    width: 100%;
-    height: 40px;
-    padding: 5px;
-    margin-bottom: 2vh;
-    font-size: larger;
-}
-
-#RouName {
-    text-align: center;
-    margin-top: 10%;
-}
-
-#SangMe {
-    margin-top: 9%;
-}
-
-h2 {
-    margin-top: 3vh;
-}
-
-.BtnWrap {
-    text-align: center;
-}
-
-.BtnWrap button {
-  
-  padding: 2.3vh;
-  font-size: 1.25rem;
-  background-color: #ED8C37;
-  color: #ffffff;
-  border: #ED8C37;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 50px;
-  margin-bottom: 6vh;
-  width: 65vw;
-  cursor: pointer;
-}
-
-/* 적응형 스타일 추가 */
-@media only screen and (max-width: 1200px) {
-  .Home9Wrap {
-    padding: 7vh 3vw; 
-  }
-
-  padding: 2.3vh;
-    font-size: 1.25rem;
-    background-color: #ED8C37;
-    color: #ffffff;
-    border: #ED8C37;
+.Home9Btn {
+    margin-top: 35px;
+    padding: 2.3vh;
+    font-size: 1rem;
+    background-color: gray;
+    color: white;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
     border-radius: 50px;
-    margin-bottom: 6vh;
-    width: 65vw;
-    cursor: pointer;
+    width: 200px;
 }
 
-#UserPK {}
-
-
-@media only screen and (max-width: 1200px) {
-    .Home9Wrap {
-        padding: 7vh 3vw;
-    }
-    #RouName,
-    #SangMe {
-        margin-bottom: 1.5vh;
-    }
-    h2 {
-        margin-top: 2vh;
-    }
-    .BtnWrap button {
-        margin-bottom: 0.5vh;
-    }
+.Home9Btn:hover {
+    background-color: #ED8C37;
+    color: white;
 }
 
-@media only screen and (max-width: 800px) {
-    .Home9Wrap {
-        padding: 5vh 2vw;
-    }
-    #RouName,
-    #SangMe {
-        margin-bottom: 1vh;
-    }
-    h2 {
-        margin-top: 1.5vh;
-    }
-    .BtnWrap button {
-        top: 17em;
-        margin-bottom: 0.5vh;
-        position: relative;
-        width: 100%;
-        text-align: center;
-    }
-    #DayDay {
-        position: relative;
-        top: 3em;
-    }
+#UserPK {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#DayDay {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #ccc;
 }
