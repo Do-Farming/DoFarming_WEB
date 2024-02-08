@@ -18,7 +18,8 @@ const Login4 = () => {
 
   const NicknameCheck = (e) => {
     const input = e.target.value;
-    if (input.length >= 0 && input.length <= 12 && (eng.test(input) || kor.test(input) || num.test(input) || !spc.test(input))) {
+    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{1,12}$/.test(input);
+    if (valid) {
       setNickname(input);
     } else {
       alert("닉네임은 영문, 한글, 숫자를 포함한 12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");

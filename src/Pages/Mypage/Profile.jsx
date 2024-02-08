@@ -26,16 +26,17 @@ const Profile = () => {
     fileInputRef.current.click();
   };
 
-  // 닉네임 수정 버튼 클릭 핸들러
-  const handleEditNickname = () => {
-    setEditingNickname(true);
-    setNewNickname(nickname);
-  };
-
   // 닉네임 변경 핸들러
   const handleNicknameChange = (e) => {
-    setNewNickname(e.target.value);
-    setNickname(e.target.value);
+    const input = e.target.value;
+    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{1,12}$/.test(input);
+
+    if (valid) {
+      setNewNickname(input);
+      setNickname(input);
+    } else {
+      alert("닉네임은 영문, 한글, 숫자를 포함한 12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
+    }
   };
 
   // 닉네임 저장 핸들러
