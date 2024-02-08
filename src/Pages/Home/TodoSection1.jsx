@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../Style/Home/Home.css";
-import "../../Pages/Nav/Nav.jsx";
-import NavBar from "../../Pages/Nav/Nav.jsx";
+import "../Nav/Nav.jsx";
 
-const MakeRoutine = ({ packageName }) => {
+const MakeRoutine = () => {
 
   return (
-    <div className="HomeWrap">
-      <NavBar/>
-      
-      <p>{packageName}</p>
+    <div className="TodoSection1Wrap">
       <p>아직 트랙이 없습니다</p> 
       <Link to="/Routine">
         <p id="goRoutine">루틴을 만들러 이동해 볼까요?</p>

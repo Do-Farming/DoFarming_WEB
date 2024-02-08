@@ -55,7 +55,7 @@ const Profile = () => {
   };
 
   const handleButtonClick = () => {
-    alert("저장되었습니다!");
+    alert("저장되었어요!");
 };
 
   return (
