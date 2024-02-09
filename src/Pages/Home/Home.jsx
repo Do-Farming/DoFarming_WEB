@@ -1,51 +1,38 @@
-import React, { useState } from "react";
-import MakePackage from "./MakePackage";
-import "../../Style/Home/Home.css";
-import "../../Style/Home/HomeModal.css";
-import NavBar from "../Nav/Nav.jsx";
-import { FaCirclePlus } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
-import Moodlets from "./HomeComponents/Moodlets";
+import React, { useState, useEffect } from "react";
+import HomeSection2 from "./HomeComponents/HomeSection2.jsx";
+import HomeSection1 from "./HomeComponents/HomeSection1.jsx";
+import NavBar from "../Nav/Nav";
+import HomeHeader from "./HomeComponents/HomeHeader.jsx";
 
 const Home = () => {
-  const [packages, setPackages] = useState([]);
-  const navigate = useNavigate();
+  const [routineData, setRoutineData] = useState(null);
 
-  const LinktoHome9 = () => {
-    navigate("/Home9");
+  useEffect(() => {
+    // 서버에서 루틴값을 받아오는 비동기 함수 호출
+    fetchRoutineData()
+      .then((data) => {
+        setRoutineData(data);
+      })
+      .catch((error) => {
+        console.error("루틴 데이터를 가져오는 중 오류가 발생했습니다:", error);
+      });
+  }, []);
+
+  const fetchRoutineData = async () => {
+    // 서버에서 루틴 데이터를 가져오는 비동기 함수 호출
+    const response = await fetch("루틴 데이터를 가져오는 API 엔드포인트 URL");
+    const data = await response.json();
+    return data;
   };
-
-  const handleAddPackage = (newPackage) => {
-    setPackages([...packages, newPackage]);
-  };
-
-  const handleDeletePackage = (index) => {
-    const updatedPackages = [...packages];
-    updatedPackages.splice(index, 1);
-    setPackages(updatedPackages);
-  };
-
 
   return (
-    <div className="HomeWrap">
-      <NavBar />
-      <Moodlets />
-
-      <MakePackage handleAddPackage={handleAddPackage} />
-
-      {packages.length > 0 ? (
-        packages.map((pkg, index) => (
-          <div key={index}>
-            <strong>패키지 이름 </strong> {pkg.name}
-            <br />
-            <strong>패키지 상태 </strong> {pkg.status}
-            <button onClick={() => handleDeletePackage(index)} className="HomeBtn">삭제</button> 
-            <hr />
-          </div>
-        ))
-      ) : null}
-
-      <FaCirclePlus className="ToHome9" onClick={LinktoHome9} />
+    <div>
+      <div className="HomeWrap">
+        <NavBar />
+        <HomeHeader/>
+        <HomeSection1 />
+        {/* <HomeSection2 /> */}
+      </div>
     </div>
   );
 };
