@@ -5,7 +5,7 @@ import "./HomeSection2_2.css";
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const PackagePrint2 = () => {
+const Homesection2 = () => {
   const [packages, setPackages] = useState([
     { id: 1, name: "아침루틴", status: "진행 중" },
     { id: 2, name: "저녁루틴", status: "진행 중" },
@@ -91,4 +91,4 @@ const PackagePrint2 = () => {
   );
 };
 
-export default PackagePrint2;
+export default Homesection2;
