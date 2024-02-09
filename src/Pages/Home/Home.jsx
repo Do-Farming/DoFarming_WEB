@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import HomeSection2 from "./HomeComponents/HomeSection2.jsx";
-import HomeSection2_2 from "./HomeComponents/HomeSection2_2.jsx";
 import HomeSection1 from "./HomeComponents/HomeSection1.jsx";
 import NavBar from "../Nav/Nav";
 import HomeHeader from "./HomeComponents/HomeHeader.jsx";
@@ -31,9 +30,8 @@ const Home = () => {
       <div className="HomeWrap">
         <NavBar />
         <HomeHeader/>
-        {/* <HomeSection1 /> */}
-        {/* {routineData ? <HomeSection2_2 data={routineData} /> : <HomeSection2 />} */}
-        <HomeSection2_2/>
+        <HomeSection1 />
+        {/* <HomeSection2 /> */}
       </div>
     </div>
   );
