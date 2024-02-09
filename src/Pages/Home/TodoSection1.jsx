@@ -3,7 +3,7 @@ import NavBar from "../Nav/Nav";
 import { TiTrash } from 'react-icons/ti';
 import "../../Style/Home/Home2_1_1.css";
 
-const Home2_1_1 = ({ pageId }) => {
+const TodoSection1 = ({ pageId }) => {
   const [routineList, setRoutineList] = useState([]);
 
   useEffect(() => {
@@ -82,4 +82,4 @@ const Home2_1_1 = ({ pageId }) => {
   );
 };
 
-export default  Home2_1_1;
+export default TodoSection1 ;
