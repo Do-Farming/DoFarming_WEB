@@ -10,9 +10,9 @@ import HomeSection1 from './HomeSection1';
 
 const PackagePrint2 = () => {
   const [packages, setPackages] = useState([
-    { id: 1, name: "아침루틴", status: "진행 중" },
-    { id: 2, name: "저녁루틴", status: "진행 중" },
-    { id: 3, name: "운동루틴", status: "완료" },
+    { id: 1, name: "예시패키지", status: "진행 중" },
+    // { id: 2, name: "저녁루틴", status: "진행 중" },
+    // { id: 3, name: "운동루틴", status: "완료" },
   ]);
 
   const navigate = useNavigate();

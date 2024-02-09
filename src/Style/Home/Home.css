@@ -35,6 +35,9 @@
     height: 118px;
     border-radius: 16px;
     cursor: pointer;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #RoutineZero {
