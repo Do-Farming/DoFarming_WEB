@@ -22,20 +22,23 @@ const HomeHeader = () => {
     ).backgroundImage;
     document.querySelector(".Moodlets").style.backgroundImage =
       selectedDivImage;
+      closeModal();
   };
 
   return (
-    <div className="HomeWrap">
-      <div className="Content1">
+    <div className="HomeHeaderWrap">
+      <div className="HomeHeaderContent">
         <div className="home_textbox">
-          <p id="hello_user">닉네임값님 반가워요</p>
-          <p id="fighting">오늘도 활기차게 하루를 시작해봐요!</p>
+          <div id="hello_user">닉네임님 반가워요</div>
+          <div id="fighting">오늘도 활기차게 하루를 <br /> 시작해봐요!</div>
         </div>
-        <div
-          className="Moodlets"
-          style={{ backgroundImage: `url("${selectedDiv}")` }}
-          onClick={openModal}
-        ></div>
+        <div className="MoodWrap">
+          <div
+            className="Moodlets"
+            style={{ backgroundImage: `url("${selectedDiv}")` }}
+            onClick={openModal}
+          ></div>
+        </div>
       </div>
 
       {isModalOpen && (

@@ -12,8 +12,8 @@ const Todo = () => {
         <div className="Todo">
             <NavBar />
             <TodoHeader />
-            {/* <TodoSection1 /> */}
-            <TodoSection2 />
+            <TodoSection1 />
+            {/* <TodoSection2 /> */}
             {/* 패키지 값이 없으면 섹션1 로드, 패키지 값이 있으면 섹션2 로드 */}
         </div>
     );
