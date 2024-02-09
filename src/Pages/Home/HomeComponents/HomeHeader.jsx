@@ -44,6 +44,14 @@ const HomeHeader = () => {
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="close-modal-button" onClick={closeModal}>
+              x
+            </div>
+            <div className="Headertxt">
+            <div className="hiuser"><strong>닉네임</strong> 님 !</div><br />
+            <div className="tellme">오늘의 감정 온도를 알려주세요 :)</div>
+            </div>
+            <div className="HimgWrap">
             <div
               className="div1"
               onClick={() => handleDivClick("div1")}
@@ -59,6 +67,7 @@ const HomeHeader = () => {
               onClick={() => handleDivClick("div3")}
               style={{ backgroundImage: 'url("/emotion3.png")' }}
             ></div>
+            <br />
             <div
               className="div4"
               onClick={() => handleDivClick("div4")}
@@ -74,6 +83,7 @@ const HomeHeader = () => {
               onClick={() => handleDivClick("div6")}
               style={{ backgroundImage: 'url("/emotion6.png")' }}
             ></div>
+            <br />
             <div
               className="div7"
               onClick={() => handleDivClick("div7")}
@@ -89,10 +99,9 @@ const HomeHeader = () => {
               onClick={() => handleDivClick("div9")}
               style={{ backgroundImage: 'url("/emotion9.png")' }}
             ></div>
+            </div>
 
-            <p className="close-modal-button" onClick={closeModal}>
-              x
-            </p>
+            
           </div>
         </div>
       )}
