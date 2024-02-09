@@ -10,7 +10,7 @@ import MyPage from "./Pages/Mypage/MyPage";
 import Map from "./Pages/Map/Map";
 import Profile from "./Pages/Mypage/Profile";
 import Reset from "./Pages/Mypage/Reset";
-import Home9 from "./Pages/Home/Home9";
+import HomeAddPackage from "./Pages/Home/HomeAddPackage";
 import Todo from "./Pages/Home/Todo";
 
 const root = document.getElementById("root");
@@ -30,7 +30,7 @@ rootElement.render(
       <Route path="/Map" element={<Map />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/Reset" element={<Reset />} />
-      <Route path="/Home9" element={<Home9 />} />
+      <Route path="/HomeAddPackage" element={<HomeAddPackage />} />
       <Route path="Todo" element={<Todo />} />
     </Routes>
   </Router>,

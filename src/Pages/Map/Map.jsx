@@ -100,7 +100,7 @@ const MyComponent = () => {
         <div className='txt1'>내 마음을 두드리는 공간</div>
         <div className='txt2'>도움을 청해봐요</div>
         {/* 문구 수정 */}
-        <div className='txt3'>#주변 전문의를 찾아봐요</div>
+        <div className='txt3Map'>#주변 전문의를 찾아봐요</div>
       </div>
       <LoadScript
         googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}

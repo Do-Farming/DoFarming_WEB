@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../../Style/Home/Home.css";
 import "../../../Style/Home/HomeModal.css";
 
-const Home = () => {
+const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDiv, setSelectedDiv] = useState("");
 
@@ -97,4 +97,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeHeader;

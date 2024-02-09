@@ -5,7 +5,7 @@ import myimg from "./기본이미지.png";
 
 const Profile = () => {
   // 상태 관리
-  const [nickname, setNickname] = useState("닉네임"); // 서버에서 사용자 닉네임 가져오기
+  const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져오기
   const [gender, setGender] = useState("값호출"); //서버에서 사용자 성별 가져오기
   const [age, setAge] = useState("값호출"); //서버에서 사용자 나이 가져오기
   const [image, setImage] = useState(null);
