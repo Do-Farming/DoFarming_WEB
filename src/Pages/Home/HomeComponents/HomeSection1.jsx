@@ -1,7 +1,6 @@
 import "../../../Style/Home/Home.css";
-import "../../../Style/Home/MakeRoutine.css";
 
-const PackageCheck = () => {
+const HomeSection1= () => {
     return (
         <div id="RoutineZero">
             <p id="Zero1">아직 루틴이 없습니다</p>
@@ -10,4 +9,4 @@ const PackageCheck = () => {
     );
 };
 
-export default PackageCheck;
+export default HomeSection1;

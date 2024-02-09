@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import PackagePrint from "./HomeComponents/PackagePrint.jsx";
-import PackagePrint2 from "./HomeComponents/PackagePrint2.jsx";
-import PackageCheck from "./HomeComponents/PackageCheck.jsx";
+import HomeSection2 from "./HomeComponents/HomeSection2.jsx";
+import HomeSection2_2 from "./HomeComponents/HomeSection2_2.jsx";
+import HomeSection1 from "./HomeComponents/HomeSection1.jsx";
 import NavBar from "../Nav/Nav";
-import Moodlets from "./HomeComponents/Moodlets.jsx";
+import HomeHeader from "./HomeComponents/HomeHeader.jsx";
 
 const Home = () => {
   const [routineData, setRoutineData] = useState(null);
@@ -28,10 +28,12 @@ const Home = () => {
 
   return (
     <div>
-      <NavBar />
-      <Moodlets />
-      <PackageCheck />
-      {routineData ? <PackagePrint2 data={routineData} /> : <PackagePrint />}
+      <div className="HomeWrap">
+        <NavBar />
+        <HomeHeader/>
+        <HomeSection1 />
+        {routineData ? <HomeSection2_2 data={routineData} /> : <HomeSection2 />}
+      </div>
     </div>
   );
 };

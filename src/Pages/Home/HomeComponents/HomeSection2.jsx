@@ -3,7 +3,7 @@
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const PackagePrint = () => {
+const HomeSection2 = () => {
 
   return (
     <div className="HomeWrap">
@@ -25,4 +25,4 @@ const PackagePrint = () => {
   );
 };
 
-export default PackagePrint;
+export default HomeSection2;

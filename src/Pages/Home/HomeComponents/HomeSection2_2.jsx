@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
-import "./PackagePrint2.css";
+import "./HomeSection2_2.css";
 
 const PackagePrint2 = () => {
   const [packages, setPackages] = useState([
