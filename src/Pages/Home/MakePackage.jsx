@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+// 서버랑 연결하면 될 듯?? 
+import React, { useState  } from "react";
 import PackageDelete from "./PackageDelete";
 
 const MakePackage = () => {
   const [packages, setPackages] = useState([]);
-  const [editingPackageId, setEditingPackageId] = useState(null); 
+  const [editingPackageId, setEditingPackageId] = useState(null);
+  const [hasPackages, setHasPackages] = useState(false);
 
   const handleAddPackage = (name, status) => {
     const newPackage = {
-      id: Math.random(), 
+      id: Math.random(),
       name,
       status,
     };
     setPackages([...packages, newPackage]);
+    setHasPackages(true);
   };
 
   const handleEditPackage = (packageId, newName, newStatus) => {
@@ -26,12 +29,15 @@ const MakePackage = () => {
       return pkg;
     });
     setPackages(updatedPackages);
-    setEditingPackageId(null); 
+    setEditingPackageId(null);
   };
 
   const handleDeletePackage = (packageId) => {
     const updatedPackages = packages.filter((pkg) => pkg.id !== packageId);
     setPackages(updatedPackages);
+    if (updatedPackages.length === 0) {
+      setHasPackages(false);
+    }
   };
 
   return (
@@ -49,13 +55,15 @@ const MakePackage = () => {
           e.target.reset();
         }}
       >
-        <input type="text" name="name" placeholder="패키지 이름" required />
-        <input type="text" name="status" placeholder="패키지 상태" required />
-        <button type="submit">{editingPackageId ? "수정" : "추가"}</button>
+       
       </form>
-      {packages.length === 0 ? (
-        <div><p>아직 루틴이 없습니다 </p><p>루틴을 추가하세요.</p></div>
-      ) : (
+      {!hasPackages && (
+        <div id="RoutineZero">
+          <p id="Zero1">아직 루틴이 없습니다</p>
+          <p id="Zero2">루틴을 추가하세요.</p>
+        </div>
+      )}
+      {hasPackages &&
         packages.map((pkg) => (
           <div key={pkg.id}>
             {editingPackageId === pkg.id ? (
@@ -70,8 +78,7 @@ const MakePackage = () => {
               />
             )}
           </div>
-        ))
-      )}
+        ))}
     </div>
   );
 };

@@ -27,8 +27,6 @@ const PackageDelete = ({ packageInfo, handleDeletePackage }) => {
 
   return (
     <div>
-      <h3>{name}</h3>
-      <p>{status}</p>
       <button onClick={() => navigate('/Home2_1_1')}>
         <RiPencilFill /> 수정
       </button>
@@ -43,9 +41,9 @@ const PackageDelete = ({ packageInfo, handleDeletePackage }) => {
               <div className="modal-background" onClick={handleCancelDelete} />
               <div id="mmodal">
                 <p>삭제하시겠습니까?</p>
-                <div h2_2_1Btns>
-                <button onClick={handleConfirmDelete}>확인</button>
-                <button onClick={handleCancelDelete}>취소</button>
+                <div h2_2_1btns="true">
+                  <button onClick={handleConfirmDelete}>확인</button>
+                  <button onClick={handleCancelDelete}>취소</button>
                 </div>
               </div>
             </div>

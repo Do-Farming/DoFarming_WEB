@@ -13,6 +13,7 @@ import Reset from "./Pages/Mypage/Reset";
 import MakeRoutine from "./Pages/Home/MakeRoutine";
 import Home9 from "./Pages/Home/Home9";
 import Home2_1_1 from "./Pages/Home/Home2_1_1";
+import PackagePrint2 from "./Pages/Home/HomeComponents/PackagePrint2";
 
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
@@ -34,6 +35,7 @@ rootElement.render(
       <Route path="/MakeRoutine" element={<MakeRoutine />} />
       <Route path="/Home9" element={<Home9 />} />
       <Route path="/Home2_1_1" element={<Home2_1_1 />} />
+      <Route path="/PackagePrint2" element={<PackagePrint2 />} />
     </Routes>
   </Router>,
 );
