@@ -1,3 +1,12 @@
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -21,27 +30,24 @@
     /* 높이를 75%로 설정 */
     background-color: white;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
+    flex-direction: column;
+    /* flex-wrap: wrap;  */
+    text-align: center;
+    align-items: center;
     border-radius: 20px 20px 0 0;
-}
-
-.modal-content>div {
-    flex-basis: 33.33%;
-    /* 3*3으로 나열 */
-    height: 33.33%;
-    background-size: cover;
-    /* 이미지를 div 크기에 맞게 조절 */
-    background-position: center;
-    /* 이미지를 중앙에 위치 */
+    animation: slideUp 0.4s ease-out;
 }
 
 .close-modal-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: black;
+    height: 5%;
+    margin-left: 85vw;
+    margin-top: 15px;
+}
+
+.Headertxt {
+    height: 10%;
+}
+
+.div1 {
+    border: 1px solid black;
 }

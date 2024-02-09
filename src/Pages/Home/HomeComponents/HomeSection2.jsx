@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
 import "../../../Style/Home/HomeSection2.css";
-import { FaPlusCircle } from "react-icons/fa";
+import { IoIosAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import PackageDeleteModal from '../PackageDeleteModal';
 import HomeSection1 from './HomeSection1';
@@ -66,7 +66,7 @@ const PackagePrint2 = () => {
       )}
       <div>
         <Link to="/HomeAddPackage">
-          <FaPlusCircle className="ToHomeAddPackage" />
+          <IoIosAddCircle className="ToHomeAddPackage" />
         </Link>
       </div>
       {showModal && (
