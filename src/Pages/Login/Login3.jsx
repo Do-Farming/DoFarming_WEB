@@ -26,22 +26,19 @@ const Login3 = () => {
       const token = localStorage.getItem("authToken");
 
       if (!token) {
-        console.error("인증 토큰이 없습니다.");
         return;
       }
 
       const apiUrl = 'https://dofarming.duckdns.org/api/v1/user/keywords';
 
-      const response = await axios.patch(apiUrl, keywords, {
+      await axios.patch(apiUrl, keywords, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-
-      console.log("서버 응답: ", response.data);
     } catch (error) {
-      console.error("서버 요청 실패:", error);
+      return;
     }
   };
 

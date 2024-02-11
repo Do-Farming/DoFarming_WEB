@@ -1,3 +1,12 @@
+/*
+// POST dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id HTTP/1.1 (루틴추가)
+// GET dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id HTTP/1.1 (루틴조회)
+//  PATCH dofarming.duckdns.org/api/v1/routine/1 HTTP/1.1 (루틴 상태변경)
+// DELETE dofarming.duckdns.org/api/v1/routine/1 HTTP/1.1 (루틴삭제)
+//  GET dofarming.duckdns.org/api/v1/user HTTP/1.1 (사용자 정보 조회)
+*/
+
+
 import React, { useState, useEffect } from "react";
 import "../../Style/Routine/Routine.css";
 import ButtonGroup from '../Components/ButtonGroup';
@@ -42,7 +51,27 @@ const Routine = () => {
   const [showFrustration, setShowFrustration] = useState(false);
   const [showRest, setShowRest] = useState(false);
   
-
+  useEffect(() => {
+    // localStorage에서 토큰을 가져옵니다.
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      // 서버에 토큰을 전달하여 사용자 정보를 요청합니다.
+      const apiUrl = "https://dofarming.duckdns.org";
+      axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        // 응답 데이터에서 사용자 정보를 설정합니다.
+        setUser(response.data.user);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
+  }, []);
+  
   const handleMiracleMorningClick = () => {
     setShowMiracleMorning(true);
     setShowDayStart(false);
