@@ -13,6 +13,8 @@ import Reset from "./Pages/Mypage/Reset";
 import HomeAddPackage from "./Pages/Home/HomeAddPackage";
 import Todo from "./Pages/Home/Todo";
 
+import "./Style/Home/Nav.css"
+
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
 
