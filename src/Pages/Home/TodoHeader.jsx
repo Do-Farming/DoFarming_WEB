@@ -1,5 +1,5 @@
 import React from "react";
-import "../../style/Home/Todo.css";
+import "../../Style/Home/Todo.css";
 
 
 const TodoHeader = () => {

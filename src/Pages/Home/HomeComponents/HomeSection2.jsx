@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
-import "../../../style/Home/HomeSection2.css";
+import "../../../Style/Home/HomeSection2.css";
 import { IoIosAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import PackageDeleteModal from '../PackageDeleteModal';

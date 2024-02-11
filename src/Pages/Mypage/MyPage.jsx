@@ -1,5 +1,5 @@
 import React from "react";
-import "../../style/Mypage/MyPage.css"
+import "../../Style/Mypage/MyPage.css"
 import NavBar from "../Nav/Nav.jsx";
 import { useNavigate } from 'react-router-dom';
 import { GoChevronRight } from "react-icons/go";

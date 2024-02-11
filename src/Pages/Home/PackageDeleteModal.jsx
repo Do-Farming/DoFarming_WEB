@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/Mypage/ResetModal.css';
+import '../../Style/Mypage/ResetModal.css';
 
 const PackageDeleteModal = ({ onClose, onConfirm }) => {
   return (

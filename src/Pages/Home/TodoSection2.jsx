@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IoTrashSharp } from "react-icons/io5";
-import "../../style/Home/Todo.css";
+import "../../Style/Home/Todo.css";
 
 const TodoSection2 = ({ pageId }) => {
   const [routineList, setRoutineList] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../../style/Home/Home.css";
-import "../../../style/Home/HomeModal.css";
+import "../../../Style/Home/Home.css";
+import "../../../Style/Home/HomeModal.css";
 
 const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

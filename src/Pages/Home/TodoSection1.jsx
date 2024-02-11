@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../style/Home/Todo.css";
+import "../../Style/Home/Todo.css";
 import "../Nav/Nav.jsx";
 
 const MakeRoutine = () => {

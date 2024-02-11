@@ -2,7 +2,7 @@
 // import { GoogleMap, LoadScript, MarkerF, InfoWindowF, StandaloneSearchBox } from '@react-google-maps/api';
 // import dot from './제목_없는_아트워크.png';
 // import NavBar from "../Nav/Nav.jsx";
-// import '../../style/Map/Map.css'
+// import '../../Style/Map/Map.css'
 // import { FaPhoneAlt } from "react-icons/fa";
 // import {  Button, Collapse, List, ListItem } from '@material-ui/core';
 

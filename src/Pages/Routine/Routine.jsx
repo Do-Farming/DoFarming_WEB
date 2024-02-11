@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../style/Routine/Routine.css";
+import "../../Style/Routine/Routine.css";
 import ButtonGroup from '../Components/ButtonGroup';
 import { MiracleMorning } from "../Components/MiracleMorning";
 import { DayStart } from "../Components/DayStart";

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "../../style/Mypage/Profile.css";
+import "../../Style/Mypage/Profile.css";
 import NavBar from "../Nav/Nav.jsx";
 import myimg from "./기본이미지.png";
 
