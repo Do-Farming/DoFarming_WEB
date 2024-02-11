@@ -1,29 +1,34 @@
-import React from 'react';
+// 서버 연결 성공?//
+
+import React, { useEffect, useState } from 'react';
 import '../../Style/Mypage/ResetModal.css';
 import axios from 'axios'; 
 
-/* DELETE dofarming.duckdns.org/api/v1/routine/1 HTTP/1.1 (루틴삭제)
-*/
-
 const ResetModal = ({ onClose, onConfirm }) => {
+const [deleting, setDeleting] = useState(false); // 삭제 중인지 여부를 나타내는 상태
 
-  // 루틴 삭제 요청
-  const deleteRoutine = () => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const apiUrl = "https://dofarming.duckdns.org/api/v1/routine/1";
-      axios.delete(apiUrl, {
+  // 루틴 삭제 함수
+  const deleteRoutine = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+
+      if (!token) {
+        throw new Error("인증 토큰이 없습니다.");
+      }
+
+      const apiUrl = "https://dofarming.duckdns.org/api/v1/track"; 
+      await axios.delete(apiUrl, {
         headers: {
-          Authorization: `Bearer ${token}`
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}`, 
         }
-      })
-      .then((response) => { // 요청이 성공하면 실행될 코드를 추가합니다.
-        console.log(response);
-        onConfirm(); // 요청 성공 후 실행할 함수를 호출합니다.
-      })
-      .catch((error) => { // 요청이 실패하면 실행될 코드를 추가합니다.
-        console.error(error);
       });
+      
+      // 삭제가 완료되면 확인 콜백 함수를 호출하고 모달을 닫음
+      onConfirm();
+      onClose();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -32,8 +37,8 @@ const ResetModal = ({ onClose, onConfirm }) => {
       <div className='resetmodal'>
         <div className='resetmodal-title'><strong>모든 루틴</strong>을 <br /> 삭제하시겠습니까?</div>
         <div className='resetmodal-footer'>
-          <button className='resetmodalbtnyes' onClick={deleteRoutine}>예</button> 
-          <button className='resetmodalbtnno' onClick={onClose}>아니오</button>
+          <button className='resetmodalbtnyes' onClick={onClose}>아니오</button>
+          <button className='resetmodalbtnno' onClick={deleteRoutine} disabled={deleting}>{deleting ? '삭제 중...' : '예'}</button> 
         </div>
       </div>
     </div>

@@ -31,20 +31,21 @@ const Login4 = () => {
 
   const AgeCheck = (e) => {
     const input = e.target.value;
-    const valid = /^[0-9]{0,3}$/.test(input);
+  
+    if (isNaN(input)) {
+      alert("숫자만 입력하세요");
+      return;
+    }
+  
+    const valid = /^[0-9]{1,3}$/.test(input);
   
     if (valid) {
       setAge(input);
     } else {
       alert("나이는 3자릿수 이하여야 합니다.");
-    } 
-    
-    if (isNaN(input)) {
-      alert("숫자만 입력하세요");
-    } else {
-      setAge(input);
     }
   };
+  
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);

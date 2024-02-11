@@ -1,3 +1,19 @@
+/* 트랙 삭제
+HTTP request
+DELETE /api/v1/track/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer FirebaseToken
+Host: dofarming.duckdns.org
+Path parameters
+Table 1. /api/v1/track/{trackId}
+Parameter	Description
+trackId
+
+트랙 id
+
+HTTP response
+HTTP/1.1 204 No Content */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../Style/Mypage/ResetModal.css';
@@ -13,7 +29,7 @@ const PackageDeleteModal = ({ onClose }) => {
   }, []);
 
   const handleDelete = () => {
-    const apiUrl = "https://dofarming.duckdns.org/api/v1/track";
+    const apiUrl = "https://dofarming.duckdns.org/api/v1/track/1";
     axios.delete(apiUrl, {
       headers: {
         Authorization: `Bearer ${token}`

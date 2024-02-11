@@ -1,9 +1,38 @@
 /*PATCH /api/v1/user/info HTTP/1.1 (사용자 정보 수정)
 GET /api/v1/user HTTP/1.1 (사용자 정보조회)
-GET /api/v1/user HTTP/1.1(사용자 정보조회)
-* */
+ */
 
-import React, { useState, useRef } from "react";  
+const updateUser = () => {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer FirebaseToken',
+    },
+    body: JSON.stringify({
+      nickname: '닉네임 변경',
+      gender: 'MALE',
+      age: 20,
+    }),
+  };
+
+  fetch('/api/v1/user/info', requestOptions)
+    .then(response => {
+      if (response.ok) {
+        console.log('사용자 정보가 성공적으로 수정되었습니다.');
+      } else {
+        console.log('사용자 정보 수정에 실패하였습니다.');
+      }
+    })
+    .catch(error => {
+      console.log('오류가 발생하였습니다:', error);
+    });
+};
+
+updateUser();
+
+
+import React, { useState, useRef } from "react";
 import "../../Style/Mypage/Profile.css";
 import NavBar from "../Nav/Nav.jsx";
 import myimg from "./기본이미지.png";
@@ -34,7 +63,26 @@ const Profile = () => {
   // 닉네임 변경 핸들러
   const handleNicknameChange = (e) => {
     const input = e.target.value;
-    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); /*로그인 4에서 언급한 이유와 같은 이유로 수정해뒀습니다. */
+    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input);
+
+    const AgeCheck = (e) => {
+      const input = e.target.value;
+    
+      if (isNaN(input)) {
+        alert("숫자만 입력하세요");
+        return;
+      }
+    
+      const valid = /^[0-9]{0,3}$/.test(input);
+    
+      if (valid) {
+        setAge(input);
+      } else {
+        alert("나이는 3자릿수 이하여야 합니다.");
+      }
+    };
+
+    
 
     if (valid) {
       setNewNickname(input);
@@ -62,7 +110,7 @@ const Profile = () => {
 
   const handleButtonClick = () => {
     alert("저장되었어요!");
-};
+  };
 
   return (
     <div className="ProfileWrap">
@@ -111,7 +159,7 @@ const Profile = () => {
               onBlur={handleNicknameChange}
               className="Profilenickname"
             />
-        </div>
+          </div>
 
           <div className="Profileinput">
             <label>성별</label>
@@ -130,7 +178,6 @@ const Profile = () => {
             <input
               type="number"
               value={age}
-              값호출
               onChange={handleAgeChange}
               className="Profileage"
             />
