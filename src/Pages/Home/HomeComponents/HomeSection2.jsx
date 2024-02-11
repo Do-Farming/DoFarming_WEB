@@ -1,33 +1,32 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
-import "./HomeSection2_2.css";
-import { FaPlusCircle } from "react-icons/fa";
+import "../../../Style/Home/HomeSection2.css";
+import { IoIosAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
+import PackageDeleteModal from '../PackageDeleteModal';
+import HomeSection1 from './HomeSection1';
+
 
 const Homesection2 = () => {
   const [packages, setPackages] = useState([
-    { id: 1, name: "아침루틴", status: "진행 중" },
-    { id: 2, name: "저녁루틴", status: "진행 중" },
-    { id: 3, name: "운동루틴", status: "완료" },
+    { id: 1, name: "예시패키지", status: "진행 중" },
+    // { id: 2, name: "저녁루틴", status: "진행 중" },
+    // { id: 3, name: "운동루틴", status: "완료" },
   ]);
 
   const navigate = useNavigate();
-  const [showDeleteBtn, setShowDeleteBtn] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const handleDeletePackage = (id) => {
-    const updatedPackages = packages.filter((pkg) => pkg.id !== id);
+    setShowModal(true);
+    setDeleteId(id);
+  };
+
+  const handleConfirmDelete = () => {
+    const updatedPackages = packages.filter((pkg) => pkg.id !== deleteId);
     setPackages(updatedPackages);
-  };
-
-  const handleClick = () => {
-    setShowDeleteBtn(true);
-    document.body.classList.add('modal-open');
-  };
-
-  const handleConfirmDelete = (id) => {
-    handleDeletePackage(id);
     setShowModal(false);
     document.body.classList.remove('modal-open');
   };
@@ -38,56 +37,45 @@ const Homesection2 = () => {
   };
 
   return (
-    <><div className="HomeWrap2">
-      <div id="userPKG">
-        {packages.map((pkg) => (
-          <div key={pkg.id}>
-            <button onClick={() => navigate('/HomeAddPackage')}>
-              <RiPencilFill /> 수정
-            </button>
-            {!showDeleteBtn && <button onClick={handleClick}>...</button>}
-            {showDeleteBtn && (
-              <div>
-                <div>
-                  <button onClick={() => setShowModal(true)}>삭제</button>
-                </div>
-                {showModal && (
-                  <div>
-                    <div className="modal-background" onClick={handleCancelDelete} />
-                    <div id="mmodal">
-                      <p>삭제하시겠습니까?</p>
-                      <div h2_2_1btns="true">
-                        <button onClick={() => handleConfirmDelete(pkg.id)}>확인</button>
-                        <button onClick={handleCancelDelete}>취소</button>
-                      </div>
-                    </div>
-                  </div>
-                )}
+    <>
+    {packages.length > 0 ? (
+      <div className="HomeWrap2">
+        <div id="userPKG" onClick={() => navigate('/Todo')}> {/* 'userPKG' 클릭 시 'Todo' 페이지로 이동 */}
+          {packages.map((pkg) => (
+            <div key={pkg.id}>
+              <div className="S2Wrap">
+                <div className="S2Wrap2">
+              <div id="userRname">{pkg.name}</div>
+              <button onClick={(e) => {e.stopPropagation(); navigate('/HomeAddPackage');}} className="BtnS2">
+                <RiPencilFill />
+              </button>
               </div>
-            )}
-            <p id="userRname">{pkg.name}</p>
-            <p id="userRdate">24/03/22 - 24/12/05</p>
-            <p id="userSangMe">일찍일어나는 새가 벌레를 잡는다!</p>
+              <button onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.id);}} className="BtnS2Del">
+                X
+              </button>
+              </div>
+              
+              <div id="userRdate">03.22 ~ 12.05</div>
+              <div id="userSangMe">일찍일어나는 새가 벌레를 잡는다!</div>
+            </div>
+          ))}
           </div>
-        ))}
-      </div>
-      </div>
+        </div>
+      ) : (
+        <HomeSection1 />
+      )}
       <div>
         <Link to="/HomeAddPackage">
-          <FaPlusCircle className="ToHomeAddPackage" />
+          <IoIosAddCircle className="ToHomeAddPackage" />
         </Link>
-        <style>
-        {`
-          .ToHomeAddPackage {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 50px;
-            color: orange;
-          }
-        `}
-      </style>
-      </div></>
+      </div>
+      {showModal && (
+        <PackageDeleteModal 
+          onClose={handleCancelDelete} 
+          onConfirm={handleConfirmDelete}
+        />
+      )}
+    </>
   );
 };
 
