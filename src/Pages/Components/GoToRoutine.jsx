@@ -27,7 +27,7 @@ const GoButton = styled.button`
       align-items: center;
       display: flex;
       padding-left: 5vw;
-      margin-left: 7.5vw;
+      margin-left: 5vw;
     }
 `;
 

@@ -11,6 +11,7 @@ const Login2Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 80vh;
+  overflow: hidden;
 `;
 
 const TextContainer = styled.div`
