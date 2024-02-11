@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Style/Mypage/ResetModal.css';
+import '../../style/Mypage/ResetModal.css';
 
 const ResetModal = ({ onClose, onConfirm }) => {
   return (

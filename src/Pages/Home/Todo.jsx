@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Style/Home/Todo.css";
+import "../../style/Home/Todo.css";
 import NavBar from "../Nav/Nav.jsx";
 import TodoHeader from "./TodoHeader";
 import TodoSection1 from "./TodoSection1";

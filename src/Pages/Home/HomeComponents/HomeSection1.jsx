@@ -1,4 +1,4 @@
-import "../../../Style/Home/Home.css";
+import "../../../style/Home/Home.css";
 import { IoIosAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 

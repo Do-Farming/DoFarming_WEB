@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../Style/Routine/Routine.css"
+import "../../style/Routine/Routine.css"
 
 const ButtonGroup = ({ activeBtn, handleBtnClick }) => (
   <div className="Routinebtn">
