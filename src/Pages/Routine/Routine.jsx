@@ -2,12 +2,12 @@
 // POST dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id HTTP/1.1 (루틴추가)
 // GET dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id HTTP/1.1 (루틴조회)
 //  PATCH dofarming.duckdns.org/api/v1/routine/1 HTTP/1.1 (루틴 상태변경)
-// DELETE dofarming.duckdns.org/api/v1/routine/1 HTTP/1.1 (루틴삭제)
 //  GET dofarming.duckdns.org/api/v1/user HTTP/1.1 (사용자 정보 조회)
 */
 
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../../Style/Routine/Routine.css";
 import ButtonGroup from '../Components/ButtonGroup';
 import { MiracleMorning } from "../Components/MiracleMorning";
@@ -27,6 +27,7 @@ import { Depression1 } from "../Components/Depression1";
 import { Frustration } from "../Components/Frustration";
 import { Rest } from "../Components/Rest";
 import { GoToRoutine } from '../Components/GoToRoutine';
+import Routinerequest from "./Routinerequest.jsx";
 import NavBar from "../Nav/Nav.jsx";
 
 
@@ -185,13 +186,6 @@ const Routine = () => {
   };
 
 
-  // useEffect(() => {
-  //   fetch('/api/v1/user') 
-  //     .then(response => response.json())
-  //     .then(data => setUser(data.user))
-  //     .catch(error => console.log(error));
-  // }, []);
-
   const handleBtnClick = (btnType) => {
     setActiveBtn(btnType);
     // 아침, 저녁, 건강, 기분 버튼 클릭 시 showMiracleMorning을 false로 설정
@@ -216,6 +210,7 @@ const Routine = () => {
   return(
     <div className="Routine_wrap">
       <NavBar />
+      <Routinerequest />
       <div className="main">
         <div className="txt">
           <div className="txt1">나를 가꾸는 시간</div>

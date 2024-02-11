@@ -1,4 +1,9 @@
-import React, { useState, useRef } from "react";
+/*PATCH /api/v1/user/info HTTP/1.1 (사용자 정보 수정)
+GET /api/v1/user HTTP/1.1 (사용자 정보조회)
+GET /api/v1/user HTTP/1.1(사용자 정보조회)
+* */
+
+import React, { useState, useRef } from "react";  
 import "../../Style/Mypage/Profile.css";
 import NavBar from "../Nav/Nav.jsx";
 import myimg from "./기본이미지.png";
