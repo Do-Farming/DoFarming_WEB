@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // import React from "react";
 // import "../../style/Login/Login1.css"
 // import { useNavigate } from "react-router-dom";
@@ -32,8 +32,6 @@
 
 // export default Login1;
 
-=======
->>>>>>> parent of e7584ed (스타일드컴포넌트예시)
 import React from "react";
 import "../../Style/Login/Login1.css"
 import { useNavigate } from "react-router-dom";
