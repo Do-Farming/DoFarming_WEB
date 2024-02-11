@@ -1,111 +1,158 @@
-// import "../../Style/Login/Login2.css";
-// import { GoogleLoginButton } from "react-social-login-buttons";
-// import { GoogleAuthProvider, signInWithPopup, getIdToken } from "firebase/auth";
-// import { auth } from "../../Firebase/firebase-config";
-// import { useNavigate } from "react-router-dom"; 
-// import axios from "axios";
-// import React, { useState, useEffect } from "react";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { GoogleAuthProvider, signInWithPopup, getIdToken } from "firebase/auth";
+import { auth } from "../../Firebase/firebase-config";
+import { useNavigate } from "react-router-dom"; 
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-// // Login2 컴포넌트 정의
-// const Login2 = () => {
-//   // useNavigate 훅을 사용하여 라우터 제어
-//   const navigate = useNavigate(); 
+const Login2Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
+`;
+
+const TextContainer = styled.div`
+  font-size: 2rem;
+  margin-top: 10vh;
+  margin-left: 7vw;
+  margin-bottom: 28vh;
+  line-height: 3rem;
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+        font-size: 2rem;
+        margin-top: 10vh;
+        margin-left: 15vw;
+        margin-bottom: 28vh;
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1279px) {
+            font-size: 2rem;
+            margin-top: 10vh;
+            margin-left: 30vw;
+            margin-bottom: 28vh;
+        }
+
+    @media screen and (min-width: 769px) and (max-width: 1279px) {
+            font-size: 2rem;
+            margin-top: 10vh;
+            margin-left: 30vw;
+            margin-bottom: 28vh;
+        }
+
+    @media screen and (min-width: 1280px) {
+            font-size: 2rem;
+            margin-top: 10vh;
+            margin-left: 35vw;
+            margin-bottom: 28vh;
+        }
+`;
+
+const StyledGoogleLoginButton = styled(GoogleLoginButton)`
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  width: 300px;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+//추후 수정
+
+// Login2 컴포넌트 정의
+const Login2 = () => {
+  // useNavigate 훅을 사용하여 라우터 제어
+  const navigate = useNavigate(); 
   
-//   // 사용자 데이터를 저장할 상태
-//   const [userData, setUserData] = useState(null);
+  // 사용자 데이터를 저장할 상태
+  const [userData, setUserData] = useState(null);
 
-//   useEffect(() => {
-//     // 로그인 상태 확인 함수
-//     const checkLoginStatus = async () => {
-//       // 로그인 토큰 가져오기
-//       const token = localStorage.getItem('authToken');
-//       if (token) {
-//         // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-//         const apiUrl = "https://dofarming.duckdns.org";
-//         try {
-//           const response = await axios.get(apiUrl, {
-//             headers: {
-//               Authorization: `Bearer ${token}`
-//             }
-//           });
-//           // 사용자가 이미 회원가입되어 있는 경우 메인 페이지로 이동
-//           if (response.data.isRegistered) {
-//             navigate('/Main'); // 메인 페이지로 이동
-//           }
-//         } catch (error) {
-//           console.error(error);
-//         }
-//       }
-//     };
+  useEffect(() => {
+    // 로그인 상태 확인 함수
+    const checkLoginStatus = async () => {
+      // 로그인 토큰 가져오기
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
+        const apiUrl = "https://dofarming.duckdns.org";
+        try {
+          const response = await axios.get(apiUrl, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          // 사용자가 이미 회원가입되어 있는 경우 메인 페이지로 이동
+          if (response.data.isRegistered) {
+            navigate('/Main'); // 메인 페이지로 이동
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
 
-//     checkLoginStatus(); // 로그인 상태 확인 함수 호출
-//   }, [navigate]);
+    checkLoginStatus(); // 로그인 상태 확인 함수 호출
+  }, [navigate]);
 
-//   // 구글 로그인 버튼 클릭 시 실행되는 함수
-//   async function handleGoogleLogin() {
-//     // GoogleAuthProvider를 사용하여 구글 로그인 팝업 실행
-//     const provider = new GoogleAuthProvider();
-//     try {
-//       const result = await signInWithPopup(auth, provider);
+  // 구글 로그인 버튼 클릭 시 실행되는 함수
+  async function handleGoogleLogin() {
+    // GoogleAuthProvider를 사용하여 구글 로그인 팝업 실행
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
       
-//       // 로그인 결과에서 사용자 정보 추출
-//       const user = result.user;
-//       setUserData(user);
+      // 로그인 결과에서 사용자 정보 추출
+      const user = result.user;
+      setUserData(user);
 
-//       // 사용자의 ID 토큰을 가져와서 localStorage에 저장
-//       const token = await getIdToken(auth.currentUser);
-//       localStorage.setItem('authToken', token);
+      // 사용자의 ID 토큰을 가져와서 localStorage에 저장
+      const token = await getIdToken(auth.currentUser);
+      localStorage.setItem('authToken', token);
 
-//       // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-//       const apiUrl = "https://dofarming.duckdns.org";
-//       const response = await axios.get(apiUrl, {
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       });
+      // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
+      const apiUrl = "https://dofarming.duckdns.org";
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-//       // 사용자가 이미 회원가입되어 있는 경우 메인 페이지로 이동
-//       if (response.data.isRegistered) {
-//         navigate('/Main'); // 메인 페이지로 이동
-//       } else {
-//         navigate('/Login3'); // 로그인 페이지로 이동
-//       }
-//     } catch (error) {
-//       // 에러 처리
-//       console.error(error);
-//     }
-//   }
+      // 사용자가 이미 회원가입되어 있는 경우 메인 페이지로 이동
+      if (response.data.isRegistered) {
+        navigate('/Main'); // 메인 페이지로 이동
+      } else {
+        navigate('/Login3'); // 로그인 페이지로 이동
+      }
+    } catch (error) {
+      // 에러 처리
+      console.error(error);
+    }
+  }
 
-//   // JSX로 화면 구성
-//   return (
-//     <div>
-//       <div className="login2_wrap">
-//         <div className="login2_textbox">
-//           <p>
-//             <strong>몸</strong>과 <strong>마음</strong><br />
-//             건강하게 챙기는 첫 단계!
-//           </p>
-          
-//         </div>
-//         <div className="Gloginbox">
-//           <GoogleLoginButton
-//           style={{
-//             backgroundColor: "white", // 배경색 변경
-//             color: "black", // 글자색 변경
-//             fontSize: "1rem", // 글자 크기 변경
-//             borderRadius: "5px", // 테두리 둥글게
-//             textAlign: "center",
-//             width: "300px",
-//           }}
-//           onClick={handleGoogleLogin}/>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+  // JSX로 화면 구성
+  return (
+    <Login2Container>
+      <TextContainer>
+        <p>
+          <strong>몸</strong>과 <strong>마음</strong><br />
+          건강하게 챙기는 첫 단계!
+        </p>
+      </TextContainer>
+      <StyledGoogleLoginButton onClick={handleGoogleLogin} />
+    </Login2Container>
+  );
+};
 
-// // 컴포넌트 내보내기
-// export default Login2;
+// 컴포넌트 내보내기
+export default Login2;
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../Style/Routine/Routine.css";
+import styled from 'styled-components';
 import ButtonGroup from '../Components/ButtonGroup';
 import { MiracleMorning } from "../Components/MiracleMorning";
 import { DayStart } from "../Components/DayStart";
@@ -20,7 +20,43 @@ import { Rest } from "../Components/Rest";
 import { GoToRoutine } from '../Components/GoToRoutine';
 import NavBar from "../Nav/Nav.jsx";
 
+const RoutineWrap = styled.div`
+    overflow: visible;
+    font-family: "GowunDodum";
+    @media all and (max-width:1023px) {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+`;
 
+const Txt1 = styled.div`
+    font-size: 1.56rem;
+    margin-left: 6vw;
+    margin-top: 4vh;
+    text-align: left;
+    font-weight: bold;
+    padding-bottom: 1vh;
+`;
+
+const Txt2 = styled.div`
+    font-size: 0.8rem;
+    margin-left: 6vw;
+    text-align: left;
+    padding-bottom: 60px;
+`;
+
+const Txt3 = styled.div`
+    font-size: 1.25rem;
+    color: #BFBABA;
+    margin-left: 25vw;
+    text-align: left;
+    @media all and (max-width:1023px) {
+      margin-left: 6vw;
+    }
+`;
 
 const Routine = () => {
   const [activeBtn, setActiveBtn] = useState('morning');
@@ -185,40 +221,40 @@ const Routine = () => {
   };
 
   return(
-    <div className="Routine_wrap">
-      <NavBar />
-      <div className="main">
-        <div className="txt">
-          <div className="txt1">나를 가꾸는 시간</div>
-          <div className="txt2">우리 모두에게는 <strong>시간</strong>이라는<br />공평한 것이 주어진다</div>
-          <div className="txt3"># {user}값받아오기 님을 위한 추천</div>
-        </div>
-        <div className="RoutineContainer">
-          <ButtonGroup activeBtn={activeBtn} handleBtnClick={handleBtnClick} />
-
-          {!showMiracleMorning && !showDayStart && !showCheerful && !showJogging && !showDayEnd && !showBath && !showMeditation && !showReading && !showMyself && !showInsomnia && !showDepression && !showFamily && !showPms && !showDepression1 && !showFrustration && !showRest && <GoToRoutine activeBtn={activeBtn} handleMiracleMorningClick={handleMiracleMorningClick} handleDayStartClick={handleDayStartClick} handleCheerfulClick={handleCheerfulClick} handleJoggingClick={handleJoggingClick} handleDayEndClick={handleDayEndClick} handleBathClick={handleBathClick} handleMeditationClick={handleMeditationClick} handleReadingClick={handleReadingClick} handleMyselfClick={handleMyselfClick} handleInsomniaClick={handleInsomniaClick} handleDepressionClick={handleDepressionClick} handleFamilyClick={handleFamilyClick} handlePmsClick={handlePmsClick} handleDepression1Click={handleDepression1Click} handleFrustrationClick={handleFrustrationClick} handleRestClick={handleRestClick}/>
-            }
-
-          {/* 미라클 모닝 상태에 따른 화면 표시 */}
-          {showMiracleMorning && <MiracleMorning />}
-          {activeBtn === 'morning' && showDayStart && <DayStart />}
-          {activeBtn === 'morning' && showCheerful && <Cheerful />}
-          {activeBtn === 'morning' && showJogging && <Jogging />}
-          {showDayEnd && <DayEnd />}
-          {showBath && <Bath />}
-          {showMeditation && <Meditation />}
-          {showReading && <Reading />}
-          {showMyself && <Myself />}
-          {showInsomnia && <Insomnia />}
-          {showDepression && <Depression />}
-          {showFamily && <Family />}
-          {showPms && <Pms />}
-          {showDepression1 && <Depression1 />}
-          {showFrustration && <Frustration />}
-          {showRest && <Rest />}
-        </div>
-      </div>
+    <RoutineWrap>
+  <NavBar />
+  <div className="main">
+    <div className="txt">
+      <Txt1>나를 가꾸는 시간</Txt1>
+      <Txt2>우리 모두에게는 <strong>시간</strong>이라는<br />공평한 것이 주어진다</Txt2>
+      <Txt3># {user}값받아오기 님을 위한 추천</Txt3>
     </div>
+    <div className="RoutineContainer">
+      <ButtonGroup activeBtn={activeBtn} handleBtnClick={handleBtnClick} />
+
+      {!showMiracleMorning && !showDayStart && !showCheerful && !showJogging && !showDayEnd && !showBath && !showMeditation && !showReading && !showMyself && !showInsomnia && !showDepression && !showFamily && !showPms && !showDepression1 && !showFrustration && !showRest && <GoToRoutine activeBtn={activeBtn} handleMiracleMorningClick={handleMiracleMorningClick} handleDayStartClick={handleDayStartClick} handleCheerfulClick={handleCheerfulClick} handleJoggingClick={handleJoggingClick} handleDayEndClick={handleDayEndClick} handleBathClick={handleBathClick} handleMeditationClick={handleMeditationClick} handleReadingClick={handleReadingClick} handleMyselfClick={handleMyselfClick} handleInsomniaClick={handleInsomniaClick} handleDepressionClick={handleDepressionClick} handleFamilyClick={handleFamilyClick} handlePmsClick={handlePmsClick} handleDepression1Click={handleDepression1Click} handleFrustrationClick={handleFrustrationClick} handleRestClick={handleRestClick}/>
+        }
+
+      {/* 미라클 모닝 상태에 따른 화면 표시 */}
+      {showMiracleMorning && <MiracleMorning />}
+      {activeBtn === 'morning' && showDayStart && <DayStart />}
+      {activeBtn === 'morning' && showCheerful && <Cheerful />}
+      {activeBtn === 'morning' && showJogging && <Jogging />}
+      {showDayEnd && <DayEnd />}
+      {showBath && <Bath />}
+      {showMeditation && <Meditation />}
+      {showReading && <Reading />}
+      {showMyself && <Myself />}
+      {showInsomnia && <Insomnia />}
+      {showDepression && <Depression />}
+      {showFamily && <Family />}
+      {showPms && <Pms />}
+      {showDepression1 && <Depression1 />}
+      {showFrustration && <Frustration />}
+      {showRest && <Rest />}
+    </div>
+  </div>
+</RoutineWrap>
     
   );
 };
