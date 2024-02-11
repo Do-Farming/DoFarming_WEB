@@ -5,7 +5,7 @@ body {
     overflow: hidden;
 }
 
-.Login1container {
+.login1container {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -20,7 +20,7 @@ body {
     margin-bottom: 0.2vh;
 }
 
-.Login1txt1 {
+.login1txt1 {
     font-size: 2.5rem;
     width: 30vw;
     font-weight: 730;
@@ -31,7 +31,7 @@ body {
     white-space: pre-line;
 }
 
-.Login1txt2 {
+.login1txt2 {
     position: relative;
     bottom: 6vh;
     font-size: 0.8rem;
@@ -70,10 +70,10 @@ body {
         margin-left: 10vw;
         margin-bottom: 0.2vh;
     }
-    .Login1txt1 {
+    .login1txt1 {
         width: 70vw;
     }
-    .Login1txt2 {
+    .login1txt2 {
         width: 70vw;
     }
     #login1_submit_btn {
