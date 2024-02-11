@@ -1,7 +1,7 @@
 import React, { useState, useRef, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaCalendarAlt } from 'react-icons/fa';
-// import '../../style/Home/Calendar.css';
+import '../../style/Home/Calendar.css';
 import '../../style/Home/HomeAddPackage.css';
 import NavBar from '../Nav/Nav.jsx';
 import { Link } from 'react-router-dom';
