@@ -1,4 +1,4 @@
-import '../../Style/Home/Calendar.css';
+import '../../Style/Calendar.css';
 import React, { useState, useRef, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const HomeWrap = styled.div`
   width: 50vw;
-  margin-left: 25vw;
+  margin-left: 22.5vw;
   display: flex;
   flex-direction: column;
   align-items: center;

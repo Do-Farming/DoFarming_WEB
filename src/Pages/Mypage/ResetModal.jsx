@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ResetModalBackdrop = styled.div`
   position: fixed;
@@ -82,13 +83,19 @@ const ResetModalButtonNo = styled.button`
   }
 `;
 
-const ResetModal = ({ onClose, onConfirm }) => {
+const ResetModal = ({ onClose }) => {
+  const handleConfirm = () => {
+    alert("저장되었습니다!");
+  };
+
   return (
     <ResetModalBackdrop>
       <ResetModalBox>
         <ResetModalTitle><strong>모든 루틴</strong>을 <br /> 삭제하시겠습니까?</ResetModalTitle>
         <div>
-          <ResetModalButtonYes onClick={onConfirm}>예</ResetModalButtonYes>
+        <Link to="/home">
+            <ResetModalButtonYes onClick={handleConfirm}>예</ResetModalButtonYes>
+          </Link>
           <ResetModalButtonNo onClick={onClose}>아니오</ResetModalButtonNo>
         </div>
       </ResetModalBox>
