@@ -87,7 +87,7 @@ const ToHomeAddPackage = styled(IoIosAddCircle)`
 `;
 
 
-const PackagePrint2 = () => {
+const Homesection2 = () => {
   const [packages, setPackages] = useState([
     { id: 1, name: "예시패키지", status: "진행 중" },
   ]);
@@ -154,4 +154,4 @@ const PackagePrint2 = () => {
   );
 };
 
-export default PackagePrint2;
+export default Homesection2;

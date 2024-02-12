@@ -19,6 +19,7 @@
     "@react-google-maps/api": "^2.19.3",
     "@types/react-datepicker": "^4.19.5",
     "@vitejs/plugin-react": "^4.2.1",
+    "autoclean": "^1.0.2",
     "axios": "^1.6.5",
     "date-fns": "^3.3.1",
     "fetch": "^1.1.0",
@@ -62,5 +63,5 @@
   "main": "index.js",
   "license": "MIT",
   "repository": "https://github.com/Finna-GDSC/DoFarming_WEB.git",
-  "author": "이윤아 <101340482+Profitah@users.noreply.github.com>"
+  "author": "박예은 <haha961109@naver.com>, 이윤아 <qwer120542@gmail.com>"
 }

@@ -144,7 +144,7 @@ const Profile = () => {
   // 닉네임 변경 핸들러
   const handleNicknameChange = (e) => {
     const input = e.target.value;
-    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{1,12}$/.test(input);
+    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); /*로그인 4에서 언급한 이유와 같은 이유로 수정해뒀습니다. */
 
     if (valid) {
       setNewNickname(input);
