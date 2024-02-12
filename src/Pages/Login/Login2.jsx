@@ -9,7 +9,6 @@ import styled from "styled-components";
 const Login2Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 80vh;
   overflow: hidden;
 `;
@@ -17,52 +16,27 @@ const Login2Container = styled.div`
 const TextContainer = styled.div`
   font-size: 2rem;
   margin-top: 10vh;
-  margin-left: 7vw;
-  margin-bottom: 28vh;
+  margin-bottom: 15vh;
   line-height: 3rem;
-
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-        font-size: 2rem;
-        margin-top: 10vh;
-        margin-left: 15vw;
-        margin-bottom: 28vh;
-    }
-
-    @media screen and (min-width: 769px) and (max-width: 1279px) {
-            font-size: 2rem;
-            margin-top: 10vh;
-            margin-left: 30vw;
-            margin-bottom: 28vh;
-        }
-
-    @media screen and (min-width: 769px) and (max-width: 1279px) {
-            font-size: 2rem;
-            margin-top: 10vh;
-            margin-left: 30vw;
-            margin-bottom: 28vh;
-        }
+  display:flex;
+  justify-content: center;
+  align-items: center;
 
     @media screen and (min-width: 1280px) {
-            font-size: 2rem;
-            margin-top: 10vh;
-            margin-left: 35vw;
-            margin-bottom: 28vh;
+            margin-bottom: 15vh;
         }
 `;
 
 const StyledGoogleLoginButton = styled(GoogleLoginButton)`
-  background-color: white;
-  color: black;
-  font-size: 1rem;
-  border-radius: 5px;
-  text-align: center;
-  width: 300px;
-  display: flex;
+  width: 70vw !important;
+  font-size:17px !important;
+  display: flex !important;
+  margin-left:15vw !important;
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    width: 38vw !important;
+    margin-left:31vw !important;
+    display:flex !important;
     justify-content: center;
-    align-items: center;
-
-  &:hover {
-    cursor: pointer;
   }
 `;
 
