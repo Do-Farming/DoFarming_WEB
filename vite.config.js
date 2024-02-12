@@ -22,8 +22,5 @@ export default {
     define: {
         'process.env': {},
         global: {},
-    },
-    optimizeDeps: {
-        include: ["@react-google-maps/api"]
     }
 };
