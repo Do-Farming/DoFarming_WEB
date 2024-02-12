@@ -8,13 +8,14 @@
     <title>Finna</title>
 
     <script type="module">
-        // const importMap = { imports: { "@react-google-maps/api": "/path/to/@react-google-maps/api.js" } }; if (window.imports) { Object.assign(window.imports, importMap.imports); } else { window.imports = importMap.imports; }
+        const importMap = { imports: { "@react-google-maps/api": "/path/to/@react-google-maps/api.js" } }; if (window.imports) { Object.assign(window.imports, importMap.imports); } else { window.imports = importMap.imports; }
     </script>
 </head>
 
 <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/node_modules/@react-google-maps/api/package.json"></script>
 </body>
 
 </html>
