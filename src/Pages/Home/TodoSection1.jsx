@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import "../../Style/Home/Todo.css";
-import "../Nav/Nav.jsx";
+import styled from "styled-components";
+
+const TodoSection1Wrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 340;
+`;
+
+const GoRoutine = styled.p`
+    color: blue;
+    text-decoration: underline blue;
+`;
 
 const MakeRoutine = () => {
-
   return (
-    <div className="TodoSection1Wrap">
+    <TodoSection1Wrap>
       <p>아직 할 일이 없습니다</p> 
       <Link to="/Routine">
-        <p id="goRoutine">루틴을 만들러 이동해 볼까요?</p>
+        <GoRoutine>루틴을 만들러 이동해 볼까요?</GoRoutine>
       </Link>
-    </div>
+    </TodoSection1Wrap>
   );
 };
 
