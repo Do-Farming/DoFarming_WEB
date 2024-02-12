@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser, AiOutlineMenu } from 'react-icons/ai';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes,createGlobalStyle } from 'styled-components';
 import LogoImg from './로고.jpeg';
 import { Link as RouterLink } from 'react-router-dom';
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+  }
+`;
 
 const slideDown = keyframes`
   0% {
@@ -149,20 +156,20 @@ const NavBar = () => {
     };
 
     return (
-        <Nav className={isNavVisible ? 'nav-border' : ''} ref={navRef}>
-      <Link to="/home" onClick={handleLogoClick}>
-        <Logo src={LogoImg} alt="" />
-      </Link>
-      <MypageIcon size='24' onClick={LinktomyPage} />
-      <NavIcon size='24' onClick={toggleNav} />
-      {isNavVisible && (
-        <NavMenu>
-          <StyledLink to="/home"><NavItem>홈</NavItem></StyledLink>
-<StyledLink to="/routine"><NavItem>루틴</NavItem></StyledLink>
-<StyledLink to="/Map"><NavItem>전문가 찾기</NavItem></StyledLink>
-        </NavMenu>
-      )}
-    </Nav>
+      <><GlobalStyle /><Nav className={isNavVisible ? 'nav-border' : ''} ref={navRef}>
+        <Link to="/home" onClick={handleLogoClick}>
+          <Logo src={LogoImg} alt="" />
+        </Link>
+        <MypageIcon size='24' onClick={LinktomyPage} />
+        <NavIcon size='24' onClick={toggleNav} />
+        {isNavVisible && (
+          <NavMenu>
+            <StyledLink to="/home"><NavItem>홈</NavItem></StyledLink>
+            <StyledLink to="/routine"><NavItem>루틴</NavItem></StyledLink>
+            <StyledLink to="/Map"><NavItem>전문가 찾기</NavItem></StyledLink>
+          </NavMenu>
+        )}
+      </Nav></>
     );
 };
 
