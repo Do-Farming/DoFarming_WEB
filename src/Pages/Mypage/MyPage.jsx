@@ -1,8 +1,29 @@
 import React from "react";
-import "../../Style/Mypage/MyPage.css"
 import NavBar from "../Nav/Nav.jsx";
 import { useNavigate } from 'react-router-dom';
 import { GoChevronRight } from "react-icons/go";
+import styled from 'styled-components';
+
+
+const MyPageText = styled.div`
+  font-size: 2rem;
+  margin-top: 4vh;
+  margin-left: 10vw;
+  margin-bottom: 5vh;
+`;
+
+const MyPageNavi = styled.div`
+  border-bottom: 0.5px solid #BFBABA;
+  margin-top: 2vh;
+  margin-left: 10vw;
+  width: 75%;
+  padding: 12px;
+  display: flex;
+`;
+
+const MyPageTextNavi = styled.div`
+  width: 95%;
+`;
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -16,18 +37,18 @@ const MyPage = () => {
   };
 
   return (
-    <div className="MypageWrap">
+    <div>
       <NavBar />
       <div>
-        <div className="mypagetxt">My Page</div>
-        <div className="mypagenavi">
-          <div className="mypagetxtnavi">개인정보</div>
+        <MyPageText>My Page</MyPageText>
+        <MyPageNavi>
+          <MyPageTextNavi>개인정보</MyPageTextNavi>
           <GoChevronRight onClick={goToProfile} color="gray"/>
-          </div>
-        <div className="mypagenavi">
-          <div className="mypagetxtnavi">루틴 초기화</div> 
+        </MyPageNavi>
+        <MyPageNavi>
+          <MyPageTextNavi>루틴 초기화</MyPageTextNavi> 
           <GoChevronRight onClick={goToRoutineReset} color="gray"/>
-          </div>
+        </MyPageNavi>
       </div>
     </div>
   );

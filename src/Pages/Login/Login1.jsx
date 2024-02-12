@@ -52,7 +52,7 @@ const MainText = styled.div`
   margin-bottom: 0.2vh;
 
   @media screen and (max-width: 873px) {
-    margin-top: 6vh;
+    margin-top: 3vh;
     margin-left: 10vw;
     margin-bottom: 0.2vh;
   }
