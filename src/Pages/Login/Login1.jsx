@@ -115,7 +115,7 @@ const Login1 = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/login3");
+    navigate("/login2");
   };
 
   return (
