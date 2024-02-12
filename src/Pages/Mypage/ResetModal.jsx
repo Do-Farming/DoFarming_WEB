@@ -11,11 +11,6 @@ const [deleting, setDeleting] = useState(false); // 삭제 중인지 여부를 �
   const deleteRoutine = async () => {
     try {
       const token = localStorage.getItem('authToken');
-
-      if (!token) {
-        throw new Error("인증 토큰이 없습니다.");
-      }
-
       const apiUrl = "https://dofarming.duckdns.org/api/v1/track"; 
       await axios.delete(apiUrl, {
         headers: {

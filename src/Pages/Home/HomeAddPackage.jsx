@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import React, { useState, useRef, forwardRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -15,22 +9,41 @@ import axios from 'axios';
 
 const token = localStorage.getItem('token');
 
-
 const HomeAddPackage = () => {
-  // 상태 변수 및 Ref 선언
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, endDate] = dateRange;
   const [isOpen, setIsOpen] = useState(false);
   const datePickerRef = useRef();
   const [routine, setRoutine] = useState('');
   const [memo, setMemo] = useState('');
+  const navigate = useNavigate();
 
-  // 버튼 클릭 핸들러
-  const handleButtonClick = () => {
-    alert("저장되었어요!");
+  const handleButtonClick = async () => {
+    try {
+      const response = await axios.post(
+        'https://dofarming.duckdns.org/api/v1/track',
+        {
+          content: routine,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        alert('저장되었어요!');
+        navigate('/home');
+      } else {
+        alert('저장에 실패했어요!');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('저장에 실패했어요!');
+    }
   };
 
-  // 커스텀 input 컴포넌트
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <div>
       <input 
@@ -45,37 +58,11 @@ const HomeAddPackage = () => {
     </div>
   ));
 
-  // 서버로 GET 요청을 보내는 함수
-  const fetchUserInfo = async () => {
-    try {
-      const token = localStorage.getItem('token'); // LocalStorage에서 토큰 가져오기
-      if (token) {
-        const apiUrl = "https://dofarming.duckdns.org";
-        const response = await axios.get(apiUrl, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.data.isRegistered) {
-          navigate("/home");
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
-  useEffect(() => {
-    fetchUserInfo();
-  }, []);
-
-  // JSX 반환
   return (
     <div>
-      <NavBar/> {/* 네비게이션 바 */}
-      <div className='Home9Wrap'> {/* 전체 컨텐츠를 감싸는 Wrapper */}
-        <div className='PackageName'> {/* 루틴 이름 입력 부분 */}
+      <NavBar/>
+      <div className='Home9Wrap'>
+        <div className='PackageName'>
           <input 
             type="text"
             value={routine}
@@ -85,8 +72,8 @@ const HomeAddPackage = () => {
             className='Home9inputboxname'
           />
         </div>
-        <div className='Home9inputWrap'> {/* 입력 요소를 감싸는 Wrapper */}
-          <div className='Home9input'> {/* 메모 입력 부분 */}
+        <div className='Home9inputWrap'>
+          <div className='Home9input'>
             <div>메모</div>
             <input 
               type="text"
@@ -97,7 +84,7 @@ const HomeAddPackage = () => {
               className='Home9inputbox'
             />
           </div>
-          <div className='Home9input'> {/* 날짜 선택 부분 */}
+          <div className='Home9input'>
             <div>기간</div>
             <DatePicker
               ref={datePickerRef}
@@ -117,9 +104,7 @@ const HomeAddPackage = () => {
           </div>
         </div>
         <div className='BtnWrap'> 
-            <Link to="/home"> 
-                <button className='Home9Btn' onClick={handleButtonClick}>완료</button>  
-            </Link>    
+            <button className='Home9Btn' onClick={handleButtonClick}>완료</button>  
         </div>
       </div>
     </div>

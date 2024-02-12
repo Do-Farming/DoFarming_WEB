@@ -2,52 +2,59 @@
 GET /api/v1/user HTTP/1.1 (사용자 정보조회)
  */
 
-const updateUser = () => {
-  const requestOptions = {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer FirebaseToken',
-    },
-    body: JSON.stringify({
-      nickname: '닉네임 변경',
-      gender: 'MALE',
-      age: 20,
-    }),
-  };
 
-  fetch('/api/v1/user/info', requestOptions)
-    .then(response => {
-      if (response.ok) {
-        console.log('사용자 정보가 성공적으로 수정되었습니다.');
-      } else {
-        console.log('사용자 정보 수정에 실패하였습니다.');
-      }
-    })
-    .catch(error => {
-      console.log('오류가 발생하였습니다:', error);
-    });
-};
-
-updateUser();
-
-
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../../Style/Mypage/Profile.css";
 import NavBar from "../Nav/Nav.jsx";
 import myimg from "./기본이미지.png";
+import axios from "axios";
+import { instance } from "../../libs/api.jsx";
 
 const Profile = () => {
-  // 상태 관리
-  const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져오기
-  const [gender, setGender] = useState("값호출"); //서버에서 사용자 성별 가져오기
-  const [age, setAge] = useState("값호출"); //서버에서 사용자 나이 가져오기
-  const [image, setImage] = useState(null);
-  const [editingNickname, setEditingNickname] = useState(false);
-  const [newNickname, setNewNickname] = useState("");
+ // 상태 관리
+const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져와 상태관리
+const [gender, setGender] = useState(""); //서버에서 사용자 성별 가져와 상태관리
+const [age, setAge] = useState(""); //서버에서 사용자 나이 가져와 상태관리
+const [image, setImage] = useState(null); // 서버에서 사용자 구글 이미지 가져와 상태관리
 
-  // input 요소에 대한 참조
-  const fileInputRef = useRef(null);
+// input 요소에 대한 참조
+const fileInputRef = useRef(null);
+
+// 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
+useEffect(() => {
+  // 서버로부터 사용자 정보를 가져오는 함수 호출
+  fetchUserInfo();
+}, []);
+
+// 서버로부터 사용자 정보를 가져오는 함수
+const fetchUserInfo = async () => {
+  try {
+    // 서버 URL
+    const apiUrl = "https://dofarming.duckdns.org/api/v1/user";
+
+    // 로그인 토큰 가져오기
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      // 서버로 GET 요청을 보냄
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // 응답 데이터에서 사용자 정보 추출하여 상태 업데이트
+      const userData = response.data;
+      setNickname(userData.nickname);
+      setGender(userData.gender);
+      setAge(userData.age);
+      // 이미지 데이터는 필요에 따라 처리
+    }
+  } catch (error) {
+    console.error("Error fetching user info:", error);
+  }
+};
+
 
   // 파일 입력 변경 핸들러
   const handleImageChange = (e) => {
@@ -60,58 +67,7 @@ const Profile = () => {
     fileInputRef.current.click();
   };
 
-  // 닉네임 변경 핸들러
-  const handleNicknameChange = (e) => {
-    const input = e.target.value;
-    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input);
-
-    const AgeCheck = (e) => {
-      const input = e.target.value;
-    
-      if (isNaN(input)) {
-        alert("숫자만 입력하세요");
-        return;
-      }
-    
-      const valid = /^[0-9]{0,3}$/.test(input);
-    
-      if (valid) {
-        setAge(input);
-      } else {
-        alert("나이는 3자릿수 이하여야 합니다.");
-      }
-    };
-
-    
-
-    if (valid) {
-      setNewNickname(input);
-      setNickname(input);
-    } else {
-      alert("닉네임은 영문, 한글, 숫자를 포함한 1글자 이상~12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
-    }
-  };
-
-  // 닉네임 저장 핸들러
-  const handleSaveNickname = () => {
-    setNickname(newNickname);
-    setEditingNickname(false);
-  };
-
-  // 성별 변경 핸들러
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
-  };
-
-  // 나이 변경 핸들러
-  const handleAgeChange = (e) => {
-    setAge(e.target.value);
-  };
-
-  const handleButtonClick = () => {
-    alert("저장되었어요!");
-  };
-
+  // JSX 반환
   return (
     <div className="ProfileWrap">
       <NavBar />
@@ -155,8 +111,7 @@ const Profile = () => {
             <input
               type="text"
               value={nickname}
-              onChange={handleNicknameChange}
-              onBlur={handleNicknameChange}
+              onChange={() => {}}
               className="Profilenickname"
             />
           </div>
@@ -165,7 +120,7 @@ const Profile = () => {
             <label>성별</label>
             <select
               value={gender}
-              onChange={handleGenderChange}
+              onChange={() => {}}
               className="Profilegender"
             >
               <option value="Male">값호출</option>
@@ -178,11 +133,10 @@ const Profile = () => {
             <input
               type="number"
               value={age}
-              onChange={handleAgeChange}
+              onChange={() => {}}
               className="Profileage"
             />
           </div>
-          <button className="Profilesubmit" onClick={handleButtonClick}>저장</button>
         </div>
       </div>
     </div>
