@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser, AiOutlineMenu } from 'react-icons/ai';
 import styled, { keyframes,createGlobalStyle } from 'styled-components';
-import LogoImg from './로고.jpeg';
+import LogoImg from './FInna_Logo.png';
 import { Link as RouterLink } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from 'styled-components';
 import NavBar from "../Nav/Nav.jsx";
-import myimg from "./기본이미지.png";
+import myimg from "./eximg.png";
 
 const ProfileWrap = styled.div``;
 
