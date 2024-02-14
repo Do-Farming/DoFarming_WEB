@@ -1,85 +1,162 @@
-/*  
-GET /api/v1/track/%ED%82%A4%EC%9B%8C%EB%93%9C1?keyword=%ED%82%A4%EC%9B%8C%EB%93%9C HTTP/1.1
-*/
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
-import "../../../Style/Home/HomeSection2.css";
 import { IoIosAddCircle } from "react-icons/io";
-import { Link } from "react-router-dom";
 import PackageDeleteModal from '../PackageDeleteModal';
-import HomeSection1 from './HomeSection1';
+import axios from 'axios';
+import styled from 'styled-components';
 
+const HomeWrap2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3vh;
+
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    padding-top: 3vh;
+  }
+`;
+
+const UserPKG = styled.div`
+  border: 0.5px solid #BFBABA;
+  border-radius: 20px;
+  margin-bottom: 2vh;
+  width: 80vw;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 20px;
+  padding-bottom: 15px;
+
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    margin-bottom: 4vh;
+    width: 40vw;
+    padding-left: 3vw;
+  }
+`;
+
+const S2Wrap = styled.div`
+  display: flex;
+  width: 70vw;
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    width:40vw;
+  }
+`;
+
+const S2Wrap2 = styled.div`
+  width: 95%;
+  display: flex;
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    width:35vw;
+  }
+`;
+
+const BtnS2 = styled.button`
+  background-color: inherit;
+  border: none;
+  size: 50;
+  padding: 0;
+  margin: 0;
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    margin-left: 1vw;
+  }
+`;
+
+const UserRname = styled.div`
+  font-size: 20px;
+`;
+
+const ToHomeAddPackage = styled(IoIosAddCircle)`
+  position: fixed;
+  bottom: 5vh;
+  right: 10vw;
+  font-size: 50px;
+  color: #ED8C37;
+  background-color: inherit;
+`;
 
 const Homesection2 = () => {
-  const [packages, setPackages] = useState([
-    { id: 1, name: "예시패키지", status: "진행 중" },
-    // { id: 2, name: "저녁루틴", status: "진행 중" },
-    // { id: 3, name: "운동루틴", status: "완료" },
-  ]);
+  const [packages, setPackages] = useState([]); 
+  const [showModal, setShowModal] = useState(false); 
+  const [deleteId, setDeleteId] = useState(null); 
+  const navigate = useNavigate(); 
 
-  const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const token = localStorage.getItem('authToken'); 
+        const response = await axios.get('https://dofarming.duckdns.org/api/v1/track', {
+          headers: {
+            'Authorization': `Bearer ${token}` 
+          }
+        });
+        const newPackages = response.data.map((pkg) => {
+          const [routine] = pkg.content.split(', '); 
+          return { ...pkg, routine }; 
+        });
+        setPackages(newPackages); 
+      } catch (error) {
+        console.error('Error fetching packages:', error); 
+      }
+    };
+
+    fetchPackages(); 
+  }, []); 
 
   const handleDeletePackage = (id) => {
-    setShowModal(true);
-    setDeleteId(id);
+    setShowModal(true); 
+    setDeleteId(id); 
   };
 
   const handleConfirmDelete = () => {
-    const updatedPackages = packages.filter((pkg) => pkg.id !== deleteId);
-    setPackages(updatedPackages);
-    setShowModal(false);
-    document.body.classList.remove('modal-open');
+    const updatedPackages = packages.filter((pkg) => pkg.trackId !== deleteId); 
+    setPackages(updatedPackages); 
+    setShowModal(false); 
+    document.body.classList.remove('modal-open'); 
   };
 
   const handleCancelDelete = () => {
-    setShowModal(false);
-    document.body.classList.remove('modal-open');
+    setShowModal(false); 
+    document.body.classList.remove('modal-open'); 
   };
 
+  const handleAddPackage = () => {
+    navigate('/HomeAddPackage'); 
+  };
+  
   return (
     <>
-    {packages.length > 0 ? (
-      <div className="HomeWrap2">
-        <div id="userPKG" onClick={() => navigate('/Todo')}> {/* 'userPKG' 클릭 시 'Todo' 페이지로 이동 */}
+    {packages.length > 0 && (
+      <HomeWrap2>
+        <UserPKG id="userPKG" onClick={() => navigate('/Todo')}> 
           {packages.map((pkg) => (
-            <div key={pkg.id}>
-              <div className="S2Wrap">
-                <div className="S2Wrap2">
-              <div id="userRname">{pkg.name}</div>
-              <button onClick={(e) => {e.stopPropagation(); navigate('/HomeAddPackage');}} className="BtnS2">
-                <RiPencilFill />
-              </button>
-              </div>
-              <button onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.id);}} className="BtnS2Del">
-                X
-              </button>
-              </div>
-              
-              <div id="userRdate">03.22 ~ 12.05</div>
-              <div id="userSangMe">일찍일어나는 새가 벌레를 잡는다!</div>
+            <div key={pkg.trackId}>
+              <S2Wrap>
+                <S2Wrap2>
+                  <UserRname>{pkg.routine}</UserRname> 
+                  <BtnS2 onClick={(e) => {e.stopPropagation(); navigate('/HomeEditPackage');}}>
+                    <RiPencilFill /> 
+                  </BtnS2>
+                </S2Wrap2>
+                <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
+                  X 
+                </BtnS2>
+              </S2Wrap>
             </div>
           ))}
-          </div>
-        </div>
-      ) : (
-        <HomeSection1 />
-      )}
-      <div>
-        <Link to="/HomeAddPackage">
-          <IoIosAddCircle className="ToHomeAddPackage" />
-        </Link>
-      </div>
-      {showModal && (
-        <PackageDeleteModal 
-          onClose={handleCancelDelete} 
-          onConfirm={handleConfirmDelete}
-        />
-      )}
+        </UserPKG>
+      </HomeWrap2>
+    )}
+    <ToHomeAddPackage onClick={handleAddPackage} /> 
+    {showModal && (
+      <PackageDeleteModal 
+        onClose={handleCancelDelete} 
+        onConfirm={handleConfirmDelete}
+      />
+    )}
     </>
   );
 };

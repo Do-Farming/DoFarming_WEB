@@ -1,16 +1,117 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, MarkerF, InfoWindowF, StandaloneSearchBox } from '@react-google-maps/api';
-import dot from './제목_없는_아트워크.png';
+import { GoogleMap, LoadScript, MarkerF, InfoWindowF, StandaloneSearchBox } from '../../../node_modules/@react-google-maps/api';
+import {  Button, Collapse, List, ListItem } from '../../../node_modules/@material-ui/core';
+// import { GoogleMap, LoadScript, MarkerF, InfoWindowF, StandaloneSearchBox } from '@react-google-maps/api';
+// import {  Button, Collapse, List, ListItem } from '@material-ui/core';
+import dot from './dot.png';
 import NavBar from "../Nav/Nav.jsx";
-import '../../Style/Map/Map.css'
+import styled from 'styled-components';
 import { FaPhoneAlt } from "react-icons/fa";
-import {  Button, Collapse, List, ListItem } from '@material-ui/core';
+
 
 const containerStyle = {
   width: '90vw',
   height: '50vh',
   margin: '0'
 };
+
+const ContainerMap = styled.div`
+  margin: auto 0;
+  padding: 0;
+  overflow-y: visible;
+  overflow: visible;
+  overflow-x: hidden;
+`;
+
+const TxtMap = styled.div`
+  width: 80vw;
+  height: auto;
+  padding-top: 1vh;
+  margin-bottom: 2vh;
+`;
+
+const Txt1 = styled.div`
+  font-size: 1.56rem;
+  margin-left: 6vw;
+  margin-top: 4vh;
+  text-align: left;
+  font-weight: bold;
+  padding-bottom: 1vh;
+`;
+
+const Txt2 = styled.div`
+  font-size: 0.8rem;
+  margin-left: 6vw;
+  text-align: left;
+  padding-bottom: 60px;
+`;
+
+const Txt3Map = styled.div`
+  margin-bottom: 1vh;
+  font-size: 1.25rem;
+  color: #BFBABA;
+  margin-left: 6vw;
+  text-align: left;
+`;
+
+const GMap = styled.div`
+  width: 90vw;
+  height: 50vh;
+  margin: 0 auto;
+  display: flex;
+`;
+
+const UlMap = styled.ul`
+  display: contents;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  margin-bottom: 2vh;
+`;
+
+const LiMap = styled.li`
+  list-style-type: none;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  width: 90vw;
+  height: auto;
+  margin: 0 auto;
+  justify-content: center;
+  border-bottom: 0.5px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const LiWrap = styled.div`
+  width: 60vw;
+`;
+
+const PlaceName = styled.div`
+  font-size: 1.2rem;
+  margin: 1vh 0;
+`;
+
+const PlaceRating = styled.div`
+  font-size: 0.8rem;
+  margin-bottom: 0.5vh;
+`;
+
+const PlaceAddress = styled.div`
+  font-size: 0.8rem;
+  margin-bottom: 0.5vh;
+  width: 60vw;
+`;
+
+const PlacePhone = styled.button`
+  float: right;
+  border: none;
+  background-color: white;
+`;
+
+const AMap = styled.a`
+  color: #ED8C37;
+`;
+
 
 const libraries = ["places"];
 
@@ -94,43 +195,43 @@ const MyComponent = () => {
 
 
   return (
-    <div className='container_map'>
+    <ContainerMap>
       <NavBar />
-      <div className='txt_map'>
-        <div className='txt1'>내 마음을 두드리는 공간</div>
-        <div className='txt2'>도움을 청해봐요</div>
+      <TxtMap>
+        <Txt1>내 마음을 두드리는 공간</Txt1>
+        <Txt2>도움을 청해봐요</Txt2>
         {/* 문구 수정 */}
-        <div className='txt3Map'>#주변 전문의를 찾아봐요</div>
-      </div>
+        <Txt3Map>#주변 전문의를 찾아봐요</Txt3Map>
+      </TxtMap>
       <LoadScript
         googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}
         libraries={libraries}
       >
-        <div className='gMap'>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={userLocation ? userLocation : { lat: 37.566535, lng: 126.9779692 }}
-          zoom={15}
-          onLoad={ref => setMap(ref)}
-        >
-          {initialLocation && (
-            <MarkerF
-              position={initialLocation}
-              icon={{ 
-                url: dot,
-                scaledSize: new window.google.maps.Size(37, 37)
-              }}
-            />
-          )}
-          {places.slice(0, 5).map((place, i) => (
-            <MarkerF
-              key={i}
-              position={place.geometry.location}
-              onClick={() => {
-                setSelectedPlace(place);
-              }}
-            />
-          ))}
+        <GMap>
+            <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={userLocation ? userLocation : { lat: 37.566535, lng: 126.9779692 }}
+            zoom={15}
+            onLoad={ref => setMap(ref)}
+            >
+            {initialLocation && (
+                <MarkerF
+                position={initialLocation}
+                icon={{ 
+                    url: dot,
+                    scaledSize: new window.google.maps.Size(37, 37)
+                }}
+                />
+            )}
+            {places.slice(0, 5).map((place, i) => (
+                <MarkerF
+                key={i}
+                position={place.geometry.location}
+                onClick={() => {
+                    setSelectedPlace(place);
+                }}
+                />
+            ))}
           {selectedPlace && (
             <InfoWindowF
               position={{ lat: selectedPlace.geometry.location.lat(), lng: selectedPlace.geometry.location.lng() }}
@@ -171,14 +272,14 @@ const MyComponent = () => {
             />
           </StandaloneSearchBox>
         </GoogleMap>
-        </div>
-        <ul className='ul_map'>
+        </GMap>
+        <UlMap>
           {places.slice(0, 5).map((place, i) => (
-            <li key={i} className='li_map'>
-              <div className='li_wrap'>
-                <div className="place-name">{place.name}</div>
-                <div className="place-rating">별점: {place.rating}/5</div>
-                <div className="place-address">{place.formatted_address}</div>
+            <LiMap key={i}>
+              <LiWrap>
+                <PlaceName>{place.name}</PlaceName>
+                <PlaceRating>별점: {place.rating}/5</PlaceRating>
+                <PlaceAddress>{place.formatted_address}</PlaceAddress>
                 <Button style={{ color: '#ED8C37' }} variant="text" onClick={() => toggleOpeningHours(place.place_id)}>
             영업 시간 {openHours[place.place_id] ? '숨기기' : '보기'}
           </Button>
@@ -195,23 +296,23 @@ const MyComponent = () => {
               )}
             </List>
           </Collapse>
-              </div>
+              </LiWrap>
               {place.phone && (
-                <button className="place-phone">
-                  <a href={`tel:${place.phone}`} className='a_map'>
+                <PlacePhone>
+                  <AMap href={`tel:${place.phone}`}>
                   <FaPhoneAlt size={30} color='#ED8C37'/>
                   <br />
                   <br />
                   통화
-                  </a>
-                </button>
+                  </AMap>
+                </PlacePhone>
       )}
-            </li>
+            </LiMap>
           ))}
-        </ul>
+        </UlMap>
 
       </LoadScript>
-    </div>
+    </ContainerMap>
   );
 };
 

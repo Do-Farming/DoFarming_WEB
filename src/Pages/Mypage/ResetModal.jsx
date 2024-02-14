@@ -1,47 +1,105 @@
-// 서버 연결 성공?//
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import React, { useEffect, useState } from 'react';
-import '../../Style/Mypage/ResetModal.css';
-import axios from 'axios'; 
+const ResetModalBackdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+`;
 
-const ResetModal = ({ onClose, onConfirm }) => {
-const [deleting, setDeleting] = useState(false); // 삭제 중인지 여부를 나타내는 상태
+const ResetModalBox = styled.div`
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+  height: auto;
+  width: 80%;
 
-  // 루틴 삭제 함수
-  const deleteRoutine = async () => {
-    try {
-      const token = localStorage.getItem('authToken');
+  @media (min-width: 576px) {
+    width: 80%;
+  }
 
-      if (!token) {
-        throw new Error("인증 토큰이 없습니다.");
-      }
+  @media (min-width: 768px) {
+    width: 70%;
+  }
 
-      const apiUrl = "https://dofarming.duckdns.org/api/v1/track"; 
-      await axios.delete(apiUrl, {
-        headers: {
-          'Content-Type': 'application/json', 
-          'Authorization': `Bearer ${token}`, 
-        }
-      });
-      
-      // 삭제가 완료되면 확인 콜백 함수를 호출하고 모달을 닫음
-      onConfirm();
-      onClose();
-    } catch (error) {
-      console.error(error);
-    }
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
+`;
+
+const ResetModalTitle = styled.div`
+  font-size: 1rem;
+  margin-bottom: 40px;
+  margin: 60px;
+`;
+
+const ResetModalButtonYes = styled.button`
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border-top: 0.5px solid #BFBABA;
+  border-right: 0.5px solid #BFBABA;
+  border-radius: 0 0 0 10px;
+  width: 50%;
+  height: auto;
+  padding: 15px;
+  border-bottom: none;
+  border-left: none;
+  
+  &:hover {
+    background-color: #ED8C37;
+    color: white;
+  }
+`;
+
+const ResetModalButtonNo = styled.button`
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border-top: 0.5px solid #BFBABA;
+  border-radius: 0 0 10px 0;
+  width: 50%;
+  height: auto;
+  padding: 15px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  
+  &:hover {
+    background-color: #ED8C37;
+    color: white;
+  }
+`;
+
+const ResetModal = ({ onClose }) => {
+  const handleConfirm = () => {
+    alert("저장되었습니다!");
   };
 
   return (
-    <div className="resetmodal-backdrop">
-      <div className='resetmodal'>
-        <div className='resetmodal-title'><strong>모든 루틴</strong>을 <br /> 삭제하시겠습니까?</div>
-        <div className='resetmodal-footer'>
-          <button className='resetmodalbtnyes' onClick={onClose}>아니오</button>
-          <button className='resetmodalbtnno' onClick={deleteRoutine} disabled={deleting}>{deleting ? '삭제 중...' : '예'}</button> 
+    <ResetModalBackdrop>
+      <ResetModalBox>
+        <ResetModalTitle><strong>모든 루틴</strong>을 <br /> 삭제하시겠습니까?</ResetModalTitle>
+        <div>
+        <Link to="/home">
+            <ResetModalButtonYes onClick={handleConfirm}>예</ResetModalButtonYes>
+          </Link>
+          <ResetModalButtonNo onClick={onClose}>아니오</ResetModalButtonNo>
         </div>
-      </div>
-    </div>
+      </ResetModalBox>
+    </ResetModalBackdrop>
   );
 }
 

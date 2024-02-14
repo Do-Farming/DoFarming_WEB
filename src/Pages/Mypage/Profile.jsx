@@ -1,53 +1,168 @@
-/*PATCH /api/v1/user/info HTTP/1.1 (사용자 정보 수정)
-GET /api/v1/user HTTP/1.1 (사용자 정보조회)
- */
-
-const updateUser = () => {
-  const requestOptions = {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer FirebaseToken',
-    },
-    body: JSON.stringify({
-      nickname: '닉네임 변경',
-      gender: 'MALE',
-      age: 20,
-    }),
-  };
-
-  fetch('/api/v1/user/info', requestOptions)
-    .then(response => {
-      if (response.ok) {
-        console.log('사용자 정보가 성공적으로 수정되었습니다.');
-      } else {
-        console.log('사용자 정보 수정에 실패하였습니다.');
-      }
-    })
-    .catch(error => {
-      console.log('오류가 발생하였습니다:', error);
-    });
-};
-
-updateUser();
-
-
-import React, { useState, useRef } from "react";
-import "../../Style/Mypage/Profile.css";
+import React, { useState, useRef, useEffect } from "react";
+import styled from 'styled-components';
 import NavBar from "../Nav/Nav.jsx";
-import myimg from "./기본이미지.png";
+import axios from "axios";
+import myimg from "./eximg.png";
+
+const ProfileWrap = styled.div``;
+
+const ProfileContainer = styled.div`
+    margin-left: 10vw;
+`;
+
+const ProfileTxt = styled.div`
+    font-size: 2rem;
+    margin-top: 4vh;
+    margin-bottom: 5vh;
+`;
+
+const ProfileContent = styled.div`
+    width: 50vw;
+    margin-left: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const ProfileimgWrap = styled.div`
+    width: 100px;
+    height: 100px;
+    border-radius: 70%;
+    overflow: hidden;
+    margin-bottom: 20px;
+`;
+
+const Profileimg = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`;
+
+const Profileinputnic = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const Profilenickname = styled.input`
+    border: none;
+    background-color: inherit;
+    width: 277.5px;
+    height: 44.5px;
+    border-radius: 15px;
+    background-color: #f6f6f6;
+    color: #5B5B5B;
+    margin: 20px 0;
+    padding-left: 25px;
+    padding-top: 28px;
+    font-size: 20px;
+    text-align: center;
+    padding: 15px 25px;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const Profileinput = styled.div`
+    width: 300px;
+    height: 52px;
+    border-radius: 15px;
+    background-color: #f6f6f6;
+    color: #5B5B5B;
+    margin: 20px 0;
+    padding-left: 25px;
+    padding-top: 28px;
+    font-size: 20px;
+`;
+
+const Profilegender = styled.select`
+    margin-left: 180px;
+    border: none;
+    background-color: inherit;
+    appearance: none;
+    color: #5B5B5B;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const Profileage = styled.input`
+    margin-left: 180px;
+    border: none;
+    width: 50px;
+    background-color: inherit;
+    color: #5B5B5B;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const Profilesubmit = styled.button`
+    margin-top: 35px;
+    padding: 2.3vh;
+    font-size: 1rem;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50px;
+    width: 200px;
+    border: none;
+
+    &:hover {
+        background-color: #ED8C37;
+        color: white;
+    }
+`;
 
 const Profile = () => {
   // 상태 관리
   const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져오기
-  const [gender, setGender] = useState("값호출"); //서버에서 사용자 성별 가져오기
-  const [age, setAge] = useState("값호출"); //서버에서 사용자 나이 가져오기
-  const [image, setImage] = useState(null);
-  const [editingNickname, setEditingNickname] = useState(false);
-  const [newNickname, setNewNickname] = useState("");
+  const [gender, setGender] = useState(""); //서버에서 사용자 성별 가져오기
+  const [age, setAge] = useState(""); //서버에서 사용자 나이 가져오기
+  const [image, setImage] = useState(null); // 서버에서 사용자 구글 이미지 가져오기
 
   // input 요소에 대한 참조
   const fileInputRef = useRef(null);
+
+  // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
+  useEffect(() => {
+    // 서버로부터 사용자 정보를 가져오는 함수 호출
+    fetchUserInfo();
+  }, []);
+
+  // 서버로부터 사용자 정보를 가져오는 함수
+  const fetchUserInfo = async () => {
+    try {
+      // 서버 URL
+      const apiUrl = "https://dofarming.duckdns.org/api/v1/user";
+
+      // 로그인 토큰 가져오기
+      const token = localStorage.getItem('authToken');
+
+      if (token) {
+        // 서버로 GET 요청을 보냄
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // 응답 데이터에서 사용자 정보 추출하여 상태 업데이트
+        const userData = response.data;
+        setNickname(userData.nickname);
+        setGender(userData.gender);
+        setAge(userData.age);
+        // 이미지 데이터는 필요에 따라 처리
+      }
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  };
 
   // 파일 입력 변경 핸들러
   const handleImageChange = (e) => {
@@ -60,132 +175,106 @@ const Profile = () => {
     fileInputRef.current.click();
   };
 
-  // 닉네임 변경 핸들러
-  const handleNicknameChange = (e) => {
-    const input = e.target.value;
-    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input);
+  // 사용자 정보를 수정하는 함수
+  const updateUserInfo = async () => {
+    try {
+      // 서버 URL
+      const apiUrl = "https://dofarming.duckdns.org/api/v1/user/info";
 
-    const AgeCheck = (e) => {
-      const input = e.target.value;
-    
-      if (isNaN(input)) {
-        alert("숫자만 입력하세요");
-        return;
+      // 로그인 토큰 가져오기
+      const token = localStorage.getItem('authToken');
+
+      if (token) {
+        // 서버로 PATCH 요청을 보냄
+        const response = await axios.patch(apiUrl, {
+          nickname,
+          gender,
+          age,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // 수정이 성공하면 메시지 출력
+        console.log("User info updated successfully");
+        alert("저장되었습니다."); // 저장 성공 시 알림
+        window.location.href = "/home"; // 홈으로 이동
       }
-    
-      const valid = /^[0-9]{0,3}$/.test(input);
-    
-      if (valid) {
-        setAge(input);
-      } else {
-        alert("나이는 3자릿수 이하여야 합니다.");
-      }
-    };
-
-    
-
-    if (valid) {
-      setNewNickname(input);
-      setNickname(input);
-    } else {
-      alert("닉네임은 영문, 한글, 숫자를 포함한 1글자 이상~12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
+    } catch (error) {
+      console.error("Error updating user info:", error);
     }
   };
 
-  // 닉네임 저장 핸들러
-  const handleSaveNickname = () => {
-    setNickname(newNickname);
-    setEditingNickname(false);
-  };
-
-  // 성별 변경 핸들러
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
-  };
-
-  // 나이 변경 핸들러
-  const handleAgeChange = (e) => {
-    setAge(e.target.value);
-  };
-
-  const handleButtonClick = () => {
-    alert("저장되었어요!");
-  };
-
+  // JSX 반환
   return (
-    <div className="ProfileWrap">
+    <ProfileWrap>
       <NavBar />
 
-      <div className="ProfileContainer">
-        <div className="ProfileTxt">Profile</div>
-        <div className="ProfileContent">
+      <ProfileContainer>
+        <ProfileTxt>Profile</ProfileTxt>
+        <ProfileContent>
           {/* 이미지, 닉네임 수정 */}
-          <div className="imgnic">
-            <div className="ProfileimgWrap">
-              {/* 이미지를 표시할 곳 */}
-              {image ? (
-                <img
-                  onClick={handleCustomButtonClick}
-                  src={image}
-                  alt="Uploaded"
-                  className="Profileimg"
-                />
-              ) : (
-                <img
-                  onClick={handleCustomButtonClick}
-                  src={myimg}
-                  alt="Default"
-                  className="Profileimg"
-                />
-              )}
-              <div>
-                {/* 숨겨진 파일 입력 */}
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                />
-              </div>
+          <ProfileimgWrap>
+            {/* 이미지를 표시할 곳 */}
+            {image ? (
+              <Profileimg
+                onClick={handleCustomButtonClick}
+                src={image}
+                alt="Uploaded"
+              />
+            ) : (
+              <Profileimg
+                onClick={handleCustomButtonClick}
+                src={myimg}
+                alt="Default"
+              />
+            )}
+            <div>
+              {/* 숨겨진 파일 입력 */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                ref={fileInputRef}
+                style={{ display: "none" }}
+              />
             </div>
-          </div>
+          </ProfileimgWrap>
 
-          <div className="Profileinputnic">
-            <input
+          <Profileinputnic>
+            <Profilenickname
               type="text"
               value={nickname}
-              onChange={handleNicknameChange}
-              onBlur={handleNicknameChange}
-              className="Profilenickname"
+              onChange={(e) => setNickname(e.target.value)}
             />
-          </div>
+          </Profileinputnic>
 
-          <div className="Profileinput">
+          <Profileinput>
             <label>성별</label>
-            <select
+            <Profilegender
               value={gender}
-              onChange={handleGenderChange}
-              className="Profilegender"
+              onChange={(e) => setGender(e.target.value)}
             >
-              <option value="Male">값호출</option>
-              <option value="Female">값호출</option>
-            </select>
-          </div>
+              <option value="MALE">남성</option>
+              <option value="FEMALE">여성</option>
+            </Profilegender>
+          </Profileinput>
 
-          <div className="Profileinput">
+          <Profileinput>
             <label>나이</label>
-            <input
+            <Profileage
               type="number"
               value={age}
-              onChange={handleAgeChange}
-              className="Profileage"
+              onChange={(e) => setAge(e.target.value)}
             />
-          </div>
-          <button className="Profilesubmit" onClick={handleButtonClick}>저장</button>
-        </div>
-      </div>
-    </div>
+          </Profileinput>
+          <Profilesubmit onClick={updateUserInfo}>
+            저장
+          </Profilesubmit>
+        </ProfileContent>
+      </ProfileContainer>
+    </ProfileWrap>
   );
 };
 
