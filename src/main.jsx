@@ -11,6 +11,7 @@ import Map from "./Pages/Map/Map";
 import Profile from "./Pages/Mypage/Profile";
 import Reset from "./Pages/Mypage/Reset";
 import HomeAddPackage from "./Pages/Home/HomeAddPackage";
+import HomeEditPackage from "./Pages/Home/HomeEditPackage";
 import Todo from "./Pages/Home/Todo";
 import HomeSection2 from "./Pages/Home/HomeComponents/HomeSection2";
 
@@ -32,6 +33,7 @@ rootElement.render(
       <Route path="/Profile" element={<Profile />} />
       <Route path="/Reset" element={<Reset />} />
       <Route path="/HomeAddPackage" element={<HomeAddPackage />} />
+      <Route path="/HomeEditPackage" element={<HomeEditPackage />} /> 
       <Route path="Todo" element={<Todo />} />
       <Route path="HomeSection2" element={<HomeSection2 />} />
     </Routes>

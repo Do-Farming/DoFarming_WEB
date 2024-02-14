@@ -1,15 +1,15 @@
-import React, { useState, useRef, forwardRef } from 'react';
+import React, { useState, useRef, forwardRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaCalendarAlt } from 'react-icons/fa';
 import '../../Style/Home/Calendar.css';
 import '../../Style/Home/HomeAddPackage.css';
 import NavBar from '../Nav/Nav.jsx';
-import { useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 
 const token = localStorage.getItem('authToken');
 
-const HomeAddPackage = () => {
+const HomeEditPackage = () => {
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
   const [startDate, endDate] = dateRange;
   const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +18,44 @@ const HomeAddPackage = () => {
   const [memo, setMemo] = useState('');
   const navigate = useNavigate(); 
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'https://dofarming.duckdns.org/api/v1/track',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          const data = response.data;
+          const lastData = data[data.length - 1];
+          console.log(lastData);
+          const [routine, memo] = lastData.content.split(', '); // 수정: content를 분리하여 루틴 이름과 메모로 설정
+          setRoutine(routine);
+          setMemo(memo);
+          setDateRange([new Date(lastData.startDate), new Date(lastData.endDate)]);
+        } else {
+          alert('데이터를 불러오지 못했어요!');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('데이터를 불러오지 못했어요!');
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleButtonClick = async () => {
     try {
       const response = await axios.post(
         'https://dofarming.duckdns.org/api/v1/track',
         {
-          content: `${routine}, ${memo}`, // 루틴 이름과 메모를 콤마와 공백으로 구분하여 content로 보냄
+          content: `${routine}, ${memo}`, // 수정: 루틴 이름과 메모를 콤마와 공백으로 구분하여 content로 보냄
           startDate: startDate.toISOString().substring(0, 10),
           endDate: endDate.toISOString().substring(0, 10),
         },
@@ -59,6 +91,10 @@ const HomeAddPackage = () => {
       <FaCalendarAlt onClick={onClick} className='Home9inputboxDateIcon'/>
     </div>
   ));
+
+  const handleClickDatePicker = () => {
+    datePickerRef.current.setOpen(true);
+  };
 
   return (
     <div>
@@ -103,6 +139,7 @@ const HomeAddPackage = () => {
               onCalendarClose={() => setIsOpen(false)}
               onCalendarOpen={() => setIsOpen(true)}
             />
+            <button onClick={handleClickDatePicker}>달력 열기</button>
           </div>
         </div>
         <div className='BtnWrap'> 
@@ -113,4 +150,4 @@ const HomeAddPackage = () => {
   );
 }
 
-export default HomeAddPackage;
+export default HomeEditPackage;

@@ -1,11 +1,3 @@
-/*
-// POST dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id HTTP/1.1 (루틴추가)
-// GET dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id HTTP/1.1 (루틴조회)
-//  PATCH dofarming.duckdns.org/api/v1/routine/1 HTTP/1.1 (루틴 상태변경)
-//  GET dofarming.duckdns.org/api/v1/user HTTP/1.1 (사용자 정보 조회)
-*/
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../Style/Routine/Routine.css";
@@ -27,12 +19,11 @@ import { Depression1 } from "../Components/Depression1";
 import { Frustration } from "../Components/Frustration";
 import { Rest } from "../Components/Rest";
 import { GoToRoutine } from '../Components/GoToRoutine';
-import Routinerequest from "./Routinerequest.jsx";
 import NavBar from "../Nav/Nav.jsx";
 
 
-
 const Routine = () => {
+  const [nickname, setNickname] = useState("");
   const [activeBtn, setActiveBtn] = useState('morning');
   const [user, setUser] = useState('');
   const [showMiracleMorning, setShowMiracleMorning] = useState(false);
@@ -51,28 +42,36 @@ const Routine = () => {
   const [showDepression1, setShowDepression1] = useState(false);
   const [showFrustration, setShowFrustration] = useState(false);
   const [showRest, setShowRest] = useState(false);
-  
+
+
+
   useEffect(() => {
-    // localStorage에서 토큰을 가져옵니다.
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      // 서버에 토큰을 전달하여 사용자 정보를 요청합니다.
-      const apiUrl = "https://dofarming.duckdns.org";
-      axios.get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(response => {
-        // 응답 데이터에서 사용자 정보를 설정합니다.
-        setUser(response.data.user);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    }
+    const fetchUserInfo = async (token) => {
+      try {
+        const response = await axios.get("https://dofarming.duckdns.org/api/v1/user", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        const { nickname } = response.data;
+        return nickname;
+      } catch (error) {
+        console.error("사용자 정보를 가져오는 중 오류가 발생했습니다:", error);
+        return null;
+      }
+    };
+
+    const getNickname = async () => {
+      const token = localStorage.getItem("authToken");
+      const nickname = await fetchUserInfo(token);
+      if (nickname) {
+        setNickname(nickname);
+      }
+    };
+
+    getNickname();
   }, []);
-  
+
   const handleMiracleMorningClick = () => {
     setShowMiracleMorning(true);
     setShowDayStart(false);
@@ -185,10 +184,8 @@ const Routine = () => {
     setShowRest(true);
   };
 
-
   const handleBtnClick = (btnType) => {
     setActiveBtn(btnType);
-    // 아침, 저녁, 건강, 기분 버튼 클릭 시 showMiracleMorning을 false로 설정
     setShowMiracleMorning(false);
     setShowDayStart(false);
     setShowCheerful(false);
@@ -207,49 +204,44 @@ const Routine = () => {
     setShowRest(false);
   };
 
-  return(
+
+  return (
     <div className="Routine_wrap">
-      <NavBar />
-      <Routinerequest />
-      <div className="main">
-        <div className="txt">
-          <div className="txt1">나를 가꾸는 시간</div>
-          <div className="txt2">우리 모두에게는 <strong>시간</strong>이라는<br />공평한 것이 주어진다</div>
-          <div className="txt3"># {user}값받아오기 님을 위한 추천</div>
-        </div>
-        <div className="RoutineContainer">
-          <ButtonGroup activeBtn={activeBtn} handleBtnClick={handleBtnClick} />
-
-          {!showMiracleMorning && !showDayStart && !showCheerful && !showJogging && !showDayEnd && !showBath && !showMeditation && !showReading && !showMyself && !showInsomnia && !showDepression && !showFamily && !showPms && !showDepression1 && !showFrustration && !showRest && <GoToRoutine activeBtn={activeBtn} handleMiracleMorningClick={handleMiracleMorningClick} handleDayStartClick={handleDayStartClick} handleCheerfulClick={handleCheerfulClick} handleJoggingClick={handleJoggingClick} handleDayEndClick={handleDayEndClick} handleBathClick={handleBathClick} handleMeditationClick={handleMeditationClick} handleReadingClick={handleReadingClick} handleMyselfClick={handleMyselfClick} handleInsomniaClick={handleInsomniaClick} handleDepressionClick={handleDepressionClick} handleFamilyClick={handleFamilyClick} handlePmsClick={handlePmsClick} handleDepression1Click={handleDepression1Click} handleFrustrationClick={handleFrustrationClick} handleRestClick={handleRestClick}/>
-            }
-
-          {/* 미라클 모닝 상태에 따른 화면 표시 */}
-          {showMiracleMorning && <MiracleMorning />}
-          {activeBtn === 'morning' && showDayStart && <DayStart />}
-          {activeBtn === 'morning' && showCheerful && <Cheerful />}
-          {activeBtn === 'morning' && showJogging && <Jogging />}
-          {showDayEnd && <DayEnd />}
-          {showBath && <Bath />}
-          {showMeditation && <Meditation />}
-          {showReading && <Reading />}
-          {showMyself && <Myself />}
-          {showInsomnia && <Insomnia />}
-          {showDepression && <Depression />}
-          {showFamily && <Family />}
-          {showPms && <Pms />}
-          {showDepression1 && <Depression1 />}
-          {showFrustration && <Frustration />}
-          {showRest && <Rest />}
-        </div>
+    <NavBar />
+    <div className="main">
+      <div className="txt">
+        <div className="txt1">나를 가꾸는 시간</div>
+        <div className="txt2">우리 모두에게는 <strong>시간</strong>이라는<br />공평한 것이 주어진다</div>
+        <div className="txt3"># {nickname} 님을 위한 추천</div>
       </div>
+      <ButtonGroup activeBtn={activeBtn} handleBtnClick={handleBtnClick} />
+
+    {!showMiracleMorning && !showDayStart && !showCheerful && !showJogging && !showDayEnd && !showBath && !showMeditation && !showReading && !showMyself && !showInsomnia && !showDepression && !showFamily && !showPms && !showDepression1 && !showFrustration && !showRest && <GoToRoutine activeBtn={activeBtn} handleMiracleMorningClick={handleMiracleMorningClick} handleDayStartClick={handleDayStartClick} handleCheerfulClick={handleCheerfulClick} handleJoggingClick={handleJoggingClick} handleDayEndClick={handleDayEndClick} handleBathClick={handleBathClick} handleMeditationClick={handleMeditationClick} handleReadingClick={handleReadingClick} handleMyselfClick={handleMyselfClick} handleInsomniaClick={handleInsomniaClick} handleDepressionClick={handleDepressionClick} handleFamilyClick={handleFamilyClick} handlePmsClick={handlePmsClick} handleDepression1Click={handleDepression1Click} handleFrustrationClick={handleFrustrationClick} handleRestClick={handleRestClick}/>
+      }
+
+      {/* 미라클 모닝 상태에 따른 화면 표시 */}
+      {showMiracleMorning && <MiracleMorning />}
+      {activeBtn === 'morning' && showDayStart && <DayStart />}
+      {activeBtn === 'morning' && showCheerful && <Cheerful />}
+      {activeBtn === 'morning' && showJogging && <Jogging />}
+      {showDayEnd && <DayEnd />}
+      {showBath && <Bath />}
+      {showMeditation && <Meditation />}
+      {showReading && <Reading />}
+      {showMyself && <Myself />}
+      {showInsomnia && <Insomnia />}
+      {showDepression && <Depression />}
+      {showFamily && <Family />}
+      {showPms && <Pms />}
+      {showDepression1 && <Depression1 />}
+      {showFrustration && <Frustration />}
+      {showRest && <Rest />}
     </div>
-    
-  );
+
+  </div>
+  
+);
 };
 
 export default Routine;
-
-
-
-
 

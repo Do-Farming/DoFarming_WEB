@@ -1,7 +1,4 @@
-/*PATCH /api/v1/user/info HTTP/1.1 (사용자 정보 수정)
-GET /api/v1/user HTTP/1.1 (사용자 정보조회)
- */
-
+// 일단 성공....
 
 import React, { useState, useRef, useEffect } from "react";
 import "../../Style/Mypage/Profile.css";
@@ -11,50 +8,49 @@ import axios from "axios";
 import { instance } from "../../libs/api.jsx";
 
 const Profile = () => {
- // 상태 관리
-const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져와 상태관리
-const [gender, setGender] = useState(""); //서버에서 사용자 성별 가져와 상태관리
-const [age, setAge] = useState(""); //서버에서 사용자 나이 가져와 상태관리
-const [image, setImage] = useState(null); // 서버에서 사용자 구글 이미지 가져와 상태관리
+  // 상태 관리
+  const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져와 상태관리
+  const [gender, setGender] = useState(""); //서버에서 사용자 성별 가져와 상태관리
+  const [age, setAge] = useState(""); //서버에서 사용자 나이 가져와 상태관리
+  const [image, setImage] = useState(null); // 서버에서 사용자 구글 이미지 가져와 상태관리
 
-// input 요소에 대한 참조
-const fileInputRef = useRef(null);
+  // input 요소에 대한 참조
+  const fileInputRef = useRef(null);
 
-// 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
-useEffect(() => {
-  // 서버로부터 사용자 정보를 가져오는 함수 호출
-  fetchUserInfo();
-}, []);
+  // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
+  useEffect(() => {
+    // 서버로부터 사용자 정보를 가져오는 함수 호출
+    fetchUserInfo();
+  }, []);
 
-// 서버로부터 사용자 정보를 가져오는 함수
-const fetchUserInfo = async () => {
-  try {
-    // 서버 URL
-    const apiUrl = "https://dofarming.duckdns.org/api/v1/user";
+  // 서버로부터 사용자 정보를 가져오는 함수
+  const fetchUserInfo = async () => {
+    try {
+      // 서버 URL
+      const apiUrl = "https://dofarming.duckdns.org/api/v1/user";
 
-    // 로그인 토큰 가져오기
-    const token = localStorage.getItem('authToken');
+      // 로그인 토큰 가져오기
+      const token = localStorage.getItem('authToken');
 
-    if (token) {
-      // 서버로 GET 요청을 보냄
-      const response = await axios.get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      if (token) {
+        // 서버로 GET 요청을 보냄
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      // 응답 데이터에서 사용자 정보 추출하여 상태 업데이트
-      const userData = response.data;
-      setNickname(userData.nickname);
-      setGender(userData.gender);
-      setAge(userData.age);
-      // 이미지 데이터는 필요에 따라 처리
+        // 응답 데이터에서 사용자 정보 추출하여 상태 업데이트
+        const userData = response.data;
+        setNickname(userData.nickname);
+        setGender(userData.gender);
+        setAge(userData.age);
+        // 이미지 데이터는 필요에 따라 처리
+      }
+    } catch (error) {
+      console.error("Error fetching user info:", error);
     }
-  } catch (error) {
-    console.error("Error fetching user info:", error);
-  }
-};
-
+  };
 
   // 파일 입력 변경 핸들러
   const handleImageChange = (e) => {
@@ -66,6 +62,44 @@ const fetchUserInfo = async () => {
   const handleCustomButtonClick = () => {
     fileInputRef.current.click();
   };
+
+  // 사용자 정보를 수정하는 함수
+  // 사용자 정보를 수정하는 함수
+const updateUserInfo = async () => {
+  try {
+    // 서버 URL
+    const apiUrl = "https://dofarming.duckdns.org/api/v1/user/info";
+
+    // 로그인 토큰 가져오기
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      // 서버로 PATCH 요청을 보냄
+      const response = await axios.patch(apiUrl, {
+        nickname,
+        gender,
+        age,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // 수정이 성공하면 메시지 출력
+      alert("저장되었습니다.");
+
+      // 로컬 상태 업데이트
+      setNickname(nickname);
+      setGender(gender);
+      setAge(age);
+
+      // 홈 화면으로 이동
+      history.push("/home");
+    }
+  } catch (error) {
+    console.error("Error updating user info:", error);
+  }
+};
 
   // JSX 반환
   return (
@@ -111,7 +145,7 @@ const fetchUserInfo = async () => {
             <input
               type="text"
               value={nickname}
-              onChange={() => {}}
+              onChange={(e) => setNickname(e.target.value)}
               className="Profilenickname"
             />
           </div>
@@ -120,11 +154,11 @@ const fetchUserInfo = async () => {
             <label>성별</label>
             <select
               value={gender}
-              onChange={() => {}}
+              onChange={(e) => setGender(e.target.value)}
               className="Profilegender"
             >
-              <option value="Male">값호출</option>
-              <option value="Female">값호출</option>
+              <option value="MALE">남성</option>
+              <option value="FEMALE">여성</option>
             </select>
           </div>
 
@@ -133,10 +167,13 @@ const fetchUserInfo = async () => {
             <input
               type="number"
               value={age}
-              onChange={() => {}}
+              onChange={(e) => setAge(e.target.value)}
               className="Profileage"
             />
           </div>
+          <button className="Profilesubmit" onClick={updateUserInfo}>
+            저장
+          </button>
         </div>
       </div>
     </div>

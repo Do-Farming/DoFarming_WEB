@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../Style/Mypage/Reset.css";
 import NavBar from "../Nav/Nav.jsx";
 import ResetModal from "./ResetModal"; 
 
@@ -13,9 +12,8 @@ const Reset = () => {
     const handleModalClose = () => {
       setShowModal(false);
     }
-
+    // 전체 초기화
     const handleResetConfirm = () => {
-      console.log("전체 초기화를 실행합니다.");
       setShowModal(false); // 모달 닫기
     }
 

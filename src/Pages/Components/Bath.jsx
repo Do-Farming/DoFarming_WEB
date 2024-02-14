@@ -12,6 +12,11 @@ export const Bath = () => {
     setShowModal(false);
   }
 
+  const handleAddRoutine = (trackId) => {
+    // 여기서 루틴을 추가하는 로직을 수행합니다.
+    console.log("Adding routine with trackId:", trackId);
+  }
+
   return (
     <div className="main_box">
       <div className="m_txt1">
@@ -27,7 +32,7 @@ export const Bath = () => {
       <div className="selectbox"><div className="txtbox">미지근한 물 마시기</div><button onClick={handleAddClick} className="selectbox_btn">추가</button></div>
       <div className="selectbox"><div className="txtbox">팩 하기</div><button onClick={handleAddClick} className="selectbox_btn">추가</button></div>
       <div className="select_all_div"><button onClick={handleAddClick} className="select_all">+전체 추가하기</button></div>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <Modal onClose={handleCloseModal} onAddRoutine={handleAddRoutine} />}
     </div>
   );
 };

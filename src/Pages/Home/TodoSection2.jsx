@@ -4,21 +4,31 @@ import "../../Style/Home/Todo.css";
 
 const TodoSection2 = ({ pageId }) => {
   const [routineList, setRoutineList] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    const storedRoutineList = localStorage.getItem(`routineList_${pageId}`);
-    if (storedRoutineList) {
-      setRoutineList(JSON.parse(storedRoutineList));
-    }
-  }, [pageId]);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://dofarming.duckdns.org/api/v1/track`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setRoutineList(data);
+      } catch (error) {
+        console.error('Error fetching routine list:', error);
+      }
+    };
 
-  useEffect(() => {
-    localStorage.setItem(`routineList_${pageId}`, JSON.stringify(routineList));
-  }, [routineList, pageId]);
+    fetchData();
+  }, [pageId, token]);
 
   const addRoutine = () => {
-    const newRoutine = { name: "", completed: false };
+    const newRoutine = { name: inputValue, completed: false };
     setRoutineList([...routineList, newRoutine]);
+    setInputValue("");
   };
 
   const deleteRoutine = (index) => {
@@ -53,13 +63,13 @@ const TodoSection2 = ({ pageId }) => {
       >
         <div className="checkbox-container">
           <div className="Check1">
-          <input
-            type="checkbox"
-            checked={routine.completed}
-            onChange={() => toggleComplete(index)}
-            id={`check${index}`}
-            disabled={routine.name.trim() === ""}
-          />
+            <input
+              type="checkbox"
+              checked={routine.completed}
+              onChange={() => toggleComplete(index)}
+              id={`check${index}`}
+              disabled={routine.name.trim() === ""}
+            />
             <label htmlFor={`check${index}`}></label>
           </div>
           <input
@@ -84,7 +94,9 @@ const TodoSection2 = ({ pageId }) => {
   return (
     <div className="TodoSection2Wrap">
       <div id="RouList">
+        {/* 루틴 목록 출력 */}
         {renderRoutineList()}
+        {/* 루틴 추가 버튼 */}
         <button className="TodoAddRoutineBtn" onClick={addRoutine}>
           + 루틴 추가하기
         </button>

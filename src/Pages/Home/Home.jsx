@@ -1,6 +1,5 @@
 // (POST) dofarming.duckdns.org/api/v1/track (기분변경)
 //PATCH dofarming.duckdns/api/v1/user/mood HTTP/1.1 (기분저장)
-// HTTP/1.1 200 OK
 // GET /api/v1/user HTTP/1.1 (사용자 정보조회 )
 
 import React, { useState, useEffect } from "react";
@@ -30,13 +29,18 @@ const Home = () => {
     return data;
   };
 
+  //토큰 가져오기
+  const token = localStorage.getItem('authToken');
+
+
+
   return (
     <div>
       <div className="HomeWrap">
         <NavBar />
         <HomeHeader/>
         <HomeSection1 />
-        {/* <HomeSection2 /> */}
+        <HomeSection2 />
       </div>
     </div>
   );
