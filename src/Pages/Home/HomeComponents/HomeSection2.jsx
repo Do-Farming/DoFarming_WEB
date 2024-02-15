@@ -23,14 +23,14 @@ const UserPKG = styled.div`
   border-radius: 20px;
   margin-bottom: 2vh;
   width: 80vw;
-  height: 100px;
+  height: 120px; /* Changed height from percentage to pixels */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   padding-top: 20px;
-  padding-bottom: 15px;
-
+  padding-bottom: 20px; /* Adjusted padding for better spacing */
+  
   @media all and (min-width: 768px) and (max-width: 3000px) {
     margin-bottom: 4vh;
     width: 40vw;
@@ -66,7 +66,7 @@ const BtnS2 = styled.button`
 `;
 
 const UserRname = styled.div`
-  font-size: 20px;
+  font-size: 24px; /* Increased font size for better readability */
 `;
 
 const ToHomeAddPackage = styled(IoIosAddCircle)`
@@ -76,6 +76,7 @@ const ToHomeAddPackage = styled(IoIosAddCircle)`
   font-size: 50px;
   color: #ED8C37;
   background-color: inherit;
+  cursor: pointer; /* Added cursor pointer for better UX */
 `;
 
 const Homesection2 = () => {
@@ -126,14 +127,14 @@ const Homesection2 = () => {
   const handleAddPackage = () => {
     navigate('/HomeAddPackage'); 
   };
-  
+
   return (
     <>
     {packages.length > 0 && (
       <HomeWrap2>
-        <UserPKG id="userPKG" onClick={() => navigate('/Todo')}> 
-          {packages.map((pkg) => (
-            <div key={pkg.trackId}>
+        {packages.map((pkg) => (
+          <UserPKG id="userPKG" onClick={() => navigate('/Todo')} key={pkg.trackId}>
+            <div>
               <S2Wrap>
                 <S2Wrap2>
                   <UserRname>{pkg.routine}</UserRname> 
@@ -146,8 +147,8 @@ const Homesection2 = () => {
                 </BtnS2>
               </S2Wrap>
             </div>
-          ))}
-        </UserPKG>
+          </UserPKG>
+        ))}
       </HomeWrap2>
     )}
     <ToHomeAddPackage onClick={handleAddPackage} /> 

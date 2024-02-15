@@ -36,7 +36,7 @@ const Home = () => {
         <NavBar />
         <HomeHeader/>
         <HomeSection1 />
-        {/* <HomeSection2 /> */}
+        <HomeSection2 />
       </div>
     </div>
   );

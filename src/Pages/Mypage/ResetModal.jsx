@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const ResetModalBackdrop = styled.div`
   position: fixed;
@@ -15,19 +16,20 @@ const ResetModalBackdrop = styled.div`
   z-index: 9999;
 `;
 
-const ResetModalBox = styled.div`
+const ResetModalBoxContainer = styled.div`
   background-color: white;
   border-radius: 10px;
   text-align: center;
-  height: auto;
   width: 80%;
+  max-width: 400px;
+  padding: 20px;
 
   @media (min-width: 576px) {
-    width: 80%;
+    width: 70%;
   }
 
   @media (min-width: 768px) {
-    width: 70%;
+    width: 60%;
   }
 
   @media (min-width: 992px) {
@@ -35,72 +37,67 @@ const ResetModalBox = styled.div`
   }
 
   @media (min-width: 1200px) {
-    width: 30%;
+    width: 40%;
   }
 `;
 
 const ResetModalTitle = styled.div`
   font-size: 1rem;
-  margin-bottom: 40px;
-  margin: 60px;
+  margin-bottom: 1.5rem;
 `;
 
-const ResetModalButtonYes = styled.button`
+const ResetModalButton = styled.button`
   cursor: pointer;
   color: black;
   background-color: white;
-  border-top: 0.5px solid #BFBABA;
-  border-right: 0.5px solid #BFBABA;
-  border-radius: 0 0 0 10px;
+  border: 0.5px solid #BFBABA;
+  border-radius: ${props => props.yes ? "0 0 0 10px" : "0 0 10px 0"};
   width: 50%;
-  height: auto;
-  padding: 15px;
+  padding: 0.75rem;
   border-bottom: none;
   border-left: none;
-  
+  border-right: ${props => props.yes ? "none" : "0.5px solid #BFBABA"};
+
   &:hover {
     background-color: #ED8C37;
     color: white;
   }
 `;
 
-const ResetModalButtonNo = styled.button`
-  cursor: pointer;
-  color: black;
-  background-color: white;
-  border-top: 0.5px solid #BFBABA;
-  border-radius: 0 0 10px 0;
-  width: 50%;
-  height: auto;
-  padding: 15px;
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
-  
-  &:hover {
-    background-color: #ED8C37;
-    color: white;
-  }
-`;
+const ResetModalBox = ({ onConfirm, onClose }) => {
+  const [deleting, setDeleting] = useState(false);
 
-const ResetModal = ({ onClose }) => {
-  const handleConfirm = () => {
-    alert("저장되었습니다!");
+  const handleDeleteRoutine = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const apiUrl = "https://dofarming.duckdns.org/api/v1/track"; 
+      await axios.delete(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}`, 
+        }
+      });
+
+      onConfirm();
+      onClose();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <ResetModalBackdrop>
-      <ResetModalBox>
+      <ResetModalBoxContainer>
         <ResetModalTitle><strong>모든 루틴</strong>을 <br /> 삭제하시겠습니까?</ResetModalTitle>
         <div>
-        <Link to="/home">
-            <ResetModalButtonYes onClick={handleConfirm}>예</ResetModalButtonYes>
+          <Link to="/home">
+            <ResetModalButton yes onClick={handleDeleteRoutine}>예</ResetModalButton>
           </Link>
-          <ResetModalButtonNo onClick={onClose}>아니오</ResetModalButtonNo>
+          <ResetModalButton onClick={onClose}>아니오</ResetModalButton>
         </div>
-      </ResetModalBox>
+      </ResetModalBoxContainer>
     </ResetModalBackdrop>
   );
-}
+};
 
-export default ResetModal;
+export default ResetModalBox;

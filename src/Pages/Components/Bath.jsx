@@ -109,6 +109,11 @@ export const Bath = () => {
     setShowModal(false);
   };
 
+  const handleAddRoutine = (trackId) => {
+    console.log("Adding routine with trackId:", trackId);
+  }
+
+
   return (
     <MainBox>
       <MTxt1>따뜻한 반신욕</MTxt1>
@@ -140,7 +145,7 @@ export const Bath = () => {
       <div>
         <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
       </div>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <Modal onClose={handleCloseModal} onAddRoutine={handleAddRoutine} />}
     </MainBox>
   );
 };
