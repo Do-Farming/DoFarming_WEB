@@ -242,6 +242,7 @@ const HomeHeader = () => {
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
 
               <br />
+            <HeaderTxt>
               <div className="tellme">오늘의 감정 온도를 알려주세요 :)</div>
             </HeaderTxt>
             <HimgWrap>

@@ -115,7 +115,7 @@ export const Bath = () => {
   const handleAddRoutine = async (trackId) => {
     try {
       // 선택된 작업의 이름을 서버로 전송하여 저장
-      await axios.post(`your_server_url/api/v1/routine/${trackId}`, { content: selectedItem });
+      await axios.post(`dofarming.duckdns.org//api/v1/routine/1/${trackId}`, { content: selectedItem });
       console.log("Routine added successfully!");
     } catch (error) {
       console.error("Error adding routine:", error);
