@@ -119,22 +119,26 @@ const HimgWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-  width: 100%;
+  width: 90%;
   height: 90%;
+  // border: 1px solid red;
 `;
 
 const ImgWrap = styled.div`
   height: 30%;
   display: flex;
+  // margin-left:20%;
+  // border: 1px solid green;
 `;
 
 const Div = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100%;
+  // height: 100%;
   width: 30%;
-  margin: 0 15px;
+  margin: 15px 15px;
+  // border:1px solid black;
 `;
 
 const HomeHeader = () => {
@@ -236,6 +240,54 @@ const HomeHeader = () => {
             <div className="div8" onClick={() => handleDivClick('div8', 'DROWSY')} style={{ backgroundImage: 'url("/emotion8.png")' }} />
             <div className="div9" onClick={() => handleDivClick('div9', 'TIRED')} style={{ backgroundImage: 'url("/emotion9.png")' }} />
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
+
+              <br />
+              <div className="tellme">오늘의 감정 온도를 알려주세요 :)</div>
+            </HeaderTxt>
+            <HimgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick("div1")}
+                  style={{ backgroundImage: 'url("/emotion1.PNG")'}}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick("div2")}
+                  style={{ backgroundImage: 'url("/emotion2.PNG")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick("div3")}
+                  style={{ backgroundImage: 'url("/emotion3.PNG")' }}
+                ></Div>
+              </ImgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick("div4")}
+                  style={{ backgroundImage: 'url("/emotion4.PNG")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick("div5")}
+                  style={{ backgroundImage: 'url("/emotion5.PNG")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick("div6")}
+                  style={{ backgroundImage: 'url("/emotion6.PNG")' }}
+                ></Div>
+              </ImgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick("div7")}
+                  style={{ backgroundImage: 'url("/emotion7.PNG")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick("div8")}
+                  style={{ backgroundImage: 'url("/emotion8.PNG")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick("div9")}
+                  style={{ backgroundImage: 'url("/emotion9.PNG")' }}
+                ></Div>
+              </ImgWrap>
+            </HimgWrap>
           </ModalContent>
         </ModalOverlay>
       )}
