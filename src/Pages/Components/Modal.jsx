@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const ModalBackdrop = styled.div`
@@ -92,13 +92,59 @@ const BtnAdd = styled.button`
 `;
 
 const Modal = ({ onClose }) => {
+  const [tracks, setTracks] = useState([]);
+
+  useEffect(() => {
+    const getTracks = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        const response = await fetch('https://dofarming.duckdns.org/api/v1/track', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        const data = await response.json();
+        setTracks(data);
+      } catch (error) {
+        console.error('Error fetching tracks:', error);
+      }
+    };
+
+    getTracks();
+  }, []);
+
   const handleAddClick = async () => {
     const selectElement = document.querySelector('.modal-select');
     const trackId = selectElement.value;
-    saveRoutine(trackId);
+    const content = selectElement.options[selectElement.selectedIndex].text;
+    await saveRoutine(trackId, content);
     onClose();
   };
 
+  const saveRoutine = async (trackId, content) => {
+    try {
+      const authToken = localStorage.getItem('authToken');
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${trackId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ content })
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Routine saved successfully. Routine Status:', responseData.routineStatus);
+      } else {
+        console.error('Failed to save routine');
+      }
+    } catch (error) {
+      console.error('Error saving routine:', error);
+    }
+  };
+  
   return (
     <ModalBackdrop>
       <ModalBox>
@@ -106,17 +152,20 @@ const Modal = ({ onClose }) => {
           <ModalTitle>루틴에 항목 추가</ModalTitle>
         </ModalHeader>
         <ModalBody>
-          <ModalSelect>
-            <option value="myPackage">값 받아오기</option>
+          <ModalSelect className="modal-select">
+            <option value="">루틴 항목 선택</option>
+            {tracks.map(track => (
+              <option key={track.trackId} value={track.trackId}>{track.content.split(',')[0]}</option>
+            ))}
           </ModalSelect>
         </ModalBody>
         <ModalFooter>
-          <BtnAdd onClick={onClose}>추가하기</BtnAdd> 
+          <BtnAdd onClick={handleAddClick}>추가하기</BtnAdd> 
           <BtnAdd onClick={onClose}>닫기</BtnAdd>
         </ModalFooter>
       </ModalBox>
     </ModalBackdrop>
   );
-}
+};
 
 export default Modal;

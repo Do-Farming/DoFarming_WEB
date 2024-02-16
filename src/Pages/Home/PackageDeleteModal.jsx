@@ -83,34 +83,27 @@ const ModalButtonNo = styled.button`
 `;
 
 const PackageDeleteModal = ({ onClose }) => {
-  const [token, setToken] = useState('');
+  // 삭제 버튼 클릭 시 호출되는 함수
+  const handleDelete = async () => {
+    // 토큰 가져오기
+    const token = localStorage.getItem('authToken'); 
 
-  useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      setToken(authToken);
+    try {
+      const response = await axios.delete('https://dofarming.duckdns.org/api/v1/track/1', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      console.log('패키지를 삭제했습니다.', response.data);
+      onClose();
+    } catch (error) {
+      console.error('패키지 삭제에 실패했습니다.', error);
     }
-  }, []);
-
-  const handleDelete = () => {
-    const apiUrl = "https://dofarming.duckdns.org/api/v1/track/1";
-    axios.delete(apiUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(response => {
-      // 요청이 성공했을 때의 처리
-      console.log("요청 성공!");
-      // 성공 시 추가로 수행할 작업이 있다면 여기에 작성
-    })
-    .catch(error => {
-      // 요청이 실패했을 때의 처리
-      console.error("요청 실패:", error);
-      // 실패 시 추가로 수행할 작업이 있다면 여기에 작성
-    });
   };
 
+  // 모달 컴포넌트 반환
   return (
     <ModalBackdrop>
       <ModalBox>

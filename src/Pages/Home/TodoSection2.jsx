@@ -62,7 +62,6 @@ const TodoSection2Routine = styled.input`
   ::placeholder {
     color: #cccccc;
   }
-  
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
     height: 70px;
@@ -123,23 +122,37 @@ const CheckboxLabel = styled.label`
   }
 `;
 
-const TodoSection2 = ({ pageId }) => {
+const TodoSection2 = ({ token }) => {
   const [routineList, setRoutineList] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    const storedRoutineList = localStorage.getItem(`routineList_${pageId}`);
-    if (storedRoutineList) {
-      setRoutineList(JSON.parse(storedRoutineList));
-    }
-  }, [pageId]);
-
-  useEffect(() => {
-    localStorage.setItem(`routineList_${pageId}`, JSON.stringify(routineList));
-  }, [routineList, pageId]);
-
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://dofarming.duckdns.org/api/v1/track`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setRoutineList(data);
+        } else {
+          console.error('Failed to fetch routine list:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching routine list:', error);
+      }
+    };
+  
+    fetchData();
+  }, [token]);
+  
   const addRoutine = () => {
-    const newRoutine = { name: "", completed: false };
+    const newRoutine = { name: inputValue, completed: false };
     setRoutineList([...routineList, newRoutine]);
+    setInputValue("");
   };
 
   const deleteRoutine = (index) => {

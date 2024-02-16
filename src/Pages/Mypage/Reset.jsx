@@ -39,7 +39,7 @@ const Reset = () => {
     const handleModalClose = () => {
       setShowModal(false);
     }
-
+    // 전체 초기화
     const handleResetConfirm = () => {
       console.log("전체 초기화를 실행합니다.");
       setShowModal(false); 

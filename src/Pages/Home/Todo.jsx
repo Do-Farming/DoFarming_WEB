@@ -4,8 +4,8 @@ import TodoHeader from "./TodoHeader";
 import TodoSection1 from "./TodoSection1";
 import TodoSection2 from "./TodoSection2";
 
-
 const Todo = () => {
+
 
 
     return (

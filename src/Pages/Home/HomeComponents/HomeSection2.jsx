@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { RiPencilFill } from 'react-icons/ri';
 import { IoIosAddCircle } from "react-icons/io";
 import PackageDeleteModal from '../PackageDeleteModal';
 import axios from 'axios';
 import styled from 'styled-components';
+
+const RoutineZero = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ED8C37;
+  font-weight: 340;
+`;
+
 
 const HomeWrap2 = styled.div`
   display: flex;
@@ -112,6 +125,7 @@ const Homesection2 = () => {
     setDeleteId(id); 
   };
 
+  // 패키지 삭제 모달에서 확인 버튼 클릭 시 실행되는 함수
   const handleConfirmDelete = () => {
     const updatedPackages = packages.filter((pkg) => pkg.trackId !== deleteId); 
     setPackages(updatedPackages); 
@@ -119,6 +133,7 @@ const Homesection2 = () => {
     document.body.classList.remove('modal-open'); 
   };
 
+  // 패키지 삭제 모달에서 취소 버튼 클릭 시 실행되는 함수
   const handleCancelDelete = () => {
     setShowModal(false); 
     document.body.classList.remove('modal-open'); 
@@ -138,9 +153,6 @@ const Homesection2 = () => {
               <S2Wrap>
                 <S2Wrap2>
                   <UserRname>{pkg.routine}</UserRname> 
-                  <BtnS2 onClick={(e) => {e.stopPropagation(); navigate('/HomeEditPackage');}}>
-                    <RiPencilFill /> 
-                  </BtnS2>
                 </S2Wrap2>
                 <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
                   X 
