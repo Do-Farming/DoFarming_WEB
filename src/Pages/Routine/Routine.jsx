@@ -89,7 +89,7 @@ const Routine = () => {
           }
         });
         const { nickname } = response.data;
-        setNickname(nickname); // 닉네임 설정 부분을 이 위치로 옮깁니다.
+        setNickname(nickname); 
       } catch (error) {
         console.error("사용자 정보를 가져오는 중 오류가 발생했습니다:", error);
       }

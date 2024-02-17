@@ -14,39 +14,41 @@ const TodoHeaderBlock = styled.div`
   }
 `;
 
-const TodoHeader = ({ firebaseToken }) => {
+const TodoHeader = ({ token }) => {
   const [trackName, setTrackName] = useState('');
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-    const fetchTrackName = async () => {
+    const getTracks = async () => {
       try {
-        const token = localStorage.getItem('authToken');
-        const response = await axios.get('https://dofarming.duckdns.org/api/v1/track', {
+        const authToken = localStorage.getItem('authToken');
+        const response = await fetch('https://dofarming.duckdns.org/api/v1/track', {
+          method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json', 
-          },
-        });
-        if (response.status === 200) {
-          const data = response.data;
-          if (data.length > 0) {
-            setTrackName(data[0].name);
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
           }
-        } else {
-          console.error('Failed to fetch track list:', response.statusText);
-        }
+        });
+        const data = await response.json();
+        setTracks(data);
       } catch (error) {
-        console.error('Error fetching track list:', error);
+        console.error('Error fetching tracks:', error);
       }
     };
 
-    fetchTrackName();
+    getTracks();
   }, []);
 
   return (
     <TodoHeaderBlock>
       {/* 트랙 이름을 표시하는 부분 */}
-      <div>Track Name: {trackName}</div>
+      <div>
+        {tracks.map(track => (
+          <option key={track.trackId} value={track.trackId}>
+            {track.content.split(',')[0]}
+          </option>
+        ))}
+      </div>
     </TodoHeaderBlock>
   );
 };
