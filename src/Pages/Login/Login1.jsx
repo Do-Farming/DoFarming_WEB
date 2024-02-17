@@ -45,7 +45,7 @@ const Login1Container = styled.div`
   overflow: hidden;
 
   @media screen and (max-width: 873px) {
-    height: 85vh;
+    height: 90vh;
   }
 `;
 
