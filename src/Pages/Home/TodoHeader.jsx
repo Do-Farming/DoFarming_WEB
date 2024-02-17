@@ -16,7 +16,7 @@ const TodoHeaderBlock = styled.div`
 const TodoHeader = () => {
     return (
         <TodoHeaderBlock>
-            <div>Morning Routine</div>
+            <div>패키지 이름</div>
             {/* 패키지 이름 받아오기 */}
         </TodoHeaderBlock>
     );
