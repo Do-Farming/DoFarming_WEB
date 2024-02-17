@@ -14,15 +14,14 @@ const MainBox = styled.div`
   padding-left: 2vw;
   margin-left: 25vw;
 
-    @media all and (max-width:1023px) {
-      width: 85vw;
-      align-items: center;
-      padding-left: 5vw;
-      margin-bottom: 4vh;
-      padding-top: 3vh;
-      margin-left:-1vw;
-    }
-
+  @media all and (max-width:1023px) {
+    width: 85vw;
+    align-items: center;
+    padding-left: 5vw;
+    margin-bottom: 4vh;
+    padding-top: 3vh;
+    margin-left:0;
+  }
 `;
 
 const MTxt1 = styled.div`

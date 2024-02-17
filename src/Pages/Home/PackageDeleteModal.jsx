@@ -83,7 +83,7 @@ const ModalButtonNo = styled.button`
   }
 `;
 
-const PackageDeleteModal = ({ onConfirm, onClose }) => {
+const PackageDeleteModal = ({ onClose }) => {
   // 삭제 버튼 클릭 시 호출되는 함수
   const handleDelete = async () => {
     // 토큰 가져오기

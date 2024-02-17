@@ -1,5 +1,3 @@
-//서버 통신 해결 후에 모달 디자인 깔끔하게 변경하기
-
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components';
 import axios from "axios";
@@ -225,9 +223,7 @@ const HomeHeader = () => {
     const selectedDivImage = getComputedStyle(document.querySelector(`.${divNumber}`)).backgroundImage;
     document.querySelector(".Moodlets").style.backgroundImage = selectedDivImage;
     updateMood(mood);
-    closeModal();
   };
-  
 
   return (
     <HomeHeaderWrap>
@@ -248,58 +244,6 @@ const HomeHeader = () => {
       {isModalOpen && (
         <ModalOverlay onClick={closeModal}>
           <ModalContent onClick={(e) => e.stopPropagation()}>
-          <CloseModalButton onClick={closeModal}>x</CloseModalButton>
-          <HeaderTxt>
-              <div className="hiuser">
-                <strong>닉네임값 !</strong>
-              </div>
-              <br />
-              <div className="tellme">Let me know how you feel today :)</div>
-            </HeaderTxt>
-            {/* <HimgWrap>
-              <ImgWrap>
-                <Div
-                  onClick={() => handleDivClick("div1")}
-                  style={{ backgroundImage: 'url("/emotions1.png")'}}
-                ></Div>
-                <Div
-                  onClick={() => handleDivClick("div2")}
-                  style={{ backgroundImage: 'url("/emotions2.png")' }}
-                ></Div>
-                <Div
-                  onClick={() => handleDivClick("div3")}
-                  style={{ backgroundImage: 'url("/emotions3.png")' }}
-                ></Div>
-              </ImgWrap>
-              <ImgWrap>
-                <Div
-                  onClick={() => handleDivClick("div4")}
-                  style={{ backgroundImage: 'url("/emotions4.png")' }}
-                ></Div>
-                <Div
-                  onClick={() => handleDivClick("div5")}
-                  style={{ backgroundImage: 'url("/emotions5.png")' }}
-                ></Div>
-                <Div
-                  onClick={() => handleDivClick("div6")}
-                  style={{ backgroundImage: 'url("/emotions6.png")' }}
-                ></Div>
-              </ImgWrap>
-              <ImgWrap>
-                <Div
-                  onClick={() => handleDivClick("div7")}
-                  style={{ backgroundImage: 'url("/emotions7.png")' }}
-                ></Div>
-                <Div
-                  onClick={() => handleDivClick("div8")}
-                  style={{ backgroundImage: 'url("/emotions8.png")' }}
-                ></Div>
-                <Div
-                  onClick={() => handleDivClick("div9")}
-                  style={{ backgroundImage: 'url("/emotions9.png")' }}
-                ></Div>
-              </ImgWrap>
-            </HimgWrap> */}
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <Div
                 key={`div${num}`}
@@ -308,6 +252,7 @@ const HomeHeader = () => {
                 style={{ backgroundImage: `url("/emotion${num}.png")` }}
               ></Div>
             ))}
+            <CloseModalButton onClick={closeModal}>x</CloseModalButton>
           </ModalContent>
         </ModalOverlay>
       )}
@@ -315,4 +260,4 @@ const HomeHeader = () => {
   );
 };
 
-export default HomeHeader;
+export default TodoHeader;
