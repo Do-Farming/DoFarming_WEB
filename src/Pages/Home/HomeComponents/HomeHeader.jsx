@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components';
 import axios from "axios";
 
-const HomeWrap = styled.div``;
+const HomeHeaderWrap = styled.div``;
 
 const HomeHeaderContent = styled.div`
   height: 18vh;
@@ -38,6 +38,17 @@ const Fighting = styled.div`
   font-size: 15px;
   line-height: 21px;
   font-weight: 340;
+`;
+
+const MoodWrap = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+  @media all and (min-width:768px) and (max-width:3000px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 
 const Moodlets = styled.div`
@@ -92,21 +103,38 @@ const ModalContent = styled.div`
   }
 `;
 
-const CloseModalButton = styled.p`
+const CloseModalButton = styled.div`
   height: 5%;
-  margin-left: auto;
+  margin-left: 85vw;
   margin-top: 15px;
   font-size: 25px;
   color: #BFBABA;
-  cursor: pointer;
+`;
+
+const HeaderTxt = styled.div`
+  height: 10%;
+`;
+
+const HimgWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  width: 100%;
+  height: 90%;
+`;
+
+const ImgWrap = styled.div`
+  height: 30%;
+  display: flex;
 `;
 
 const Div = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  height: 100%;
   width: 30%;
-  margin: 15px 15px;
+  margin: 0 15px;
 `;
 
 const HomeHeader = () => {
@@ -169,17 +197,19 @@ const HomeHeader = () => {
   };
 
   return (
-    <HomeWrap>
+    <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
           <HelloUser>{nickname}님 반가워요</HelloUser>
           <Fighting>오늘도 활기차게 하루를 시작해봐요!</Fighting>
         </HomeTextBox>
+        <MoodWrap>
         <Moodlets
           className="Moodlets"
           style={{ backgroundImage: `url("${selectedDiv}")` }}
           onClick={openModal}
         ></Moodlets>
+        </MoodWrap>
       </HomeHeaderContent>
 
       {isModalOpen && (
@@ -197,7 +227,7 @@ const HomeHeader = () => {
           </ModalContent>
         </ModalOverlay>
       )}
-    </HomeWrap>
+    </HomeHeaderWrap>
   );
 };
 

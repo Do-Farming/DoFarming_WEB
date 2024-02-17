@@ -41,7 +41,6 @@ const TodoHeader = ({ token }) => {
 
   return (
     <TodoHeaderBlock>
-      {/* 트랙 이름을 표시하는 부분 */}
       <div>
         {tracks.map(track => (
           <option key={track.trackId} value={track.trackId}>
