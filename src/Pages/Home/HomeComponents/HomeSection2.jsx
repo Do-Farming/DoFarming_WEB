@@ -41,8 +41,7 @@ const UserPKG = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding-top: 20px;
-  padding-bottom: 20px; /* Adjusted padding for better spacing */
+  
   
   @media all and (min-width: 768px) and (max-width: 3000px) {
     margin-bottom: 4vh;
