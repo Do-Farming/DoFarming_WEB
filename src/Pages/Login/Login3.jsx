@@ -8,7 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 95vh;
+  height: 92.5vh;
   overflow: hidden;
 `;
 
