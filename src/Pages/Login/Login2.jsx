@@ -117,7 +117,7 @@ const Login2 = () => {
     <Login2Container>
       <TextContainer>
         <p>
-          <strong>Body</strong>and <strong>Mind</strong><br />
+          <strong>Body</strong> and <strong>Mind</strong><br />
           The first step to take care of your health!
         </p>
       </TextContainer>
