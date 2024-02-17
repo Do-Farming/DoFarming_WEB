@@ -10,10 +10,10 @@ const TodoSection2Wrap = styled.div`
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
     // position: fixed;
-    left: 50%;
+    // left: 50%;
     transform: translate(-50%);
-    width: 330px;
-    margin-left: 0;
+    width: 83vw;
+    margin-left: 8.5vw;
   }
 `;
 
