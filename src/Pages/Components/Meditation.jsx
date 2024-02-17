@@ -112,34 +112,34 @@ export const Meditation = () => {
   return (
     <MainBox>
   <MTxt1>
-    명상과 기록
+  Meditation
   </MTxt1>
   <MTxt2>
-    잠들기 전 오늘 있었던 일을 되돌아보면서 자신에게<br />
-    진정한 휴식을 선물해 보는 건 어때요?
+  Why don't you reflect on what happened today<br />
+  before you go to bed and give yourself a real break?
   </MTxt2>
   <Selectbox>
-    <Txtbox>편한 옷으로 갈아입기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Changing into PJs</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>캔들 켜기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Turn on Candle</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>가습기 켜기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Turning on humidifier</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>감사 일기 쓰기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Writing gratitude journal</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>명상 하기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Meditation</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <div>
-    <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+    <SelectAll onClick={handleAddClick}>+Add all </SelectAll>
   </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>

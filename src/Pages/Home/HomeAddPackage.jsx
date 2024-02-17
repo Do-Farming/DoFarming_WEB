@@ -60,7 +60,7 @@ const HomeInputBoxName = styled.input`
   outline: none;
   border: none;
   background-color: inherit;
-  font-size: 20px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -131,22 +131,22 @@ function Home9() {
           value={routine}
           onChange={(e) => setRoutine(e.target.value)}
           onBlur={() => setRoutine(routine)}
-          placeholder='루틴 이름'
+          placeholder='Routine name'
         />
       </PackageName>
       <div className='Home9inputWrap'>
         <HomeInput>
-          <div>메모</div>
+          <div>Memo</div>
           <HomeInputBox 
             type="text"
             value={memo}
             onChange={(e) => setMemo(e.target.value)}
             onBlur={() => setMemo(memo)}
-            placeholder='글자 수 제한'
+            placeholder='Write memo'
           />
         </HomeInput>
         <HomeInput>
-          <Datename>시작일</Datename>
+          <Datename>Start date</Datename>
           <HomeInputBox 
             type="date"
             value={dateRange[0].toISOString().substring(0, 10)}
@@ -154,7 +154,7 @@ function Home9() {
           />
         </HomeInput>
         <HomeInput>
-          <Datename>마감일</Datename>
+          <Datename>End date</Datename>
           <HomeInputBox 
             type="date"
             value={dateRange[1].toISOString().substring(0, 10)}
@@ -164,7 +164,7 @@ function Home9() {
       </div>
       <div className='BtnWrap'>
           <Link to="/home">
-              <HomeBtn onClick={handleButtonClick}>완료</HomeBtn>  
+              <HomeBtn onClick={handleButtonClick}>Submit</HomeBtn>  
           </Link>    
       </div>
     </HomeWrap>

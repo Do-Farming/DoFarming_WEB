@@ -112,34 +112,34 @@ export const Cheerful = () => {
   return (
     <MainBox>
   <MTxt1>
-    활기찬 아침
+  Cheerful morning
   </MTxt1>
   <MTxt2>
-    웃음으로 시작해 웃음으로 끝내면 그 하루는 <br />
-    어느 때보다 행복할 거예요.
+  Start with a smile and end with a smile, and that day<br />
+  will be happier than ever.
   </MTxt2>
   <Selectbox>
-    <Txtbox>물 마시기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Taking vitamins</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>명상</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Getting sunlight</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>오늘 하루 계획 세우기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Stretching</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>옷 갈아입기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Check to do</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>샤워하기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Go outside</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <div>
-    <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
   </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>

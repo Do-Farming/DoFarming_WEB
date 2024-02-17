@@ -110,38 +110,38 @@ export const Pms = () => {
 
   return (
     <MainBox>
-      <MTxt1>자기 관리 (PMS)</MTxt1>
-      <MTxt2>소파에 누워 편안한 시간을 보내는 것도 좋아요.</MTxt2>
+      <MTxt1>PMS</MTxt1>
+      <MTxt2>It's also good to lie down on the sofa and have a <br />comfortable time.</MTxt2>
       <Selectbox>
-        <Txtbox>물 한 잔 마시기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Drinking a glass of water</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>진통제 먹기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Taking painkillers</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>전화 알림 끄기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Turn off phone notifications</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>핫 초코 마시기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Drinking hot coco</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>낮잠 자기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Taking a nap</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>영화 보기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Geting snacks ready</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>간식 준비</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Watching movie</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <div>
-        <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+        <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
       </div>
       {showModal && <Modal onClose={handleCloseModal} />}
     </MainBox>

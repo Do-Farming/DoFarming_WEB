@@ -124,34 +124,34 @@ export const Bath = () => {
 
   return (
     <MainBox>
-      <MTxt1>따뜻한 반신욕</MTxt1>
+      <MTxt1>A warm bath</MTxt1>
       <MTxt2>
-        오늘 하루 수고 많았을 당신.
+      You must have worked hard today. 
         <br />
-        따뜻한 물에서 하루의 노곤함을 풀어보는게 어때요?
+        Why don't you relax in warm water?
       </MTxt2>
       <Selectbox>
-        <Txtbox>반신욕 물 받기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('반신욕 물 받기')}>추가</SelectboxBtn>
+        <Txtbox>Draw a bath</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('반신욕 물 받기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>머리 빗기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('머리 빗기')}>추가</SelectboxBtn>
+        <Txtbox>Brushing hair</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('머리 빗기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>반신욕 하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('반신욕 하기')}>추가</SelectboxBtn>
+        <Txtbox>Taking a bath</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('반신욕 하기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>미지근한 물 마시기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('미지근한 물 마시기')}>추가</SelectboxBtn>
+        <Txtbox>Drinking tea</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('미지근한 물 마시기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>팩 하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('팩 하기')}>추가</SelectboxBtn>
+        <Txtbox>Doing a face mask</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('팩 하기')}>Add</SelectboxBtn>
       </Selectbox>
       <div>
-        <SelectAll onClick={() => handleAddClick('전체 추가')}>+전체 추가하기</SelectAll>
+        <SelectAll onClick={() => handleAddClick('전체 추가')}>+Add all</SelectAll>
       </div>
       {showModal && <Modal onClose={handleCloseModal} selectedItem={selectedItem} onAddRoutine={handleAddRoutine} />}
     </MainBox>

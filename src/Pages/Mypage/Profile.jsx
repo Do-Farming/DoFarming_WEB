@@ -204,7 +204,7 @@ const Profile = () => {
 
         // 수정이 성공하면 메시지 출력
         console.log("User info updated successfully");
-        alert("저장되었습니다."); // 저장 성공 시 알림
+        // alert("저장되었습니다."); // 저장 성공 시 알림
         window.location.href = "/home"; // 홈으로 이동
       }
     } catch (error) {
@@ -257,18 +257,18 @@ const Profile = () => {
           </Profileinputnic>
 
           <Profileinput>
-            <label>성별</label>
+            <label>Sex</label>
             <Profilegender
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
-              <option value="MALE">남성</option>
-              <option value="FEMALE">여성</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
             </Profilegender>
           </Profileinput>
 
           <Profileinput>
-            <label>나이</label>
+            <label>Age</label>
             <Profileage
               type="number"
               value={age}
@@ -276,7 +276,7 @@ const Profile = () => {
             />
           </Profileinput>
           <Profilesubmit onClick={updateUserInfo}>
-            저장
+            Submit
           </Profilesubmit>
         </ProfileContent>
       </ProfileContainer>

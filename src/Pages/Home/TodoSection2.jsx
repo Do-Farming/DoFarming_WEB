@@ -60,7 +60,7 @@ const TodoSection2Routine = styled.input`
   text-decoration: ${({ completed }) => completed ? "line-through" : "none"};
   text-decoration-thickness: ${({ completed }) => completed ? "1px" : "initial"};
   ::placeholder {
-    color: #cccccc;
+    color: #BFBABA;
   }
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
@@ -198,7 +198,7 @@ const TodoSection2 = ({ token }) => {
               type="text"
               value={routine.name}
               onChange={(e) => updateRoutineName(index, e.target.value)}
-              placeholder="할 일을 입력하세요"
+              placeholder="Write your to-do"
               completed={routine.completed}
             />
             <TodoDelete onClick={() => deleteRoutine(index)}>
@@ -207,7 +207,7 @@ const TodoSection2 = ({ token }) => {
           </CheckboxContainer>
         ))}
         <TodoAddRoutineBtn onClick={addRoutine}>
-          + 루틴 추가하기
+        + Add routine
         </TodoAddRoutineBtn>
       </div>
     </TodoSection2Wrap>

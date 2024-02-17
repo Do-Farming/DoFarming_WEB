@@ -107,10 +107,10 @@ const PackageDeleteModal = ({ onClose }) => {
   return (
     <ModalBackdrop>
       <ModalBox>
-        <ModalTitle><strong>패키지명</strong><br /> 삭제하시겠습니까?</ModalTitle>
+        <ModalTitle><strong>Delete</strong><br /> Routine?</ModalTitle>
         <div>
-          <ModalButtonYes onClick={onConfirm}>예</ModalButtonYes>
-          <ModalButtonNo onClick={onClose}>아니오</ModalButtonNo>
+          <ModalButtonYes onClick={onConfirm}>Yes</ModalButtonYes>
+          <ModalButtonNo onClick={onClose}>No</ModalButtonNo>
         </div>
       </ModalBox>
     </ModalBackdrop>

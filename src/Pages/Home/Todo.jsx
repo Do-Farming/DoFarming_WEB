@@ -12,7 +12,7 @@ const Todo = () => {
         <div className="Todo">
             <NavBar />
             <TodoHeader />
-            <TodoSection1 />
+            {/* <TodoSection1 /> */}
             <TodoSection2 />
         </div>
     );

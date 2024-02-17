@@ -112,17 +112,17 @@ export const MiracleMorning = () => {
   return (
     <MainBox>
       <MTxt1>
-        미라클 모닝
+      Miracle morning
       </MTxt1>
       <MTxt2>
-          스스로 정한 시간에 일어나서 하루를 시작해보면 어떨까요?<br />당신 인생의 터닝포인트가 될 거예요.
+      How about waking up at a set time and starting your day? <br />It could be a turning point in your life.
       </MTxt2>
-      <Selectbox><Txtbox>잠자리 정리</Txtbox><SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>명상</Txtbox><SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>산책 혹은 런닝머신</Txtbox><SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>샤워하기</Txtbox><SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>독서하기</Txtbox><SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn></Selectbox>
-      <div><SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll></div>
+      <Selectbox><Txtbox>Tidy up the bed</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
+      <Selectbox><Txtbox>Meditation</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
+      <Selectbox><Txtbox>Walking</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
+      <Selectbox><Txtbox>Taking a shower</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
+      <Selectbox><Txtbox>Reading</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
+      <div><SelectAll onClick={handleAddClick}>+Add all</SelectAll></div>
       {showModal && <Modal onClose={handleCloseModal} />}
     </MainBox>
   );
