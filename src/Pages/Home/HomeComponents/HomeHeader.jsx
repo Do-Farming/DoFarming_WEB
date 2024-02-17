@@ -398,7 +398,7 @@ const HomeHeader = () => {
     <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
-          <HelloUser id="hello_user">Hello, DoFarming</HelloUser>
+          <HelloUser id="hello_user">Hello, 닉네임값</HelloUser>
           <Fighting id="fighting">
           Let's enjoy the cheerful day!
           </Fighting>
@@ -416,7 +416,7 @@ const HomeHeader = () => {
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
             <HeaderTxt>
               <div className="hiuser">
-                <strong>DoFarming !</strong>
+                <strong>닉네임값 !</strong>
               </div>
               <br />
               <div className="tellme">Let me know how you feel today :)</div>
