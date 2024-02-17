@@ -43,9 +43,9 @@ const TodoHeader = ({ token }) => {
     <TodoHeaderBlock>
       <div>
         {tracks.map(track => (
-          <option key={track.trackId} value={track.trackId}>
+          <div key={track.trackId}>
             {track.content.split(',')[0]}
-          </option>
+          </div>
         ))}
       </div>
     </TodoHeaderBlock>

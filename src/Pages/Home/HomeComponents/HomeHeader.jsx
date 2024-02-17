@@ -141,21 +141,21 @@ const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDiv, setSelectedDiv] = useState("");
   const [nickname, setNickname] = useState("");
+  const [moods, setMoods] = useState([]);
 
   const token = localStorage.getItem("authToken");
 
-  const updateMood = async (mood) => {
-    try {
-      const response = await axios.patch(
-        "https://dofarming.duckdns.org/api/v1/user/mood",
-        { mood: mood },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      console.log("Mood updated successfully:", response.data);
-    } catch (error) {
-      console.error("Error updating mood:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchMoods = async () => {
+      try {
+        const response = await axios.get("https://dofarming.duckdns.org/api/v1/moods");
+        setMoods(response.data);
+      } catch (error) {
+        console.error("Error fetching moods:", error);
+      }
+    };
+    fetchMoods();
+  }, []);
 
   const fetchUserInfo = async () => {
     try {
@@ -184,11 +184,40 @@ const HomeHeader = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    const selectedDivImage = getComputedStyle(document.querySelector(`.${selectedDiv}`)).backgroundImage;
-    document.querySelector(".Moodlets").style.backgroundImage = selectedDivImage;
-    updateMood(selectedDiv);
+    if (selectedDiv) { // Check if selectedDiv is not empty
+      const selectedDivImage = getComputedStyle(document.querySelector(`.${selectedDiv}`)).backgroundImage;
+      document.querySelector(".Moodlets").style.backgroundImage = selectedDivImage;
+      updateMood(selectedDiv);
+    }
   };
 
+  const updateMood = async (mood) => {
+    try {
+      if (!mood) { // Mood 값이 없는 경우에 대한 처리
+        console.error("Mood is undefined");
+        return;
+      }
+  
+      // 서버에서 반환한 Mood 값이 유효한지 확인
+      const isValidMood = moods.includes(mood);
+      if (!isValidMood) {
+        console.error("Invalid mood:", mood);
+        return;
+      }
+  
+      // 서버로 보낼 데이터의 형식을 수정하여 Mood 열거형에 정의된 값으로 변경
+      const response = await axios.patch(
+        "https://dofarming.duckdns.org/api/v1/user/mood",
+        { mood: mood }, // 이 부분을 수정해야 함
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("Mood updated successfully:", response.data);
+    } catch (error) {
+      console.error("Error updating mood:", error);
+    }
+  };
+  
+  
   const handleDivClick = (divNumber, mood) => {
     setSelectedDiv(mood);
     const selectedDivImage = getComputedStyle(document.querySelector(`.${divNumber}`)).backgroundImage;
@@ -204,11 +233,11 @@ const HomeHeader = () => {
           <Fighting>오늘도 활기차게 하루를 시작해봐요!</Fighting>
         </HomeTextBox>
         <MoodWrap>
-        <Moodlets
-          className="Moodlets"
-          style={{ backgroundImage: `url("${selectedDiv}")` }}
-          onClick={openModal}
-        ></Moodlets>
+          <Moodlets
+            className="Moodlets"
+            style={{ backgroundImage: `url("${selectedDiv}")` }}
+            onClick={openModal}
+          ></Moodlets>
         </MoodWrap>
       </HomeHeaderContent>
 
@@ -219,7 +248,7 @@ const HomeHeader = () => {
               <Div
                 key={`div${num}`}
                 className={`div${num}`}
-                onClick={() => handleDivClick(`div${num}`, "Mood")}
+                onClick={() => handleDivClick(`div${num}`, moods[num - 1].name)}
                 style={{ backgroundImage: `url("/emotion${num}.png")` }}
               ></Div>
             ))}
