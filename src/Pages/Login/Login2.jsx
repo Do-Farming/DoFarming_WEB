@@ -16,7 +16,7 @@ const Login2Container = styled.div`
 
 const TextContainer = styled.div`
   font-size: 2rem;
-  margin-top: 10vh;
+  margin-top: 5vh;
   margin-bottom: 15vh;
   line-height: 3rem;
   display:flex;
@@ -25,6 +25,7 @@ const TextContainer = styled.div`
 
     @media screen and (min-width: 1280px) {
             margin-bottom: 15vh;
+            margin-top: 10vh;
         }
 `;
 
