@@ -8,7 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 90vh;
+  height: 95vh;
   overflow: hidden;
 `;
 
@@ -16,7 +16,7 @@ const Text1 = styled.p`
   text-align: center;
   font-size: 2.2rem;
   margin: 0 auto;
-  padding-top: 6vh;
+  padding-top: 3vh;
   width: 90vw;
   font-weight: 400;
 
