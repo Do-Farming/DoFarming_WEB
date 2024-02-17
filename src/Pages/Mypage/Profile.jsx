@@ -204,7 +204,7 @@ const Profile = () => {
 
         // 수정이 성공하면 메시지 출력
         console.log("User info updated successfully");
-        // alert("저장되었습니다."); // 저장 성공 시 알림
+        alert("저장되었습니다."); // 저장 성공 시 알림
         window.location.href = "/home"; // 홈으로 이동
       }
     } catch (error) {

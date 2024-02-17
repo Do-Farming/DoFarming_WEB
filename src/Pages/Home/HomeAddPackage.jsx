@@ -51,8 +51,11 @@ const PackageName = styled.div`
   align-items: center;
   text-align: center;
   justify-content: center;
-  margin-top: 12vh;
+  margin-top: 5vh;
   margin-bottom: 9vh;
+  @media screen and (min-width: 1280px) {
+    margin-top: 12vh;
+}
 `;
 
 const HomeInputBoxName = styled.input`
