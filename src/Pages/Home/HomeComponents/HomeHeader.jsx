@@ -109,6 +109,7 @@ const CloseModalButton = styled.div`
   margin-top: 15px;
   font-size: 25px;
   color: #BFBABA;
+  cursor: pointer;
 `;
 
 const HeaderTxt = styled.div`
