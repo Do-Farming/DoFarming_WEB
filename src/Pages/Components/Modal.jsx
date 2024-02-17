@@ -55,6 +55,12 @@ const ModalTitle = styled.h3`
   padding-top: 13%;
 `;
 
+const CloseButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
 const ModalBody = styled.div`
   margin-bottom: 20px;
 `;
@@ -91,7 +97,7 @@ const BtnAdd = styled.button`
   }
 `;
 
-const Modal = ({ onClose }) => {
+const Modal = ({ onRoutineSelect, onClose }) => {
   const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
@@ -119,30 +125,9 @@ const Modal = ({ onClose }) => {
     const selectElement = document.querySelector('.modal-select');
     const trackId = selectElement.value;
     const content = selectElement.options[selectElement.selectedIndex].text;
-    await saveRoutine(trackId, content);
-    onClose();
-  };
-
-  const saveRoutine = async (trackId, content) => {
-    try {
-      const authToken = localStorage.getItem('authToken');
-      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${trackId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${authToken}`
-        },
-        body: JSON.stringify({ content })
-      });
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Routine saved successfully. Routine Status:', responseData.routineStatus);
-      } else {
-        console.error('Failed to save routine');
-      }
-    } catch (error) {
-      console.error('Error saving routine:', error);
-    }
+    onRoutineSelect({ trackId, content });
+    onClose(); // 모달 닫기
+    alert('루틴이 추가되었습니다.'); // 알림 띄우기
   };
   
   return (

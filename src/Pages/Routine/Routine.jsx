@@ -20,6 +20,8 @@ import { Frustration } from "../Components/Frustration";
 import { Rest } from "../Components/Rest";
 import { GoToRoutine } from '../Components/GoToRoutine';
 import NavBar from "../Nav/Nav.jsx";
+import Modal from '../Components/Modal';
+import TodoSection2 from '../Home/TodoSection2';  
 
 const RoutineWrap = styled.div`
     overflow: visible;
@@ -60,6 +62,7 @@ const Txt3 = styled.div`
 `;
 
 const Routine = () => {
+  const [selectedRoutine, setSelectedRoutine] = useState(null); 
   const [nickname, setNickname] = useState("");
   const [activeBtn, setActiveBtn] = useState('morning');
   const [showMiracleMorning, setShowMiracleMorning] = useState(false);
@@ -89,7 +92,7 @@ const Routine = () => {
           }
         });
         const { nickname } = response.data;
-        setNickname(nickname); // 닉네임 설정 부분을 이 위치로 옮깁니다.
+        setNickname(nickname); 
       } catch (error) {
         console.error("사용자 정보를 가져오는 중 오류가 발생했습니다:", error);
       }
@@ -97,6 +100,10 @@ const Routine = () => {
 
     getNickname();
   }, []);
+
+  const handleRoutineSelect = (routine) => {
+    setSelectedRoutine(routine);
+  };
 
   const handleMiracleMorningClick = () => {
     setShowMiracleMorning(true);
@@ -229,8 +236,14 @@ const Routine = () => {
     setShowFrustration(false);
     setShowRest(false);
   };
+  const handleAddClick = (newRoutine) => {
+    if (onRoutineSelect) {
+      onRoutineSelect(newRoutine); 
+    }
+  };
 
-  return(
+
+  return (
     <RoutineWrap>
       <NavBar />
       <div className="main">

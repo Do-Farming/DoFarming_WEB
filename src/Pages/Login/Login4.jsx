@@ -97,10 +97,8 @@ const Login4 = () => {
 
   const NicknameCheck = (e) => {
     const input = e.target.value;
-    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); /* 닉네임이 0글자라니.. 너무 이상하지만 최소 글자가 1글자일 경우 
-                                                         input 창에 있는 글자가 1글자일 때 삭제할 수 없다는 문제가 발생해 우선 부득이하게 이렇게 수정해둡니다.
-                                                         다행히 닉네임값과 나이값을 입력하지 않으면 다음페이지로 넘어갈 수 없어 닉네임이 없는 사람은 생기지 않을 것 같습니다. */ 
-                                                         
+    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); 
+    
     if (valid) {
       setNickname(input);
     } else {
