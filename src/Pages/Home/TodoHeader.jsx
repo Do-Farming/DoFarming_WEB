@@ -13,7 +13,7 @@ const TodoHeaderBlock = styled.div`
     }
 `;
 
-const TodoHeader = () => {
+const TodoHeader1 = () => {
     return (
         <TodoHeaderBlock>
             <div>루틴 이름</div>
@@ -22,4 +22,4 @@ const TodoHeader = () => {
     );
 };
 
-export default TodoHeader;  
+export default TodoHeader1;  
