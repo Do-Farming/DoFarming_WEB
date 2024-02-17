@@ -10,6 +10,9 @@ const Container = styled.div`
   justify-content: space-between;
   height: 91vh;
   overflow: hidden;
+  @media screen and (min-width: 1280px) {
+    height: 100vh;
+}
 `;
 
 const Text1 = styled.p`

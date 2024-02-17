@@ -18,11 +18,14 @@ const Text = styled.div`
   padding-top: 10vh;
   width: 90vw;
   font-weight: 400;
-  padding-bottom: 20vh;
+  padding-bottom: 15vh;
 
   strong {
     font-weight: bolder;
   }
+  @media screen and (min-width: 1280px) {
+    padding-bottom: 20vh;
+}
 `;
 
 const InputContainer = styled.div`
