@@ -42,7 +42,7 @@ const CheckboxContainer = styled.div`
   border-radius: 20px;
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
-    width: 330px;
+    width: 83vw;
     margin-top: 20px;
   }
 `;
