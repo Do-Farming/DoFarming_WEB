@@ -21,7 +21,7 @@ const MainBox = styled.div`
       padding-left: 5vw;
       margin-bottom: 4vh;
       padding-top: 3vh;
-      margin-left:0;
+      margin-left:-1vw;
     }
 `;
 
