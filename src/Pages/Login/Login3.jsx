@@ -8,15 +8,18 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
+  height: 90vh;
   overflow: hidden;
+  @media screen and (min-width: 1280px) {
+    height: 100vh;
+}
 `;
 
 const Text1 = styled.p`
   text-align: center;
   font-size: 2.2rem;
   margin: 0 auto;
-  padding-top: 10vh;
+  padding-top: 3vh;
   width: 90vw;
   font-weight: 400;
 
@@ -119,20 +122,20 @@ const Login3 = () => {
   };
 
   const options = [
-    '학업',
-    '취업',
-    '직장생활',
-    '인간관계',
-    '사랑',
-    '스트레스',
-    '미래에 대한 불안감',
-    '건강',
+    'Study',
+    'Work life',
+    'Love',
+    'Relationship',
+    'Economic stability',
+    'Self-esteem',
+    'Future anxiety',
+    'Health',
   ];
 
   return (
     <Container>
       <Text1>
-        <strong>어떤 고민</strong>이 있으세요?
+      What’s your <strong>Concerns?</strong>
       </Text1>
       <Options id="options">
         {options.map((option) => (
@@ -152,7 +155,7 @@ const Login3 = () => {
           onClick={handleButtonClick}
           disabled={selectedOptions.length === 0}
         >
-          선택 완료
+          Complete
         </SelectButton>
       </Link>
     </Container>

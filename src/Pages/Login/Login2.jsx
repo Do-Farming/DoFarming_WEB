@@ -15,7 +15,7 @@ const Login2Container = styled.div`
 `;
 
 const TextContainer = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 10vh;
   margin-bottom: 15vh;
   line-height: 3rem;
@@ -117,8 +117,8 @@ const Login2 = () => {
     <Login2Container>
       <TextContainer>
         <p>
-          <strong>몸</strong>과 <strong>마음</strong><br />
-          건강하게 챙기는 첫 단계!
+          <strong>Body</strong> and <strong>Mind</strong><br />
+          The first step to take <br />care of your health!
         </p>
       </TextContainer>
       <StyledGoogleLoginButton onClick={handleGoogleLogin} />

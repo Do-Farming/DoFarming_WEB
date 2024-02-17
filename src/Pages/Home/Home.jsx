@@ -31,7 +31,10 @@ const Home = () => {
 
   //토큰 가져오기
   const token = localStorage.getItem('authToken');
-
+  if (!token) {
+    // 토큰이 없다면 로그인 페이지를 보여줍니다.
+    return <Login />;
+  }
 
 
   return (
@@ -39,7 +42,7 @@ const Home = () => {
       <div className="HomeWrap">
         <NavBar />
         <HomeHeader/>
-        <HomeSection1 />
+        {/* <HomeSection1 /> */}
         <HomeSection2 />
       </div>
     </div>

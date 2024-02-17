@@ -111,36 +111,37 @@ export const DayEnd = () => {
 
   return (
     <MainBox>
-      <MTxt1>
-        하루의 마무리
-      </MTxt1>
-      <MTxt2>
-        오늘 하루도 수고 많았어요.<br />하루를 충만하게 마무리 해보는 건 어떨까요?
-      </MTxt2>
-      <Selectbox>
-        <Txtbox>일기쓰기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>내일 입을 옷 준비</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>샤워</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>스킨 케어</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>취침 명상</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
-      </div>
-      {showModal && <Modal onClose={handleCloseModal} />}
-    </MainBox>
+  <MTxt1>
+  Wraping up the day
+  </MTxt1>
+  <MTxt2>
+  You did a great job today.<br />Why don't we wrap up the day neatly?
+  </MTxt2>
+  <Selectbox>
+    <Txtbox>Writing a diary</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Preparing tomorrow's clothes</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Take a shower</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Skin care</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Bedtime meditation</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <div>
+    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
+  </div>
+  {showModal && <Modal onClose={handleCloseModal} />}
+</MainBox>
+
   );
 };

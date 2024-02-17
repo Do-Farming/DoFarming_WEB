@@ -248,9 +248,9 @@ const Routine = () => {
       <NavBar />
       <div className="main">
         <div className="txt">
-          <Txt1>나를 가꾸는 시간</Txt1>
-          <Txt2>우리 모두에게는 <strong>시간</strong>이라는<br />공평한 것이 주어진다</Txt2>
-          <Txt3># {nickname} 님을 위한 추천</Txt3>
+          <Txt1>Time to take care of myself</Txt1>
+          <Txt2><strong>Time</strong> is fair to all of us</Txt2>
+          <Txt3>#Suggestion for DoFarming</Txt3>
         </div>
         <div className="RoutineContainer">
           <ButtonGroup activeBtn={activeBtn} handleBtnClick={handleBtnClick} />

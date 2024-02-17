@@ -18,11 +18,14 @@ const Text = styled.div`
   padding-top: 10vh;
   width: 90vw;
   font-weight: 400;
-  padding-bottom: 20vh;
+  padding-bottom: 15vh;
 
   strong {
     font-weight: bolder;
   }
+  @media screen and (min-width: 1280px) {
+    padding-bottom: 20vh;
+}
 `;
 
 const InputContainer = styled.div`
@@ -168,24 +171,24 @@ const Login4 = () => {
   return (
     <Container>
       <Text>
-        <div><strong>좋아요!</strong><br />이제 시작해볼까요?</div>
+        <div><strong>Well done!</strong><br />Let’s dig in !</div>
       </Text>
       <InputContainer>
       <InputContainer1>
         <form id="myInfo">
-          <Input type="text" placeholder="닉네임" value={Nickname} onChange={NicknameCheck} onBlur={NicknameCheck} /><br />
-          <Input type="text" placeholder="나이" value={Age} onChange={AgeCheck} />
+          <Input type="text" placeholder="Nickname" value={Nickname} onChange={NicknameCheck} onBlur={NicknameCheck} /><br />
+          <Input type="text" placeholder="Age" value={Age} onChange={AgeCheck} />
         </form>
       </InputContainer1>
 
         <Select id="gender" value={Gender} onChange={handleGenderChange}>
-          <option value="">성별</option>
-          <option value="MALE">남성</option>
-          <option value="FEMALE">여성</option>
+          <option value="">Sex</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
         </Select>
 
         <Link to="/Home">
-          <SubmitButton type="submit" disabled={btn_disabled} onClick={Submit_to_Server}>시작!</SubmitButton>
+          <SubmitButton type="submit" disabled={btn_disabled} onClick={Submit_to_Server}>Let’s Go!</SubmitButton>
         </Link>
       </InputContainer>
     </Container>

@@ -111,50 +111,51 @@ export const Depression1 = () => {
 
   return (
     <MainBox>
-      <MTxt1>
-        우울증 완화
-      </MTxt1>
-      <MTxt2>
-        어두운 밤에서 새벽을 지나 아침이라는 밝은 빛이<br />
-        당신을 맞이하고 있어요.<br />
-        당신이 무엇을 하든 일이 잘되게 해 줄 거예요.
-      </MTxt2>
-      <Selectbox>
-        <Txtbox>침대 정리</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>커튼 열기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>창문 열기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>물 마시기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>이 닦기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>감정 적기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>오늘의 목표 적어보기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>호흡 운동하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
-      </div>
-      {showModal && <Modal onClose={handleCloseModal} />}
-    </MainBox>
+  <MTxt1>
+  Ease depression
+  </MTxt1>
+  <MTxt2>
+  The bright light of morning is welcoming you from <br />
+  dark night through dawn. Whatever you do, it will <br />
+  make things work.
+  </MTxt2>
+  <Selectbox>
+    <Txtbox>Making the bed</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Opening the curtain</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Opening a window</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Drinking water</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Brushing teeth</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Writing down your emotions</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Write down today's goals</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Breath in and out</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <div>
+    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
+  </div>
+  {showModal && <Modal onClose={handleCloseModal} />}
+</MainBox>
+
   );
 };

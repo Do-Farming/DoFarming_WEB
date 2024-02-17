@@ -15,7 +15,7 @@ const Resetbtn = styled.button`
     background-color: rgb(245, 245, 245);
     padding: 15px;
     border: none;
-    width: 50vw;
+    width: 70vw;
     border-radius: 10px;
     font: 1rem;
     margin: 50px;
@@ -49,8 +49,8 @@ const Reset = () => {
     <div>
       <NavBar />
       <ResetWrap>
-        <Resetbtn onClick={handleResetClick}>모든 루틴 초기화</Resetbtn>
-        <Resettxt>전체 루틴 및 내 리스트를 삭제합니다.<br/>루틴을 삭제하면 복구할 수 없어요.</Resettxt>
+        <Resetbtn onClick={handleResetClick}>Initialization all Routine</Resetbtn>
+        <Resettxt>Delete the entire routine and Your to-do list.<br/>If You delete the routine, You can't recover it.</Resettxt>
       </ResetWrap>
       {/* 모달 컴포넌트 */}
       {showModal && <ResetModal onClose={handleModalClose} onConfirm={handleResetConfirm} />}

@@ -20,7 +20,7 @@ const MainBox = styled.div`
       padding-left: 5vw;
       margin-bottom: 4vh;
       padding-top: 3vh;
-      margin-left:0;
+      margin-left:-1vw;
     }
 `;
 
@@ -112,34 +112,34 @@ export const Myself = () => {
   return (
     <MainBox>
   <MTxt1>
-    나를 가꾸는 시간
+  Taking care of myself
   </MTxt1>
   <MTxt2>
-    나를 돌보는 시간이 있나요? <br />
-    다른 것이 아닌 나를 중심으로 루틴을 만들어 보는 건 어때요?
+    Do you have time to take care of yourself?<br />
+    Why don't you make a routine around me<br /> and not anything else?
   </MTxt2>
   <Selectbox>
-    <Txtbox>좋아하는 음악 듣기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Listening to fav song</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>샤워하기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Taking a shower</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>스킨 케어</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Doing a Facial mask</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>마사지 하기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>massage yourself</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>립밤 바르기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Putting on lip balm</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <div>
-    <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
   </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>

@@ -50,7 +50,7 @@ margin: 60px;
 
 const ResetModalButton = styled.button`
 cursor: pointer;
-color: black;
+color: gray;
 background-color: white;
 border-top: 0.5px solid #BFBABA;
 border-right: 0.5px solid #BFBABA;
@@ -110,12 +110,12 @@ const ResetModalBox = ({ onConfirm, onClose }) => {
   return (
     <ResetModalBackdrop>
       <ResetModalBoxContainer>
-        <ResetModalTitle><strong>모든 루틴</strong>을 <br /> 삭제하시겠습니까?</ResetModalTitle>
+        <ResetModalTitle><strong>Initialization</strong><br /> all Routine?</ResetModalTitle>
         <div>
           <Link to="/home">
-            <ResetModalButton yes onClick={handleDeleteRoutine}>예</ResetModalButton>
+            <ResetModalButton yes onClick={handleDeleteRoutine}>Yes</ResetModalButton>
           </Link>
-          <ResetModalButtonNo onClick={onClose}>아니오</ResetModalButtonNo>
+          <ResetModalButtonNo onClick={onClose}>No</ResetModalButtonNo>
         </div>
       </ResetModalBoxContainer>
     </ResetModalBackdrop>
