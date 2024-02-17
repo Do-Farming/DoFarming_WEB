@@ -92,11 +92,6 @@ const Login4 = () => {
 
   const btn_disabled = !Nickname || !Age || !Gender;
 
-  const eng = /[a-zA-Z]/;
-  const kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-  const num = /[0-9]/;
-  const spc = /[~!@#$%^&*()_+|<>?:{}]/;
-
   const NicknameCheck = (e) => {
     const input = e.target.value;
     const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); /* 닉네임이 0글자라니.. 너무 이상하지만 최소 글자가 1글자일 경우 
@@ -112,20 +107,21 @@ const Login4 = () => {
 
   const AgeCheck = (e) => {
     const input = e.target.value;
+  
+    if (isNaN(input)) {
+      alert("숫자만 입력하세요");
+      return;
+    }
+  
     const valid = /^[0-9]{0,3}$/.test(input);
   
     if (valid) {
       setAge(input);
     } else {
       alert("나이는 3자릿수 이하여야 합니다.");
-    } 
-    
-    if (isNaN(input)) {
-      alert("숫자만 입력하세요");
-    } else {
-      setAge(input);
     }
   };
+  
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);

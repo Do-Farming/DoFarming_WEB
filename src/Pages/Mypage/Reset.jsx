@@ -39,11 +39,10 @@ const Reset = () => {
     const handleModalClose = () => {
       setShowModal(false);
     }
-
+    // 전체 초기화
     const handleResetConfirm = () => {
-      // 여기에 전체 초기화 작업을 수행하는 코드를 추가합니다.
       console.log("전체 초기화를 실행합니다.");
-      setShowModal(false); // 모달 닫기
+      setShowModal(false); 
     }
 
   return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import "../Nav/Nav.jsx";
 
 const TodoSection1Wrap = styled.div`
     display: flex;
