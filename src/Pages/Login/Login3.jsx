@@ -16,7 +16,7 @@ const Text1 = styled.p`
   text-align: center;
   font-size: 2.2rem;
   margin: 0 auto;
-  padding-top: 10vh;
+  padding-top: 6vh;
   width: 90vw;
   font-weight: 400;
 

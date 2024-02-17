@@ -16,7 +16,7 @@ const Login2Container = styled.div`
 
 const TextContainer = styled.div`
   font-size: 2rem;
-  margin-top: 5vh;
+  margin-top: 10vh;
   margin-bottom: 15vh;
   line-height: 3rem;
   display:flex;
@@ -25,7 +25,6 @@ const TextContainer = styled.div`
 
     @media screen and (min-width: 1280px) {
             margin-bottom: 15vh;
-            margin-top: 5vh;
         }
 `;
 
@@ -118,7 +117,7 @@ const Login2 = () => {
     <Login2Container>
       <TextContainer>
         <p>
-          <strong>Body</strong> and <strong>Mind</strong><br />
+          <strong>Body</strong>and <strong>Mind</strong><br />
           The first step to take care of your health!
         </p>
       </TextContainer>
