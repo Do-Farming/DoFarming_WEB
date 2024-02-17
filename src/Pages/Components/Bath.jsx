@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 import styled from 'styled-components';
+import axios from 'axios';
 
 const MainBox = styled.div`
     border: 0.2px solid rgb(131, 131, 131);
@@ -100,13 +101,25 @@ const SelectAll = styled.button`
 
 export const Bath = () => {
   const [showModal, setShowModal] = useState(false);
-
-  const handleAddClick = () => {
+  const [selectedItem, setSelectedItem] = useState('');
+  
+  const handleAddClick = (item) => {
+    setSelectedItem(item);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleAddRoutine = async (trackId) => {
+    try {
+      // 선택된 작업의 이름을 서버로 전송하여 저장
+      await axios.post(`your_server_url/api/v1/routine/${trackId}`, { content: selectedItem });
+      console.log("Routine added successfully!");
+    } catch (error) {
+      console.error("Error adding routine:", error);
+    }
   };
 
   return (
@@ -119,28 +132,28 @@ export const Bath = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>반신욕 물 받기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('반신욕 물 받기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>머리 빗기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('머리 빗기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>반신욕 하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('반신욕 하기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>미지근한 물 마시기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('미지근한 물 마시기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>팩 하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('팩 하기')}>추가</SelectboxBtn>
       </Selectbox>
       <div>
-        <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+        <SelectAll onClick={() => handleAddClick('전체 추가')}>+전체 추가하기</SelectAll>
       </div>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <Modal onClose={handleCloseModal} selectedItem={selectedItem} onAddRoutine={handleAddRoutine} />}
     </MainBox>
   );
 };

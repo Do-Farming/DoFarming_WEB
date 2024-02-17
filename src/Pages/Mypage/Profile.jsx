@@ -164,6 +164,12 @@ const Profile = () => {
     }
   };
 
+  // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
+  useEffect(() => {
+    // 서버로부터 사용자 정보를 가져오는 함수 호출
+    fetchUserInfo();
+  }, []);
+
   // 파일 입력 변경 핸들러
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
