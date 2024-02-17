@@ -25,7 +25,7 @@ const TextContainer = styled.div`
 
     @media screen and (min-width: 1280px) {
             margin-bottom: 15vh;
-            margin-top: 10vh;
+            margin-top: 5vh;
         }
 `;
 
