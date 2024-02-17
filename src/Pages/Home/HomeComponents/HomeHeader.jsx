@@ -191,43 +191,43 @@ const HomeHeader = () => {
               <ImgWrap>
                 <Div
                   onClick={() => handleDivClick("div1")}
-                  style={{ backgroundImage: 'url("/emotion1.PNG")'}}
+                  style={{ backgroundImage: 'url("emotion1.PNG")'}}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick("div2")}
-                  style={{ backgroundImage: 'url("/emotion2.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion2.PNG")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick("div3")}
-                  style={{ backgroundImage: 'url("/emotion3.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion3.PNG")' }}
                 ></Div>
               </ImgWrap>
               <ImgWrap>
                 <Div
                   onClick={() => handleDivClick("div4")}
-                  style={{ backgroundImage: 'url("/emotion4.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion4.PNG")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick("div5")}
-                  style={{ backgroundImage: 'url("/emotion5.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion5.PNG")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick("div6")}
-                  style={{ backgroundImage: 'url("/emotion6.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion6.PNG")' }}
                 ></Div>
               </ImgWrap>
               <ImgWrap>
                 <Div
                   onClick={() => handleDivClick("div7")}
-                  style={{ backgroundImage: 'url("/emotion7.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion7.PNG")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick("div8")}
-                  style={{ backgroundImage: 'url("/emotion8.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion8.PNG")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick("div9")}
-                  style={{ backgroundImage: 'url("/emotion9.PNG")' }}
+                  style={{ backgroundImage: 'url("emotion9.PNG")' }}
                 ></Div>
               </ImgWrap>
             </HimgWrap>
