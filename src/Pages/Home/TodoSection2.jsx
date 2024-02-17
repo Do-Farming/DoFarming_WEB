@@ -7,7 +7,7 @@ const TodoSection2Wrap = styled.div`
   margin-left: 35vw;
   margin-top: 5vh;
   height: auto;
-  overflow: auto;
+  overflow-y: auto;
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
     position: fixed;
