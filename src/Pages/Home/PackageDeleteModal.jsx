@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -109,7 +110,7 @@ const PackageDeleteModal = ({ onClose }) => {
       <ModalBox>
         <ModalTitle><strong>패키지명</strong><br /> 삭제하시겠습니까?</ModalTitle>
         <div>
-          <ModalButtonYes onClick={onConfirm}>예</ModalButtonYes>
+          <ModalButtonYes onClick={handleDelete}>예</ModalButtonYes>
           <ModalButtonNo onClick={onClose}>아니오</ModalButtonNo>
         </div>
       </ModalBox>

@@ -9,24 +9,11 @@ const HomeHeaderContent = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    height: 18vh;
-    display: flex;
-    width: 40vw;
-    margin-left: 30vw;
-    align-items: center;
-  }
 `;
 
 const HomeTextBox = styled.div`
   width: 50%;
   padding-left: 5.5vw;
-
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    padding: 0;
-    margin-top: 1vh;
-  }
 `;
 
 const HelloUser = styled.div`
@@ -44,11 +31,6 @@ const MoodWrap = styled.div`
   width: 50%;
   display: flex;
   justify-content: center;
-
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    display: flex;
-    justify-content: flex-end;
-  }
 `;
 
 const Moodlets = styled.div`
@@ -96,11 +78,6 @@ const ModalContent = styled.div`
   align-items: center;
   border-radius: 20px 20px 0 0;
   animation: ${slideUp} 0.4s ease-out;
-
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    width: 90%;
-    height: 80%;
-  }
 `;
 
 const CloseModalButton = styled.div`
@@ -121,24 +98,19 @@ const HimgWrap = styled.div`
   margin-top: 60px;
   width: 90%;
   height: 90%;
-  // border: 1px solid red;
 `;
 
 const ImgWrap = styled.div`
   height: 30%;
   display: flex;
-  // margin-left:20%;
-  // border: 1px solid green;
 `;
 
 const Div = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  // height: 100%;
   width: 30%;
   margin: 15px 15px;
-  // border:1px solid black;
 `;
 
 const HomeHeader = () => {
@@ -146,10 +118,72 @@ const HomeHeader = () => {
   const [selectedDiv, setSelectedDiv] = useState('');
   const [nickname, setNickname] = useState('');
 
-  const token = localStorage.getItem('authToken');
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get('https://dofarming.duckdns.org/api/v1/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const { nickname } = response.data;
+        setNickname(nickname);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+    fetchUserInfo();
+  }, []);
 
+  const openModal = () => {
+    setIsModalOpen(true);
+    if (selectedDiv) {
+      const selectedDivElement = document.querySelector(`.${selectedDiv}`);
+      if (selectedDivElement) {
+        const selectedDivImage = getComputedStyle(selectedDivElement).backgroundImage;
+        const moodletsElement = document.querySelector('.Moodlets');
+        if (moodletsElement) {
+          moodletsElement.style.backgroundImage = selectedDivImage;
+        } else {
+          console.error(`Moodlets element not found.`);
+        }
+      } else {
+        console.error(`Div element with class ${selectedDiv} not found.`);
+      }
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  
+    if (selectedDiv) {
+      const selectedDivElement = document.querySelector(`.${selectedDiv}`);
+      if (selectedDivElement) {
+        const selectedDivImage = getComputedStyle(selectedDivElement).backgroundImage;
+        const moodletsElement = document.querySelector('.Moodlets');
+        if (moodletsElement) {
+          moodletsElement.style.backgroundImage = selectedDivImage;
+          updateMood(selectedDiv);
+        } else {
+          console.error(`Moodlets element not found.`);
+        }
+      } else {
+        console.error(`Div element with class ${selectedDiv} not found.`);
+      }
+    }
+  };
+  
+  const handleDivClick = (divNumber, mood) => {
+    setSelectedDiv(divNumber);
+  
+    updateMood(mood);
+  };
+  
+  
   const updateMood = async (mood) => {
     try {
+      const token = localStorage.getItem('authToken');
       const response = await axios.patch(
         'https://dofarming.duckdns.org/api/v1/user/mood',
         { mood },
@@ -163,53 +197,6 @@ const HomeHeader = () => {
     } catch (error) {
       console.error('Error updating mood:', error);
     }
-  };
-
-  const fetchUserInfo = async () => {
-    try {
-      const response = await axios.get('https://dofarming.duckdns.org/api/v1/user', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { nickname } = response.data;
-      return nickname;
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    const getNickname = async () => {
-      const nickname = await fetchUserInfo();
-      if (nickname) {
-        setNickname(nickname);
-      }
-    };
-    getNickname();
-  }, []);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-
-    const selectedDivImage = getComputedStyle(document.querySelector(`.${selectedDiv}`)).backgroundImage;
-    document.querySelector('.Moodlets').style.backgroundImage = selectedDivImage;
-
-    updateMood(selectedDiv);
-  };
-
-  const handleDivClick = (divNumber, mood) => {
-    setSelectedDiv(mood);
-
-    const selectedDivImage = getComputedStyle(document.querySelector(`.${divNumber}`)).backgroundImage;
-    document.querySelector('.Moodlets').style.backgroundImage = selectedDivImage;
-
-    updateMood(mood);
   };
 
   return (
@@ -241,7 +228,6 @@ const HomeHeader = () => {
             <div className="div9" onClick={() => handleDivClick('div9', 'TIRED')} style={{ backgroundImage: 'url("/emotion9.png")' }} />
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
 
-              <br />
             <HeaderTxt>
               <div className="tellme">오늘의 감정 온도를 알려주세요 :)</div>
             </HeaderTxt>
