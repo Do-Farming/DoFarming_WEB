@@ -34,7 +34,7 @@
 
 
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const Login1Container = styled.div`
@@ -105,6 +105,12 @@ const SubmitButton = styled.button`
     background-color: #ed8c37;
     color: white;
   }
+
+  // 다크모드를 감지하여 버튼 색상 유지
+  @media (prefers-color-scheme: dark) { /* 수정된 부분을 주석으로 표시 */
+    background-color: #ed8c37;
+  }
+
 
   @media screen and (max-width: 873px) {
     width: 300px;
