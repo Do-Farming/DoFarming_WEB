@@ -41,8 +41,12 @@ const Login1Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 85vh;
+  height: 100vh;
   overflow: hidden;
+
+  @media screen and (max-width: 873px) {
+    height: 85vh;
+  }
 `;
 
 const MainText = styled.div`
