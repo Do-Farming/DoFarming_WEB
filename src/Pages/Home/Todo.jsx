@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Nav/Nav.jsx";
-import TodoHeader from "./TodoHeader";
+import TodoHeader from "./TodoHeader.jsx";
 import TodoSection1 from "./TodoSection1";
 import TodoSection2 from "./TodoSection2";
 import Login2 from "../Login/Login2.jsx"; // Login2 컴포넌트 import
