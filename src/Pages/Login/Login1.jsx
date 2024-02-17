@@ -41,7 +41,7 @@ const Login1Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  height: 85vh;
   overflow: hidden;
 `;
 
