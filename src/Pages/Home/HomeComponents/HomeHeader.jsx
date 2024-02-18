@@ -142,48 +142,23 @@ const HomeHeader = () => {
   const [selectedDiv, setSelectedDiv] = useState('');
   const [nickname, setNickname] = useState('');
 
-  const token = localStorage.getItem('authToken');
-
-  const updateMood = async (mood) => {
-    try {
-      const response = await axios.patch(
-        'https://dofarming.duckdns.org/api/v1/user/mood',
-        { mood },
-        {
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get('https://dofarming.duckdns.org/api/v1/user', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      console.log('Mood updated successfully:', response.data);
-    } catch (error) {
-      console.error('Error updating mood:', error);
-    }
-  };
-
-  const fetchUserInfo = async () => {
-    try {
-      const response = await axios.get('https://dofarming.duckdns.org/api/v1/user', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { nickname } = response.data;
-      return nickname;
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    const getNickname = async () => {
-      const nickname = await fetchUserInfo();
-      if (nickname) {
+        });
+        const { nickname } = response.data;
         setNickname(nickname);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
       }
     };
-    getNickname();
+
+    fetchUserInfo();
   }, []);
 
   const openModal = () => {
@@ -197,6 +172,24 @@ const HomeHeader = () => {
     document.querySelector('.Moodlets').style.backgroundImage = selectedDivImage;
 
     updateMood(selectedDiv);
+  };
+
+  const updateMood = async (mood) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const response = await axios.patch(
+        'https://dofarming.duckdns.org/api/v1/user/mood',
+        { mood },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log('Mood updated successfully:', response.data);
+    } catch (error) {
+      console.error('Error updating mood:', error);
+    }
   };
 
   const handleDivClick = (divNumber, mood) => {

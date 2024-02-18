@@ -93,7 +93,7 @@ const Login2 = () => {
       localStorage.setItem('authToken', token);
 
       // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-      const apiUrl = instance.defaults.baseURL + "/api/v1/user";  
+      const apiUrl = instance.defaults.baseURL;  
       const response = await axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`

@@ -101,6 +101,7 @@ const CheckboxLabel = styled.label`
     color: white;
   }
 `;
+
 const TodoSection2 = ({ token }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -114,6 +115,7 @@ const TodoSection2 = ({ token }) => {
             'Content-Type': 'application/json'
           }
         });
+        
         if (response.ok) {
           const data = await response.json();
           setRoutineList(data);
@@ -132,6 +134,38 @@ const TodoSection2 = ({ token }) => {
     const newRoutine = { name: inputValue, completed: false };
     setRoutineList([...routineList, newRoutine]);
     setInputValue("");
+    saveRoutine(newRoutine); // 입력 완료 후 서버에 저장
+  };
+
+  const saveRoutine = async (newRoutine) => {
+    try {
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: newRoutine.name 
+        })
+      });
+      if (!response.ok) {
+        console.error('Failed to save routine:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error saving routine:', error);
+    }
+  };
+  
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleEnterPress = (event) => {
+    if (event.key === 'Enter' && inputValue.trim() !== '') {
+      addRoutine();
+    }
   };
 
   const deleteRoutine = (index) => {
