@@ -212,8 +212,8 @@ const HomeHeader = () => {
     <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
-          <HelloUser>{nickname}님 반가워요</HelloUser>
-          <Fighting>오늘도 활기차게 하루를 시작해봐요!</Fighting>
+          <HelloUser>Hello, {nickname}</HelloUser>
+          <Fighting>Let's enjoy the cheerful day!</Fighting>
         </HomeTextBox>
         <MoodWrap>
           <Moodlets

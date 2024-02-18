@@ -23,9 +23,9 @@ const GoRoutine = styled.p`
 const MakeRoutine = () => {
   return (
     <TodoSection1Wrap>
-      <p>아직 할 일이 없습니다</p> 
+      <p>There's nothing to do</p> 
       <Link to="/Routine">
-        <GoRoutine>루틴을 만들러 이동해 볼까요?</GoRoutine>
+        <GoRoutine>Shall we make a new routine?</GoRoutine>
       </Link>
     </TodoSection1Wrap>
   );

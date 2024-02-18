@@ -3,17 +3,14 @@ import { IoTrashSharp } from "react-icons/io5";
 import styled from "styled-components";
 
 const TodoSection2Wrap = styled.div`
-  width: 40vw;
-  margin-left: 35vw;
+  width: 70vw; /* 변경된 너비 */
+  margin-left: 15vw; /* 변경된 여백 */
   margin-top: 5vh;
   height: auto;
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%);
-    width: 330px;
-    margin-left: 0;
+    width: 83vw;
+    margin-left: 8.5vw;
   }
 `;
 
@@ -35,14 +32,15 @@ const TodoAddRoutineBtn = styled.button`
 `;
 
 const CheckboxContainer = styled.div`
-  width: 30vw;
   display: flex;
+  flex-direction: column; /* 변경된 방향 */
+  align-items: center; /* 추가된 정렬 */
   margin-top: 4vh;
   border: 0.5px solid #BFBABA;
   border-radius: 20px;
+  padding: 10px;
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
-    width: 330px;
     margin-top: 20px;
   }
 `;
@@ -50,21 +48,16 @@ const CheckboxContainer = styled.div`
 const TodoSection2Routine = styled.input`
   background-color: inherit;
   border: none;
-  height: 7vh;
   font-size: 20px;
   text-align: center;
-  width: 75%;
+  width: 100%; /* 변경된 너비 */
   padding-top: 2px;
   font-weight: 100;
-  outline:none;
+  outline: none;
   text-decoration: ${({ completed }) => completed ? "line-through" : "none"};
   text-decoration-thickness: ${({ completed }) => completed ? "1px" : "initial"};
   ::placeholder {
-    color: #cccccc;
-  }
-
-  @media all and (min-width: 300px) and (max-width: 1023px) {
-    height: 70px;
+    color: #BFBABA;
   }
 `;
 
@@ -72,24 +65,13 @@ const TodoDelete = styled.button`
   color: #ED8C37;
   background-color: white;
   border: none;
-  height: 7vh;
-  width: 15%;
   padding-top: 8px;
   border-radius: 20px;
-
-  @media all and (min-width: 300px) and (max-width: 1023px) {
-    padding-top: 15px;
-  }
 `;
 
 const Check1 = styled.div`
-  width: 10%;
   padding-top: 12.5px;
   padding-left: 10px;
-
-  @media all and (min-width: 300px) and (max-width: 1023px) {
-    padding-top: 16.5px;
-  }
 `;
 
 const Checkbox = styled.input`
@@ -97,15 +79,13 @@ const Checkbox = styled.input`
 `;
 
 const CheckboxLabel = styled.label`
-  margin-top: 5px;
-  margin-left: 5px;
   display: inline-block;
   width: 25px;
   height: 25px;
   border: 1px solid #ED8C37;
   border-radius: 50%;
   position: relative;
-  background-color:inherit;
+  background-color: inherit;
 
   ${Checkbox}:checked + &::after {
     content: '✔';
@@ -121,7 +101,6 @@ const CheckboxLabel = styled.label`
     color: white;
   }
 `;
-
 const TodoSection2 = ({ token }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -198,7 +177,7 @@ const TodoSection2 = ({ token }) => {
               type="text"
               value={routine.name}
               onChange={(e) => updateRoutineName(index, e.target.value)}
-              placeholder="할 일을 입력하세요"
+              placeholder="Write your to-do"
               completed={routine.completed}
             />
             <TodoDelete onClick={() => deleteRoutine(index)}>
@@ -207,7 +186,7 @@ const TodoSection2 = ({ token }) => {
           </CheckboxContainer>
         ))}
         <TodoAddRoutineBtn onClick={addRoutine}>
-          + 루틴 추가하기
+        + Add routine
         </TodoAddRoutineBtn>
       </div>
     </TodoSection2Wrap>

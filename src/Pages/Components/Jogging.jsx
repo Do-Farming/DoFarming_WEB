@@ -20,7 +20,7 @@ const MainBox = styled.div`
       padding-left: 5vw;
       margin-bottom: 4vh;
       padding-top: 3vh;
-      margin-left:0;
+      margin-left:-1vw;
     }
 `;
 
@@ -111,36 +111,36 @@ export const Jogging = () => {
 
   return (
     <MainBox>
-  <MTxt1>상쾌한 조깅</MTxt1>
+  <MTxt1>Refreshing jogging</MTxt1>
   <MTxt2>
-    일상을 떠나 새로운 에너지를 만들어봐요.
+  Let's leave our daily lives and create new energy.
   </MTxt2>
   <Selectbox>
-    <Txtbox>물 마시기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Drink water</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>간단한 간식 섭취</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Eatting light snack</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>이어폰, 물 챙기기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Prepare water n earphone</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>워밍업 스트레칭</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Warm up</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>러닝</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Running</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>샤워하기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Taking shower</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <div>
-    <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
   </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>

@@ -111,37 +111,38 @@ export const Family = () => {
 
   return (
     <MainBox>
-      <MTxt1>
-        가족과의 시간
-      </MTxt1>
-      <MTxt2>
-        가족과 함께 보내는 시간은 소중한 보물과도 같습니다. <br />
-        함께하는 모든 순간이 소중하고 값진 시간이 될 거예요.
-      </MTxt2>
-      <Selectbox>
-        <Txtbox>가족들과 포옹하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>오늘 하루 공유하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>저녁 식사 준비</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>함께 저녁 식사 하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <Selectbox>
-        <Txtbox>고마움 표현하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-      </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
-      </div>
-      {showModal && <Modal onClose={handleCloseModal} />}
-    </MainBox>
+  <MTxt1>
+  Sharing time with family
+  </MTxt1>
+  <MTxt2>
+  Spending time with your family is like a precious <br />
+  treasure. Every moment together will be a <br />precious time.
+  </MTxt2>
+  <Selectbox>
+    <Txtbox>Hugging your family</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Sharing a day</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Preparing dinner</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Dinner with family</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <Selectbox>
+    <Txtbox>Expressing gratitude</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+  </Selectbox>
+  <div>
+    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
+  </div>
+  {showModal && <Modal onClose={handleCloseModal} />}
+</MainBox>
+
   );
 };

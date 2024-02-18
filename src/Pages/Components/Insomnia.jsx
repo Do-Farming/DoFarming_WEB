@@ -20,7 +20,7 @@ const MainBox = styled.div`
       padding-left: 5vw;
       margin-bottom: 4vh;
       padding-top: 3vh;
-      margin-left:0;
+      margin-left:-1vw;
     }
 `;
 
@@ -112,34 +112,34 @@ export const Insomnia = () => {
   return (
     <MainBox>
   <MTxt1>
-    불면증 극복
+  Overcoming insomnia
   </MTxt1>
   <MTxt2>
-    매일 밤, 편안하게 잠들어 새로운 하루를 맞이해보세요. <br />
-    몸과 마음을 편하게 가다듬어 보는 건 어떨까요?
+  Sleep comfortably every night and face a new day. <br />
+  Why don't you relax your body and mind?
   </MTxt2>
   <Selectbox>
-    <Txtbox>아로마 오일+가습기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Aroma Oil + Humidifier</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>조명 어둡게</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>In a dim light</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>따뜻한 차 마시기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Drinking hot tea</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>가벼운 스트레칭</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Light stretching</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
-    <Txtbox>ASMR 듣기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+    <Txtbox>Listening to ASMR</Txtbox>
+    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
   </Selectbox>
   <div>
-    <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
   </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>

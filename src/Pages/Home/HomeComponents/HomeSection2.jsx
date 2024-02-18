@@ -26,6 +26,7 @@ const UserPKG = styled.div`
   padding-top: 20px;
   padding-bottom: 20px;
   position: relative; /* Added position relative */
+  overflow: hidden; /* Prevent content from overflowing */
 `;
 
 const S2Wrap = styled.div`

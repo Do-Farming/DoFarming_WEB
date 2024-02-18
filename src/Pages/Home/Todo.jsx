@@ -26,10 +26,9 @@ const Todo = () => {
     return (
         <div className="Todo">
             <NavBar />
-            {/* Firebase 토큰을 TodoHeader와 TodoSection 컴포넌트에 전달 */}
-            <TodoHeader token={firebaseToken} />
-            <TodoSection1 token={firebaseToken} />
-            <TodoSection2 token={firebaseToken} />
+            <TodoHeader />
+            {/* <TodoSection1 /> */}
+            <TodoSection2 />
         </div>
     );
 };

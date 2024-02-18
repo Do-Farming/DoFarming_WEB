@@ -20,7 +20,7 @@ const MainBox = styled.div`
       padding-left: 5vw;
       margin-bottom: 4vh;
       padding-top: 3vh;
-      margin-left:0;
+      margin-left:-1vw;
     }
 `;
 
@@ -112,34 +112,36 @@ export const Reading = () => {
   return (
     <MainBox>
       <MTxt1>
-        잠들기 전 독서
+      Reading before bed
       </MTxt1>
       <MTxt2>
-        취침 30분 전 스마트폰을 자제하는 것은<br />
-        깊은 잠을 자는 데에 좋은 효과가 있어요.
+      Refraining from your phone 30 minutes before <br />
+      bedtime works well for deep sleep.
       </MTxt2>
       <Selectbox>
-        <Txtbox>마실 차 준비</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Preparing tea</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>노트와 펜 준비</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Preparing notes 
+and pens</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>조명 켜기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Turning on 
+nightstand light</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>책 읽기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Reading a book</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>인상 깊은 문장 기록하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Transcribing impressive part</Txtbox>
+        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
       </Selectbox>
       <div>
-        <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+        <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
       </div>
       {showModal && <Modal onClose={handleCloseModal} />}
     </MainBox>
