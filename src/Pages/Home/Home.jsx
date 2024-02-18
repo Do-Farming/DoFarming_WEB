@@ -42,7 +42,7 @@ const Home = () => {
       <div className="HomeWrap">
         <NavBar />
         <HomeHeader/>
-        {/* <HomeSection1 /> */}
+        <HomeSection1 />
         <HomeSection2 />
       </div>
     </div>
