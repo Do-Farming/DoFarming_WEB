@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, MarkerF, InfoWindowF, StandaloneSearchBox } from '../../../node_modules/@react-google-maps/api';
 import {  Button, Collapse, List, ListItem } from '../../../node_modules/@material-ui/core';
 // import { GoogleMap, LoadScript, MarkerF, InfoWindowF, StandaloneSearchBox } from '@react-google-maps/api';
-// import {  Button, Collapse, List, ListItem } from '@material-ui/core';
+//import {  Button, Collapse, List, ListItem } from '@material-ui/core';
 import dot from './dot.png';
 import NavBar from "../Nav/Nav.jsx";
 import styled from 'styled-components';
 import { FaPhoneAlt } from "react-icons/fa";
-
 
 const containerStyle = {
   width: '90vw',
@@ -198,10 +197,11 @@ const MyComponent = () => {
     <ContainerMap>
       <NavBar />
       <TxtMap>
-        <Txt1>내 마음을 두드리는 공간</Txt1>
-        <Txt2>도움을 청해봐요</Txt2>
+        <Txt1>Space to tap into my emotions</Txt1>
+        {/* <Txt2>도움을 청해봐요</Txt2> */}
         {/* 문구 수정 */}
-        <Txt3Map>#주변 전문의를 찾아봐요</Txt3Map>
+        <Txt3Map># Find Expert
+</Txt3Map>
       </TxtMap>
       <LoadScript
         googleMapsApiKey={import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY}
@@ -251,7 +251,7 @@ const MyComponent = () => {
           >
             <input
               type="text"
-              placeholder="추천 키워드: 정신, 심리, 상담, 건강 증진 센터"
+              placeholder="Suggested keyword: psychiatry, counseling"
               style={{
                 boxSizing: `border-box`,
                 border: `1px solid transparent`,
@@ -278,10 +278,10 @@ const MyComponent = () => {
             <LiMap key={i}>
               <LiWrap>
                 <PlaceName>{place.name}</PlaceName>
-                <PlaceRating>별점: {place.rating}/5</PlaceRating>
+                <PlaceRating>Rating: {place.rating}/5</PlaceRating>
                 <PlaceAddress>{place.formatted_address}</PlaceAddress>
                 <Button style={{ color: '#ED8C37' }} variant="text" onClick={() => toggleOpeningHours(place.place_id)}>
-            영업 시간 {openHours[place.place_id] ? '숨기기' : '보기'}
+                Opening hours: {openHours[place.place_id] ? 'Hide' : 'Show'}
           </Button>
           <Collapse in={openHours[place.place_id]}>
             <List>
@@ -291,7 +291,7 @@ const MyComponent = () => {
                 </ListItem>
               )) : (
                 <ListItem>
-                  정보 없음
+                  No information
                 </ListItem>
               )}
             </List>
@@ -303,7 +303,8 @@ const MyComponent = () => {
                   <FaPhoneAlt size={30} color='#ED8C37'/>
                   <br />
                   <br />
-                  통화
+                  
+call
                   </AMap>
                 </PlacePhone>
       )}
