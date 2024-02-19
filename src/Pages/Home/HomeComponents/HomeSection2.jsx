@@ -191,7 +191,9 @@ const Homesection2 = () => {
           ))}
         </HomeWrap2>
       )}
-      <ToHomeAddPackage /> 
+      <Link to="/HomeAddPackage">
+        <ToHomeAddPackage /> 
+      </Link>
     </>
   );
 };

@@ -23,7 +23,7 @@ const ToHomeAddPackage = styled(IoIosAddCircle)`
 const HomeSection1 = () => {
   return (
     <>
-      <Link to="/homeaddpackage">
+      <Link to="/HomeAddPackage">
         <ToHomeAddPackage />
       </Link>
     </>
