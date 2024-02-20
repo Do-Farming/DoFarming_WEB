@@ -70,6 +70,7 @@ margin-bottom:3px;
 
 const Datetxt = styled.div`
 margin-bottom:4px;
+font-size: 13px;
   
 `;
 
