@@ -14,67 +14,89 @@ const HomeWrap2 = styled.div`
 `;
 
 const UserPKG = styled.div`
-  border: 1px solid black;
+  border: 0.5px solid #BFBABA;
   border-radius: 20px;
   margin-bottom: 2vh;
   width: 80vw;
-  height: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  position: relative;
-  overflow: hidden;
+  height: 150px;
+  
+
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    width: 40vw;
+    margin-bottom: 4vh;
+  }
 `;
 
 const S2Wrap = styled.div`
-  display: flex;
-  width: 70vw;
+  width:68vw;
+  height:95px;
+  margin-left: 5vw;
+  
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    width:35vw;
+    margin-left: 2vw;
+  }
 `;
 
-const S2Wrap2 = styled.div`
-  width: 95%;
-  display: flex;
-  flex-direction: column;
+const Pkg2 = styled.div`
+    display:flex;
+  `;
+
+  const Pkg3 = styled.div`
+  display:flex;
+justify-content: flex-end;
+margin-right:3vw;
+  
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    margin-right:1vw;
+  }
 `;
+
 
 const BtnS2 = styled.button`
-  background-color: inherit;
+background-color: inherit;
+margin-bottom:20px;
   border: none;
-  size: 50;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 10px;
-  right: 20px;
+  
 `;
 
+
 const UserRname = styled.div`
-  font-size: 24px;
+padding-top:25px;
+font-size: 20px;
+margin-bottom:3px;
+  
+`;
+
+const Datetxt = styled.div`
+margin-bottom:4px;
+  
 `;
 
 const MemoText = styled.div`
-  margin-top: 5px;
+  
 `;
 
+
 const StatusIndicator = styled.div`
-  padding-top: 10px;
-  text-align: center;
-  width: 70px;
-  height: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: 10px;
-  background-color: ${(props) => props.statusColor};
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: center;
+width: 65px;
+height: auto;
+border: none;
+border-radius: 10px;
+background-color: ${(props) => props.statusColor};
+@media all and (min-width: 768px) and (max-width: 3000px) {
+}
+
 `;
 
 const StatusText = styled.div`
   font-size: 14px;
   font-weight: bold;
   color: white;
+  text-align: center;
 `;
 
 const ToHomeAddPackage = styled(IoIosAddCircle)`
@@ -96,7 +118,7 @@ const getStatusColor = (endDate) => {
 const getStatusText = (endDate) => {
   const today = new Date();
   const end = new Date(endDate);
-  return end < today ? '기간 만료' : '진행중'; 
+  return end < today ? 'Over' : 'ongoing'; 
 };
 
 const Homesection2 = () => {
@@ -156,6 +178,7 @@ const Homesection2 = () => {
     line-height: 28px;
   `;
 
+
   return (
     <>
       {packages.length === 0 && (
@@ -171,23 +194,23 @@ const Homesection2 = () => {
           {packages.map((pkg) => (
             <Link to={`/todo?trackId=${pkg.trackId}`} key={pkg.trackId} style={{ textDecoration: 'none' , color: 'black'}} >
               <UserPKG id="userPKG">
-                <div>
+                <Pkg2>
                   <S2Wrap>
-                    <S2Wrap2>
                       <UserRname>{pkg.routine}</UserRname>
-                      <div>{pkg.startDate} ~ {pkg.endDate}</div>
-                      <MemoText>메모: {pkg.memo}</MemoText> 
-                    </S2Wrap2>
-                    <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
+                      <Datetxt>{pkg.startDate} ~ {pkg.endDate}</Datetxt>
+                      <MemoText>Memo: {pkg.memo}</MemoText> 
+                  </S2Wrap>
+                  <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
                       X 
                     </BtnS2>
-                  </S2Wrap>
-                </div>
-                <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
-                  <StatusText>
-                    {getStatusText(pkg.endDate)}
-                  </StatusText>
-                </StatusIndicator>
+                </Pkg2>
+                <Pkg3>
+                 <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
+                    <StatusText>
+                      {getStatusText(pkg.endDate)}
+                    </StatusText>
+                  </StatusIndicator>
+                </Pkg3>
               </UserPKG>
             </Link>
           ))}
