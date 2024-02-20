@@ -14,42 +14,35 @@ const TodoHeaderBlock = styled.div`
   }
 `;
 
-const TodoHeader = ({ token }) => {
+const TodoHeader = ({ trackId }) => {
   const [trackName, setTrackName] = useState('');
-  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-    const getTracks = async () => {
+    const getTrackName = async () => {
+      if (!trackId) {
+        console.error('Error: trackId is undefined.');
+        return; // trackId가 없으면 함수 종료
+      }
+
       try {
-        const authToken = localStorage.getItem('authToken');
-        const response = await fetch('https://dofarming.duckdns.org/api/v1/track', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
-        const data = await response.json();
-        setTracks(data);
+        // 트랙 이름을 가져오기 위해 서버로 요청을 보냅니다.
+        const response = await axios.get(`https://dofarming.duckdns.org/api/v1/track/${trackId}`);
+        setTrackName(response.data.content);
       } catch (error) {
-        console.error('Error fetching tracks:', error);
+        console.error('Error fetching track name:', error);
       }
     };
 
-    getTracks();
-  }, []);
+    getTrackName();
+  }, [trackId]);
 
   return (
     <TodoHeaderBlock>
       <div>
-        {tracks.map(track => (
-          <div key={track.trackId}>
-            {track.content.split(',')[0]}
-          </div>
-        ))}
+        {trackName || 'Track name not available'} {/* trackName이 없을 경우 오류 메시지 표시 */}
       </div>
     </TodoHeaderBlock>
   );
 };
 
-export default TodoHeader;  
+export default TodoHeader;

@@ -105,11 +105,12 @@ const CheckboxLabel = styled.label`
 const TodoSection2 = ({ token }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const selectedTrackId = "여기에 선택된 트랙의 ID를 입력"; // 사용자가 선택한 트랙의 ID
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://dofarming.duckdns.org/api/v1/track`, {
+        const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -128,7 +129,7 @@ const TodoSection2 = ({ token }) => {
     };
   
     fetchData();
-  }, [token]);
+  }, [token, selectedTrackId]);
   
   const addRoutine = () => {
     const newRoutine = { name: inputValue, completed: false };
@@ -139,7 +140,7 @@ const TodoSection2 = ({ token }) => {
 
   const saveRoutine = async (newRoutine) => {
     try {
-      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id`, {
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -156,7 +157,6 @@ const TodoSection2 = ({ token }) => {
       console.error('Error saving routine:', error);
     }
   };
-  
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);

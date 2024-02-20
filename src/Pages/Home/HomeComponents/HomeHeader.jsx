@@ -144,10 +144,6 @@ const HomeHeader = () => {
   const [selectedDivImage, setSelectedDivImage] = useState("");
   const token = localStorage.getItem("authToken");
 
-  // 감정 온도를 로컬 스토리지에서 가져오기
-  const storedMood = localStorage.getItem('mood');
-  const [mood, setMood] = useState(storedMood || ""); // 기본값은 저장된 감정 온도 또는 빈 문자열
-
   const fetchUserInfo = async () => {
     try {
       const response = await axios.get("https://dofarming.duckdns.org/api/v1/user", {
@@ -176,9 +172,6 @@ const HomeHeader = () => {
 
   const updateMood = async (mood) => {
     try {
-      // 감정 온도를 로컬 스토리지에 저장
-      localStorage.setItem('mood', mood);
-      setMood(mood);
       const response = await axios.patch(
         "https://dofarming.duckdns.org/api/v1/user/mood",
         {
@@ -187,7 +180,6 @@ const HomeHeader = () => {
         {
           headers: {
             Authorization: `Bearer ${token}`
-            
           }
         }
       );

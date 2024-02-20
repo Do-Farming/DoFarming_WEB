@@ -4,7 +4,6 @@
 
 import React, { useState, useEffect } from "react";
 import HomeSection2 from "./HomeComponents/HomeSection2.jsx";
-import HomeSection1 from "./HomeComponents/HomeSection1.jsx";
 import NavBar from "../Nav/Nav";
 import HomeHeader from "./HomeComponents/HomeHeader.jsx";
 
