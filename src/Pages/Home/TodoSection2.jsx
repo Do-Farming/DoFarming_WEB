@@ -110,7 +110,7 @@ const TodoSection2 = ({ token }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
+        const response = await patch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
