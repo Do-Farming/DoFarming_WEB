@@ -134,7 +134,8 @@ const Modal = ({ selectedRoutine, onClose }) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ content: selectedRoutine }), // 선택된 루틴을 전송
+        body: JSON.stringify({ content: selectedRoutine }),
+
       });
 
       if (response.ok) {
