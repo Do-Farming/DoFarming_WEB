@@ -10,12 +10,12 @@ const HomeWrap2 = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 3vh;
-  position: relative; /* Added position relative */
+  position: relative;
 `;
 
 const UserPKG = styled.div`
-  border: 1px solid black; /* Black border */
-  border-radius: 20px; /* Rounded border */
+  border: 1px solid black;
+  border-radius: 20px;
   margin-bottom: 2vh;
   width: 80vw;
   height: 120px;
@@ -25,8 +25,8 @@ const UserPKG = styled.div`
   justify-content: space-around;
   padding-top: 20px;
   padding-bottom: 20px;
-  position: relative; /* Added position relative */
-  overflow: hidden; /* Prevent content from overflowing */
+  position: relative;
+  overflow: hidden;
 `;
 
 const S2Wrap = styled.div`
@@ -60,8 +60,8 @@ const MemoText = styled.div`
 `;
 
 const StatusIndicator = styled.div`
-  padding-top: 10px; 
-  text-align: center; 
+  padding-top: 10px;
+  text-align: center;
   width: 70px;
   height: 30px;
   border: 1px solid black;
@@ -74,7 +74,7 @@ const StatusIndicator = styled.div`
 const StatusText = styled.div`
   font-size: 14px;
   font-weight: bold;
-  color: white; /* White color for text */
+  color: white;
 `;
 
 const ToHomeAddPackage = styled(IoIosAddCircle)`
@@ -90,7 +90,7 @@ const ToHomeAddPackage = styled(IoIosAddCircle)`
 const getStatusColor = (endDate) => {
   const today = new Date();
   const end = new Date(endDate);
-  return end < today ? '#FF6347' : '#32CD32'; 
+  return end < today ? '#808080' : '#ED8C37'; 
 };
 
 const getStatusText = (endDate) => {
@@ -125,32 +125,75 @@ const Homesection2 = () => {
     fetchPackages(); 
   }, []); 
 
+  const handleDeletePackage = async (trackId) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      await axios.delete(`https://dofarming.duckdns.org/api/v1/track/${trackId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}` 
+        }
+      });
+      setPackages(packages.filter(pkg => pkg.trackId !== trackId));
+    } catch (error) {
+      console.error('Error deleting package:', error); 
+    }
+  };
+
+  const RoutineZero = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ED8C37;
+    font-weight: 340;
+  `;
+
+  const Zero1 = styled.div`
+    line-height: 28px;
+  `;
+
   return (
     <>
-    {packages.length > 0 && (
-      <HomeWrap2>
-        {packages.map((pkg) => (
-          <UserPKG id="userPKG" onClick={() => navigate('/Todo')} key={pkg.trackId}>
-            <div>
-              <S2Wrap>
-                <S2Wrap2>
-                  <UserRname>{pkg.routine}</UserRname>
-                  <div>{pkg.startDate} ~ {pkg.endDate}</div>
-                  <MemoText>메모: {pkg.memo}</MemoText> 
-                </S2Wrap2>
-                <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
-                  X 
-                </BtnS2>
-              </S2Wrap>
-            </div>
-            <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
-              <StatusText>{getStatusText(pkg.endDate)}</StatusText>
-            </StatusIndicator>
-          </UserPKG>
-        ))}
-      </HomeWrap2>
-    )}
-    <ToHomeAddPackage /> 
+      {packages.length === 0 && (
+        <RoutineZero>
+          <Zero1>No routine yet
+            <br /> Please make a routine first
+          </Zero1>
+        </RoutineZero>
+      )}
+
+      {packages.length > 0 && (
+        <HomeWrap2>
+          {packages.map((pkg) => (
+            <UserPKG id="userPKG" onClick={() => navigate('/Todo')} key={pkg.trackId}>
+              <div>
+                <S2Wrap>
+                  <S2Wrap2>
+                    <UserRname>{pkg.routine}</UserRname>
+                    <div>{pkg.startDate} ~ {pkg.endDate}</div>
+                    <MemoText>메모: {pkg.memo}</MemoText> 
+                  </S2Wrap2>
+                  <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
+                    X 
+                  </BtnS2>
+                </S2Wrap>
+              </div>
+              <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
+                <StatusText>
+                  {getStatusText(pkg.endDate)}
+                </StatusText>
+              </StatusIndicator>
+            </UserPKG>
+          ))}
+        </HomeWrap2>
+      )}
+      <Link to="/HomeAddPackage">
+        <ToHomeAddPackage /> 
+      </Link>
     </>
   );
 };

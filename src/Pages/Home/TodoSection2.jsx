@@ -101,19 +101,22 @@ const CheckboxLabel = styled.label`
     color: white;
   }
 `;
+
 const TodoSection2 = ({ token }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const selectedTrackId = "여기에 선택된 트랙의 ID를 입력"; // 사용자가 선택한 트랙의 ID
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://dofarming.duckdns.org/api/v1/track`, {
+        const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         });
+        
         if (response.ok) {
           const data = await response.json();
           setRoutineList(data);
@@ -126,12 +129,43 @@ const TodoSection2 = ({ token }) => {
     };
   
     fetchData();
-  }, [token]);
+  }, [token, selectedTrackId]);
   
   const addRoutine = () => {
     const newRoutine = { name: inputValue, completed: false };
     setRoutineList([...routineList, newRoutine]);
     setInputValue("");
+    saveRoutine(newRoutine); // 입력 완료 후 서버에 저장
+  };
+
+  const saveRoutine = async (newRoutine) => {
+    try {
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: newRoutine.name 
+        })
+      });
+      if (!response.ok) {
+        console.error('Failed to save routine:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error saving routine:', error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleEnterPress = (event) => {
+    if (event.key === 'Enter' && inputValue.trim() !== '') {
+      addRoutine();
+    }
   };
 
   const deleteRoutine = (index) => {

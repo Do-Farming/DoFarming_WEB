@@ -18,13 +18,14 @@ const TodoSection1Wrap = styled.div`
 const GoRoutine = styled.p`
     color: blue;
     text-decoration: underline blue;
+
 `;
 
 const MakeRoutine = () => {
   return (
     <TodoSection1Wrap>
       <p>There's nothing to do</p> 
-      <Link to="/Routine">
+      <Link to="/routine">
         <GoRoutine>Shall we make a new routine?</GoRoutine>
       </Link>
     </TodoSection1Wrap>

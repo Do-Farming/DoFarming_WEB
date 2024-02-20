@@ -120,168 +120,195 @@ const Profilesubmit = styled.button`
 `;
 
 const Profile = () => {
-  // 상태 관리
-  const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져오기
-  const [gender, setGender] = useState(""); //서버에서 사용자 성별 가져오기
-  const [age, setAge] = useState(""); //서버에서 사용자 나이 가져오기
-  const [image, setImage] = useState(null); // 서버에서 사용자 구글 이미지 가져오기
+    // 상태 관리
+    const [nickname, setNickname] = useState(""); // 서버에서 사용자 닉네임 가져오기
+    const [gender, setGender] = useState(""); //서버에서 사용자 성별 가져오기
+    const [age, setAge] = useState(""); //서버에서 사용자 나이 가져오기
+    const [profileImageUrl, setProfileImageUrl] = useState(""); // 사용자의 프로필 이미지 URL
 
-  // input 요소에 대한 참조
-  const fileInputRef = useRef(null);
+    // input 요소에 대한 참조
+    const fileInputRef = useRef(null);
 
-  // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
-  useEffect(() => {
-    // 서버로부터 사용자 정보를 가져오는 함수 호출
-    fetchUserInfo();
-  }, []);
+    // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
+    useEffect(() => {
+        // 서버로부터 사용자 정보를 가져오는 함수 호출
+        fetchUserInfo();
+    }, []);
 
-  // 서버로부터 사용자 정보를 가져오는 함수
-  const fetchUserInfo = async () => {
-    try {
-      // 서버 URL
-      const apiUrl = "https://dofarming.duckdns.org/api/v1/user";
+    // 서버로부터 사용자 정보를 가져오는 함수
+    const fetchUserInfo = async () => {
+        try {
+            // 서버 URL
+            const apiUrl = "https://dofarming.duckdns.org/api/v1/user";
 
-      // 로그인 토큰 가져오기
-      const token = localStorage.getItem('authToken');
+            // 로그인 토큰 가져오기
+            const token = localStorage.getItem('authToken');
 
-      if (token) {
-        // 서버로 GET 요청을 보냄
-        const response = await axios.get(apiUrl, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+            if (token) {
+                // 서버로 GET 요청을 보냄
+                const response = await axios.get(apiUrl, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-        // 응답 데이터에서 사용자 정보 추출하여 상태 업데이트
-        const userData = response.data;
-        setNickname(userData.nickname);
-        setGender(userData.gender);
-        setAge(userData.age);
-        // 이미지 데이터는 필요에 따라 처리
-      }
-    } catch (error) {
-      console.error("Error fetching user info:", error);
-    }
-  };
+                // 응답 데이터에서 사용자 정보 추출하여 상태 업데이트
+                const userData = response.data;
+                setNickname(userData.nickname);
+                setGender(userData.gender);
+                setAge(userData.age);
+                
+                // 사용자의 프로필 이미지 URL 설정
+                setProfileImageUrl(userData.profileImageUrl);
+            }
+        } catch (error) {
+            console.error("Error fetching user info:", error);
+        }
+    };
 
-  // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
-  useEffect(() => {
-    // 서버로부터 사용자 정보를 가져오는 함수 호출
-    fetchUserInfo();
-  }, []);
+    // 파일 입력 변경 핸들러
+    const handleImageChange = async (e) => {
+        const selectedImage = e.target.files[0];
 
-  // 파일 입력 변경 핸들러
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setImage(URL.createObjectURL(selectedImage));
-  };
+        // FormData 객체 생성
+        const formData = new FormData();
+        formData.append("multipartFile", selectedImage); // 'multipartFile' 파트에 이미지 추가
 
-  // 커스텀 버튼 클릭 핸들러
-  const handleCustomButtonClick = () => {
-    fileInputRef.current.click();
-  };
+        try {
+            // 서버 URL
+            const imageUrlApiUrl = "https://dofarming.duckdns.org/api/v1/user/image";
+            const userInfoApiUrl = "https://dofarming.duckdns.org/api/v1/user";
 
-  // 사용자 정보를 수정하는 함수
-  const updateUserInfo = async () => {
-    try {
-      // 서버 URL
-      const apiUrl = "https://dofarming.duckdns.org/api/v1/user/info";
+            // 로그인 토큰 가져오기
+            const token = localStorage.getItem('authToken');
 
-      // 로그인 토큰 가져오기
-      const token = localStorage.getItem('authToken');
+            if (token) {
+                // 서버로 PUT 요청을 보냄
+                await axios.put(imageUrlApiUrl, formData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    },
+                });
 
-      if (token) {
-        // 서버로 PATCH 요청을 보냄
-        const response = await axios.patch(apiUrl, {
-          nickname,
-          gender,
-          age,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+                // 이미지 업로드 성공 시 사용자 정보 다시 가져오기
+                const response = await axios.get(userInfoApiUrl, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-        // 수정이 성공하면 메시지 출력
-        console.log("User info updated successfully");
-        alert("저장되었습니다."); // 저장 성공 시 알림
-        window.location.href = "/home"; // 홈으로 이동
-      }
-    } catch (error) {
-      console.error("Error updating user info:", error);
-    }
-  };
+                // 응답 데이터에서 사용자 정보 추출하여 상태 업데이트
+                const userData = response.data;
+                setNickname(userData.nickname);
+                setGender(userData.gender);
+                setAge(userData.age);
+                setProfileImageUrl(userData.profileImageUrl);
 
-  // JSX 반환
-  return (
-    <ProfileWrap>
-      <NavBar />
+                console.log("User profile image uploaded successfully");
+            }
+        } catch (error) {
+            console.error("Error uploading profile image:", error);
+        }
+    };
 
-      <ProfileContainer>
-        <ProfileTxt>Profile</ProfileTxt>
-        <ProfileContent>
-          {/* 이미지, 닉네임 수정 */}
-          <ProfileimgWrap>
-            {/* 이미지를 표시할 곳 */}
-            {image ? (
-              <Profileimg
-                onClick={handleCustomButtonClick}
-                src={image}
-                alt="Uploaded"
-              />
-            ) : (
-              <Profileimg
-                onClick={handleCustomButtonClick}
-                src={myimg}
-                alt="Default"
-              />
-            )}
-            <div>
-              {/* 숨겨진 파일 입력 */}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                ref={fileInputRef}
-                style={{ display: "none" }}
-              />
-            </div>
-          </ProfileimgWrap>
+    // 커스텀 버튼 클릭 핸들러
+    const handleCustomButtonClick = () => {
+        fileInputRef.current.click();
+    };
 
-          <Profileinputnic>
-            <Profilenickname
-              type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-            />
-          </Profileinputnic>
+    // 사용자 정보를 수정하는 함수
+    const updateUserInfo = async () => {
+        try {
+            // 서버 URL
+            const apiUrl = "https://dofarming.duckdns.org/api/v1/user/info";
 
-          <Profileinput>
-            <label>Sex</label>
-            <Profilegender
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              <option value="MALE">Male</option>
-              <option value="FEMALE">Female</option>
-            </Profilegender>
-          </Profileinput>
+            // 로그인 토큰 가져오기
+            const token = localStorage.getItem('authToken');
 
-          <Profileinput>
-            <label>Age</label>
-            <Profileage
-              type="number"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-            />
-          </Profileinput>
-          <Profilesubmit onClick={updateUserInfo}>
-            Submit
-          </Profilesubmit>
-        </ProfileContent>
-      </ProfileContainer>
-    </ProfileWrap>
-  );
+            if (token) {
+                // 서버로 PATCH 요청을 보냄
+                const response = await axios.patch(apiUrl, {
+                    nickname,
+                    gender,
+                    age,
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                // 수정이 성공하면 메시지 출력
+                console.log("User info updated successfully");
+                alert("저장되었습니다."); // 저장 성공 시 알림
+                window.location.href = "/home"; // 홈으로 이동
+            }
+        } catch (error) {
+            console.error("Error updating user info:", error);
+        }
+    };
+
+    // JSX 반환
+    return (
+        <ProfileWrap>
+            <NavBar />
+
+            <ProfileContainer>
+                <ProfileTxt>Profile</ProfileTxt>
+                <ProfileContent>
+                    {/* 이미지, 닉네임 수정 */}
+                    <ProfileimgWrap>
+                        <Profileimg
+                            onClick={handleCustomButtonClick}
+                            src={profileImageUrl || myimg} // 프로필 이미지가 없을 경우 기본 이미지(myimg) 사용
+                            alt="Profile"
+                        />
+                        <div>
+                            {/* 숨겨진 파일 입력 */}
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                ref={fileInputRef}
+                                style={{ display: "none" }}
+                            />
+                        </div>
+                    </ProfileimgWrap>
+
+                    <Profileinputnic>
+                        <Profilenickname
+                            type="text"
+                            value={nickname}
+                            onChange={(e) => setNickname(e.target.value)}
+                        />
+                    </Profileinputnic>
+
+                    <Profileinput>
+                        <label>Sex</label>
+                        <Profilegender
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                        >
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                        </Profilegender>
+                    </Profileinput>
+
+                    <Profileinput>
+                        <label>Age</label>
+                        <Profileage
+                            type="number"
+                            value={age}
+                            onChange={(e) => setAge(e.target.value)}
+                        />
+                    </Profileinput>
+                    <Profilesubmit onClick={updateUserInfo}>
+                        Submit
+                    </Profilesubmit>
+                </ProfileContent>
+            </ProfileContainer>
+        </ProfileWrap>
+    );
 };
 
 export default Profile;

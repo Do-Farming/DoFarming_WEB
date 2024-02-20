@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const ModalBackdrop = styled.div`
@@ -26,20 +26,20 @@ const ModalBox = styled.div`
   position: relative;
   overflow: hidden;
   @media (min-width: 576px) {
-        width: 80%;
-}
+    width: 80%;
+  }
 
-@media (min-width: 768px) {
-        width: 70%;
-}
+  @media (min-width: 768px) {
+    width: 70%;
+  }
 
-@media (min-width: 992px) {
-        width: 50%;
-}
+  @media (min-width: 992px) {
+    width: 50%;
+  }
 
-@media (min-width: 1200px) {
-        width: 30%;
-}
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -92,7 +92,7 @@ const BtnAdd = styled.button`
   flex: 1;
 
   &:hover {
-    color: #ED8C37;
+    color: #ed8c37;
     cursor: pointer;
   }
 `;
@@ -108,8 +108,8 @@ const Modal = ({ onRoutineSelect, onClose }) => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authToken}`
-          }
+            Authorization: `Bearer ${authToken}`,
+          },
         });
         const data = await response.json();
         setTracks(data);
@@ -125,11 +125,33 @@ const Modal = ({ onRoutineSelect, onClose }) => {
     const selectElement = document.querySelector('.modal-select');
     const trackId = selectElement.value;
     const content = selectElement.options[selectElement.selectedIndex].text;
-    onRoutineSelect({ trackId, content });
-    onClose(); // 모달 닫기
-    alert('루틴이 추가되었습니다.'); // 알림 띄우기
+    const authToken = localStorage.getItem('authToken');
+
+    try {
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${trackId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ content: content }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        onRoutineSelect(responseData); // 루틴 정보를 전달
+        onClose(); // 모달 닫기
+        alert('루틴이 추가되었습니다.'); // 알림 띄우기
+      } else {
+        alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+      }
+    } catch (error) {
+      console.error('Error adding routine:', error);
+      alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+    }
   };
-  
+
+  // tracks가 null 또는 undefined인 경우 빈 배열로 대체하여 렌더링
   return (
     <ModalBackdrop>
       <ModalBox>
@@ -139,13 +161,13 @@ const Modal = ({ onRoutineSelect, onClose }) => {
         <ModalBody>
           <ModalSelect className="modal-select">
             <option value="">Select</option>
-            {tracks.map(track => (
+            {tracks && tracks.map(track => ( // tracks가 유효한 배열인 경우에만 map 함수 호출
               <option key={track.trackId} value={track.trackId}>{track.content.split(',')[0]}</option>
             ))}
           </ModalSelect>
         </ModalBody>
         <ModalFooter>
-          <BtnAdd onClick={handleAddClick}>Add</BtnAdd> 
+          <BtnAdd onClick={handleAddClick}>Add</BtnAdd>
           <BtnAdd onClick={onClose}>Close</BtnAdd>
         </ModalFooter>
       </ModalBox>
