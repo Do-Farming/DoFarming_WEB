@@ -169,25 +169,27 @@ const Homesection2 = () => {
       {packages.length > 0 && (
         <HomeWrap2>
           {packages.map((pkg) => (
-            <UserPKG id="userPKG" onClick={() => navigate('/Todo')} key={pkg.trackId}>
-              <div>
-                <S2Wrap>
-                  <S2Wrap2>
-                    <UserRname>{pkg.routine}</UserRname>
-                    <div>{pkg.startDate} ~ {pkg.endDate}</div>
-                    <MemoText>메모: {pkg.memo}</MemoText> 
-                  </S2Wrap2>
-                  <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
-                    X 
-                  </BtnS2>
-                </S2Wrap>
-              </div>
-              <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
-                <StatusText>
-                  {getStatusText(pkg.endDate)}
-                </StatusText>
-              </StatusIndicator>
-            </UserPKG>
+            <Link to={`/todo?trackId=${pkg.trackId}`} key={pkg.trackId} style={{ textDecoration: 'none' , color: 'black'}} >
+              <UserPKG id="userPKG">
+                <div>
+                  <S2Wrap>
+                    <S2Wrap2>
+                      <UserRname>{pkg.routine}</UserRname>
+                      <div>{pkg.startDate} ~ {pkg.endDate}</div>
+                      <MemoText>메모: {pkg.memo}</MemoText> 
+                    </S2Wrap2>
+                    <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
+                      X 
+                    </BtnS2>
+                  </S2Wrap>
+                </div>
+                <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
+                  <StatusText>
+                    {getStatusText(pkg.endDate)}
+                  </StatusText>
+                </StatusIndicator>
+              </UserPKG>
+            </Link>
           ))}
         </HomeWrap2>
       )}
