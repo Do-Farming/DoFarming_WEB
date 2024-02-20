@@ -105,7 +105,7 @@ const ModalContent = styled.div`
 
 const CloseModalButton = styled.div`
   height: 5%;
-  margin-left: 85vw;
+  margin-left: auto; /* Adjusted */
   margin-top: 15px;
   font-size: 25px;
   color: #BFBABA;
@@ -141,26 +141,16 @@ const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDiv, setSelectedDiv] = useState("");
   const [nickname, setNickname] = useState("");
-  const [moods, setMoods] = useState([]);
-
+  const [selectedDivImage, setSelectedDivImage] = useState("");
   const token = localStorage.getItem("authToken");
-
-  useEffect(() => {
-    const fetchMoods = async () => {
-      try {
-        const response = await axios.get("https://dofarming.duckdns.org/api/v1/moods");
-        setMoods(response.data);
-      } catch (error) {
-        console.error("Error fetching moods:", error);
-      }
-    };
-    fetchMoods();
-  }, []);
 
   const fetchUserInfo = async () => {
     try {
       const response = await axios.get("https://dofarming.duckdns.org/api/v1/user", {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json" 
+        }
       });
       const { nickname } = response.data;
       return nickname;
@@ -169,7 +159,7 @@ const HomeHeader = () => {
       return null;
     }
   };
-
+  
   useEffect(() => {
     const getNickname = async () => {
       const nickname = await fetchUserInfo();
@@ -180,79 +170,106 @@ const HomeHeader = () => {
     getNickname();
   }, []);
 
-  const openModal = () => setIsModalOpen(true);
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    if (selectedDiv) { // Check if selectedDiv is not empty
-      const selectedDivImage = getComputedStyle(document.querySelector(`.${selectedDiv}`)).backgroundImage;
-      document.querySelector(".Moodlets").style.backgroundImage = selectedDivImage;
-      updateMood(selectedDiv);
-    }
-  };
-
   const updateMood = async (mood) => {
     try {
-      if (!mood) { // Mood 값이 없는 경우에 대한 처리
-        console.error("Mood is undefined");
-        return;
-      }
-  
-      // 서버에서 반환한 Mood 값이 유효한지 확인
-      const isValidMood = moods.includes(mood);
-      if (!isValidMood) {
-        console.error("Invalid mood:", mood);
-        return;
-      }
-  
-      // 서버로 보낼 데이터의 형식을 수정하여 Mood 열거형에 정의된 값으로 변경
       const response = await axios.patch(
         "https://dofarming.duckdns.org/api/v1/user/mood",
-        { mood: mood }, // 이 부분을 수정해야 함
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          mood: mood
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
       );
       console.log("Mood updated successfully:", response.data);
     } catch (error) {
       console.error("Error updating mood:", error);
     }
   };
-  
-  
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const handleDivClick = (divNumber, mood) => {
     setSelectedDiv(mood);
-    const selectedDivImage = getComputedStyle(document.querySelector(`.${divNumber}`)).backgroundImage;
-    document.querySelector(".Moodlets").style.backgroundImage = selectedDivImage;
+    setSelectedDivImage(`url("/emotion${divNumber}.png")`);
     updateMood(mood);
+    closeModal();
   };
-
+  
   return (
     <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
-          <HelloUser>Hello, {nickname}</HelloUser>
-          <Fighting>Let's enjoy the cheerful day!</Fighting>
+          <HelloUser id="hello_user">{nickname}님 반가워요</HelloUser>
+          <Fighting id="fighting">
+            오늘도 활기차게 하루를 <br /> 시작해봐요!
+          </Fighting>
         </HomeTextBox>
         <MoodWrap>
           <Moodlets
-            className="Moodlets"
-            style={{ backgroundImage: `url("${selectedDiv}")` }}
+            style={{ backgroundImage: selectedDivImage }}
             onClick={openModal}
           ></Moodlets>
         </MoodWrap>
       </HomeHeaderContent>
-
       {isModalOpen && (
         <ModalOverlay onClick={closeModal}>
           <ModalContent onClick={(e) => e.stopPropagation()}>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-              <Div
-                key={`div${num}`}
-                className={`div${num}`}
-                onClick={() => handleDivClick(`div${num}`, moods[num - 1].name)}
-                style={{ backgroundImage: `url("/emotion${num}.png")` }}
-              ></Div>
-            ))}
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
+            <HeaderTxt>
+              <div className="hiuser">
+                <strong>{nickname}</strong> 님 !
+              </div>
+              <br />
+              <div className="tellme">오늘의 감정 온도를 알려주세요 :)</div>
+            </HeaderTxt>
+            <HimgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick(1, "HAPPY")}
+                  style={{ backgroundImage: 'url("/emotion1.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(2, "ANGRY")}
+                  style={{ backgroundImage: 'url("/emotion2.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(3, "NERVOUS")}
+                  style={{ backgroundImage: 'url("/emotion3.png")' }}
+                ></Div>
+              </ImgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick(4, "SAD")}
+                  style={{ backgroundImage: 'url("/emotion4.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(5, "EXCITED")}
+                  style={{ backgroundImage: 'url("/emotion5.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(6, "PROUD")}
+                  style={{ backgroundImage: 'url("/emotion6.png")' }}
+                ></Div>
+              </ImgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick(7, "CALM")}
+                  style={{ backgroundImage: 'url("/emotion7.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(8, "DROWSY")}
+                  style={{ backgroundImage: 'url("/emotion8.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(9, "TIRED")}
+                  style={{ backgroundImage: 'url("/emotion9.png")' }}
+                ></Div>
+              </ImgWrap>
+            </HimgWrap>
           </ModalContent>
         </ModalOverlay>
       )}
@@ -261,3 +278,4 @@ const HomeHeader = () => {
 };
 
 export default HomeHeader;
+

@@ -1,23 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
-import { IoIosAddCircle } from "react-icons/io";
-import PackageDeleteModal from '../PackageDeleteModal';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
-const RoutineZero = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ED8C37;
-  font-weight: 340;
-`;
-
+import axios from 'axios';
+import { IoIosAddCircle } from 'react-icons/io';  
 
 const HomeWrap2 = styled.div`
   display: flex;
@@ -25,45 +10,34 @@ const HomeWrap2 = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 3vh;
-
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    padding-top: 3vh;
-  }
+  position: relative;
 `;
 
 const UserPKG = styled.div`
-  border: 0.5px solid #BFBABA;
+  border: 1px solid black;
   border-radius: 20px;
   margin-bottom: 2vh;
   width: 80vw;
-  height: 120px; /* Changed height from percentage to pixels */
+  height: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  
-  
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    margin-bottom: 4vh;
-    width: 40vw;
-    padding-left: 3vw;
-  }
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  overflow: hidden;
 `;
 
 const S2Wrap = styled.div`
   display: flex;
   width: 70vw;
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    width:40vw;
-  }
 `;
 
 const S2Wrap2 = styled.div`
   width: 95%;
   display: flex;
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    width:35vw;
-  }
+  flex-direction: column;
 `;
 
 const BtnS2 = styled.button`
@@ -72,13 +46,35 @@ const BtnS2 = styled.button`
   size: 50;
   padding: 0;
   margin: 0;
-  @media all and (min-width: 768px) and (max-width: 3000px) {
-    margin-left: 1vw;
-  }
+  position: absolute;
+  top: 10px;
+  right: 20px;
 `;
 
 const UserRname = styled.div`
-  font-size: 24px; /* Increased font size for better readability */
+  font-size: 24px;
+`;
+
+const MemoText = styled.div`
+  margin-top: 5px;
+`;
+
+const StatusIndicator = styled.div`
+  padding-top: 10px;
+  text-align: center;
+  width: 70px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: 10px;
+  background-color: ${(props) => props.statusColor};
+`;
+
+const StatusText = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
 `;
 
 const ToHomeAddPackage = styled(IoIosAddCircle)`
@@ -88,13 +84,23 @@ const ToHomeAddPackage = styled(IoIosAddCircle)`
   font-size: 50px;
   color: #ED8C37;
   background-color: inherit;
-  cursor: pointer; /* Added cursor pointer for better UX */
+  cursor: pointer;
 `;
+
+const getStatusColor = (endDate) => {
+  const today = new Date();
+  const end = new Date(endDate);
+  return end < today ? '#808080' : '#ED8C37'; 
+};
+
+const getStatusText = (endDate) => {
+  const today = new Date();
+  const end = new Date(endDate);
+  return end < today ? '기간 만료' : '진행중'; 
+};
 
 const Homesection2 = () => {
   const [packages, setPackages] = useState([]); 
-  const [showModal, setShowModal] = useState(false); 
-  const [deleteId, setDeleteId] = useState(null); 
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -107,8 +113,8 @@ const Homesection2 = () => {
           }
         });
         const newPackages = response.data.map((pkg) => {
-          const [routine] = pkg.content.split(', '); 
-          return { ...pkg, routine }; 
+          const [routine, memo] = pkg.content.split(', '); 
+          return { ...pkg, routine, memo }; 
         });
         setPackages(newPackages); 
       } catch (error) {
@@ -119,56 +125,77 @@ const Homesection2 = () => {
     fetchPackages(); 
   }, []); 
 
-  const handleDeletePackage = (id) => {
-    setShowModal(true); 
-    setDeleteId(id); 
+  const handleDeletePackage = async (trackId) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      await axios.delete(`https://dofarming.duckdns.org/api/v1/track/${trackId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}` 
+        }
+      });
+      setPackages(packages.filter(pkg => pkg.trackId !== trackId));
+    } catch (error) {
+      console.error('Error deleting package:', error); 
+    }
   };
 
-  // 패키지 삭제 모달에서 확인 버튼 클릭 시 실행되는 함수
-  const handleConfirmDelete = () => {
-    const updatedPackages = packages.filter((pkg) => pkg.trackId !== deleteId); 
-    setPackages(updatedPackages); 
-    setShowModal(false); 
-    document.body.classList.remove('modal-open'); 
-  };
+  const RoutineZero = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ED8C37;
+    font-weight: 340;
+  `;
 
-  // 패키지 삭제 모달에서 취소 버튼 클릭 시 실행되는 함수
-  const handleCancelDelete = () => {
-    setShowModal(false); 
-    document.body.classList.remove('modal-open'); 
-  };
-
-  const handleAddPackage = () => {
-    navigate('/HomeAddPackage'); 
-  };
+  const Zero1 = styled.div`
+    line-height: 28px;
+  `;
 
   return (
     <>
-    {packages.length > 0 && (
-      <HomeWrap2>
-        {packages.map((pkg) => (
-          <UserPKG id="userPKG" onClick={() => navigate('/Todo')} key={pkg.trackId}>
-            <div>
-              <S2Wrap>
-                <S2Wrap2>
-                  <UserRname>{pkg.routine}</UserRname> 
-                </S2Wrap2>
-                <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
-                  X 
-                </BtnS2>
-              </S2Wrap>
-            </div>
-          </UserPKG>
-        ))}
-      </HomeWrap2>
-    )}
-    <ToHomeAddPackage onClick={handleAddPackage} /> 
-    {showModal && (
-      <PackageDeleteModal 
-        onClose={handleCancelDelete} 
-        onConfirm={handleConfirmDelete}
-      />
-    )}
+      {packages.length === 0 && (
+        <RoutineZero>
+          <Zero1>No routine yet
+            <br /> Please make a routine first
+          </Zero1>
+        </RoutineZero>
+      )}
+
+      {packages.length > 0 && (
+        <HomeWrap2>
+          {packages.map((pkg) => (
+            <Link to={`/todo?trackId=${pkg.trackId}`} key={pkg.trackId} style={{ textDecoration: 'none' , color: 'black'}} >
+              <UserPKG id="userPKG">
+                <div>
+                  <S2Wrap>
+                    <S2Wrap2>
+                      <UserRname>{pkg.routine}</UserRname>
+                      <div>{pkg.startDate} ~ {pkg.endDate}</div>
+                      <MemoText>메모: {pkg.memo}</MemoText> 
+                    </S2Wrap2>
+                    <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
+                      X 
+                    </BtnS2>
+                  </S2Wrap>
+                </div>
+                <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
+                  <StatusText>
+                    {getStatusText(pkg.endDate)}
+                  </StatusText>
+                </StatusIndicator>
+              </UserPKG>
+            </Link>
+          ))}
+        </HomeWrap2>
+      )}
+      <Link to="/HomeAddPackage">
+        <ToHomeAddPackage /> 
+      </Link>
     </>
   );
 };

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Modal from "./Modal";
+import React, { useState, useEffect, useRef} from "react";
 import styled from 'styled-components';
+import TodoSection2 from "../Home/TodoSection2";
 
 const MainBox = styled.div`
   border: 0.2px solid rgb(131, 131, 131);
@@ -98,27 +98,64 @@ const SelectAll = styled.button`
 `;
 
 export const Bath = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState('');
+  const [tracks, setTracks] = useState([]);
+  const todoSectionRef = useRef(null); // TodoSection2 컴포넌트의 레퍼런스 생성
 
-  const handleAddClick = () => {
-    setShowModal(true);
-  };
+  useEffect(() => {
+    const getTracks = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        const response = await fetch('https://dofarming.duckdns.org/api/v1/track', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        const data = await response.json();
+        setTracks(data);
+      } catch (error) {
+        console.error('Error fetching tracks:', error);
+      }
+    };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+    getTracks();
+  }, []);
 
-  const handleRoutineSelect = (routine) => {
-    setSelectedItem(routine);
-    // 여기서 루틴을 처리하거나 다른 작업을 수행합니다.
+  const handleAddClick = async (content) => {
+    const authToken = localStorage.getItem('authToken');
+  
+    try {
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ content: content })
+      });
+  
+      if (response.ok) {
+        alert('루틴이 추가되었습니다.'); // 알림 띄우기
+
+        // TodoSection2 컴포넌트의 레퍼런스를 통해 루틴을 추가하는 함수 호출
+        if (todoSectionRef.current && todoSectionRef.current.addRoutine) {
+          todoSectionRef.current.addRoutine(content);
+        }
+      } else {
+        alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+      }
+    } catch (error) {
+      console.error('Error adding routine:', error);
+      alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+    }
   };
 
   return (
     <MainBox>
       <MTxt1>A warm bath</MTxt1>
       <MTxt2>
-      You must have worked hard today. 
+        You must have worked hard today. 
         <br />
         Why don't you relax in warm water?
       </MTxt2>
@@ -145,7 +182,7 @@ export const Bath = () => {
       <div>
         <SelectAll onClick={() => handleAddClick('전체 추가')}>+Add all</SelectAll>
       </div>
-      {showModal && <Modal onClose={handleCloseModal} onRoutineSelect={handleRoutineSelect} />}
+      <TodoSection2 ref={todoSectionRef} /> {/* TodoSection2 컴포넌트에 레퍼런스 추가 */}
     </MainBox>
   );
 };
