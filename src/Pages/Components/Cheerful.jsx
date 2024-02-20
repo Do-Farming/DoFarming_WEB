@@ -100,49 +100,59 @@ const SelectAll = styled.button`
 
 export const Cheerful = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
+    setSelectedRoutine('');
     setShowModal(false);
-  }
+  };
+
+  const handleAddAllClick = () => {
+    handleAddClick('Taking vitamins');
+    handleAddClick('Getting sunlight');
+    handleAddClick('Stretching');
+    handleAddClick('Check to do');
+    handleAddClick('Go outside');
+  };
 
   return (
     <MainBox>
-  <MTxt1>
-  Cheerful morning
-  </MTxt1>
-  <MTxt2>
-  Start with a smile and end with a smile, and that day<br />
-  will be happier than ever.
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>Taking vitamins</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Getting sunlight</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Stretching</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Check to do</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Go outside</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <div>
-    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
-  </div>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
-
+      <MTxt1>Cheerful morning</MTxt1>
+      <MTxt2>
+        Start with a smile and end with a smile, and that day<br />
+        will be happier than ever.
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Taking vitamins</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking vitamins')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Getting sunlight</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Getting sunlight')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Stretching</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Stretching')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Check to do</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Check to do')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Go outside</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Go outside')}>Add </SelectboxBtn>
+      </Selectbox>
+      <div>
+        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
+      </div>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };
+
+export default Cheerful;

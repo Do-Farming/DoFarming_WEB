@@ -105,13 +105,13 @@ const CheckboxLabel = styled.label`
 
 const TodoSection2 = ({ token, selectedTrackId }) => {
   const [routineList, setRoutineList] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValues, setInputValues] = useState({});
 
   useEffect(() => {
     const fetchRoutines = async () => {
       try {
         const response = await axios.get(
-          `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+          `https://dofarming.duckdns.org/api/v1/routine/18`,
           {
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -122,6 +122,11 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
 
         if (response.status === 200) {
           setRoutineList(response.data);
+          const initialValues = {};
+          response.data.forEach(routine => {
+            initialValues[routine.routineId] = routine.name;
+          });
+          setInputValues(initialValues);
         } else {
           console.error('Failed to fetch routines:', response.statusText);
         }
@@ -141,7 +146,7 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
       const response = await axios.post(
         `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
         {
-          name: newRoutine.name 
+          name: newRoutine.name,
         },
         {
           headers: {
@@ -153,7 +158,7 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
 
       if (response.status === 200) {
         setRoutineList([...routineList, newRoutine]);
-        setInputValue("");
+        setInputValue(""); // addRoutine 함수에서 inputValue 초기화
       } else {
         console.error('Failed to save routine:', response.statusText);
       }
@@ -161,6 +166,7 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
       console.error('Error saving routine:', error);
     }
   };
+
 
   const deleteRoutine = async (index) => {
     try {
@@ -179,22 +185,53 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
     }
   };
 
-  const updateRoutineName = (index, newName) => {
-    const newList = [...routineList];
-    newList[index] = {
-      ...newList[index],
-      name: newName,
-    };
-    setRoutineList(newList);
+  const updateRoutineName = async (routineId, newName) => {
+    try {
+      await axios.put(
+        `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
+        {
+          name: newName 
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      setInputValues(prevState => ({
+        ...prevState,
+        [routineId]: newName
+      }));
+    } catch (error) {
+      console.error('Error updating routine name:', error);
+    }
   };
 
-  const toggleComplete = (index) => {
-    const newList = [...routineList];
-    newList[index] = {
-      ...newList[index],
-      completed: !newList[index].completed,
-    };
-    setRoutineList(newList);
+  const toggleComplete = async (index) => {
+    const routine = routineList[index];
+    try {
+      await axios.put(
+        `https://dofarming.duckdns.org/api/v1/routine/${routine.routineId}`,
+        {
+          completed: !routine.completed 
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      const newList = [...routineList];
+      newList[index] = {
+        ...routine,
+        completed: !routine.completed
+      };
+      setRoutineList(newList);
+    } catch (error) {
+      console.error('Error updating routine completion status:', error);
+    }
   };
 
   return (
@@ -214,8 +251,8 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
             </Check1>
             <TodoSection2Routine
               type="text"
-              value={routine.name}
-              onChange={(e) => updateRoutineName(index, e.target.value)}
+              value={inputValues[routine.routineId] || ""}
+              onChange={(e) => updateRoutineName(routine.routineId, e.target.value)}
               placeholder="Write your to-do"
               completed={routine.completed}
             />
@@ -225,7 +262,7 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
           </CheckboxContainer>
         ))}
         <TodoAddRoutineBtn onClick={addRoutine}>
-        + Add routine
+          + Add routine
         </TodoAddRoutineBtn>
       </div>
     </TodoSection2Wrap>

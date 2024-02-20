@@ -97,7 +97,7 @@ const BtnAdd = styled.button`
   }
 `;
 
-const Modal = ({ onRoutineSelect, onClose }) => {
+const Modal = ({ selectedRoutine, onClose }) => {
   const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
@@ -134,12 +134,11 @@ const Modal = ({ onRoutineSelect, onClose }) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ content: content }),
+        body: JSON.stringify({ content: selectedRoutine }), // 선택된 루틴을 전송
       });
 
       if (response.ok) {
         const responseData = await response.json();
-        onRoutineSelect(responseData); // 루틴 정보를 전달
         onClose(); // 모달 닫기
         alert('루틴이 추가되었습니다.'); // 알림 띄우기
       } else {
