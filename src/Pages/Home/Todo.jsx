@@ -1,51 +1,45 @@
-import NavBar from '../Nav/Nav';
-import React, { useState, useEffect } from 'react';
-import TodoSection1 from './TodoSection1';
-import TodoSection2 from './TodoSection2';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // useLocation hook import
+import NavBar from "../Nav/Nav.jsx";
+import TodoHeader from "./TodoHeader";
+import TodoSection1 from "./TodoSection1";
+import TodoSection2 from "./TodoSection2";
+import Login2 from "../Login/Login2.jsx"; // Login2 컴포넌트 import
 
 const Todo = () => {
-  const [hasRoutine, setHasRoutine] = useState(false);
-  const [trackId, setTrackId] = useState(null); // 트랙 아이디 상태 추가
+    const [firebaseToken, setFirebaseToken] = useState('');
+    const [selectedTrack, setSelectedTrack] = useState(null); // 선택된 트랙을 상태로 저장
+    const location = useLocation(); // 현재 URL을 가져오는 useLocation hook 사용
 
-  useEffect(() => {
-    // 트랙 조회 요청을 보내고 루틴이 있는지 확인합니다.
-    const fetchTrack = async () => {
-      try {
-        const token = localStorage.getItem('authToken');
-        const response = await axios.get('https://dofarming.duckdns.org/api/v1/track', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        // 트랙이 있으면 첫 번째 트랙의 아이디를 설정합니다.
-        if (response.data.length > 0) {
-          setTrackId(response.data[0].trackId);
-          setHasRoutine(true);
-        }
-      } catch (error) {
-        console.error('Error fetching track:', error);
-      }
-    };
+    useEffect(() => {
+        // Firebase 토큰 가져오는 함수 호출
+        const fetchFirebaseToken = async () => {
+            try {
+                // const token = await getFirebaseToken(); // Firebase 토큰을 가져오는 함수 호출
+                const token = Login2.token; // Login2 컴포넌트에서 가져온 토큰
+                setFirebaseToken(token); // 가져온 토큰을 상태에 저장
+            } catch (error) {
+                console.error('Error fetching Firebase token:', error);
+            }
+        };
+        
+        fetchFirebaseToken(); // Firebase 토큰 가져오는 함수 호출
 
-    fetchTrack();
-  }, []);
+        // URL에서 트랙 아이디를 읽어와서 상태에 저장
+        const params = new URLSearchParams(location.search);
+        const trackId = params.get('trackId');
+        setSelectedTrack(trackId);
+    }, [location.search]); // location.search가 변할 때마다 실행
 
-  // TodoSection1에서 루틴을 만들면 호출되는 함수
-  const handleCreateRoutine = () => {
-    setHasRoutine(true);
-  };
-
-  return (
-    <div className="Todo">
-      <NavBar />
-      {hasRoutine ? (
-        <TodoSection2 trackId={trackId} /> 
-      ) : (
-        <TodoSection1 onCreateRoutine={handleCreateRoutine} />
-      )}
-    </div>
-  );
+    return (
+        <div className="Todo">
+            <NavBar />
+            {/* TodoHeader에 선택된 트랙 아이디를 props로 전달 */}
+            <TodoHeader trackId={selectedTrack} />
+            <TodoSection1 />
+            <TodoSection2 />
+        </div>
+    );
 };
 
 export default Todo;
