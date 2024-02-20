@@ -136,6 +136,9 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
   }, [token, selectedTrackId]);
 
   const addRoutine = async () => {
+    const newRoutine = { name: inputValue, completed: false };
+    setRoutineList([...routineList, newRoutine]);
+    setInputValue("");
     try {
       const newRoutine = { name: inputValue, completed: false };
       const response = await axios.post(
@@ -163,6 +166,9 @@ const TodoSection2 = ({ token, selectedTrackId }) => {
   };
 
   const deleteRoutine = async (index) => {
+    const newList = [...routineList];
+    newList.splice(index, 1);
+    setRoutineList(newList);
     try {
       const routineId = routineList[index].routineId;
       await axios.delete(`https://dofarming.duckdns.org/api/v1/routine/${routineId}`, {
