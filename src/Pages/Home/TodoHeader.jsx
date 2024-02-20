@@ -21,11 +21,10 @@ const TodoHeader = ({ trackId }) => {
     const getTrackName = async () => {
       if (!trackId) {
         console.error('Error: trackId is undefined.');
-        return; // trackId가 없으면 함수 종료
+        return;
       }
 
       try {
-        // 트랙 이름을 가져오기 위해 서버로 요청을 보냅니다.
         const response = await axios.get(`https://dofarming.duckdns.org/api/v1/track/${trackId}`);
         setTrackName(response.data.content);
       } catch (error) {
@@ -39,7 +38,7 @@ const TodoHeader = ({ trackId }) => {
   return (
     <TodoHeaderBlock>
       <div>
-        {trackName || 'Track name not available'} {/* trackName이 없을 경우 오류 메시지 표시 */}
+        {trackName || 'Track name not available'}
       </div>
     </TodoHeaderBlock>
   );

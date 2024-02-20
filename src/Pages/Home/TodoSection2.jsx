@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { IoTrashSharp } from "react-icons/io5";
 import styled from "styled-components";
+import axios from 'axios';
 
 const TodoSection2Wrap = styled.div`
-  width: 70vw; /* 변경된 너비 */
-  margin-left: 15vw; /* 변경된 여백 */
+  width: 70vw;
+  margin-left: 15vw;
   margin-top: 5vh;
   height: auto;
 
@@ -33,8 +34,8 @@ const TodoAddRoutineBtn = styled.button`
 
 const CheckboxContainer = styled.div`
   display: flex;
-  flex-direction: column; /* 변경된 방향 */
-  align-items: center; /* 추가된 정렬 */
+  flex-direction: column;
+  align-items: center;
   margin-top: 4vh;
   border: 0.5px solid #BFBABA;
   border-radius: 20px;
@@ -50,7 +51,7 @@ const TodoSection2Routine = styled.input`
   border: none;
   font-size: 20px;
   text-align: center;
-  width: 100%; /* 변경된 너비 */
+  width: 100%;
   padding-top: 2px;
   font-weight: 100;
   outline: none;
@@ -102,55 +103,58 @@ const CheckboxLabel = styled.label`
   }
 `;
 
-const TodoSection2 = ({ token }) => {
+const TodoSection2 = ({ token, selectedTrackId }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const selectedTrackId = "여기에 선택된 트랙의 ID를 입력"; // 사용자가 선택한 트랙의 ID
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRoutines = async () => {
       try {
-        const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
+        const response = await axios.get(
+          `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
           }
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          setRoutineList(data);
+        );
+
+        if (response.status === 200) {
+          setRoutineList(response.data);
         } else {
-          console.error('Failed to fetch routine list:', response.statusText);
+          console.error('Failed to fetch routines:', response.statusText);
         }
       } catch (error) {
-        console.error('Error fetching routine list:', error);
+        console.error('Error fetching routines:', error);
       }
     };
-  
-    fetchData();
-  }, [token, selectedTrackId]);
-  
-  const addRoutine = () => {
-    const newRoutine = { name: inputValue, completed: false };
-    setRoutineList([...routineList, newRoutine]);
-    setInputValue("");
-    saveRoutine(newRoutine); // 입력 완료 후 서버에 저장
-  };
 
-  const saveRoutine = async (newRoutine) => {
+    if (selectedTrackId) {
+      fetchRoutines();
+    }
+  }, [token, selectedTrackId]);
+
+  const addRoutine = async () => {
     try {
-      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+      const newRoutine = { name: inputValue, completed: false };
+      const response = await axios.post(
+        `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+        {
           name: newRoutine.name 
-        })
-      });
-      if (!response.ok) {
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.status === 200) {
+        setRoutineList([...routineList, newRoutine]);
+        setInputValue("");
+      } else {
         console.error('Failed to save routine:', response.statusText);
       }
     } catch (error) {
@@ -158,20 +162,21 @@ const TodoSection2 = ({ token }) => {
     }
   };
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const handleEnterPress = (event) => {
-    if (event.key === 'Enter' && inputValue.trim() !== '') {
-      addRoutine();
+  const deleteRoutine = async (index) => {
+    try {
+      const routineId = routineList[index].routineId;
+      await axios.delete(`https://dofarming.duckdns.org/api/v1/routine/${routineId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const newList = [...routineList];
+      newList.splice(index, 1);
+      setRoutineList(newList);
+    } catch (error) {
+      console.error('Error deleting routine:', error);
     }
-  };
-
-  const deleteRoutine = (index) => {
-    const newList = [...routineList];
-    newList.splice(index, 1);
-    setRoutineList(newList);
   };
 
   const updateRoutineName = (index, newName) => {
