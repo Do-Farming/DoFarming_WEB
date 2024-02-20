@@ -33,7 +33,6 @@ const Todo = () => {
         <div className="Todo">
             <NavBar />
             {/* TodoHeader에 선택된 트랙 아이디를 props로 전달 */}
-            <TodoHeader trackId={selectedTrack} />
             <TodoSection1 />
             <TodoSection2 />
         </div>

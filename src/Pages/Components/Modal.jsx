@@ -140,13 +140,15 @@ const Modal = ({ selectedRoutine, onClose }) => {
       if (response.ok) {
         const responseData = await response.json();
         onClose(); // 모달 닫기
-        alert('루틴이 추가되었습니다.'); // 알림 띄우기
+        alert('Added!'); // 알림 띄우기
       } else {
-        alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+        alert('Failed to add routine :('); // 실패 알림 띄우기
+        onClose(); // 모달 닫기
       }
     } catch (error) {
       console.error('Error adding routine:', error);
-      alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+      alert('Failed to add routine:('); // 실패 알림 띄우기
+      onClose(); // 모달 닫기
     }
   };
 

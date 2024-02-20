@@ -102,7 +102,7 @@ const Login4 = () => {
     if (valid) {
       setNickname(input);
     } else {
-      alert("닉네임은 영문, 한글, 숫자를 포함한 1글자 이상~12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
+      alert("Nicknames must be at least 1 to 12 characters, including English, Korean, and numbers, and must not contain special symbols.");
     }
   };
 
@@ -110,7 +110,7 @@ const Login4 = () => {
     const input = e.target.value;
   
     if (isNaN(input)) {
-      alert("숫자만 입력하세요");
+      alert("Only numbers can be entered.");
       return;
     }
   
@@ -119,7 +119,7 @@ const Login4 = () => {
     if (valid) {
       setAge(input);
     } else {
-      alert("나이는 3자릿수 이하여야 합니다.");
+      alert("The age must be no more than three digits.");
     }
   };
   

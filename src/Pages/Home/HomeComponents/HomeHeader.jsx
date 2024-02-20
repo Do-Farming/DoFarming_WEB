@@ -57,7 +57,7 @@ const Moodlets = styled.div`
   height: 118px;
   border-radius: 16px;
   cursor: pointer;
-  background-size: contain;
+  background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
 `;
@@ -105,7 +105,7 @@ const ModalContent = styled.div`
 
 const CloseModalButton = styled.div`
   height: 5%;
-  margin-left: auto; /* Adjusted */
+  margin-left: 85vw;
   margin-top: 15px;
   font-size: 25px;
   color: #BFBABA;
@@ -203,9 +203,9 @@ const HomeHeader = () => {
     <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
-          <HelloUser id="hello_user">{nickname}님 반가워요</HelloUser>
+          <HelloUser id="hello_user">Hello, {nickname}</HelloUser>
           <Fighting id="fighting">
-            오늘도 활기차게 하루를 <br /> 시작해봐요!
+          Let's enjoy the cheerful day!
           </Fighting>
         </HomeTextBox>
         <MoodWrap>
@@ -221,10 +221,10 @@ const HomeHeader = () => {
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
             <HeaderTxt>
               <div className="hiuser">
-                <strong>{nickname}</strong> 님 !
+                <strong>{nickname}</strong> !
               </div>
               <br />
-              <div className="tellme">오늘의 감정 온도를 알려주세요 :)</div>
+              <div className="tellme">Let me know how you feel today :)</div>
             </HeaderTxt>
             <HimgWrap>
               <ImgWrap>
@@ -278,3 +278,4 @@ const HomeHeader = () => {
 };
 
 export default HomeHeader;
+
