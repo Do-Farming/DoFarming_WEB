@@ -115,14 +115,14 @@ function Home9() {
         }
       );
       if (response.status === 200) {
-        alert('저장되었어요!');
+        alert('Saved!');
         navigate('/home'); 
       } else {
-        alert('저장에 실패했어요!');
+        alert('Save failed :(');
       }
     } catch (error) {
       console.error(error);
-      alert('저장에 실패했어요!');
+      alert('Save failed :(');
     }
   };
 
