@@ -14,6 +14,8 @@ import HomeAddPackage from "./Pages/Home/HomeAddPackage";
 import Todo from "./Pages/Home/Todo";
 import HomeSection2 from "./Pages/Home/HomeComponents/HomeSection2";
 
+
+const basename = process.env.REACT_APP_BASENAME; // 수정된 부분
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
 
@@ -38,7 +40,7 @@ function App() {
 }
 
 rootElement.render(
-  <Router>
+  <Router basename={basename}>
     <App />
   </Router>
 );
