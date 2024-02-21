@@ -20,8 +20,6 @@ import { Frustration } from "../Components/Frustration";
 import { Rest } from "../Components/Rest";
 import { GoToRoutine } from '../Components/GoToRoutine';
 import NavBar from "../Nav/Nav.jsx";
-import Modal from '../Components/Modal';
-import TodoSection2 from '../Home/TodoSection2';  
 
 const RoutineWrap = styled.div`
     overflow: visible;
