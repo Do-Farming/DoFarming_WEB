@@ -125,12 +125,17 @@ const TodoSection2 = ({ selectedTrackId }) => {
   const [inputValues, setInputValues] = useState({});
 
   const handleInputChange = (e, routineId) => {
+    const { value } = e.target;
     setInputValues({
       ...inputValues,
-      [routineId]: e.target.value,
+      [routineId]: value,
     });
+  
+    // 입력 값이 변경될 때마다 로컬 스토리지에 저장
+    localStorage.setItem(`inputValue_${routineId}`, value);
   };
 
+  
   const deleteRoutine = async (routineId) => {
     const token = localStorage.getItem('authToken');
     try {
@@ -183,31 +188,36 @@ const TodoSection2 = ({ selectedTrackId }) => {
   };
 
   const addRoutine = async () => {
-    const token = localStorage.getItem('authToken');
-    try {
-      const response = await axios.post(
-        `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
-        {
-          content: '',
-        },
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+  const token = localStorage.getItem('authToken');
+  try {
+    const response = await axios.post(
+      `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+      {
+        content: '',
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-      );
-
-      if (response.status === 201) {
-        const newRoutine = response.data;
-        setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]);
-      } else {
-        console.error('Failed to add routine:', response.statusText);
       }
-    } catch (error) {
-      console.error('Error adding routine:', error);
+    );
+
+    if (response.status === 201) {
+      const newRoutine = response.data;
+      setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]);
+      // 루틴 추가 후에 포커스를 해당 입력 필드로 설정
+      setInputValues(prevInputValues => ({
+        ...prevInputValues,
+        [newRoutine.routineId]: '',
+      }));
+    } else {
+      console.error('Failed to add routine:', response.statusText);
     }
-  };
+  } catch (error) {
+    console.error('Error adding routine:', error);
+  }
+};
 
   useEffect(() => {
     const fetchRoutines = async () => {
@@ -248,7 +258,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
       {routineList.map((routine, index) => (
         <CheckboxContainer key={index}>
           <Check1>
-            <Checkbox type="checkbox" onChange={(e) => { e.preventDefault(); toggleComplete(index); }} checked={routine.checked} />
+          <Checkbox type="checkbox" onChange={() => { toggleComplete(index); }} checked={routine.completed} />
             <CheckboxLabel />
           </Check1>
           <TodoSection2Routine 

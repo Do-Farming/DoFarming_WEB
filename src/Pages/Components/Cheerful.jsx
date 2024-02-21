@@ -100,24 +100,22 @@ const SelectAll = styled.button`
 
 export const Cheerful = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedRoutine, setSelectedRoutine] = useState('');
+  const [selectedRoutines, setSelectedRoutines] = useState([]);
 
   const handleAddClick = (routine) => {
-    setSelectedRoutine(routine);
+    setSelectedRoutines(prevRoutines => [...prevRoutines, routine]);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setSelectedRoutine('');
+    setSelectedRoutines([]);
     setShowModal(false);
   };
 
   const handleAddAllClick = () => {
-    handleAddClick('Taking vitamins');
-    handleAddClick('Getting sunlight');
-    handleAddClick('Stretching');
-    handleAddClick('Check to do');
-    handleAddClick('Go outside');
+    const allRoutines = ['Taking vitamins', 'Getting sunlight', 'Stretching', 'Check to do', 'Go outside'];
+    setSelectedRoutines(allRoutines);
+    setShowModal(true);
   };
 
   return (
@@ -150,7 +148,7 @@ export const Cheerful = () => {
       <div>
         <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
       </div>
-      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+      {showModal && <Modal selectedRoutines={selectedRoutines} onClose={handleCloseModal} />}
     </MainBox>
   );
 };

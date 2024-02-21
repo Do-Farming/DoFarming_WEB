@@ -100,13 +100,24 @@ const SelectAll = styled.button`
 
 export const Frustration = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
+    setSelectedRoutine('');
     setShowModal(false);
+  };
+
+  const handleAddAllClick = () => {
+    handleAddClick('Breath in and out');
+    handleAddClick('Calling friends or family');
+    handleAddClick('Writing down your emotions');
+    handleAddClick('Think positive thoughts');
+    handleAddClick('Having a hobby time');
   }
 
   return (
@@ -120,26 +131,26 @@ export const Frustration = () => {
   </MTxt2>
   <Selectbox>
     <Txtbox>Breath in and out</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick('Breath in and out')}>Add </SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Calling friends or family</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick('Calling friends or family')}>Add </SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Writing down your emotions</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick('Writing down your emotions')}>Add </SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Think positive thoughts</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick('Think positive thoughts')}>Add </SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Having a hobby time</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick('Having a hobby time')}>Add </SelectboxBtn>
   </Selectbox>
   <div>
-    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
+  <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
   </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>

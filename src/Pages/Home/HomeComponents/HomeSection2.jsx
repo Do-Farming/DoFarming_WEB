@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { IoIosAddCircle } from 'react-icons/io';  
+import { IoIosAddCircle } from 'react-icons/io';
 
 const HomeWrap2 = styled.div`
   display: flex;
@@ -14,67 +14,98 @@ const HomeWrap2 = styled.div`
 `;
 
 const UserPKG = styled.div`
-  border: 1px solid black;
+  border: 0.5px solid #BFBABA;
   border-radius: 20px;
   margin-bottom: 2vh;
   width: 80vw;
-  height: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  position: relative;
-  overflow: hidden;
+  height: 150px;
+
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    width: 40vw;
+    margin-bottom: 4vh;
+  }
 `;
 
 const S2Wrap = styled.div`
-  display: flex;
-  width: 70vw;
+  width: 68vw;
+  height: 95px;
+  margin-left: 5vw;
+
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    width: 35vw;
+    margin-left: 2vw;
+  }
 `;
 
-const S2Wrap2 = styled.div`
-  width: 95%;
+const Pkg2 = styled.div`
   display: flex;
-  flex-direction: column;
+`;
+
+const Pkg3 = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 3vw;
+
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+    margin-right: 1vw;
+  }
 `;
 
 const BtnS2 = styled.button`
   background-color: inherit;
+  margin-bottom: 20px;
   border: none;
-  size: 50;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 10px;
-  right: 20px;
 `;
 
 const UserRname = styled.div`
-  font-size: 24px;
+  padding-top: 25px;
+  font-size: 20px;
+  margin-bottom: 3px;
 `;
 
-const MemoText = styled.div`
-  margin-top: 5px;
+const Datetxt = styled.div`
+  margin-bottom: 4px;
+  font-size: 13px;
 `;
+
+const MemoText = styled.div``;
 
 const StatusIndicator = styled.div`
-  padding-top: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   text-align: center;
-  width: 70px;
-  height: 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: 10px;
+  width: 65px;
+  height: auto;
+  border: none;
+  border-radius: 10px;
   background-color: ${(props) => props.statusColor};
+
+  @media all and (min-width: 768px) and (max-width: 3000px) {
+  }
 `;
 
 const StatusText = styled.div`
   font-size: 14px;
   font-weight: bold;
   color: white;
+  text-align: center;
+`;
+
+const RoutineZero = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ed8c37;
+  font-weight: 340;
+`;
+
+const Zero1 = styled.div`
+  line-height: 28px;
 `;
 
 const ToHomeAddPackage = styled(IoIosAddCircle)`
@@ -82,7 +113,7 @@ const ToHomeAddPackage = styled(IoIosAddCircle)`
   bottom: 5vh;
   right: 10vw;
   font-size: 50px;
-  color: #ED8C37;
+  color: #ed8c37;
   background-color: inherit;
   cursor: pointer;
 `;
@@ -90,71 +121,54 @@ const ToHomeAddPackage = styled(IoIosAddCircle)`
 const getStatusColor = (endDate) => {
   const today = new Date();
   const end = new Date(endDate);
-  return end < today ? '#808080' : '#ED8C37'; 
+  return end < today ? '#808080' : '#ed8c37';
 };
 
 const getStatusText = (endDate) => {
   const today = new Date();
   const end = new Date(endDate);
-  return end < today ? '기간 만료' : '진행중'; 
+  return end < today ? 'Over' : 'ongoing';
 };
 
 const Homesection2 = () => {
-  const [packages, setPackages] = useState([]); 
-  const navigate = useNavigate(); 
+  const [packages, setPackages] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const token = localStorage.getItem('authToken'); 
+        const token = localStorage.getItem('authToken');
         const response = await axios.get('https://dofarming.duckdns.org/api/v1/track', {
           headers: {
-            'Authorization': `Bearer ${token}` 
+            'Authorization': `Bearer ${token}`
           }
         });
         const newPackages = response.data.map((pkg) => {
-          const [routine, memo] = pkg.content.split(', '); 
-          return { ...pkg, routine, memo }; 
+          const [routine, memo] = pkg.content.split(', ');
+          return { ...pkg, routine, memo };
         });
-        setPackages(newPackages); 
+        setPackages(newPackages);
       } catch (error) {
-        console.error('Error fetching packages:', error); 
+        console.error('Error fetching packages:', error);
       }
     };
 
-    fetchPackages(); 
-  }, []); 
+    fetchPackages();
+  }, []);
 
   const handleDeletePackage = async (trackId) => {
     try {
       const token = localStorage.getItem('authToken');
       await axios.delete(`https://dofarming.duckdns.org/api/v1/track/${trackId}`, {
         headers: {
-          'Authorization': `Bearer ${token}` 
+          'Authorization': `Bearer ${token}`
         }
       });
       setPackages(packages.filter(pkg => pkg.trackId !== trackId));
     } catch (error) {
-      console.error('Error deleting package:', error); 
+      console.error('Error deleting package:', error);
     }
   };
-
-  const RoutineZero = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    position: absolute;
-    top: 53%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #ED8C37;
-    font-weight: 340;
-  `;
-
-  const Zero1 = styled.div`
-    line-height: 28px;
-  `;
 
   return (
     <>
@@ -169,32 +183,32 @@ const Homesection2 = () => {
       {packages.length > 0 && (
         <HomeWrap2>
           {packages.map((pkg) => (
-            <Link to={`/todo?trackId=${pkg.trackId}`} key={pkg.trackId} style={{ textDecoration: 'none' , color: 'black'}} >
+            <Link to={`/todo?trackId=${pkg.trackId}`} key={pkg.trackId} style={{ textDecoration: 'none', color: 'black' }}>
               <UserPKG id="userPKG">
-                <div>
+                <Pkg2>
                   <S2Wrap>
-                    <S2Wrap2>
-                      <UserRname>{pkg.routine}</UserRname>
-                      <div>{pkg.startDate} ~ {pkg.endDate}</div>
-                      <MemoText>메모: {pkg.memo}</MemoText> 
-                    </S2Wrap2>
-                    <BtnS2 onClick={(e) => {e.stopPropagation(); handleDeletePackage(pkg.trackId);}} className="BtnS2Del">
-                      X 
-                    </BtnS2>
+                    <UserRname>{pkg.routine}</UserRname>
+                    <Datetxt>{pkg.startDate} ~ {pkg.endDate}</Datetxt>
+                    <MemoText>Memo: {pkg.memo}</MemoText>
                   </S2Wrap>
-                </div>
-                <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
-                  <StatusText>
-                    {getStatusText(pkg.endDate)}
-                  </StatusText>
-                </StatusIndicator>
+                  <BtnS2 onClick={(e) => { e.stopPropagation(); handleDeletePackage(pkg.trackId); }} className="BtnS2Del">
+                    X
+                  </BtnS2>
+                </Pkg2>
+                <Pkg3>
+                  <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
+                    <StatusText>
+                      {getStatusText(pkg.endDate)}
+                    </StatusText>
+                  </StatusIndicator>
+                </Pkg3>
               </UserPKG>
             </Link>
           ))}
         </HomeWrap2>
       )}
       <Link to="/HomeAddPackage">
-        <ToHomeAddPackage /> 
+        <ToHomeAddPackage />
       </Link>
     </>
   );
