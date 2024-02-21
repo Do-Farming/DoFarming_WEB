@@ -18,11 +18,14 @@ const Text = styled.div`
   padding-top: 10vh;
   width: 90vw;
   font-weight: 400;
-  padding-bottom: 20vh;
+  padding-bottom: 15vh;
 
   strong {
     font-weight: bolder;
   }
+  @media screen and (min-width: 1280px) {
+    padding-bottom: 20vh;
+}
 `;
 
 const InputContainer = styled.div`
@@ -92,40 +95,34 @@ const Login4 = () => {
 
   const btn_disabled = !Nickname || !Age || !Gender;
 
-  const eng = /[a-zA-Z]/;
-  const kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-  const num = /[0-9]/;
-  const spc = /[~!@#$%^&*()_+|<>?:{}]/;
-
   const NicknameCheck = (e) => {
     const input = e.target.value;
-    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); /* 닉네임이 0글자라니.. 너무 이상하지만 최소 글자가 1글자일 경우 
-                                                         input 창에 있는 글자가 1글자일 때 삭제할 수 없다는 문제가 발생해 우선 부득이하게 이렇게 수정해둡니다.
-                                                         다행히 닉네임값과 나이값을 입력하지 않으면 다음페이지로 넘어갈 수 없어 닉네임이 없는 사람은 생기지 않을 것 같습니다. */ 
-                                                         
+    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); 
+    
     if (valid) {
       setNickname(input);
     } else {
-      alert("닉네임은 영문, 한글, 숫자를 포함한 1글자 이상~12글자 이하여야 하며 특수기호를 포함하지 않아야 합니다.");
+      alert("Nicknames must be at least 1 to 12 characters, including English, Korean, and numbers, and must not contain special symbols.");
     }
   };
 
   const AgeCheck = (e) => {
     const input = e.target.value;
+  
+    if (isNaN(input)) {
+      alert("Only numbers can be entered.");
+      return;
+    }
+  
     const valid = /^[0-9]{0,3}$/.test(input);
   
     if (valid) {
       setAge(input);
     } else {
-      alert("나이는 3자릿수 이하여야 합니다.");
-    } 
-    
-    if (isNaN(input)) {
-      alert("숫자만 입력하세요");
-    } else {
-      setAge(input);
+      alert("The age must be no more than three digits.");
     }
   };
+  
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -174,24 +171,24 @@ const Login4 = () => {
   return (
     <Container>
       <Text>
-        <div><strong>좋아요!</strong><br />이제 시작해볼까요?</div>
+        <div><strong>Well done!</strong><br />Let’s dig in !</div>
       </Text>
       <InputContainer>
       <InputContainer1>
         <form id="myInfo">
-          <Input type="text" placeholder="닉네임" value={Nickname} onChange={NicknameCheck} onBlur={NicknameCheck} /><br />
-          <Input type="text" placeholder="나이" value={Age} onChange={AgeCheck} />
+          <Input type="text" placeholder="Nickname" value={Nickname} onChange={NicknameCheck} onBlur={NicknameCheck} /><br />
+          <Input type="text" placeholder="Age" value={Age} onChange={AgeCheck} />
         </form>
       </InputContainer1>
 
         <Select id="gender" value={Gender} onChange={handleGenderChange}>
-          <option value="">성별</option>
-          <option value="MALE">남성</option>
-          <option value="FEMALE">여성</option>
+          <option value="">Sex</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
         </Select>
 
         <Link to="/Home">
-          <SubmitButton type="submit" disabled={btn_disabled} onClick={Submit_to_Server}>시작!</SubmitButton>
+          <SubmitButton type="submit" disabled={btn_disabled} onClick={Submit_to_Server}>Let’s Go!</SubmitButton>
         </Link>
       </InputContainer>
     </Container>

@@ -1,6 +1,7 @@
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleAuthProvider, signInWithPopup, getIdToken } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-config";
+import { instance } from "../../libs/api";
 import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -14,7 +15,7 @@ const Login2Container = styled.div`
 `;
 
 const TextContainer = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 10vh;
   margin-bottom: 15vh;
   line-height: 3rem;
@@ -57,26 +58,25 @@ const Login2 = () => {
       const token = localStorage.getItem('authToken');
       if (token) {
         // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-        const apiUrl = "https://dofarming.duckdns.org";
         try {
-          const response = await axios.get(apiUrl, {
+          const response = await instance.get("/", {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
           // 사용자가 이미 회원가입되어 있는 경우 메인 페이지로 이동
           if (response.data.isRegistered) {
-            navigate('/Main'); // 메인 페이지로 이동
+            navigate('/home'); // 메인 페이지로 이동
           }
         } catch (error) {
           console.error(error);
         }
       }
     };
-
+  
     checkLoginStatus(); // 로그인 상태 확인 함수 호출
   }, [navigate]);
-
+  
   // 구글 로그인 버튼 클릭 시 실행되는 함수
   async function handleGoogleLogin() {
     // GoogleAuthProvider를 사용하여 구글 로그인 팝업 실행
@@ -93,7 +93,7 @@ const Login2 = () => {
       localStorage.setItem('authToken', token);
 
       // 서버에 토큰을 전달하여 사용자 인증 및 관련 정보 요청
-      const apiUrl = "https://dofarming.duckdns.org";
+      const apiUrl = instance.defaults.baseURL;  
       const response = await axios.get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -102,7 +102,7 @@ const Login2 = () => {
 
       // 사용자가 이미 회원가입되어 있는 경우 메인 페이지로 이동
       if (response.data.isRegistered) {
-        navigate('/Main'); // 메인 페이지로 이동
+        navigate('/home'); // 메인 페이지로 이동
       } else {
         navigate('/Login3'); // 로그인 페이지로 이동
       }
@@ -117,8 +117,8 @@ const Login2 = () => {
     <Login2Container>
       <TextContainer>
         <p>
-          <strong>몸</strong>과 <strong>마음</strong><br />
-          건강하게 챙기는 첫 단계!
+          <strong>Body</strong> and <strong>Mind</strong><br />
+          The first step to take <br />care of your health!
         </p>
       </TextContainer>
       <StyledGoogleLoginButton onClick={handleGoogleLogin} />

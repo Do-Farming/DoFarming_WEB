@@ -100,50 +100,60 @@ const SelectAll = styled.button`
 
 export const DayStart = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
+    setSelectedRoutine('');
     setShowModal(false);
-  }
+  };
+
+  const handleAddAllClick = () => {
+    handleAddClick('Drinking water');
+    handleAddClick('Meditate');
+    handleAddClick('Making plans for the day');
+    handleAddClick('Change clothes');
+    handleAddClick('Taking a shower');
+  };
 
   return (
     <MainBox>
-  <MTxt1>
-    하루의 시작
-  </MTxt1>
-  <MTxt2>
-    어두운 밤에서 새벽을 지나 아침이라는 밝은 빛이<br />
-    당신을 맞이하고 있어요.<br />
-    당신이 무엇을 하든 일이 잘되게 해 줄 거예요.
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>물 마시기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>명상</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>오늘 하루 계획 세우기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>옷 갈아입기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>샤워하기</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
-  </Selectbox>
-  <div>
-    <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
-  </div>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
-
+      <MTxt1>Beginning of the day</MTxt1>
+      <MTxt2>
+        The bright light of morning is welcoming you from the
+        <br />
+        dark night through the dawn. Whatever you do, it's
+        <br />
+        going to make things work.
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Drinking water</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Drinking water')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Meditate</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Meditate')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Making plans for the day</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Making plans for the day')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Change clothes</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Change clothes')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Taking a shower</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking a shower')}>Add</SelectboxBtn>
+      </Selectbox>
+      <div>
+        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
+      </div>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };

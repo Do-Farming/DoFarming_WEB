@@ -42,11 +42,11 @@ const MyPage = () => {
       <div>
         <MyPageText>My Page</MyPageText>
         <MyPageNavi>
-          <MyPageTextNavi>개인정보</MyPageTextNavi>
+          <MyPageTextNavi>User info</MyPageTextNavi>
           <GoChevronRight onClick={goToProfile} color="gray"/>
         </MyPageNavi>
         <MyPageNavi>
-          <MyPageTextNavi>루틴 초기화</MyPageTextNavi> 
+          <MyPageTextNavi>Routine Initialization</MyPageTextNavi> 
           <GoChevronRight onClick={goToRoutineReset} color="gray"/>
         </MyPageNavi>
       </div>

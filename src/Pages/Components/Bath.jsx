@@ -1,146 +1,188 @@
-import React, { useState } from "react";
-import Modal from "./Modal";
+import React, { useState, useEffect, useRef} from "react";
 import styled from 'styled-components';
+import TodoSection2 from "../Home/TodoSection2";
 
 const MainBox = styled.div`
-    border: 0.2px solid rgb(131, 131, 131);
-    border-radius: 20px;
-    height: auto;
-    text-align: left;
-    margin-bottom: 3vh;
-    padding-top: 3.5vh;
-    display: inline-block;
-    width: 48vw;
-    padding-left: 2vw;
-    margin-left: 25vw;
+  border: 0.2px solid rgb(131, 131, 131);
+  border-radius: 20px;
+  height: auto;
+  text-align: left;
+  margin-bottom: 3vh;
+  padding-top: 3.5vh;
+  display: inline-block;
+  width: 48vw;
+  padding-left: 2vw;
+  margin-left: 25vw;
 
-    @media all and (max-width:1023px) {
-      width: 85vw;
-      align-items: center;
-      padding-left: 5vw;
-      margin-bottom: 4vh;
-      padding-top: 3vh;
-      margin-left:0;
-    }
+  @media all and (max-width:1023px) {
+    width: 85vw;
+    align-items: center;
+    padding-left: 5vw;
+    margin-bottom: 4vh;
+    padding-top: 3vh;
+    margin-left:0;
+  }
 `;
 
 const MTxt1 = styled.div`
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 `;
 
 const MTxt2 = styled.div`
-    font-size: 0.8rem;
-    color: #5B5B5B;
-    padding-bottom: 4vh;
-    padding-top: 2px;
-    @media all and (min-width:1024px) {
-      padding-top: 3px;
-    }
+  font-size: 0.8rem;
+  color: #5B5B5B;
+  padding-bottom: 4vh;
+  padding-top: 2px;
+  @media all and (min-width:1024px) {
+    padding-top: 3px;
+  }
 `;
 
 const Selectbox = styled.div`
-    border-radius: 13px;
-    background-color: #F7F7F7;
-    height: 7vh;
-    margin-bottom: 2vh;
-    width: 80vw;
-    display: flex;
-    @media all and (min-width:1024px) {
-      width: 45vw;
-    }
+  border-radius: 13px;
+  background-color: #F7F7F7;
+  height: 7vh;
+  margin-bottom: 2vh;
+  width: 80vw;
+  display: flex;
+  @media all and (min-width:1024px) {
+    width: 45vw;
+  }
 `;
 
 const Txtbox = styled.div`
-    font-size: 20px;
-    width: 90%;
-    height: 3.8vh;
-    margin-left: 20px;
-    margin-top: 2.2vh;
-    @media all and (min-width:1024px) {
-      margin-top: 2vh;
-      width: 38vw;
-    }
+  font-size: 20px;
+  width: 90%;
+  height: 3.8vh;
+  margin-left: 20px;
+  margin-top: 2.2vh;
+  @media all and (min-width:1024px) {
+    margin-top: 2vh;
+    width: 38vw;
+  }
 `;
 
 const SelectboxBtn = styled.button`
-    color: #595656;
-    background-color: #D9D9D9;
-    border: none;
-    height: 3.8vh;
-    border-radius: 20px;
-    margin-top: 1.6vh;
-    width: 50px;
-    cursor: pointer;
-    @media all and (max-width:1023px) {
-      margin-right: 2vw;
-    }
-    
+  color: #595656;
+  background-color: #D9D9D9;
+  border: none;
+  height: 3.8vh;
+  border-radius: 20px;
+  margin-top: 1.6vh;
+  width: 50px;
+  cursor: pointer;
+  @media all and (max-width:1023px) {
+    margin-right: 2vw;
+  }  
 `;
 
 const SelectAll = styled.button`
-    border: none;
-    background-color: white;
-    color: rgb(167, 167, 167);
-    margin-top: 8vh;
-    margin-bottom: 2vh;
-    height: 5vh;
-    font-size: 1.2rem;
-    text-align: center;
-    @media all and (max-width:1023px) {
-      width: 20vh;
-      position: relative;
-      left: 47%;
-      transform: translateX(-50%);
-    }
-    @media all and (min-width:1024px) {
-      width: 14vw;
-      margin-left: 16vw;
-    }
+  border: none;
+  background-color: white;
+  color: rgb(167, 167, 167);
+  margin-top: 8vh;
+  margin-bottom: 2vh;
+  height: 5vh;
+  font-size: 1.2rem;
+  text-align: center;
+  @media all and (max-width:1023px) {
+    width: 20vh;
+    position: relative;
+    left: 47%;
+    transform: translateX(-50%);
+  }
+  @media all and (min-width:1024px) {
+    width: 14vw;
+    margin-left: 16vw;
+  }
 `;
 
 export const Bath = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [tracks, setTracks] = useState([]);
+  const todoSectionRef = useRef(null); // TodoSection2 컴포넌트의 레퍼런스 생성
 
-  const handleAddClick = () => {
-    setShowModal(true);
-  };
+  useEffect(() => {
+    const getTracks = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        const response = await fetch('https://dofarming.duckdns.org/api/v1/track', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        const data = await response.json();
+        setTracks(data);
+      } catch (error) {
+        console.error('Error fetching tracks:', error);
+      }
+    };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+    getTracks();
+  }, []);
+
+  const handleAddClick = async (content) => {
+    const authToken = localStorage.getItem('authToken');
+  
+    try {
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/1?trackId=%ED%8A%B8%EB%9E%99%20id`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({ content: content })
+      });
+  
+      if (response.ok) {
+        alert('루틴이 추가되었습니다.'); // 알림 띄우기
+
+        // TodoSection2 컴포넌트의 레퍼런스를 통해 루틴을 추가하는 함수 호출
+        if (todoSectionRef.current && todoSectionRef.current.addRoutine) {
+          todoSectionRef.current.addRoutine(content);
+        }
+      } else {
+        alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+      }
+    } catch (error) {
+      console.error('Error adding routine:', error);
+      alert('루틴 추가에 실패했습니다.'); // 실패 알림 띄우기
+    }
   };
 
   return (
     <MainBox>
-      <MTxt1>따뜻한 반신욕</MTxt1>
+      <MTxt1>A warm bath</MTxt1>
       <MTxt2>
-        오늘 하루 수고 많았을 당신.
+        You must have worked hard today. 
         <br />
-        따뜻한 물에서 하루의 노곤함을 풀어보는게 어때요?
+        Why don't you relax in warm water?
       </MTxt2>
       <Selectbox>
-        <Txtbox>반신욕 물 받기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Draw a bath</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('반신욕 물 받기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>머리 빗기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Brushing hair</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('머리 빗기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>반신욕 하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Taking a bath</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('반신욕 하기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>미지근한 물 마시기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Drinking tea</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('미지근한 물 마시기')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>팩 하기</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>추가</SelectboxBtn>
+        <Txtbox>Doing a face mask</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('팩 하기')}>Add</SelectboxBtn>
       </Selectbox>
       <div>
-        <SelectAll onClick={handleAddClick}>+전체 추가하기</SelectAll>
+        <SelectAll onClick={() => handleAddClick('전체 추가')}>+Add all</SelectAll>
       </div>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      <TodoSection2 ref={todoSectionRef} /> {/* TodoSection2 컴포넌트에 레퍼런스 추가 */}
     </MainBox>
   );
 };

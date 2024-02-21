@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const ModalBackdrop = styled.div`
@@ -26,20 +26,20 @@ const ModalBox = styled.div`
   position: relative;
   overflow: hidden;
   @media (min-width: 576px) {
-        width: 80%;
-}
+    width: 80%;
+  }
 
-@media (min-width: 768px) {
-        width: 70%;
-}
+  @media (min-width: 768px) {
+    width: 70%;
+  }
 
-@media (min-width: 992px) {
-        width: 50%;
-}
+  @media (min-width: 992px) {
+    width: 50%;
+  }
 
-@media (min-width: 1200px) {
-        width: 30%;
-}
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -53,6 +53,12 @@ const ModalTitle = styled.h3`
   margin: 0;
   margin: auto;
   padding-top: 13%;
+`;
+
+const CloseButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
 
 const ModalBody = styled.div`
@@ -86,30 +92,88 @@ const BtnAdd = styled.button`
   flex: 1;
 
   &:hover {
-    color: #ED8C37;
+    color: #ed8c37;
     cursor: pointer;
   }
 `;
 
-const Modal = ({ onClose }) => {
+const Modal = ({ selectedRoutine, onClose }) => {
+  const [tracks, setTracks] = useState([]);
+
+  useEffect(() => {
+    const getTracks = async () => {
+      try {
+        const authToken = localStorage.getItem('authToken');
+        const response = await fetch('https://dofarming.duckdns.org/api/v1/track', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+        const data = await response.json();
+        setTracks(data);
+      } catch (error) {
+        console.error('Error fetching tracks:', error);
+      }
+    };
+
+    getTracks();
+  }, []);
+
+  const handleAddClick = async () => {
+    const selectElement = document.querySelector('.modal-select');
+    const trackId = selectElement.value;
+    const content = selectElement.options[selectElement.selectedIndex].text;
+    const authToken = localStorage.getItem('authToken');
+
+    try {
+      const response = await fetch(`https://dofarming.duckdns.org/api/v1/routine/${trackId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ content: selectedRoutine }),
+
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        onClose(); 
+        alert('Added!'); 
+      } else {
+        alert('Failed to add routine :('); 
+        onClose(); 
+      }
+    } catch (error) {
+      console.error('Error adding routine:', error);
+      alert('Failed to add routine:('); 
+      onClose(); 
+    }
+  };
+
   return (
     <ModalBackdrop>
       <ModalBox>
         <ModalHeader>
-          <ModalTitle>루틴에 항목 추가</ModalTitle>
+          <ModalTitle>Add to Routine</ModalTitle>
         </ModalHeader>
         <ModalBody>
-          <ModalSelect>
-            <option value="myPackage">값 받아오기</option>
+          <ModalSelect className="modal-select">
+            <option value="">Select</option>
+            {tracks && tracks.map(track => ( // tracks가 유효한 배열인 경우에만 map 함수 호출
+              <option key={track.trackId} value={track.trackId}>{track.content.split(',')[0]}</option>
+            ))}
           </ModalSelect>
         </ModalBody>
         <ModalFooter>
-          <BtnAdd onClick={onClose}>추가하기</BtnAdd> 
-          <BtnAdd onClick={onClose}>닫기</BtnAdd>
+          <BtnAdd onClick={handleAddClick}>Add</BtnAdd>
+          <BtnAdd onClick={onClose}>Close</BtnAdd>
         </ModalFooter>
       </ModalBox>
     </ModalBackdrop>
   );
-}
+};
 
 export default Modal;

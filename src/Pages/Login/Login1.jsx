@@ -43,6 +43,10 @@ const Login1Container = styled.div`
   justify-content: space-between;
   height: 100vh;
   overflow: hidden;
+
+  @media screen and (max-width: 873px) {
+    height: 90vh;
+  }
 `;
 
 const MainText = styled.div`
@@ -65,7 +69,7 @@ const Text1 = styled.p`
   margin-bottom: 0.3vh;
   letter-spacing: 1px;
   margin-top: 2.5vh;
-  line-height: 3.4rem;
+  line-height: 2.8rem;
   white-space: pre-line;
 
   @media screen and (max-width: 873px) {
@@ -122,15 +126,14 @@ const Login1 = () => {
     <Login1Container>
       <MainText>
         <Text1>
-          우리에게 주어진<br></br>공평한 하루
+          A fair day<br></br>for us
         </Text1>
         <Text2>
-          남에게 있는 것을 바라보는 것이 아닌,<br></br> 나에게 주어진 것에
-          감사하는 마음
+        Not looking at what is in others, <br></br>but being grateful for what is given to me
         </Text2>
       </MainText>
       <SubmitButton id="login1_submit_btn" onClick={handleButtonClick}>
-        <strong>반가워👋</strong>
+        <strong>Hello👋</strong>
       </SubmitButton>
     </Login1Container>
   );

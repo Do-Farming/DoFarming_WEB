@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import "../Nav/Nav.jsx";
 
 const TodoSection1Wrap = styled.div`
     display: flex;
@@ -17,14 +18,15 @@ const TodoSection1Wrap = styled.div`
 const GoRoutine = styled.p`
     color: blue;
     text-decoration: underline blue;
+
 `;
 
 const MakeRoutine = () => {
   return (
     <TodoSection1Wrap>
-      <p>아직 할 일이 없습니다</p> 
-      <Link to="/Routine">
-        <GoRoutine>루틴을 만들러 이동해 볼까요?</GoRoutine>
+      <p>There's nothing to do</p> 
+      <Link to="/routine">
+        <GoRoutine>Shall we make a new routine?</GoRoutine>
       </Link>
     </TodoSection1Wrap>
   );

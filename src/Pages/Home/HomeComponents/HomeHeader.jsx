@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components';
+import axios from "axios";
 
 const HomeHeaderWrap = styled.div``;
 
@@ -10,7 +10,7 @@ const HomeHeaderContent = styled.div`
   width: 100%;
   align-items: center;
 
-  @media all and (min-width: 768px) and (max-width: 3000px) {
+  @media all and (min-width:768px) and (max-width:3000px) {
     height: 18vh;
     display: flex;
     width: 40vw;
@@ -23,7 +23,7 @@ const HomeTextBox = styled.div`
   width: 50%;
   padding-left: 5.5vw;
 
-  @media all and (min-width: 768px) and (max-width: 3000px) {
+  @media all and (min-width:768px) and (max-width:3000px) {
     padding: 0;
     margin-top: 1vh;
   }
@@ -45,7 +45,7 @@ const MoodWrap = styled.div`
   display: flex;
   justify-content: center;
 
-  @media all and (min-width: 768px) and (max-width: 3000px) {
+  @media all and (min-width:768px) and (max-width:3000px) {
     display: flex;
     justify-content: flex-end;
   }
@@ -57,7 +57,7 @@ const Moodlets = styled.div`
   height: 118px;
   border-radius: 16px;
   cursor: pointer;
-  background-size: contain;
+  background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
 `;
@@ -97,7 +97,7 @@ const ModalContent = styled.div`
   border-radius: 20px 20px 0 0;
   animation: ${slideUp} 0.4s ease-out;
 
-  @media all and (min-width: 768px) and (max-width: 3000px) {
+  @media all and (min-width:768px) and (max-width:3000px) {
     width: 90%;
     height: 80%;
   }
@@ -108,7 +108,7 @@ const CloseModalButton = styled.div`
   margin-left: 85vw;
   margin-top: 15px;
   font-size: 25px;
-  color: #bfbaba;
+  color: #BFBABA;
 `;
 
 const HeaderTxt = styled.div`
@@ -137,105 +137,163 @@ const Div = styled.div`
   margin: 0 15px;
 `;
 
+const moodToNumber = (mood) => {
+  switch (mood) {
+    case "HAPPY":
+      return 1;
+    case "ANGRY":
+      return 2;
+    case "NERVOUS":
+      return 3;
+    case "SAD":
+      return 4;
+    case "EXCITED":
+      return 5;
+    case "PROUD":
+      return 6;
+    case "CALM":
+      return 7;
+    case "DROWSY":
+      return 8;
+    case "TIRED":
+      return 9;
+    default:
+      return 0;
+  }
+};
+
 const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDiv, setSelectedDiv] = useState('');
-  const [nickname, setNickname] = useState('');
-
-  const token = localStorage.getItem('authToken');
-
-  const updateMood = async (mood) => {
-    try {
-      const response = await axios.patch(
-        'https://dofarming.duckdns.org/api/v1/user/mood',
-        { mood },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log('Mood updated successfully:', response.data);
-    } catch (error) {
-      console.error('Error updating mood:', error);
-    }
-  };
+  const [nickname, setNickname] = useState("");
+  const [selectedDivImage, setSelectedDivImage] = useState("");
+  const token = localStorage.getItem("authToken");
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get('https://dofarming.duckdns.org/api/v1/user', {
+      const response = await axios.get("https://dofarming.duckdns.org/api/v1/user", {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
+          "Content-Type": "application/json" 
+        }
       });
-      const { nickname } = response.data;
-      return nickname;
+      const { nickname, mood } = response.data;
+      return { nickname, mood };
     } catch (error) {
-      console.error('Error fetching user info:', error);
+      console.error("Error fetching user info:", error);
       return null;
     }
   };
-
+  
   useEffect(() => {
-    const getNickname = async () => {
-      const nickname = await fetchUserInfo();
-      if (nickname) {
-        setNickname(nickname);
+    const getNicknameAndMood = async () => {
+      const userData = await fetchUserInfo();
+      if (userData) {
+        setNickname(userData.nickname);
+        setSelectedDivImage(`url("/emotion${moodToNumber(userData.mood)}.png")`);
       }
     };
-    getNickname();
+    getNicknameAndMood();
   }, []);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const updateMood = async (mood) => {
+    try {
+      await axios.patch(
+        "https://dofarming.duckdns.org/api/v1/user/mood",
+        {
+          mood: mood
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      console.log("Mood updated successfully:", mood);
+      setSelectedDivImage(`url("/emotion${moodToNumber(mood)}.png")`);
+    } catch (error) {
+      console.error("Error updating mood:", error);
+    }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-
-    const selectedDivImage = getComputedStyle(document.querySelector(`.${selectedDiv}`)).backgroundImage;
-    document.querySelector('.Moodlets').style.backgroundImage = selectedDivImage;
-
-    updateMood(selectedDiv);
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const handleDivClick = (divNumber, mood) => {
-    setSelectedDiv(mood);
-
-    const selectedDivImage = getComputedStyle(document.querySelector(`.${divNumber}`)).backgroundImage;
-    document.querySelector('.Moodlets').style.backgroundImage = selectedDivImage;
-
     updateMood(mood);
+    closeModal();
   };
-
+  
   return (
     <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
-          <HelloUser>{nickname}님 반가워요</HelloUser>
-          <Fighting>오늘도 활기차게 하루를 시작해봐요!</Fighting>
+          <HelloUser id="hello_user">Hello, {nickname}</HelloUser>
+          <Fighting id="fighting">
+            Let's enjoy the cheerful day!
+          </Fighting>
         </HomeTextBox>
         <MoodWrap>
           <Moodlets
-            style={{ backgroundImage: `url("${selectedDiv}")` }}
+            style={{ backgroundImage: selectedDivImage }}
             onClick={openModal}
-          />
+          ></Moodlets>
         </MoodWrap>
       </HomeHeaderContent>
-
       {isModalOpen && (
         <ModalOverlay onClick={closeModal}>
           <ModalContent onClick={(e) => e.stopPropagation()}>
-            <div className="div1" onClick={() => handleDivClick('div1', 'HAPPY')} style={{ backgroundImage: 'url("/emotion1.png")' }} />
-            <div className="div2" onClick={() => handleDivClick('div2', 'ANGRY')} style={{ backgroundImage: 'url("/emotion2.png")' }} />
-            <div className="div3" onClick={() => handleDivClick('div3', 'NERVOUS')} style={{ backgroundImage: 'url("/emotion3.png")' }} />
-            <div className="div4" onClick={() => handleDivClick('div4', 'SAD')} style={{ backgroundImage: 'url("/emotion4.png")' }} />
-            <div className="div5" onClick={() => handleDivClick('div5', 'EXCITED')} style={{ backgroundImage: 'url("/emotion5.png")' }} />
-            <div className="div6" onClick={() => handleDivClick('div6', 'PROUD')} style={{ backgroundImage: 'url("/emotion6.png")' }} />
-            <div className="div7" onClick={() => handleDivClick('div7', 'CALM')} style={{ backgroundImage: 'url("/emotion7.png")' }} />
-            <div className="div8" onClick={() => handleDivClick('div8', 'DROWSY')} style={{ backgroundImage: 'url("/emotion8.png")' }} />
-            <div className="div9" onClick={() => handleDivClick('div9', 'TIRED')} style={{ backgroundImage: 'url("/emotion9.png")' }} />
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
+            <HeaderTxt>
+              <div className="hiuser">
+                <strong>{nickname}</strong> !
+              </div>
+              <br />
+              <div className="tellme">Let me know how you feel today :)</div>
+            </HeaderTxt>
+            <HimgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick(1, "HAPPY")}
+                  style={{ backgroundImage: 'url("/emotion1.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(2, "ANGRY")}
+                  style={{ backgroundImage: 'url("/emotion2.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(3, "NERVOUS")}
+                  style={{ backgroundImage: 'url("/emotion3.png")' }}
+                ></Div>
+              </ImgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick(4, "SAD")}
+                  style={{ backgroundImage: 'url("/emotion4.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(5, "EXCITED")}
+                  style={{ backgroundImage: 'url("/emotion5.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(6, "PROUD")}
+                  style={{ backgroundImage: 'url("/emotion6.png")' }}
+                ></Div>
+              </ImgWrap>
+              <ImgWrap>
+                <Div
+                  onClick={() => handleDivClick(7, "CALM")}
+                  style={{ backgroundImage: 'url("/emotion7.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(8, "DROWSY")}
+                  style={{ backgroundImage: 'url("/emotion8.png")' }}
+                ></Div>
+                <Div
+                  onClick={() => handleDivClick(9, "TIRED")}
+                  style={{ backgroundImage: 'url("/emotion9.png")' }}
+                ></Div>
+              </ImgWrap>
+            </HimgWrap>
           </ModalContent>
         </ModalOverlay>
       )}

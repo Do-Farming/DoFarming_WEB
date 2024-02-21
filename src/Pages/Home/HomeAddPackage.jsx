@@ -1,12 +1,7 @@
-import React, { useState, useRef, forwardRef } from 'react';
-import DatePicker from 'react-datepicker';
-import { FaCalendarAlt } from 'react-icons/fa';
-import NavBar from '../Nav/Nav.jsx';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
-const token = localStorage.getItem('authToken');
 
 const HomeWrap = styled.div`
   width: 50vw;
@@ -30,7 +25,7 @@ const HomeBtn = styled.button`
   border: none;
 
   &:hover {
-    background-color: #ED8C37;
+    background-color: #ed8c37;
     color: white;
   }
 `;
@@ -40,7 +35,7 @@ const HomeInput = styled.div`
   height: 78px;
   border-radius: 15px;
   background-color: #f6f6f6;
-  color: #5B5B5B;
+  color: #5b5b5b;
   margin: 20px 0;
   padding-left: 25px;
   font-size: 20px;
@@ -56,8 +51,11 @@ const PackageName = styled.div`
   align-items: center;
   text-align: center;
   justify-content: center;
-  margin-top: 12vh;
+  margin-top: 5vh;
   margin-bottom: 9vh;
+  @media screen and (min-width: 1280px) {
+    margin-top: 12vh;
+}
 `;
 
 const HomeInputBoxName = styled.input`
@@ -65,7 +63,7 @@ const HomeInputBoxName = styled.input`
   outline: none;
   border: none;
   background-color: inherit;
-  font-size: 20px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -86,30 +84,28 @@ const HomeInputBox = styled.input`
   margin-left: 50px;
   width: 180px;
   margin-right: 10px;
-  color:#5B5B5B;
+  color: #5b5b5b;
 `;
 
 const Datename = styled.div`
-  width:100px;
+  width: 100px;
 `;
 
-const HomeAddPackage = () => {
+function Home9() {
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
-  const [startDate, endDate] = dateRange;
-  const [isOpen, setIsOpen] = useState(false);
-  const datePickerRef = useRef();
   const [routine, setRoutine] = useState('');
   const [memo, setMemo] = useState('');
   const navigate = useNavigate(); 
 
   const handleButtonClick = async () => {
     try {
+      const token = localStorage.getItem('authToken');
       const response = await axios.post(
         'https://dofarming.duckdns.org/api/v1/track',
         {
           content: `${routine}, ${memo}`,
-          startDate: startDate.toISOString().substring(0, 10),
-          endDate: endDate.toISOString().substring(0, 10),
+          startDate: dateRange[0].toISOString().substring(0, 10),
+          endDate: dateRange[1].toISOString().substring(0, 10),
         },
         {
           headers: {
@@ -119,80 +115,63 @@ const HomeAddPackage = () => {
         }
       );
       if (response.status === 200) {
-        alert('저장되었어요!');
+        alert('Saved!');
         navigate('/home'); 
       } else {
-        alert('저장에 실패했어요!');
+        alert('Save failed :(');
       }
     } catch (error) {
       console.error(error);
-      alert('저장에 실패했어요!');
+      alert('Save failed :(');
     }
   };
 
-  const CustomInput = forwardRef(({ value, onClick }, ref) => (
-    <div>
-      <input 
-        ref={ref}
-        type="text" 
-        value={value} 
-        readOnly
-        className="Home9inputboxDate"
-        onChange={(e) => setDateRange(e.target.value.split(' - ').map(date => new Date(date)))}
-      />
-      <FaCalendarAlt onClick={onClick} className='Home9inputboxDateIcon'/>
-    </div>
-  ));
-
   return (
-    <div>
-      <NavBar/>
-      <HomeWrap>
-        <PackageName>
-          <HomeInputBoxName 
+    <HomeWrap>
+      <PackageName>
+        <HomeInputBoxName 
+          type="text"
+          value={routine}
+          onChange={(e) => setRoutine(e.target.value)}
+          onBlur={() => setRoutine(routine)}
+          placeholder='Routine name'
+        />
+      </PackageName>
+      <div className='Home9inputWrap'>
+        <HomeInput>
+          <div>Memo</div>
+          <HomeInputBox 
             type="text"
-            value={routine}
-            onChange={(e) => setRoutine(e.target.value)}
-            onBlur={() => setRoutine(routine || '')}
-            placeholder='루틴 이름'
+            value={memo}
+            onChange={(e) => setMemo(e.target.value)}
+            onBlur={() => setMemo(memo)}
+            placeholder='Write memo'
           />
-        </PackageName>
-        <div className='Home9inputWrap'>
-          <HomeInput>
-            <div>메모</div>
-            <HomeInputBox 
-              type="text"
-              value={memo}
-              onChange={(e) => setMemo(e.target.value)}
-              onBlur={() => setMemo(memo || '')}
-              placeholder='글자 수 제한'
-            />
-          </HomeInput>
-          <HomeInput>
-            <Datename>기간</Datename>
-            <DatePicker
-              ref={datePickerRef}
-              selected={startDate}
-              onChange={(update) => {
-                setDateRange(update);
-              }}
-              startDate={startDate}
-              endDate={endDate}
-              selectsRange
-              customInput={<CustomInput />}
-              dateFormat="yy/MM/dd"
-              open={isOpen}
-              onCalendarClose={() => setIsOpen(false)}
-              onCalendarOpen={() => setIsOpen(true)}
-            />
-          </HomeInput>
-        </div>
-        <div className='BtnWrap'> 
-            <HomeBtn onClick={handleButtonClick}>완료</HomeBtn>  
-        </div>
-      </HomeWrap>
-    </div>
+        </HomeInput>
+        <HomeInput>
+          <Datename>Start date</Datename>
+          <HomeInputBox 
+            type="date"
+            value={dateRange[0].toISOString().substring(0, 10)}
+            onChange={(e) => setDateRange([new Date(e.target.value), dateRange[1]])}
+          />
+        </HomeInput>
+        <HomeInput>
+          <Datename>End date</Datename>
+          <HomeInputBox 
+            type="date"
+            value={dateRange[1].toISOString().substring(0, 10)}
+            onChange={(e) => setDateRange([dateRange[0], new Date(e.target.value)])}
+          />
+        </HomeInput>
+      </div>
+      <div className='BtnWrap'>
+          <Link to="/home">
+              <HomeBtn onClick={handleButtonClick}>Submit</HomeBtn>  
+          </Link>    
+      </div>
+    </HomeWrap>
   );
 }
 
-export default HomeAddPackage;
+export default Home9;
