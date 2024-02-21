@@ -130,7 +130,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
       ...inputValues,
       [routineId]: value,
     });
-  
+
     // 입력 값이 변경될 때마다 로컬 스토리지에 저장
     localStorage.setItem(`inputValue_${routineId}`, value);
   };
@@ -179,7 +179,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
           } 
         }
       );
-  
+
       if (response.status === 204) {
         console.log('Routine successfully deleted');
         setRoutineList(prevRoutineList => prevRoutineList.filter(routine => routine.routineId !== routineId));
@@ -199,7 +199,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
     try {
       const response = await axios.patch(
         `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
-        { routineStatus: newStatus, content: inputValues[routineId] }, // routineStatus 추가 및 content 속성 포함
+        { routineStatus: newStatus }, // 서버에서 요구하는 변경된 상태만 전송
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -235,7 +235,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
           }
         }
       );
-  
+
       if (response.status === 201) {
         const newRoutine = response.data;
         setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]);
@@ -250,7 +250,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
       console.error('Error adding routine:', error);
     }
   };
-  
+
 
   useEffect(() => {
     const fetchRoutines = async () => {
@@ -291,6 +291,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
       {routineList.map((routine, index) => (
         <CheckboxContainer key={index}>
           <Check1>
+            {/* 체크박스의 상태가 true 또는 false일 때 */}
             <Checkbox type="checkbox" onChange={() => { toggleComplete(index); }} checked={routine.completed} />
             <CheckboxLabel />
           </Check1>
@@ -298,8 +299,8 @@ const TodoSection2 = ({ selectedTrackId }) => {
             value={inputValues[routine.routineId] || ''} 
             onChange={(e) => handleInputChange(e, routine.routineId)}
             onBlur={() => updateRoutine(routine.routineId, inputValues[routine.routineId])} // 수정이 완료될 때 서버로 전송
-            checked={routine.checked} 
-            style={routine.checked ? { textDecoration: 'line-through' } : null} 
+            checked={routine.completed} 
+            style={routine.completed ? { textDecoration: 'line-through' } : null} // 체크된 경우에는 텍스트에 선을 그음
           />
           <TodoDelete>
             <IoTrashSharp onClick={() => deleteRoutine(routine.routineId)} />
