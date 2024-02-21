@@ -135,7 +135,38 @@ const TodoSection2 = ({ selectedTrackId }) => {
     localStorage.setItem(`inputValue_${routineId}`, value);
   };
 
-  
+  const updateRoutine = async (routineId, content) => {
+    const token = localStorage.getItem('authToken');
+    try {
+      const response = await axios.patch(
+        `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
+        { content },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      if (response.status === 200) {
+        console.log('Routine successfully updated');
+        // 서버의 응답이 성공적이면 로컬의 상태를 변경
+        setRoutineList(prevRoutineList => {
+          const updatedList = [...prevRoutineList];
+          const index = updatedList.findIndex(routine => routine.routineId === routineId);
+          if (index !== -1) {
+            updatedList[index].content = content;
+          }
+          return updatedList;
+        });
+      } else {
+        console.error('Failed to update routine:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error updating routine:', error);
+    }
+  };
+
   const deleteRoutine = async (routineId) => {
     const token = localStorage.getItem('authToken');
     try {
@@ -163,11 +194,12 @@ const TodoSection2 = ({ selectedTrackId }) => {
   const toggleComplete = async (index) => {
     const token = localStorage.getItem('authToken');
     const routineId = routineList[index].routineId;
-  
+    const newStatus = routineList[index].completed ? "INCOMPLETE" : "COMPLETE"; // 새로운 상태
+    
     try {
       const response = await axios.patch(
         `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
-        { routineStatus: routineList[index].completed ? "INCOMPLETE" : "COMPLETE" }, // 루틴의 completed 상태에 따라 변경할 routineStatus 값 설정
+        { routineStatus: newStatus, content: inputValues[routineId] }, // routineStatus 추가 및 content 속성 포함
         {
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -177,7 +209,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
       );
       if (response.status === 200) {
         const newList = [...routineList];
-        newList[index] = { ...newList[index], completed: !newList[index].completed }; // 서버의 응답이 성공적이면 로컬의 상태를 변경
+        newList[index] = { ...newList[index], completed: !newList[index].completed };
         setRoutineList(newList);
       } else {
         console.error('Failed to update routine status:', response.statusText);
@@ -186,38 +218,39 @@ const TodoSection2 = ({ selectedTrackId }) => {
       console.error('Error updating routine status:', error);
     }
   };
+  
 
   const addRoutine = async () => {
-  const token = localStorage.getItem('authToken');
-  try {
-    const response = await axios.post(
-      `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
-      {
-        content: '',
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+    const token = localStorage.getItem('authToken');
+    try {
+      const response = await axios.post(
+        `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+        {
+          content: inputValues[selectedTrackId] || '', // 사용자가 입력한 내용을 보냄
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
         }
+      );
+  
+      if (response.status === 201) {
+        const newRoutine = response.data;
+        setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]);
+        setInputValues(prevInputValues => ({
+          ...prevInputValues,
+          [newRoutine.routineId]: '', // 입력 값 초기화
+        }));
+      } else {
+        console.error('Failed to add routine:', response.statusText);
       }
-    );
-
-    if (response.status === 201) {
-      const newRoutine = response.data;
-      setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]);
-      // 루틴 추가 후에 포커스를 해당 입력 필드로 설정
-      setInputValues(prevInputValues => ({
-        ...prevInputValues,
-        [newRoutine.routineId]: '',
-      }));
-    } else {
-      console.error('Failed to add routine:', response.statusText);
+    } catch (error) {
+      console.error('Error adding routine:', error);
     }
-  } catch (error) {
-    console.error('Error adding routine:', error);
-  }
-};
+  };
+  
 
   useEffect(() => {
     const fetchRoutines = async () => {
@@ -258,12 +291,13 @@ const TodoSection2 = ({ selectedTrackId }) => {
       {routineList.map((routine, index) => (
         <CheckboxContainer key={index}>
           <Check1>
-          <Checkbox type="checkbox" onChange={() => { toggleComplete(index); }} checked={routine.completed} />
+            <Checkbox type="checkbox" onChange={() => { toggleComplete(index); }} checked={routine.completed} />
             <CheckboxLabel />
           </Check1>
           <TodoSection2Routine 
             value={inputValues[routine.routineId] || ''} 
             onChange={(e) => handleInputChange(e, routine.routineId)}
+            onBlur={() => updateRoutine(routine.routineId, inputValues[routine.routineId])} // 수정이 완료될 때 서버로 전송
             checked={routine.checked} 
             style={routine.checked ? { textDecoration: 'line-through' } : null} 
           />

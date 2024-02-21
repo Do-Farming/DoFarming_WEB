@@ -100,48 +100,57 @@ const SelectAll = styled.button`
 
 export const Depression = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
-  }
+  };
+
+  const handleAddAllClick = () => {
+    handleAddClick('Staring at my emotions as they are');
+    handleAddClick("Writing about today's mood");
+    handleAddClick('Writing a gratitude journal');
+    handleAddClick('Listening to fav song');
+    handleAddClick('Taking a walk');
+  };
 
   return (
     <MainBox>
-  <MTxt1>
-  Ease depression
-  </MTxt1>
-  <MTxt2>
-  Small changes will lead to big changes.
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>Staring at my emotions as they are</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Writing about today's mood</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Writing a gratitude journal</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Listening to fav song</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Taking a walk</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <div>
-    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
-  </div>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
-
+      <MTxt1>
+        Ease depression
+      </MTxt1>
+      <MTxt2>
+        Small changes will lead to big changes.
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Staring at my emotions as they are</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Staring at my emotions as they are')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Writing about today's mood</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Writing about today's mood")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Writing a gratitude journal</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Writing a gratitude journal')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Listening to fav song</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Listening to fav song')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Taking a walk</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking a walk')}>Add</SelectboxBtn>
+      </Selectbox>
+      <div>
+        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
+      </div>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };
