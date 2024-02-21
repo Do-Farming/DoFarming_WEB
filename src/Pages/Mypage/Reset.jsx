@@ -52,7 +52,6 @@ const Reset = () => {
         <Resetbtn onClick={handleResetClick}>Initialization all Routine</Resetbtn>
         <Resettxt>Delete the entire routine and Your to-do list.<br/>If You delete the routine, You can't recover it.</Resettxt>
       </ResetWrap>
-      {/* 모달 컴포넌트 */}
       {showModal && <ResetModal onClose={handleModalClose} onConfirm={handleResetConfirm} />}
     </div>
   );

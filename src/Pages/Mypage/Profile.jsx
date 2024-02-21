@@ -129,6 +129,26 @@ const Profile = () => {
     // input 요소에 대한 참조
     const fileInputRef = useRef(null);
 
+    // 닉네임 유효성 검사 함수
+    const validateNickname = (input) => {
+        // 닉네임은 1자 이상 12자 이하이며, 영어, 한글, 숫자만 포함되어야 함
+        const regex = /^[a-zA-Z0-9가-힣]{1,12}$/;
+        return regex.test(input);
+    };
+
+    // 나이 유효성 검사 함수
+    const validateAge = (input) => {
+        // 나이는 세 자리 이하이어야 함
+        const regex = /^[0-9]{1,3}$/;
+        return regex.test(input);
+    };
+
+    // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
+    useEffect(() => {
+      // 서버로부터 사용자 정보를 가져오는 함수 호출
+      fetchUserInfo();
+  }, []);
+
     // 컴포넌트가 마운트될 때 사용자 정보를 가져오는 효과
     useEffect(() => {
         // 서버로부터 사용자 정보를 가져오는 함수 호출
@@ -220,6 +240,17 @@ const Profile = () => {
     // 사용자 정보를 수정하는 함수
     const updateUserInfo = async () => {
         try {
+            // 닉네임 유효성 검사
+                if (!validateNickname(nickname)) {
+                   alert("Nicknames must be at least 1 to 12 characters, including English, Korean, and numbers, and must not contain special symbols.");
+                    return;
+                }
+    
+                // 나이 유효성 검사
+                if (!validateAge(age)) {
+                    alert("The age must be no more than three digits.");
+                    return;
+                }
             // 서버 URL
             const apiUrl = "https://dofarming.duckdns.org/api/v1/user/info";
 
