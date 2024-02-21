@@ -117,6 +117,7 @@ export const Cheerful = () => {
     setSelectedRoutines(allRoutines);
     setShowModal(true);
   };
+  
 
   return (
     <MainBox>
