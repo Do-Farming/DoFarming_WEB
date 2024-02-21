@@ -10,9 +10,6 @@ const TodoSection2Wrap = styled.div`
   height: auto;
 
   @media all and (min-width: 300px) and (max-width: 1023px) {
-    // position: fixed;
-    // left: 50%;
-    // transform: translate(-50%);
     width: 83vw;
     margin-left: 8.5vw;
   }
@@ -123,10 +120,94 @@ const CheckboxLabel = styled.label`
   }
 `;
 
-
 const TodoSection2 = ({ selectedTrackId }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValues, setInputValues] = useState({});
+
+  const handleInputChange = (e, routineId) => {
+    setInputValues({
+      ...inputValues,
+      [routineId]: e.target.value,
+    });
+  };
+
+  const deleteRoutine = async (routineId) => {
+    const token = localStorage.getItem('authToken');
+    try {
+      const response = await axios.delete(
+        `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          } 
+        }
+      );
+  
+      if (response.status === 204) {
+        console.log('Routine successfully deleted');
+        setRoutineList(prevRoutineList => prevRoutineList.filter(routine => routine.routineId !== routineId));
+      } else {
+        console.error('Failed to delete routine:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting routine:', error);
+    }
+  };
+
+  const toggleComplete = async (index) => {
+    const token = localStorage.getItem('authToken');
+    const routineId = routineList[index].routineId;
+  
+    try {
+      const response = await axios.patch(
+        `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
+        { routineStatus: routineList[index].completed ? "INCOMPLETE" : "COMPLETE" }, // 루틴의 completed 상태에 따라 변경할 routineStatus 값 설정
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      if (response.status === 200) {
+        const newList = [...routineList];
+        newList[index] = { ...newList[index], completed: !newList[index].completed }; // 서버의 응답이 성공적이면 로컬의 상태를 변경
+        setRoutineList(newList);
+      } else {
+        console.error('Failed to update routine status:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error updating routine status:', error);
+    }
+  };
+
+  const addRoutine = async () => {
+    const token = localStorage.getItem('authToken');
+    try {
+      const response = await axios.post(
+        `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+        {
+          content: '',
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.status === 201) {
+        const newRoutine = response.data;
+        setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]);
+      } else {
+        console.error('Failed to add routine:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding routine:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchRoutines = async () => {
@@ -163,21 +244,25 @@ const TodoSection2 = ({ selectedTrackId }) => {
   }, [selectedTrackId]);
 
   return (
-    <TodoSection2Wrap> {/* TodoSection2Wrap 컴포넌트를 사용 */}
-      <TodoAddRoutineBtn>Add Routine</TodoAddRoutineBtn> {/* TodoAddRoutineBtn 컴포넌트를 사용 */}
-      {/* Render routine list here */}
+    <TodoSection2Wrap>
       {routineList.map((routine, index) => (
-        <CheckboxContainer key={index}> {/* CheckboxContainer 컴포넌트를 사용 */}
+        <CheckboxContainer key={index}>
           <Check1>
-            <Checkbox type="checkbox" />
+            <Checkbox type="checkbox" onChange={(e) => { e.preventDefault(); toggleComplete(index); }} checked={routine.checked} />
             <CheckboxLabel />
           </Check1>
-          <TodoSection2Routine value={routine.content} completed={routine.completed} />
+          <TodoSection2Routine 
+            value={inputValues[routine.routineId] || ''} 
+            onChange={(e) => handleInputChange(e, routine.routineId)}
+            checked={routine.checked} 
+            style={routine.checked ? { textDecoration: 'line-through' } : null} 
+          />
           <TodoDelete>
-            <IoTrashSharp />
+            <IoTrashSharp onClick={() => deleteRoutine(routine.routineId)} />
           </TodoDelete>
         </CheckboxContainer>
       ))}
+      <TodoAddRoutineBtn onClick={addRoutine}> + Add routine </TodoAddRoutineBtn>
     </TodoSection2Wrap>
   );
 };

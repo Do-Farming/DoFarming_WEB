@@ -16,16 +16,21 @@ const TodoHeaderBlock = styled.div`
 
 const TodoHeader = ({ trackId }) => {
   const [trackName, setTrackName] = useState('');
+  const [selectedTrackId, setSelectedTrackId] = useState('');
+
+  useEffect(() => {
+    setSelectedTrackId(trackId); 
+  }, [trackId]);
 
   useEffect(() => {
     const getTrackName = async () => {
-      if (!trackId) {
+      if (!selectedTrackId) {
         console.error('Error: trackId is undefined.');
         return;
       }
 
       try {
-        const response = await axios.get(`https://dofarming.duckdns.org/api/v1/track/${trackId}`);
+        const response = await axios.get(`https://dofarming.duckdns.org/api/v1/track/${selectedTrackId}`);
         setTrackName(response.data.content);
       } catch (error) {
         console.error('Error fetching track name:', error);
@@ -33,7 +38,7 @@ const TodoHeader = ({ trackId }) => {
     };
 
     getTrackName();
-  }, [trackId]);
+  }, [selectedTrackId]);
 
   return (
     <TodoHeaderBlock>
@@ -45,3 +50,4 @@ const TodoHeader = ({ trackId }) => {
 };
 
 export default TodoHeader;
+ㄴ

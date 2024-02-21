@@ -6,8 +6,8 @@ import TodoSection2 from "./TodoSection2.jsx";
 const Todo = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const trackId = params.get('trackId'); // URL의 쿼리 매개변수에서 트랙 ID를 가져옵니다.
-
+  const trackId = params.get('trackId'); 
+  
   return (
     <div>
       <NavBar />  

@@ -137,9 +137,33 @@ const Div = styled.div`
   margin: 0 15px;
 `;
 
+const moodToNumber = (mood) => {
+  switch (mood) {
+    case "HAPPY":
+      return 1;
+    case "ANGRY":
+      return 2;
+    case "NERVOUS":
+      return 3;
+    case "SAD":
+      return 4;
+    case "EXCITED":
+      return 5;
+    case "PROUD":
+      return 6;
+    case "CALM":
+      return 7;
+    case "DROWSY":
+      return 8;
+    case "TIRED":
+      return 9;
+    default:
+      return 0;
+  }
+};
+
 const HomeHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDiv, setSelectedDiv] = useState("");
   const [nickname, setNickname] = useState("");
   const [selectedDivImage, setSelectedDivImage] = useState("");
   const token = localStorage.getItem("authToken");
@@ -152,8 +176,8 @@ const HomeHeader = () => {
           "Content-Type": "application/json" 
         }
       });
-      const { nickname } = response.data;
-      return nickname;
+      const { nickname, mood } = response.data;
+      return { nickname, mood };
     } catch (error) {
       console.error("Error fetching user info:", error);
       return null;
@@ -161,18 +185,19 @@ const HomeHeader = () => {
   };
   
   useEffect(() => {
-    const getNickname = async () => {
-      const nickname = await fetchUserInfo();
-      if (nickname) {
-        setNickname(nickname);
+    const getNicknameAndMood = async () => {
+      const userData = await fetchUserInfo();
+      if (userData) {
+        setNickname(userData.nickname);
+        setSelectedDivImage(`url("/emotion${moodToNumber(userData.mood)}.png")`);
       }
     };
-    getNickname();
+    getNicknameAndMood();
   }, []);
 
   const updateMood = async (mood) => {
     try {
-      const response = await axios.patch(
+      await axios.patch(
         "https://dofarming.duckdns.org/api/v1/user/mood",
         {
           mood: mood
@@ -183,7 +208,8 @@ const HomeHeader = () => {
           }
         }
       );
-      console.log("Mood updated successfully:", response.data);
+      console.log("Mood updated successfully:", mood);
+      setSelectedDivImage(`url("/emotion${moodToNumber(mood)}.png")`);
     } catch (error) {
       console.error("Error updating mood:", error);
     }
@@ -193,8 +219,6 @@ const HomeHeader = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const handleDivClick = (divNumber, mood) => {
-    setSelectedDiv(mood);
-    setSelectedDivImage(`url("/emotion${divNumber}.png")`);
     updateMood(mood);
     closeModal();
   };
@@ -205,7 +229,7 @@ const HomeHeader = () => {
         <HomeTextBox>
           <HelloUser id="hello_user">Hello, {nickname}</HelloUser>
           <Fighting id="fighting">
-          Let's enjoy the cheerful day!
+            Let's enjoy the cheerful day!
           </Fighting>
         </HomeTextBox>
         <MoodWrap>
@@ -278,4 +302,3 @@ const HomeHeader = () => {
 };
 
 export default HomeHeader;
-
