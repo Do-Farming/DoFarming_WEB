@@ -117,12 +117,24 @@ export const MiracleMorning = () => {
       <MTxt2>
       How about waking up at a set time and starting your day? <br />It could be a turning point in your life.
       </MTxt2>
-      <Selectbox><Txtbox>Tidy up the bed</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>Meditation</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>Walking</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>Taking a shower</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
-      <Selectbox><Txtbox>Reading</Txtbox><SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn></Selectbox>
-      <div><SelectAll onClick={handleAddClick}>+Add all</SelectAll></div>
+      <Selectbox><Txtbox>Tidy up the bed</Txtbox>
+      <SelectboxBtn onClick={() => handleAddClick('Tidy up the bed')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox><Txtbox>Meditation</Txtbox>
+      <SelectboxBtn onClick={() => handleAddClick('Meditation')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Walking</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Walking')}>Add</SelectboxBtn>
+        </Selectbox>
+      <Selectbox>
+        <Txtbox>Taking a shower</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking a shower')}>Add</SelectboxBtn>
+        </Selectbox>
+      <Selectbox>
+        <Txtbox>Reading</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Reading')}>Add</SelectboxBtn>
+        </Selectbox>
       {showModal && <Modal onClose={handleCloseModal} />}
     </MainBox>
   );

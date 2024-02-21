@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState} from 'react';
+import Modal from './Modal';
 import styled from 'styled-components';
-import TodoSection2 from "../Home/TodoSection2";
-import Modal from "./Modal"; // 모달 컴포넌트 import
+
 
 const MainBox = styled.div`
   border: 0.2px solid rgb(131, 131, 131);
@@ -77,31 +77,9 @@ const SelectboxBtn = styled.button`
   }  
 `;
 
-const SelectAll = styled.button`
-  border: none;
-  background-color: white;
-  color: rgb(167, 167, 167);
-  margin-top: 8vh;
-  margin-bottom: 2vh;
-  height: 5vh;
-  font-size: 1.2rem;
-  text-align: center;
-  @media all and (max-width:1023px) {
-    width: 20vh;
-    position: relative;
-    left: 47%;
-    transform: translateX(-50%);
-  }
-  @media all and (min-width:1024px) {
-    width: 14vw;
-    margin-left: 16vw;
-  }
-`;
-
 export const Bath = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedRoutine, setSelectedRoutine] = useState('');
-  const todoSectionRef = useRef(null);
 
   const handleAddClick = (routine) => {
     setSelectedRoutine(routine);
@@ -111,10 +89,6 @@ export const Bath = () => {
   const handleCloseModal = () => {
     setSelectedRoutine('');
     setShowModal(false);
-  };
-
-  const handleAddAllClick = () => {
-    setShowModal(true);
   };
 
   return (
@@ -145,11 +119,7 @@ export const Bath = () => {
         <Txtbox>Doing a face mask</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Doing a face mask')}>Add</SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
-      <TodoSection2 ref={todoSectionRef} />
     </MainBox>
   );
 };

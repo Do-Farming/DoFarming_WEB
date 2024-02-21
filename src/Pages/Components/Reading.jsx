@@ -148,9 +148,6 @@ export const Reading = () => {
         <Txtbox>Transcribing impressive part</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Transcribing impressive part')}>Add</SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );

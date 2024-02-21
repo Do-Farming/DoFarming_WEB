@@ -112,13 +112,6 @@ export const Frustration = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Breath in and out');
-    handleAddClick('Calling friends or family');
-    handleAddClick('Writing down your emotions');
-    handleAddClick('Think positive thoughts');
-    handleAddClick('Having a hobby time');
-  }
 
   return (
     <MainBox>
@@ -149,9 +142,6 @@ export const Frustration = () => {
     <Txtbox>Having a hobby time</Txtbox>
     <SelectboxBtn onClick={() => handleAddClick('Having a hobby time')}>Add </SelectboxBtn>
   </Selectbox>
-  <div>
-  <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-  </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>
 

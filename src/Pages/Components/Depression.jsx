@@ -77,27 +77,6 @@ const SelectboxBtn = styled.button`
     
 `;
 
-const SelectAll = styled.button`
-    border: none;
-    background-color: white;
-    color: rgb(167, 167, 167);
-    margin-top: 8vh;
-    margin-bottom: 2vh;
-    height: 5vh;
-    font-size: 1.2rem;
-    text-align: center;
-    @media all and (max-width:1023px) {
-      width: 20vh;
-      position: relative;
-      left: 47%;
-      transform: translateX(-50%);
-    }
-    @media all and (min-width:1024px) {
-      width: 14vw;
-      margin-left: 16vw;
-    }
-`;
-
 export const Depression = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedRoutine, setSelectedRoutine] = useState('');
@@ -109,14 +88,6 @@ export const Depression = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-  };
-
-  const handleAddAllClick = () => {
-    handleAddClick('Staring at my emotions as they are');
-    handleAddClick("Writing about today's mood");
-    handleAddClick('Writing a gratitude journal');
-    handleAddClick('Listening to fav song');
-    handleAddClick('Taking a walk');
   };
 
   return (
@@ -147,9 +118,6 @@ export const Depression = () => {
         <Txtbox>Taking a walk</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Taking a walk')}>Add</SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );

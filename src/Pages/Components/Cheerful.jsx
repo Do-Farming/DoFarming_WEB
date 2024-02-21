@@ -112,14 +112,6 @@ export const Cheerful = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Taking vitamins');
-    handleAddClick('Getting sunlight');
-    handleAddClick('Stretching');
-    handleAddClick('Check to do');
-    handleAddClick('Go outside');
-  };
-
   return (
     <MainBox>
       <MTxt1>Cheerful morning</MTxt1>
@@ -147,9 +139,6 @@ export const Cheerful = () => {
         <Txtbox>Go outside</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Go outside')}>Add </SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );

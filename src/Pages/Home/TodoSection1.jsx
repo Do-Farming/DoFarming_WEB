@@ -21,7 +21,7 @@ const GoRoutine = styled.p`
 
 `;
 
-const MakeRoutine = () => {
+const Todoselect1= () => {
   return (
     <TodoSection1Wrap>
       <p>There's nothing to do</p> 
@@ -32,4 +32,4 @@ const MakeRoutine = () => {
   );
 };
 
-export default MakeRoutine;
+export default Todoselect1;

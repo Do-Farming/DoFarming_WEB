@@ -111,13 +111,6 @@ export const DayEnd = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Writing a diary');
-    handleAddClick("Preparing tomorrow's clothes");
-    handleAddClick('Take a shower');
-    handleAddClick('Skin care');
-    handleAddClick('Bedtime meditation');
-  };
 
   return (
     <MainBox>
@@ -147,9 +140,6 @@ export const DayEnd = () => {
         <Txtbox>Bedtime meditation</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Bedtime meditation')}>Add</SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );

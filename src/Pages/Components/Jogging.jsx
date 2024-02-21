@@ -111,14 +111,6 @@ export const Jogging = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Drink water');
-    handleAddClick('Eating light snack');
-    handleAddClick('Prepare water n earphone');
-    handleAddClick('Warm up');
-    handleAddClick('Running');
-    handleAddClick('Taking shower');
-  };
 
   return (
     <MainBox>
@@ -150,9 +142,6 @@ export const Jogging = () => {
         <Txtbox>Taking shower</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Taking shower')}>Add</SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );

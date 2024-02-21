@@ -55,9 +55,7 @@ const BtnS2 = styled.button`
   background-color: inherit;
   margin-bottom: 20px;
   border: none;
-  padding: 40px 40px; /* 내부 여백 설정 */
 `;
-
 
 const UserRname = styled.div`
   padding-top: 25px;
@@ -191,7 +189,7 @@ const Homesection2 = () => {
                   <S2Wrap>
                     <UserRname>{pkg.routine}</UserRname>
                     <Datetxt>{pkg.startDate} ~ {pkg.endDate}</Datetxt>
-                    <MemoText>Memo:: {pkg.memo}</MemoText>
+                    <MemoText>Memo: {pkg.memo}</MemoText>
                   </S2Wrap>
                   <BtnS2 onClick={(e) => { e.stopPropagation(); handleDeletePackage(pkg.trackId); }} className="BtnS2Del">
                     X

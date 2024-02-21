@@ -111,14 +111,6 @@ export const Insomnia = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Aroma Oil + Humidifier');
-    handleAddClick('In a dim light');
-    handleAddClick('Drinking hot tea');
-    handleAddClick('Light stretching');
-    handleAddClick('Listening to ASMR');
-  };
-
   return (
     <MainBox>
       <MTxt1>
@@ -148,9 +140,6 @@ export const Insomnia = () => {
         <Txtbox>Listening to ASMR</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Listening to ASMR')}>Add</SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );
