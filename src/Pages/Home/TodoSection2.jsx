@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoTrashSharp } from "react-icons/io5";
 import styled from "styled-components";
 import axios from 'axios';
+import Todoselect1 from "./TodoSection1";
 
 const TodoSection2Wrap = styled.div`
   width: 40vw;
@@ -123,42 +124,42 @@ const CheckboxLabel = styled.label`
 const TodoSection2 = ({ selectedTrackId }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValues, setInputValues] = useState({});
+  const [hasRoutine, setHasRoutine] = useState(false);
 
-  const handleInputChange = (e, routineId) => {
-    const { value } = e.target;
-    setInputValues({
-      ...inputValues,
-      [routineId]: value,
-    });
-  
-    // 입력 값이 변경될 때마다 로컬 스토리지에 저장
-    localStorage.setItem(`inputValue_${routineId}`, value);
-  };
+  useEffect(() => {
+    const fetchRoutines = async () => {
+      const token = localStorage.getItem('authToken');
+      try {
+        const response = await axios.get(
+          `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            } 
+          }
+        );
 
-  
-  const deleteRoutine = async (routineId) => {
-    const token = localStorage.getItem('authToken');
-    try {
-      const response = await axios.delete(
-        `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          } 
+        if (response.status === 200) {
+          setRoutineList(response.data);
+          const initialValues = {};
+          response.data.forEach(routine => {
+            initialValues[routine.routineId] = routine.content;
+          });
+          setInputValues(initialValues);
+          setHasRoutine(response.data.length > 0); // 루틴이 있으면 true, 없으면 false로 설정
+        } else {
+          console.error('Failed to fetch routines:', response.statusText);
         }
-      );
-  
-      if (response.status === 204) {
-        console.log('Routine successfully deleted');
-        setRoutineList(prevRoutineList => prevRoutineList.filter(routine => routine.routineId !== routineId));
-      } else {
-        console.error('Failed to delete routine:', response.statusText);
+      } catch (error) {
+        console.error('Error fetching routines:', error);
       }
-    } catch (error) {
-      console.error('Error deleting routine:', error);
+    };
+
+    if (selectedTrackId) {
+      fetchRoutines();
     }
-  };
+  }, [selectedTrackId]);
 
   const toggleComplete = async (index) => {
     const token = localStorage.getItem('authToken');
@@ -219,62 +220,101 @@ const TodoSection2 = ({ selectedTrackId }) => {
   }
 };
 
-  useEffect(() => {
-    const fetchRoutines = async () => {
-      const token = localStorage.getItem('authToken');
-      try {
-        const response = await axios.get(
-          `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
-          {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            } 
-          }
-        );
-
-        if (response.status === 200) {
-          setRoutineList(response.data);
-          const initialValues = {};
-          response.data.forEach(routine => {
-            initialValues[routine.routineId] = routine.content;
-          });
-          setInputValues(initialValues);
-        } else {
-          console.error('Failed to fetch routines:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error fetching routines:', error);
+const deleteRoutine = async (routineId) => {
+  const token = localStorage.getItem('authToken');
+  try {
+    const response = await axios.delete(
+      `https://dofarming.duckdns.org/api/v1/routine/${routineId}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        } 
       }
-    };
+    );
 
-    if (selectedTrackId) {
-      fetchRoutines();
+    if (response.status === 204) {
+      console.log('Routine successfully deleted');
+      setRoutineList(prevRoutineList => prevRoutineList.filter(routine => routine.routineId !== routineId));
+    } else {
+      console.error('Failed to delete routine:', response.statusText);
     }
-  }, [selectedTrackId]);
-
-  return (
-    <TodoSection2Wrap>
-      {routineList.map((routine, index) => (
-        <CheckboxContainer key={index}>
-          <Check1>
-          <Checkbox type="checkbox" onChange={() => { toggleComplete(index); }} checked={routine.completed} />
-            <CheckboxLabel />
-          </Check1>
-          <TodoSection2Routine 
-            value={inputValues[routine.routineId] || ''} 
-            onChange={(e) => handleInputChange(e, routine.routineId)}
-            checked={routine.checked} 
-            style={routine.checked ? { textDecoration: 'line-through' } : null} 
-          />
-          <TodoDelete>
-            <IoTrashSharp onClick={() => deleteRoutine(routine.routineId)} />
-          </TodoDelete>
-        </CheckboxContainer>
-      ))}
-      <TodoAddRoutineBtn onClick={addRoutine}> + Add routine </TodoAddRoutineBtn>
-    </TodoSection2Wrap>
-  );
+  } catch (error) {
+    console.error('Error deleting routine:', error);
+  }
 };
 
+useEffect(() => {
+  const fetchRoutines = async () => {
+    const token = localStorage.getItem('authToken');
+    try {
+      const response = await axios.get(
+        `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          } 
+        }
+      );
+
+      if (response.status === 200) {
+        setRoutineList(response.data);
+        const initialValues = {};
+        response.data.forEach(routine => {
+          initialValues[routine.routineId] = routine.content;
+        });
+        setInputValues(initialValues);
+
+        // 루틴이 있는지 여부를 업데이트합니다.
+        setHasRoutine(response.data.length > 0);
+      } else {
+        console.error('Failed to fetch routines:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching routines:', error);
+    }
+  };
+
+  if (selectedTrackId) {
+    fetchRoutines();
+  }
+}, [selectedTrackId]);
+
+return (
+  <TodoSection2Wrap>
+    {/* 루틴이 없을 때 Todoselect1 컴포넌트를 렌더링합니다. */}
+    {!hasRoutine && <Todoselect1 />}
+    {/* 루틴이 있는 경우 루틴 목록을 렌더링합니다. */}
+    {hasRoutine && (
+      <>
+        {routineList.map((routine, index) => (
+          <CheckboxContainer key={index}>
+            <Check1>
+              <Checkbox
+                type="checkbox"
+                onChange={() => {
+                  toggleComplete(index);
+                }}
+                checked={routine.completed}
+              />
+              <CheckboxLabel />
+            </Check1>
+            <TodoSection2Routine
+              value={inputValues[routine.routineId] || ''}
+              onChange={(e) => handleInputChange(e, routine.routineId)}
+              checked={routine.checked}
+              style={routine.checked ? { textDecoration: 'line-through' } : null}
+            />
+            <TodoDelete>
+              <IoTrashSharp onClick={() => deleteRoutine(routine.routineId)} />
+            </TodoDelete>
+          </CheckboxContainer>
+        ))}
+        {/* Add routine 버튼을 렌더링합니다. */}
+        <TodoAddRoutineBtn onClick={addRoutine}> + Add routine </TodoAddRoutineBtn>
+      </>
+    )}
+  </TodoSection2Wrap>
+)};
 export default TodoSection2;

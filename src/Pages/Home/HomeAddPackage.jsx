@@ -134,7 +134,7 @@ function Home9() {
           value={routine}
           onChange={(e) => setRoutine(e.target.value)}
           onBlur={() => setRoutine(routine)}
-          placeholder='Routine name'
+          placeholder='Track name'
         />
       </PackageName>
       <div className='Home9inputWrap'>

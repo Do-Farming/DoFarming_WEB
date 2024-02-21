@@ -250,7 +250,7 @@ const Routine = () => {
         <div className="txt">
           <Txt1>Time to take care of myself</Txt1>
           <Txt2><strong>Time</strong> is fair to all of us</Txt2>
-          <Txt3>#Suggestion for DoFarming</Txt3>
+          <Txt3>#{nickname} Suggestion for DoFarming</Txt3>
         </div>
         <div className="RoutineContainer">
           <ButtonGroup activeBtn={activeBtn} handleBtnClick={handleBtnClick} />

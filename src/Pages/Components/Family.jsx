@@ -77,72 +77,58 @@ const SelectboxBtn = styled.button`
     
 `;
 
-const SelectAll = styled.button`
-    border: none;
-    background-color: white;
-    color: rgb(167, 167, 167);
-    margin-top: 8vh;
-    margin-bottom: 2vh;
-    height: 5vh;
-    font-size: 1.2rem;
-    text-align: center;
-    @media all and (max-width:1023px) {
-      width: 20vh;
-      position: relative;
-      left: 47%;
-      transform: translateX(-50%);
-    }
-    @media all and (min-width:1024px) {
-      width: 14vw;
-      margin-left: 16vw;
-    }
-`;
 
 export const Family = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
-  }
+  };
+
+  const handleAddAllClick = () => {
+    handleAddClick('Hugging your family');
+    handleAddClick('Sharing a day');
+    handleAddClick('Preparing dinner');
+    handleAddClick('Dinner with family');
+    handleAddClick('Expressing gratitude');
+  };
 
   return (
     <MainBox>
-  <MTxt1>
-  Sharing time with family
-  </MTxt1>
-  <MTxt2>
-  Spending time with your family is like a precious <br />
-  treasure. Every moment together will be a <br />precious time.
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>Hugging your family</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Sharing a day</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Preparing dinner</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Dinner with family</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Expressing gratitude</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <div>
-    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
-  </div>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
-
+      <MTxt1>
+        Sharing time with family
+      </MTxt1>
+      <MTxt2>
+        Spending time with your family is like a precious <br />
+        treasure. Every moment together will be a <br />precious time.
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Hugging your family</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Hugging your family')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Sharing a day</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Sharing a day')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Preparing dinner</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Preparing dinner')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Dinner with family</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Dinner with family')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Expressing gratitude</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Expressing gratitude')}>Add</SelectboxBtn>
+      </Selectbox>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };

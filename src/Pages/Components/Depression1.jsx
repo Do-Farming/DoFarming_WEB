@@ -77,27 +77,6 @@ const SelectboxBtn = styled.button`
     
 `;
 
-const SelectAll = styled.button`
-    border: none;
-    background-color: white;
-    color: rgb(167, 167, 167);
-    margin-top: 8vh;
-    margin-bottom: 2vh;
-    height: 5vh;
-    font-size: 1.2rem;
-    text-align: center;
-    @media all and (max-width:1023px) {
-      width: 20vh;
-      position: relative;
-      left: 47%;
-      transform: translateX(-50%);
-    }
-    @media all and (min-width:1024px) {
-      width: 14vw;
-      margin-left: 16vw;
-    }
-`;
-
 export const Depression1 = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -121,39 +100,35 @@ export const Depression1 = () => {
   </MTxt2>
   <Selectbox>
     <Txtbox>Making the bed</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
+    <SelectboxBtn onClick={() => handleAddClick("Marking the bed")}></SelectboxBtn>Add </Selectbox>
   <Selectbox>
     <Txtbox>Opening the curtain</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick("Opening the curtain")}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Opening a window</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick("Opening a window")}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Drinking water</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick("Drinking water")}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Brushing teeth</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick("Brushing teeth")}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Writing down your emotions</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick("Writing down your emotions")}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Write down today's goals</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick("Write down today's goals")}>Add</SelectboxBtn>
   </Selectbox>
   <Selectbox>
     <Txtbox>Breath in and out</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+    <SelectboxBtn onClick={() => handleAddClick("Breath in and out")}>Add</SelectboxBtn>
   </Selectbox>
-  <div>
-    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
-  </div>
   {showModal && <Modal onClose={handleCloseModal} />}
 </MainBox>
 

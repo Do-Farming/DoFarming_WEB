@@ -112,14 +112,6 @@ export const DayStart = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Drinking water');
-    handleAddClick('Meditate');
-    handleAddClick('Making plans for the day');
-    handleAddClick('Change clothes');
-    handleAddClick('Taking a shower');
-  };
-
   return (
     <MainBox>
       <MTxt1>Beginning of the day</MTxt1>
@@ -150,9 +142,6 @@ export const DayStart = () => {
         <Txtbox>Taking a shower</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Taking a shower')}>Add</SelectboxBtn>
       </Selectbox>
-      <div>
-        <SelectAll onClick={handleAddAllClick}>+Add all</SelectAll>
-      </div>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );

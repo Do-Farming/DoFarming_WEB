@@ -100,49 +100,47 @@ const SelectAll = styled.button`
 
 export const Insomnia = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
-  }
+  };
 
   return (
     <MainBox>
-  <MTxt1>
-  Overcoming insomnia
-  </MTxt1>
-  <MTxt2>
-  Sleep comfortably every night and face a new day. <br />
-  Why don't you relax your body and mind?
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>Aroma Oil + Humidifier</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>In a dim light</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Drinking hot tea</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Light stretching</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Listening to ASMR</Txtbox>
-    <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
-  </Selectbox>
-  <div>
-    <SelectAll onClick={handleAddClick}>+Add all</SelectAll>
-  </div>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
-
+      <MTxt1>
+        Overcoming insomnia
+      </MTxt1>
+      <MTxt2>
+        Sleep comfortably every night and face a new day. <br />
+        Why don't you relax your body and mind?
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Aroma Oil + Humidifier</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Aroma Oil + Humidifier')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>In a dim light</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('In a dim light')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Drinking hot tea</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Drinking hot tea')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Light stretching</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Light stretching')}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Listening to ASMR</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Listening to ASMR')}>Add</SelectboxBtn>
+      </Selectbox>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };
