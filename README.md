@@ -67,9 +67,5 @@ You can see your information and change your nickname, age, and gender.
 * Jacascript
 * styled-components
 * vite
-* Java 17
-* Spring boot 3.0
-* RDS(MySQL)
-* Google Cloud Storage
 
 <img width="892" alt="architecture" src="https://github.com/Finna-GDSC/DoFarming_PM/assets/144197605/f18585dc-40ae-4ab7-94e9-6c7d46a19499">
