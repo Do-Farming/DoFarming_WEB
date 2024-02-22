@@ -41,8 +41,6 @@ const StyledGoogleLoginButton = styled(GoogleLoginButton)`
   }
 `;
 
-//추후 수정
-
 // Login2 컴포넌트 정의
 const Login2 = () => {
   // useNavigate 훅을 사용하여 라우터 제어

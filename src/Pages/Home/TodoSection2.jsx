@@ -3,6 +3,7 @@ import { IoTrashSharp } from "react-icons/io5";
 import styled from "styled-components";
 import axios from 'axios';
 import Todoselect1 from "./TodoSection1";
+import $ from "jquery"; 
 
 const TodoSection2Wrap = styled.div`
   width: 40vw;
@@ -125,41 +126,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
   const [routineList, setRoutineList] = useState([]);
   const [inputValues, setInputValues] = useState({});
   const [hasRoutine, setHasRoutine] = useState(false);
-
-  useEffect(() => {
-    const fetchRoutines = async () => {
-      const token = localStorage.getItem('authToken');
-      try {
-        const response = await axios.get(
-          `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
-          {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            } 
-          }
-        );
-
-        if (response.status === 200) {
-          setRoutineList(response.data);
-          const initialValues = {};
-          response.data.forEach(routine => {
-            initialValues[routine.routineId] = routine.content;
-          });
-          setInputValues(initialValues);
-          setHasRoutine(response.data.length > 0); // 루틴이 있으면 true, 없으면 false로 설정
-        } else {
-          console.error('Failed to fetch routines:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error fetching routines:', error);
-      }
-    };
-
-    if (selectedTrackId) {
-      fetchRoutines();
-    }
-  }, [selectedTrackId]);
+  
 
   const toggleComplete = async (index) => {
     const token = localStorage.getItem('authToken');
@@ -189,36 +156,33 @@ const TodoSection2 = ({ selectedTrackId }) => {
   };
 
   const addRoutine = async () => {
-  const token = localStorage.getItem('authToken');
-  try {
-    const response = await axios.post(
-      `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
-      {
-        content: '',
-      },
-      {
+    const token = localStorage.getItem('authToken');
+    try {
+      const response = await $.ajax({
+        type: 'POST',
+        url: `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}?trackId=${encodeURIComponent('track id')}`,
+        data: JSON.stringify({ content: 'Routine content' }),
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
-      }
-    );
+      });
 
-    if (response.status === 201) {
-      const newRoutine = response.data;
-      setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]);
-      // 루틴 추가 후에 포커스를 해당 입력 필드로 설정
-      setInputValues(prevInputValues => ({
-        ...prevInputValues,
-        [newRoutine.routineId]: '',
-      }));
-    } else {
-      console.error('Failed to add routine:', response.statusText);
+      if (response.status === 201) {
+        const newRoutine = response.data;
+        setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]); // 상태 업데이트
+        // Set focus to the corresponding input field after adding the routine
+        setInputValues(prevInputValues => ({
+          ...prevInputValues,
+          [newRoutine.routineId]: '',
+        }));
+      } else {
+        console.error('Failed to add routine:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error while adding routine:', error);
     }
-  } catch (error) {
-    console.error('Error adding routine:', error);
-  }
-};
+  };
 
 const deleteRoutine = async (routineId) => {
   const token = localStorage.getItem('authToken');

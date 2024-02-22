@@ -98,44 +98,49 @@ const SelectAll = styled.button`
     }
 `;
 
+
 export const MiracleMorning = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
+    setSelectedRoutine('');
     setShowModal(false);
-  }
+  };
 
   return (
     <MainBox>
-      <MTxt1>
-      Miracle morning
-      </MTxt1>
+      <MTxt1>Miracle morning</MTxt1>
       <MTxt2>
-      How about waking up at a set time and starting your day? <br />It could be a turning point in your life.
+        How about waking up at a set time and starting your day? <br />
+        It could be a turning point in your life.
       </MTxt2>
-      <Selectbox><Txtbox>Tidy up the bed</Txtbox>
-      <SelectboxBtn onClick={() => handleAddClick('Tidy up the bed')}>Add</SelectboxBtn>
+      <Selectbox>
+        <Txtbox>Tidy up the bed</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Tidy up the bed')}>Add</SelectboxBtn>
       </Selectbox>
-      <Selectbox><Txtbox>Meditation</Txtbox>
-      <SelectboxBtn onClick={() => handleAddClick('Meditation')}>Add</SelectboxBtn>
+      <Selectbox>
+        <Txtbox>Meditation</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Meditation')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>Walking</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Walking')}>Add</SelectboxBtn>
-        </Selectbox>
+      </Selectbox>
       <Selectbox>
         <Txtbox>Taking a shower</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Taking a shower')}>Add</SelectboxBtn>
-        </Selectbox>
+      </Selectbox>
       <Selectbox>
         <Txtbox>Reading</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Reading')}>Add</SelectboxBtn>
-        </Selectbox>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      </Selectbox>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );
 };
