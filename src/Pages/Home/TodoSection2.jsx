@@ -157,33 +157,44 @@ const TodoSection2 = ({ selectedTrackId }) => {
 
   const addRoutine = async () => {
     const token = localStorage.getItem('authToken');
+    const content = ''; 
+  
+    let newRoutine; // newRoutine 변수를 선언
+  
+    // 새로운 루틴을 화면에 바로 출력하기 위해 상태 업데이트를 직접 처리합니다.
+    setRoutineList(prevRoutineList => {
+      newRoutine = { content, routineId: Date.now() }; // newRoutine 변수에 값 할당
+      const updatedList = [...prevRoutineList, newRoutine]; // 새로운 루틴을 기존 목록에 추가
+      return updatedList;
+    });
+  
+    // Set focus to the corresponding input field after adding the routine
+    setInputValues(prevInputValues => ({
+      ...prevInputValues,
+      [newRoutine.routineId]: '',
+    }));
+  
     try {
       const response = await $.ajax({
         type: 'POST',
-        url: `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}?trackId=${encodeURIComponent('track id')}`,
-        data: JSON.stringify({ content: 'Routine content' }),
+        url: `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}?trackId=${encodeURIComponent(selectedTrackId)}`,
+        data: JSON.stringify({ content }),
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
-
-      if (response.status === 201) {
-        const newRoutine = response.data;
-        setRoutineList(prevRoutineList => [...prevRoutineList, newRoutine]); // 상태 업데이트
-        // Set focus to the corresponding input field after adding the routine
-        setInputValues(prevInputValues => ({
-          ...prevInputValues,
-          [newRoutine.routineId]: '',
-        }));
+  
+      if (response.status === 200) {
+        // 성공적으로 루틴을 추가한 경우에 대한 처리
       } else {
         console.error('Failed to add routine:', response.statusText);
       }
     } catch (error) {
       console.error('Error while adding routine:', error);
     }
-  };
-
+  };  
+  
 const deleteRoutine = async (routineId) => {
   const token = localStorage.getItem('authToken');
   try {
@@ -275,7 +286,6 @@ return (
             </TodoDelete>
           </CheckboxContainer>
         ))}
-        {/* Add routine 버튼을 렌더링합니다. */}
         <TodoAddRoutineBtn onClick={addRoutine}> + Add routine </TodoAddRoutineBtn>
       </>
     )}
