@@ -76,27 +76,6 @@ const SelectboxBtn = styled.button`
   }
 `;
 
-const SelectAll = styled.button`
-  border: none;
-  background-color: white;
-  color: rgb(167, 167, 167);
-  margin-top: 8vh;
-  margin-bottom: 2vh;
-  height: 5vh;
-  font-size: 1.2rem;
-  text-align: center;
-  @media all and (max-width: 1023px) {
-    width: 20vh;
-    position: relative;
-    left: 47%;
-    transform: translateX(-50%);
-  }
-  @media all and (min-width: 1024px) {
-    width: 14vw;
-    margin-left: 16vw;
-  }
-`;
-
 export const Pms = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedRoutine, setSelectedRoutine] = useState('');
@@ -143,7 +122,9 @@ export const Pms = () => {
         <Txtbox>Watching movie</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick('Watching movie')}>Add</SelectboxBtn>
       </Selectbox>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );
 };
+
+export default Pms;

@@ -111,14 +111,6 @@ export const Reading = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Preparing tea');
-    handleAddClick('Preparing notes and pens');
-    handleAddClick('Turning on nightstand light');
-    handleAddClick('Reading a book');
-    handleAddClick('Transcribing impressive part');
-  };
-
   return (
     <MainBox>
       <MTxt1>

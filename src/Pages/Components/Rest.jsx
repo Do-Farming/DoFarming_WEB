@@ -89,17 +89,19 @@ export const Rest = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setSelectedRoutine(''); // Reset selectedRoutine when closing modal
   };
 
   return (
     <MainBox>
       <MTxt1>Rest after work</MTxt1>
       <MTxt2>
-      It's a reward given to you. <br />
-      Why don't you relax today and <br />recharge your energy for tomorrow? 
+        It's a reward given to you. <br />
+        Why don't you relax today and <br />recharge your energy for tomorrow? 
       </MTxt2>
-      <Selectbox><Txtbox>Turn off phone notifications</Txtbox>
-      <SelectboxBtn onClick={() => handleAddClick('Turn off phone notifications')}>Add</SelectboxBtn>
+      <Selectbox>
+        <Txtbox>Turn off phone notifications</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Turn off phone notifications')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>Turn on Candle</Txtbox>
@@ -109,14 +111,17 @@ export const Rest = () => {
         <Txtbox>Taking a deep breath</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick("Taking a deep breath")}>Add</SelectboxBtn>
       </Selectbox>
-      <Selectbox><Txtbox>Listening to music</Txtbox>
-      <SelectboxBtn onClick={() => handleAddClick("Listening to music")}>Add</SelectboxBtn>
+      <Selectbox>
+        <Txtbox>Listening to music</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Listening to music")}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>Having a hobby time</Txtbox>
         <SelectboxBtn onClick={() => handleAddClick("Having a hobby time")}>Add</SelectboxBtn>
       </Selectbox>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );
 };
+
+export default Rest;

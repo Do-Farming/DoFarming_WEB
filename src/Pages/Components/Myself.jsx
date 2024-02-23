@@ -109,39 +109,39 @@ export const Myself = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setSelectedRoutine(''); // Reset selectedRoutine when closing modal
   };
 
   return (
     <MainBox>
-  <MTxt1>
-  Taking care of myself
-  </MTxt1>
-  <MTxt2>
-    Do you have time to take care of yourself?<br />
-    Why don't you make a routine around me<br /> and not anything else?
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>Listening to fav song</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Listening to fav song")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Taking a shower</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Taking a shower")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Doing a Facial mask</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Doing a Facial mask")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>massage yourself</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("massage yourself")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Putting on lip balm</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Putting on lip balm")}>Add</SelectboxBtn>
-
-  </Selectbox>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
+      <MTxt1>Taking care of myself</MTxt1>
+      <MTxt2>
+        Do you have time to take care of yourself?<br />
+        Why don't you make a routine around me<br /> and not anything else?
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Listening to fav song</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Listening to fav song")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Taking a shower</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Taking a shower")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Doing a Facial mask</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Doing a Facial mask")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Massage yourself</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Massage yourself")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Putting on lip balm</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Putting on lip balm")}>Add</SelectboxBtn>
+      </Selectbox>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };
+
+export default Myself;
