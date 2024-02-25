@@ -17,8 +17,9 @@ import HomeSection2 from "./Pages/Home/HomeComponents/HomeSection2";
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
 
-function App() {
-  return (
+
+rootElement.render(
+  <Router>
     <Routes>
       <Route path="/" element={<Login1 />} />
       <Route path="/login2" element={<Login2 />} />
@@ -31,14 +32,8 @@ function App() {
       <Route path="/Profile" element={<Profile />} />
       <Route path="/Reset" element={<Reset />} />
       <Route path="/HomeAddPackage" element={<HomeAddPackage />} />
-      <Route path="/Todo" element={<Todo />} />
-      <Route path="/HomeSection2" element={<HomeSection2 />} />
+      <Route path="Todo" element={<Todo />} />
+      <Route path="HomeSection2" element={<HomeSection2 />} />
     </Routes>
-  );
-}
-
-rootElement.render(
-  <Router>
-    <App />
   </Router>
 );
