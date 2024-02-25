@@ -55,6 +55,8 @@ const BtnS2 = styled.button`
   background-color: inherit;
   margin-bottom: 20px;
   border: none;
+  position: relative;
+  right: 20px;
 `;
 
 const UserRname = styled.div`
@@ -72,12 +74,14 @@ const MemoText = styled.div``;
 
 const StatusIndicator = styled.div`
   padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  width: 65px;
-  height: auto;
-  border: none;
-  border-radius: 10px;
+    padding-bottom: 12px;
+    text-align: center;
+    width: 65px;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    top: 80px;
   background-color: ${(props) => props.statusColor};
 
   @media all and (min-width: 768px) and (max-width: 3000px) {
@@ -183,27 +187,25 @@ const Homesection2 = () => {
       {packages.length > 0 && (
         <HomeWrap2>
           {packages.map((pkg) => (
-            <Link to={`/todo?trackId=${pkg.trackId}`} key={pkg.trackId} style={{ textDecoration: 'none', color: 'black' }}>
-              <UserPKG id="userPKG">
-                <Pkg2>
-                  <S2Wrap>
-                    <UserRname>{pkg.routine}</UserRname>
-                    <Datetxt>{pkg.startDate} ~ {pkg.endDate}</Datetxt>
-                    <MemoText>Memo: {pkg.memo}</MemoText>
-                  </S2Wrap>
-                  <BtnS2 onClick={(e) => { e.stopPropagation(); handleDeletePackage(pkg.trackId); }} className="BtnS2Del">
-                    X
-                  </BtnS2>
-                </Pkg2>
+            <UserPKG key={pkg.trackId}>
+              <Pkg2>
+                <S2Wrap onClick={() => navigate(`/todo?trackId=${pkg.trackId}`)}>
+                  <UserRname>{pkg.routine}</UserRname>
+                  <Datetxt>{pkg.startDate} ~ {pkg.endDate}</Datetxt>
+                  <MemoText>Memo: {pkg.memo}</MemoText>
+                </S2Wrap>
                 <Pkg3>
                   <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>
                     <StatusText>
                       {getStatusText(pkg.endDate)}
                     </StatusText>
                   </StatusIndicator>
+                  <BtnS2 onClick={(e) => { e.stopPropagation(); handleDeletePackage(pkg.trackId); }}>
+                    X
+                  </BtnS2>
                 </Pkg3>
-              </UserPKG>
-            </Link>
+              </Pkg2>
+            </UserPKG>
           ))}
         </HomeWrap2>
       )}
