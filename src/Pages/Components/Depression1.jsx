@@ -79,58 +79,59 @@ const SelectboxBtn = styled.button`
 
 export const Depression1 = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
-  }
+    setSelectedRoutine(''); // Reset selectedRoutine when closing modal
+  };
 
   return (
     <MainBox>
-  <MTxt1>
-  Ease depression
-  </MTxt1>
-  <MTxt2>
-  The bright light of morning is welcoming you from <br />
-  dark night through dawn. Whatever you do, it will <br />
-  make things work.
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>Making the bed</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Marking the bed")}></SelectboxBtn>Add </Selectbox>
-  <Selectbox>
-    <Txtbox>Opening the curtain</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Opening the curtain")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Opening a window</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Opening a window")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Drinking water</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Drinking water")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Brushing teeth</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Brushing teeth")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Writing down your emotions</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Writing down your emotions")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Write down today's goals</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Write down today's goals")}>Add</SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Breath in and out</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick("Breath in and out")}>Add</SelectboxBtn>
-  </Selectbox>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
-
+      <MTxt1>Ease depression</MTxt1>
+      <MTxt2>
+        The bright light of morning is welcoming you from <br />
+        dark night through dawn. Whatever you do, it will <br />
+        make things work.
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Making the bed</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Making the bed")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Opening the curtain</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Opening the curtain")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Opening a window</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Opening a window")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Drinking water</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Drinking water")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Brushing teeth</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Brushing teeth")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Writing down your emotions</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Writing down your emotions")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Write down today's goals</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Write down today's goals")}>Add</SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Breath in and out</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Breath in and out")}>Add</SelectboxBtn>
+      </Selectbox>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };

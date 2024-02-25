@@ -78,13 +78,16 @@ const SelectboxBtn = styled.button`
 
 export const Meditation = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = (routine) => {
+    setSelectedRoutine(routine);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setSelectedRoutine(''); // Reset selectedRoutine when closing modal
   };
 
   return (
@@ -96,25 +99,27 @@ export const Meditation = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>Changing into PJs</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('Changing into PJs')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>Turn on Candle</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('Turn on Candle')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>Turning on humidifier</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('Turning on humidifier')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>Writing gratitude journal</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('Writing gratitude journal')}>Add</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>Meditation</Txtbox>
-        <SelectboxBtn onClick={handleAddClick}>Add</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('Meditation')}>Add</SelectboxBtn>
       </Selectbox>
-      {showModal && <Modal onClose={handleCloseModal} />}
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
   );
 };
+
+export default Meditation;

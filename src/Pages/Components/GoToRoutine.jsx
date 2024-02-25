@@ -53,19 +53,16 @@ export const GoToRoutine = ({ activeBtn, handleMiracleMorningClick, handleDaySta
         <>
           <GoButton onClick={handleMyselfClick}>Taking care of myself</GoButton>
           <GoButton onClick={handleInsomniaClick}>Overcoming insomnia</GoButton>
-          <GoButton onClick={handleDepressionClick}>
-Ease depression</GoButton>
+          <GoButton onClick={handleDepressionClick}>Ease depression</GoButton>
           <GoButton onClick={handleFamilyClick}>Sharing time with family</GoButton>
         </>
       )}
       {activeBtn === 'mood' && (
         <>
-          <GoButton onClick={handlePmsClick}>
-PMS</GoButton>
+          <GoButton onClick={handlePmsClick}>PMS</GoButton>
           <GoButton onClick={handleDepression1Click}>Ease depression</GoButton>
           <GoButton onClick={handleFrustrationClick}>When you feel discouraged</GoButton>
-          <GoButton onClick={handleRestClick}>
-Rest after work</GoButton>
+          <GoButton onClick={handleRestClick}>Rest after work</GoButton>
         </>
       )}
     </Gotoroutine>

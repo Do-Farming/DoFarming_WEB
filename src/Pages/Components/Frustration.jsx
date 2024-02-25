@@ -112,38 +112,36 @@ export const Frustration = () => {
     setShowModal(false);
   };
 
-
   return (
     <MainBox>
-  <MTxt1>
-  When you feel discouraged
-  </MTxt1>
-  <MTxt2>
-  It's just a temporary moment as part of your <br /> growth and learning. <br /> 
-  You'll be stronger in the process of finding <br /> yourself again.
-  </MTxt2>
-  <Selectbox>
-    <Txtbox>Breath in and out</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick('Breath in and out')}>Add </SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Calling friends or family</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick('Calling friends or family')}>Add </SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Writing down your emotions</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick('Writing down your emotions')}>Add </SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Think positive thoughts</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick('Think positive thoughts')}>Add </SelectboxBtn>
-  </Selectbox>
-  <Selectbox>
-    <Txtbox>Having a hobby time</Txtbox>
-    <SelectboxBtn onClick={() => handleAddClick('Having a hobby time')}>Add </SelectboxBtn>
-  </Selectbox>
-  {showModal && <Modal onClose={handleCloseModal} />}
-</MainBox>
-
+      <MTxt1>When you feel discouraged</MTxt1>
+      <MTxt2>
+        It's just a temporary moment as part of your <br /> growth and learning. <br /> 
+        You'll be stronger in the process of finding <br /> yourself again.
+      </MTxt2>
+      <Selectbox>
+        <Txtbox>Breath in and out</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Breath in and out')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Calling friends or family</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Calling friends or family')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Writing down your emotions</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Writing down your emotions')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Think positive thoughts</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Think positive thoughts')}>Add </SelectboxBtn>
+      </Selectbox>
+      <Selectbox>
+        <Txtbox>Having a hobby time</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Having a hobby time')}>Add </SelectboxBtn>
+      </Selectbox>
+      {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
+    </MainBox>
   );
 };
+
+export default Frustration;

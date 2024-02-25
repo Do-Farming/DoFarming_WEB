@@ -91,14 +91,6 @@ export const Family = () => {
     setShowModal(false);
   };
 
-  const handleAddAllClick = () => {
-    handleAddClick('Hugging your family');
-    handleAddClick('Sharing a day');
-    handleAddClick('Preparing dinner');
-    handleAddClick('Dinner with family');
-    handleAddClick('Expressing gratitude');
-  };
-
   return (
     <MainBox>
       <MTxt1>

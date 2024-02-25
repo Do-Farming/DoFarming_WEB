@@ -34,6 +34,8 @@ rootElement.render(
       <Route path="/HomeAddPackage" element={<HomeAddPackage />} />
       <Route path="Todo" element={<Todo />} />
       <Route path="HomeSection2" element={<HomeSection2 />} />
+      <Route path="Todo" element={<Todo />} />
+      <Route path="HomeSection2" element={<HomeSection2 />} />
     </Routes>
-  </Router>,
+  </Router>
 );
