@@ -1,4 +1,4 @@
-# DoFarming-SERVER
+# DoFarming-WEB
 
 # FINNA
 ![FINNA](https://github.com/Finna-GDSC/DoFarming_PM/assets/144197605/81a272b0-0421-4770-accc-82c8f74480cf)
