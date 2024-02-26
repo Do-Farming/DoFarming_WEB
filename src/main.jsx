@@ -22,20 +22,18 @@ rootElement.render(
   <Router>
     <Routes>
       <Route path="/" element={<Login1 />} />
-      <Route path="/login2" element={<Login2 />} />
-      <Route path="/login3" element={<Login3 />} />
-      <Route path="/login4" element={<Login4 />} />
-      <Route path="/Home" element={<Home />} />
-      <Route path="/Routine" element={<Routine />} />
-      <Route path="/MyPage" element={<MyPage />} />
-      <Route path="/Map" element={<Map />} />
-      <Route path="/Profile" element={<Profile />} />
-      <Route path="/Reset" element={<Reset />} />
-      <Route path="/HomeAddPackage" element={<HomeAddPackage />} />
-      <Route path="Todo" element={<Todo />} />
-      <Route path="HomeSection2" element={<HomeSection2 />} />
-      <Route path="Todo" element={<Todo />} />
-      <Route path="HomeSection2" element={<HomeSection2 />} />
+      <Route path="/login2/" element={<Login2 />} />
+      <Route path="/login3/" element={<Login3 />} />
+      <Route path="/login4/" element={<Login4 />} />
+      <Route path="/Home/" element={<Home />} />
+      <Route path="/Routine/" element={<Routine />} />
+      <Route path="/MyPage/" element={<MyPage />} />
+      <Route path="/Map/" element={<Map />} />
+      <Route path="/Profile/" element={<Profile />} />
+      <Route path="/Reset/" element={<Reset />} />
+      <Route path="/HomeAddPackage/" element={<HomeAddPackage />} />
+      <Route path="/Todo/" element={<Todo />} />
+      <Route path="/HomeSection2/" element={<HomeSection2 />} />
     </Routes>
   </Router>
 );

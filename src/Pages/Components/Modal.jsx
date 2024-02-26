@@ -162,7 +162,7 @@ const Modal = ({ selectedRoutine, onClose }) => {
         <ModalBody>
           <ModalSelect className="modal-select">
             <option value="">Select</option>
-            {tracks && tracks.map(track => ( // tracks가 유효한 배열인 경우에만 map 함수 호출
+            {tracks && tracks.map(track => ( 
               <option key={track.trackId} value={track.trackId}>{track.content.split(',')[0]}</option>
             ))}
           </ModalSelect>

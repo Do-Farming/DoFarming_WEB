@@ -193,7 +193,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
   const addRoutine = async () => {
     const token = localStorage.getItem("authToken");
     const content = "";
-
+  
     try {
       const response = await axios.post(
         `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}?trackId=${encodeURIComponent(
@@ -207,9 +207,9 @@ const TodoSection2 = ({ selectedTrackId }) => {
           },
         }
       );
-
+  
       if (response.status === 200) {
-        setRoutineList(prevRoutines => [...prevRoutines, response.data]);
+        fetchRoutines();
       } else {
         console.error("루틴 추가 실패:", response.statusText);
       }
@@ -217,7 +217,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
       console.error("루틴 추가 오류:", error);
     }
   };
-
+  
   const fetchRoutines = async () => {
     const token = localStorage.getItem("authToken");
   
