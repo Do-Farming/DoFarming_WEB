@@ -16,19 +16,7 @@
 
 <body>
     <div id="root"></div>
-    <script type="module">
-        import { BrowserRouter } from 'react-router-dom';
-        import React from 'react';
-        import ReactDOM from 'react-dom';
-        import App from './src/main.jsx';
-
-        ReactDOM.hydrate(
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>,
-            document.getElementById('root')
-        );
-    </script>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>
