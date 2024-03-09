@@ -14,7 +14,6 @@ import HomeAddPackage from "./Pages/Home/HomeAddPackage";
 import Todo from "./Pages/Home/Todo";
 import HomeSection2 from "./Pages/Home/HomeComponents/HomeSection2";
 
-
 const root = document.getElementById("root");
 const rootElement = createRoot(root);
 
@@ -35,7 +34,6 @@ rootElement.render(
       <Route path="/HomeAddPackage/" element={<HomeAddPackage />} />
       <Route path="/Todo/" element={<Todo />} />
       <Route path="/HomeSection2/" element={<HomeSection2 />} />
-      <Route path=""
     </Routes>
   </Router>
 );
