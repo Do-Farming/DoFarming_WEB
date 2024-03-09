@@ -223,7 +223,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
   
     try {
       const response = await axios.get(
-        `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+        `https://dofagit resetrming.duckdns.org/api/v1/routine/${selectedTrackId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
