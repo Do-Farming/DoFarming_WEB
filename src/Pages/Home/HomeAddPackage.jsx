@@ -134,22 +134,22 @@ function Home9() {
           value={routine}
           onChange={(e) => setRoutine(e.target.value)}
           onBlur={() => setRoutine(routine)}
-          placeholder='Track name'
+          placeholder='패키지 이름'
         />
       </PackageName>
       <div className='Home9inputWrap'>
         <HomeInput>
-          <div>Memo</div>
+          <div>메모</div>
           <HomeInputBox 
             type="text"
             value={memo}
             onChange={(e) => setMemo(e.target.value)}
             onBlur={() => setMemo(memo)}
-            placeholder='Write memo'
+            placeholder='목표를 적어주세요'
           />
         </HomeInput>
         <HomeInput>
-          <Datename>Start date</Datename>
+          <Datename>시작일</Datename>
           <HomeInputBox 
             type="date"
             value={dateRange[0].toISOString().substring(0, 10)}
@@ -157,7 +157,7 @@ function Home9() {
           />
         </HomeInput>
         <HomeInput>
-          <Datename>End date</Datename>
+          <Datename>종료일</Datename>
           <HomeInputBox 
             type="date"
             value={dateRange[1].toISOString().substring(0, 10)}
@@ -167,7 +167,7 @@ function Home9() {
       </div>
       <div className='BtnWrap'>
           <Link to="/home">
-              <HomeBtn onClick={handleButtonClick}>Submit</HomeBtn>  
+              <HomeBtn onClick={handleButtonClick}>완료</HomeBtn>  
           </Link>    
       </div>
     </HomeWrap>

@@ -114,33 +114,33 @@ export const DayStart = () => {
 
   return (
     <MainBox>
-      <MTxt1>Beginning of the day</MTxt1>
+      <MTxt1>하루의 시작</MTxt1>
       <MTxt2>
-        The bright light of morning is welcoming you from the
+      어두운 밤에서 새벽을 지나 아침이라는 밝은 빛이
         <br />
-        dark night through the dawn. Whatever you do, it's
+        당신을 맞이하고 있어요
         <br />
-        going to make things work.
+        당신이 무엇을 하든 일이 잘 되게 해줄거예요
       </MTxt2>
       <Selectbox>
-        <Txtbox>Drinking water</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drinking water')}>Add</SelectboxBtn>
+        <Txtbox>물 마시기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Drinking water')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Meditate</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Meditate')}>Add</SelectboxBtn>
+        <Txtbox>명상</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Meditate')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Making plans for the day</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Making plans for the day')}>Add</SelectboxBtn>
+        <Txtbox>오늘 하루 계획 세우기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Making plans for the day')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Change clothes</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Change clothes')}>Add</SelectboxBtn>
+        <Txtbox>옷 갈아입기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Change clothes')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Taking a shower</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking a shower')}>Add</SelectboxBtn>
+        <Txtbox>샤워하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking a shower')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

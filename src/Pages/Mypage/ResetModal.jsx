@@ -110,12 +110,12 @@ const ResetModalBox = ({ onConfirm, onClose }) => {
   return (
     <ResetModalBackdrop>
       <ResetModalBoxContainer>
-        <ResetModalTitle><strong>Initialization</strong><br /> all Routine?</ResetModalTitle>
+        <ResetModalTitle><strong>모든 루틴</strong><br /> 삭제하시겠습니까?</ResetModalTitle>
         <div>
           <Link to="/home">
-            <ResetModalButton yes onClick={handleDeleteRoutine}>Yes</ResetModalButton>
+            <ResetModalButton yes onClick={handleDeleteRoutine}>예</ResetModalButton>
           </Link>
-          <ResetModalButtonNo onClick={onClose}>No</ResetModalButtonNo>
+          <ResetModalButtonNo onClick={onClose}>아니오</ResetModalButtonNo>
         </div>
       </ResetModalBoxContainer>
     </ResetModalBackdrop>

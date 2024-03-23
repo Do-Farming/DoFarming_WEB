@@ -314,18 +314,18 @@ const Profile = () => {
                     </Profileinputnic>
 
                     <Profileinput>
-                        <label>Sex</label>
+                        <label>성별</label>
                         <Profilegender
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
                         >
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
+                            <option value="MALE">남성</option>
+                            <option value="FEMALE">여성</option>
                         </Profilegender>
                     </Profileinput>
 
                     <Profileinput>
-                        <label>Age</label>
+                        <label>나이</label>
                         <Profileage
                             type="number"
                             value={age}
@@ -333,7 +333,7 @@ const Profile = () => {
                         />
                     </Profileinput>
                     <Profilesubmit onClick={updateUserInfo}>
-                        Submit
+                        저장하기
                     </Profilesubmit>
                 </ProfileContent>
             </ProfileContainer>

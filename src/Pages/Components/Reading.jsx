@@ -114,31 +114,31 @@ export const Reading = () => {
   return (
     <MainBox>
       <MTxt1>
-        Reading before bed
+        잠들기 전 독서
       </MTxt1>
       <MTxt2>
-        Refraining from your phone 30 minutes before <br />
-        bedtime works well for deep sleep.
+      취침 30분 전에 스마트폰을 자제하는 것은 깊은 잠을<br />
+      자는 데에 좋은 효과가 있어요
       </MTxt2>
       <Selectbox>
-        <Txtbox>Preparing tea</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Preparing tea')}>Add</SelectboxBtn>
+        <Txtbox>마실 차 준비</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Preparing tea')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Preparing notes and pens</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Preparing notes and pens')}>Add</SelectboxBtn>
+        <Txtbox>노트와 펜 준비하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Preparing notes and pens')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Turning on nightstand light</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Turning on nightstand light')}>Add</SelectboxBtn>
+        <Txtbox>스탠드 조명 켜기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Turning on nightstand light')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Reading a book</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Reading a book')}>Add</SelectboxBtn>
+        <Txtbox>책 읽기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Reading a book')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Transcribing impressive part</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Transcribing impressive part')}>Add</SelectboxBtn>
+        <Txtbox>필사하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Transcribing impressive part')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

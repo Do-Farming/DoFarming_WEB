@@ -93,43 +93,43 @@ export const Depression1 = () => {
 
   return (
     <MainBox>
-      <MTxt1>Ease depression</MTxt1>
+      <MTxt1>우울증 완화</MTxt1>
       <MTxt2>
-        The bright light of morning is welcoming you from <br />
-        dark night through dawn. Whatever you do, it will <br />
-        make things work.
+      어두운 밤에서 새벽을 지나 아침이라는 밝은 빛이  <br />
+      당신을 맞이하고 있어요<br />
+      당신이 무엇을 하든 일이 잘 되게 해줄거예요
       </MTxt2>
       <Selectbox>
-        <Txtbox>Making the bed</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Making the bed")}>Add</SelectboxBtn>
+        <Txtbox>침대 정리</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Making the bed")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Opening the curtain</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Opening the curtain")}>Add</SelectboxBtn>
+        <Txtbox>커튼 열기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Opening the curtain")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Opening a window</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Opening a window")}>Add</SelectboxBtn>
+        <Txtbox>창문 열기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Opening a window")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Drinking water</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Drinking water")}>Add</SelectboxBtn>
+        <Txtbox>물 마시기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Drinking water")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Brushing teeth</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Brushing teeth")}>Add</SelectboxBtn>
+        <Txtbox>이 닦기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Brushing teeth")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Writing down your emotions</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Writing down your emotions")}>Add</SelectboxBtn>
+        <Txtbox>감정 적기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Writing down your emotions")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Write down today's goals</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Write down today's goals")}>Add</SelectboxBtn>
+        <Txtbox>오늘의 작은 목표 적어보기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Write down today's goals")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Breath in and out</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Breath in and out")}>Add</SelectboxBtn>
+        <Txtbox>호흡 운동하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Breath in and out")}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

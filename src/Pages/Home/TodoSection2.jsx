@@ -325,7 +325,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
             </CheckboxContainer>
           ))}
           <TodoAddRoutineBtn onClick={addRoutine}>
-            + Add Routine
+            + 루틴 추가하기
           </TodoAddRoutineBtn>
         </>
       )}

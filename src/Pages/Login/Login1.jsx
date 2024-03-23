@@ -91,14 +91,14 @@ const Login1 = () => {
     <Login1Container>
       <MainText>
         <Text1>
-          A fair day<br></br>for us
+          우리에게 주어진<br></br>공평한 하루
         </Text1>
         <Text2>
-        Not looking at what is in others, <br></br>but being grateful for what is given to me
+        남에게 있는 것을 바라보는 것이 아닌, <br></br>나에게 주어진 것에 감사하는 마음
         </Text2>
       </MainText>
       <SubmitButton id="login1_submit_btn" onClick={handleButtonClick}>
-        <strong>Hello👋</strong>
+        <strong>반가워👋</strong>
       </SubmitButton>
     </Login1Container>
   );

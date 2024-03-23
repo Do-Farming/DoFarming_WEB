@@ -227,9 +227,9 @@ const HomeHeader = () => {
     <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
-          <HelloUser id="hello_user">Hello, {nickname}</HelloUser>
+          <HelloUser id="hello_user">{nickname}님 반가워요</HelloUser>
           <Fighting id="fighting">
-            Let's enjoy the cheerful day!
+            오늘도 활기차게 하루를 시작해봐요!
           </Fighting>
         </HomeTextBox>
         <MoodWrap>
@@ -245,10 +245,10 @@ const HomeHeader = () => {
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
             <HeaderTxt>
               <div className="hiuser">
-                <strong>{nickname}</strong> !
+                <strong>{nickname}</strong> 님!
               </div>
               <br />
-              <div className="tellme">Let me know how you feel today :)</div>
+              <div className="tellme">오늘의 행복 지수를 알려주세요 :)</div>
             </HeaderTxt>
             <HimgWrap>
               <ImgWrap>

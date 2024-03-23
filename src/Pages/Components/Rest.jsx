@@ -94,30 +94,30 @@ export const Rest = () => {
 
   return (
     <MainBox>
-      <MTxt1>Rest after work</MTxt1>
+      <MTxt1>일과 후 휴식</MTxt1>
       <MTxt2>
-        It's a reward given to you. <br />
-        Why don't you relax today and <br />recharge your energy for tomorrow? 
+      당신에게 주어진 보상입니다.<br />
+      오늘 하루 수고를 풀고 내일을 위한 에너지를 충전 해 보는 건<br />어떨까요? 
       </MTxt2>
       <Selectbox>
-        <Txtbox>Turn off phone notifications</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Turn off phone notifications')}>Add</SelectboxBtn>
+        <Txtbox>전화 알림 끄기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Turn off phone notifications')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Turn on Candle</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Turn on Candle")}>Add</SelectboxBtn>
+        <Txtbox>캔들 켜기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Turn on Candle")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Taking a deep breath</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Taking a deep breath")}>Add</SelectboxBtn>
+        <Txtbox>심호흡 하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Taking a deep breath")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Listening to music</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Listening to music")}>Add</SelectboxBtn>
+        <Txtbox>음악 듣기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Listening to music")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Having a hobby time</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Having a hobby time")}>Add</SelectboxBtn>
+        <Txtbox>재미있는 활동 계획하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Having a hobby time")}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
