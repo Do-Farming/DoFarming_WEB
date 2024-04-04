@@ -122,20 +122,20 @@ const Login3 = () => {
   };
 
   const options = [
-    'Study',
-    'Work life',
-    'Love',
-    'Relationship',
-    'Economic stability',
-    'Self-esteem',
-    'Future anxiety',
-    'Health',
+    '학업/취업',
+    '직장 생활',
+    '사랑',
+    '인간관계',
+    '경제적 안정',
+    '자존감',
+    '불안감',
+    '건강',
   ];
 
   return (
     <Container>
       <Text1>
-      What’s your <strong>Concerns?</strong>
+      <strong>어떤 고민</strong>이 있으세요?
       </Text1>
       <Options id="options">
         {options.map((option) => (
@@ -155,7 +155,7 @@ const Login3 = () => {
           onClick={handleButtonClick}
           disabled={selectedOptions.length === 0}
         >
-          Complete
+          선택 완료
         </SelectButton>
       </Link>
     </Container>

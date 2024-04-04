@@ -93,30 +93,30 @@ export const Depression = () => {
   return (
     <MainBox>
       <MTxt1>
-        Ease depression
+        우울증 완화
       </MTxt1>
       <MTxt2>
-        Small changes will lead to big changes.
+      작은 변화는 큰 변화로 이어질 거예요.
       </MTxt2>
       <Selectbox>
-        <Txtbox>Staring at my emotions as they are</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Staring at my emotions as they are')}>Add</SelectboxBtn>
+        <Txtbox>내 감정을 그대로 응시하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Staring at my emotions as they are')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Writing about today's mood</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Writing about today's mood")}>Add</SelectboxBtn>
+        <Txtbox>오늘의 기분 쓰기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick("Writing about today's mood")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Writing a gratitude journal</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Writing a gratitude journal')}>Add</SelectboxBtn>
+        <Txtbox>오늘 하루 감사일기 쓰기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Writing a gratitude journal')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Listening to fav song</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Listening to fav song')}>Add</SelectboxBtn>
+        <Txtbox>좋아하는 음악 듣기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Listening to fav song')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Taking a walk</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking a walk')}>Add</SelectboxBtn>
+        <Txtbox>산책하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking a walk')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

@@ -114,31 +114,31 @@ export const Insomnia = () => {
   return (
     <MainBox>
       <MTxt1>
-        Overcoming insomnia
+        불면증 극복
       </MTxt1>
       <MTxt2>
-        Sleep comfortably every night and face a new day. <br />
-        Why don't you relax your body and mind?
+      매일 밤, 편안하게 잠들어 새로운 하루를 맞이해보세요.<br />
+      몸과 마음을 편하게 가다듬어 보는 건 어떨까요?
       </MTxt2>
       <Selectbox>
-        <Txtbox>Aroma Oil + Humidifier</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Aroma Oil + Humidifier')}>Add</SelectboxBtn>
+        <Txtbox>아로마 오일 + 가습기 켜기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Aroma Oil + Humidifier')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>In a dim light</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('In a dim light')}>Add</SelectboxBtn>
+        <Txtbox>조명 어둡게</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('In a dim light')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Drinking hot tea</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drinking hot tea')}>Add</SelectboxBtn>
+        <Txtbox>따뜻한 차 마시기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Drinking hot tea')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Light stretching</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Light stretching')}>Add</SelectboxBtn>
+        <Txtbox>가벼운 스트레칭</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Light stretching')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Listening to ASMR</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Listening to ASMR')}>Add</SelectboxBtn>
+        <Txtbox>ASMR 듣기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Listening to ASMR')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

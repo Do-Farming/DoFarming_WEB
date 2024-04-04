@@ -94,31 +94,31 @@ export const Family = () => {
   return (
     <MainBox>
       <MTxt1>
-        Sharing time with family
+        가족과의 시간
       </MTxt1>
       <MTxt2>
-        Spending time with your family is like a precious <br />
-        treasure. Every moment together will be a <br />precious time.
+      가족과 함께 보내는 시간은 소중한 보물과도 같습니다.<br />
+      함께하는 모든 순간이 소중하고 값진 시간이 될 거에요.
       </MTxt2>
       <Selectbox>
-        <Txtbox>Hugging your family</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Hugging your family')}>Add</SelectboxBtn>
+        <Txtbox>가족들과 포옹하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Hugging your family')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Sharing a day</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Sharing a day')}>Add</SelectboxBtn>
+        <Txtbox>오늘 어땠어? 물어보기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Sharing a day')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Preparing dinner</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Preparing dinner')}>Add</SelectboxBtn>
+        <Txtbox>저녁 식사</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Preparing dinner')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Dinner with family</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Dinner with family')}>Add</SelectboxBtn>
+        <Txtbox>저녁 식사</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Dinner with family')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Expressing gratitude</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Expressing gratitude')}>Add</SelectboxBtn>
+        <Txtbox>고마움 표현하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Expressing gratitude')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

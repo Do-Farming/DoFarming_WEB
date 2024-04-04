@@ -178,8 +178,8 @@ const Homesection2 = () => {
     <>
       {packages.length === 0 && (
         <RoutineZero>
-          <Zero1>No routine yet
-            <br /> Please make a routine first
+          <Zero1>아직 루틴이 없습니다
+            <br /> 루틴을 먼저 만들어주세요
           </Zero1>
         </RoutineZero>
       )}
@@ -192,7 +192,7 @@ const Homesection2 = () => {
                 <S2Wrap onClick={() => navigate(`/todo?trackId=${pkg.trackId}`)}>
                   <UserRname>{pkg.routine}</UserRname>
                   <Datetxt>{pkg.startDate} ~ {pkg.endDate}</Datetxt>
-                  <MemoText>Memo: {pkg.memo}</MemoText>
+                  <MemoText>목표: {pkg.memo}</MemoText>
                 </S2Wrap>
                 <Pkg3>
                   <StatusIndicator statusColor={getStatusColor(pkg.endDate)}>

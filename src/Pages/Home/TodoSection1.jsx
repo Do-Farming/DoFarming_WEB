@@ -24,9 +24,9 @@ const GoRoutine = styled.p`
 const Todoselect1= () => {
   return (
     <TodoSection1Wrap>
-      <p>There's nothing to do</p> 
+      <p>아직 루틴이 없습니다</p> <br></br>
       <Link to="/routine">
-        <GoRoutine>Shall we make a new routine?</GoRoutine>
+        <GoRoutine>루틴을 만들러 이동해볼까요?</GoRoutine>
       </Link>
     </TodoSection1Wrap>
   );

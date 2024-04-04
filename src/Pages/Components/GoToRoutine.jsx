@@ -35,34 +35,34 @@ export const GoToRoutine = ({ activeBtn, handleMiracleMorningClick, handleDaySta
     <Gotoroutine>
       {activeBtn === 'morning' && (
         <>
-          <GoButton onClick={handleMiracleMorningClick}>Miracle morning</GoButton>
-          <GoButton onClick={handleDayStartClick}>Beginning of the day</GoButton>
-          <GoButton onClick={handleCheerfulClick}>Cheerful morning</GoButton>
-          <GoButton onClick={handleJoggingClick}>Refreshing jogging</GoButton>
+          <GoButton onClick={handleMiracleMorningClick}>미라클 모닝</GoButton>
+          <GoButton onClick={handleDayStartClick}>하루의 시작</GoButton>
+          <GoButton onClick={handleCheerfulClick}>활기찬 아침</GoButton>
+          <GoButton onClick={handleJoggingClick}>상쾌한 조깅</GoButton>
         </>
       )}
       {activeBtn === 'evening' && (
         <>
-          <GoButton onClick={handleDayEndClick}>Wraping up the day</GoButton>
-          <GoButton onClick={handleBathClick}>A warm bath</GoButton>
-          <GoButton onClick={handleMeditationClick}>Meditation</GoButton>
-          <GoButton onClick={handleReadingClick}>Reading before bed</GoButton>
+          <GoButton onClick={handleDayEndClick}>하루의 마무리</GoButton>
+          <GoButton onClick={handleBathClick}>따뜻한 반신욕</GoButton>
+          <GoButton onClick={handleMeditationClick}>명상과 기록</GoButton>
+          <GoButton onClick={handleReadingClick}>잠들기 전 독서</GoButton>
         </>
       )}
       {activeBtn === 'health' && (
         <>
-          <GoButton onClick={handleMyselfClick}>Taking care of myself</GoButton>
-          <GoButton onClick={handleInsomniaClick}>Overcoming insomnia</GoButton>
-          <GoButton onClick={handleDepressionClick}>Ease depression</GoButton>
-          <GoButton onClick={handleFamilyClick}>Sharing time with family</GoButton>
+          <GoButton onClick={handleMyselfClick}>나를 가꾸는 시간</GoButton>
+          <GoButton onClick={handleInsomniaClick}>불면증 극복</GoButton>
+          <GoButton onClick={handleDepressionClick}>우울증 완화</GoButton>
+          <GoButton onClick={handleFamilyClick}>가족과의 시간</GoButton>
         </>
       )}
       {activeBtn === 'mood' && (
         <>
-          <GoButton onClick={handlePmsClick}>PMS</GoButton>
-          <GoButton onClick={handleDepression1Click}>Ease depression</GoButton>
-          <GoButton onClick={handleFrustrationClick}>When you feel discouraged</GoButton>
-          <GoButton onClick={handleRestClick}>Rest after work</GoButton>
+          <GoButton onClick={handlePmsClick}>자기관리 (PMS)</GoButton>
+          <GoButton onClick={handleDepression1Click}>우울증 완화</GoButton>
+          <GoButton onClick={handleFrustrationClick}>좌절감이 들 때</GoButton>
+          <GoButton onClick={handleRestClick}>일과 후 휴식</GoButton>
         </>
       )}
     </Gotoroutine>

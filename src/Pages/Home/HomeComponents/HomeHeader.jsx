@@ -189,7 +189,7 @@ const HomeHeader = () => {
       const userData = await fetchUserInfo();
       if (userData) {
         setNickname(userData.nickname);
-        setSelectedDivImage(`url("/emotion${moodToNumber(userData.mood)}.png")`);
+        setSelectedDivImage(`url("/${moodToNumber(userData.mood)}.png")`);
       }
     };
     getNicknameAndMood();
@@ -209,7 +209,7 @@ const HomeHeader = () => {
         }
       );
       console.log("Mood updated successfully:", mood);
-      setSelectedDivImage(`url("/emotion${moodToNumber(mood)}.png")`);
+      setSelectedDivImage(`url("/${moodToNumber(mood)}.png")`);
     } catch (error) {
       console.error("Error updating mood:", error);
     }
@@ -227,9 +227,9 @@ const HomeHeader = () => {
     <HomeHeaderWrap>
       <HomeHeaderContent>
         <HomeTextBox>
-          <HelloUser id="hello_user">Hello, {nickname}</HelloUser>
+          <HelloUser id="hello_user">{nickname}님 반가워요</HelloUser>
           <Fighting id="fighting">
-            Let's enjoy the cheerful day!
+            오늘도 활기차게 하루를 시작해봐요!
           </Fighting>
         </HomeTextBox>
         <MoodWrap>
@@ -245,52 +245,52 @@ const HomeHeader = () => {
             <CloseModalButton onClick={closeModal}>x</CloseModalButton>
             <HeaderTxt>
               <div className="hiuser">
-                <strong>{nickname}</strong> !
+                <strong>{nickname}</strong> 님!
               </div>
               <br />
-              <div className="tellme">Let me know how you feel today :)</div>
+              <div className="tellme">오늘의 행복 지수를 알려주세요 :)</div>
             </HeaderTxt>
             <HimgWrap>
               <ImgWrap>
                 <Div
                   onClick={() => handleDivClick(1, "HAPPY")}
-                  style={{ backgroundImage: 'url("/emotion1.png")' }}
+                  style={{ backgroundImage: 'url("/1.png")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick(2, "ANGRY")}
-                  style={{ backgroundImage: 'url("/emotion2.png")' }}
+                  style={{ backgroundImage: 'url("/2.png")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick(3, "NERVOUS")}
-                  style={{ backgroundImage: 'url("/emotion3.png")' }}
+                  style={{ backgroundImage: 'url("/3.png")' }}
                 ></Div>
               </ImgWrap>
               <ImgWrap>
                 <Div
                   onClick={() => handleDivClick(4, "SAD")}
-                  style={{ backgroundImage: 'url("/emotion4.png")' }}
+                  style={{ backgroundImage: 'url("/4.png")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick(5, "EXCITED")}
-                  style={{ backgroundImage: 'url("/emotion5.png")' }}
+                  style={{ backgroundImage: 'url("/5.png")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick(6, "PROUD")}
-                  style={{ backgroundImage: 'url("/emotion6.png")' }}
+                  style={{ backgroundImage: 'url("/6.png")' }}
                 ></Div>
               </ImgWrap>
               <ImgWrap>
                 <Div
                   onClick={() => handleDivClick(7, "CALM")}
-                  style={{ backgroundImage: 'url("/emotion7.png")' }}
+                  style={{ backgroundImage: 'url("/7.png")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick(8, "DROWSY")}
-                  style={{ backgroundImage: 'url("/emotion8.png")' }}
+                  style={{ backgroundImage: 'url("/8.png")' }}
                 ></Div>
                 <Div
                   onClick={() => handleDivClick(9, "TIRED")}
-                  style={{ backgroundImage: 'url("/emotion9.png")' }}
+                  style={{ backgroundImage: 'url("/9.png")' }}
                 ></Div>
               </ImgWrap>
             </HimgWrap>

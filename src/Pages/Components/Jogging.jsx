@@ -114,33 +114,35 @@ export const Jogging = () => {
 
   return (
     <MainBox>
-      <MTxt1>Refreshing jogging</MTxt1>
+      <MTxt1>상쾌한 조깅</MTxt1>
       <MTxt2>
-        Let's leave our daily lives and create new energy.
+      바람이 불어와 마음을 가볍게 만들어주는, <br />
+      상쾌한 조깅으로 시작하는 건 어떨까요? <br />
+      일상을 떠나 새로운 에너지를 만들어봐요
       </MTxt2>
       <Selectbox>
-        <Txtbox>Drink water</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drink water')}>Add</SelectboxBtn>
+        <Txtbox>물 마시기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Drink water')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Eating light snack</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Eating light snack')}>Add</SelectboxBtn>
+        <Txtbox>간단한 간식 섭취</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Eating light snack')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Prepare water n earphone</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Prepare water n earphone')}>Add</SelectboxBtn>
+        <Txtbox>이어폰, 물 챙기기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Prepare water n earphone')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Warm up</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Warm up')}>Add</SelectboxBtn>
+        <Txtbox>워밍업 스트레칭</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Warm up')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Running</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Running')}>Add</SelectboxBtn>
+        <Txtbox>러닝</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Running')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Taking shower</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking shower')}>Add</SelectboxBtn>
+        <Txtbox>샤워하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking shower')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

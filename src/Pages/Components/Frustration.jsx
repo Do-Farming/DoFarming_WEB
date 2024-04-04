@@ -114,30 +114,29 @@ export const Frustration = () => {
 
   return (
     <MainBox>
-      <MTxt1>When you feel discouraged</MTxt1>
+      <MTxt1>좌절감이 들 때</MTxt1>
       <MTxt2>
-        It's just a temporary moment as part of your <br /> growth and learning. <br /> 
-        You'll be stronger in the process of finding <br /> yourself again.
+      당신의 성장과 배움의 일부로 일시적인 순간 일 뿐이에요. <br /> 자신을 다시 찾는 과정에서 더욱 강해질거에요.
       </MTxt2>
       <Selectbox>
-        <Txtbox>Breath in and out</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Breath in and out')}>Add </SelectboxBtn>
+        <Txtbox>호흡 운동하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Breath in and out')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Calling friends or family</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Calling friends or family')}>Add </SelectboxBtn>
+        <Txtbox>친구나 가족에게 전화하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Calling friends or family')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Writing down your emotions</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Writing down your emotions')}>Add </SelectboxBtn>
+        <Txtbox>감정 적기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Writing down your emotions')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Think positive thoughts</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Think positive thoughts')}>Add </SelectboxBtn>
+        <Txtbox>기대나 긍정적인 생각 적기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Think positive thoughts')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Having a hobby time</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Having a hobby time')}>Add </SelectboxBtn>
+        <Txtbox>취미 시간 갖기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Having a hobby time')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

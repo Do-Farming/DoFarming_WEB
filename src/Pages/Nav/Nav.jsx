@@ -164,9 +164,9 @@ const NavBar = () => {
         <NavIcon size='24' onClick={toggleNav} />
         {isNavVisible && (
           <NavMenu>
-            <StyledLink to="/home"><NavItem>Home</NavItem></StyledLink>
-            <StyledLink to="/routine"><NavItem>Routine</NavItem></StyledLink>
-            <StyledLink to="/Map"><NavItem>Find expert</NavItem></StyledLink>
+            <StyledLink to="/home"><NavItem>홈</NavItem></StyledLink>
+            <StyledLink to="/routine"><NavItem>루틴</NavItem></StyledLink>
+            <StyledLink to="/Map"><NavItem>전문가와의 상담</NavItem></StyledLink>
           </NavMenu>
         )}
       </Nav></>

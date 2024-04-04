@@ -157,19 +157,19 @@ const Modal = ({ selectedRoutine, onClose }) => {
     <ModalBackdrop>
       <ModalBox>
         <ModalHeader>
-          <ModalTitle>Add to Routine</ModalTitle>
+          <ModalTitle>루틴에 항목 추가</ModalTitle>
         </ModalHeader>
         <ModalBody>
           <ModalSelect className="modal-select">
-            <option value="">Select</option>
+            <option value="">선택</option>
             {tracks && tracks.map(track => ( 
               <option key={track.trackId} value={track.trackId}>{track.content.split(',')[0]}</option>
             ))}
           </ModalSelect>
         </ModalBody>
         <ModalFooter>
-          <BtnAdd onClick={handleAddClick}>Add</BtnAdd>
-          <BtnAdd onClick={onClose}>Close</BtnAdd>
+          <BtnAdd onClick={handleAddClick}>추가하기</BtnAdd>
+          <BtnAdd onClick={onClose}>닫기</BtnAdd>
         </ModalFooter>
       </ModalBox>
     </ModalBackdrop>

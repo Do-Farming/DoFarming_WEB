@@ -51,17 +51,17 @@ const Inactive = styled.button`
 const ButtonGroup = ({ activeBtn, handleBtnClick }) => (
   <Routinebtn>
     {activeBtn === 'morning' ? 
-      <Active onClick={() => handleBtnClick('morning')}>Morning</Active> : 
-      <Inactive onClick={() => handleBtnClick('morning')}>Morning</Inactive>}
+      <Active onClick={() => handleBtnClick('morning')}>아침</Active> : 
+      <Inactive onClick={() => handleBtnClick('morning')}>아침</Inactive>}
     {activeBtn === 'evening' ? 
-      <Active onClick={() => handleBtnClick('evening')}>Evening</Active> : 
-      <Inactive onClick={() => handleBtnClick('evening')}>Evening</Inactive>}
+      <Active onClick={() => handleBtnClick('evening')}>저녁</Active> : 
+      <Inactive onClick={() => handleBtnClick('evening')}>저녁</Inactive>}
     {activeBtn === 'health' ? 
-      <Active onClick={() => handleBtnClick('health')}>Health</Active> : 
-      <Inactive onClick={() => handleBtnClick('health')}>Health</Inactive>}
+      <Active onClick={() => handleBtnClick('health')}>건강</Active> : 
+      <Inactive onClick={() => handleBtnClick('health')}>건강</Inactive>}
     {activeBtn === 'mood' ? 
-      <Active onClick={() => handleBtnClick('mood')}>Feeling</Active> : 
-      <Inactive onClick={() => handleBtnClick('mood')}>Feeling</Inactive>}
+      <Active onClick={() => handleBtnClick('mood')}>기분</Active> : 
+      <Inactive onClick={() => handleBtnClick('mood')}>기분</Inactive>}
   </Routinebtn>
 );
 

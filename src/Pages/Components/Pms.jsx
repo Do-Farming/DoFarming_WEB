@@ -92,35 +92,35 @@ export const Pms = () => {
 
   return (
     <MainBox>
-      <MTxt1>PMS</MTxt1>
-      <MTxt2>It's also good to lie down on the sofa and have a <br />comfortable time.</MTxt2>
+      <MTxt1>자기관리 (PMS)</MTxt1>
+      <MTxt2>소파에 누워 편안한 시간을 보내는 것도 좋아요.</MTxt2>
       <Selectbox>
-        <Txtbox>Drinking a glass of water</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drinking a glass of water')}>Add</SelectboxBtn>
+        <Txtbox>물 한 잔 마시기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Drinking a glass of water')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Taking painkillers</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking painkillers')}>Add</SelectboxBtn>
+        <Txtbox>진통제 먹기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking painkillers')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Turn off phone notifications</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Turn off phone notifications')}>Add</SelectboxBtn>
+        <Txtbox>전화 알림 끄기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Turn off phone notifications')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Drinking hot coco</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drinking hot coco')}>Add</SelectboxBtn>
+        <Txtbox>핫초코 마시기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Drinking hot coco')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Taking a nap</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking a nap')}>Add</SelectboxBtn>
+        <Txtbox>낮잠 자기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Taking a nap')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Geting snacks ready</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Geting snacks ready')}>Add</SelectboxBtn>
+        <Txtbox>간식 준비</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Geting snacks ready')}>준비</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>Watching movie</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Watching movie')}>Add</SelectboxBtn>
+        <Txtbox>영화 보기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('Watching movie')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

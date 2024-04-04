@@ -115,8 +115,8 @@ const Login2 = () => {
     <Login2Container>
       <TextContainer>
         <p>
-          <strong>Body</strong> and <strong>Mind</strong><br />
-          The first step to take <br />care of your health!
+          <strong>몸</strong> 과 <strong>마음</strong><br />
+          건강하게 챙기는 첫 단계 !
         </p>
       </TextContainer>
       <StyledGoogleLoginButton onClick={handleGoogleLogin} />
