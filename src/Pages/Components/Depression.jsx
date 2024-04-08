@@ -100,23 +100,23 @@ export const Depression = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>내 감정을 그대로 응시하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Staring at my emotions as they are')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('내 감정을 그대로 응시하기<')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>오늘의 기분 쓰기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Writing about today's mood")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("오늘의 기분 쓰기")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>오늘 하루 감사일기 쓰기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Writing a gratitude journal')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('오늘 하루 감사일기 쓰기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>좋아하는 음악 듣기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Listening to fav song')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('좋아하는 음악 듣기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>산책하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking a walk')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('산책하기')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

@@ -122,27 +122,27 @@ export const Jogging = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>물 마시기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drink water')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('물 마시기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>간단한 간식 섭취</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Eating light snack')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('간단한 간식 섭취')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>이어폰, 물 챙기기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Prepare water n earphone')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('이어폰, 물 챙기기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>워밍업 스트레칭</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Warm up')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('워밍업 스트레칭')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>러닝</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Running')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('러닝')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>샤워하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking shower')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('샤워하기')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

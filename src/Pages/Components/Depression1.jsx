@@ -101,35 +101,35 @@ export const Depression1 = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>침대 정리</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Making the bed")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("침대 정리")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>커튼 열기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Opening the curtain")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("커튼 열기")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>창문 열기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Opening a window")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("창문 열기")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>물 마시기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Drinking water")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("물 마시기")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>이 닦기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Brushing teeth")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("이 닦기")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>감정 적기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Writing down your emotions")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("감정 적기")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>오늘의 작은 목표 적어보기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Write down today's goals")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("오늘의 작은 목표 적어보기")}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>호흡 운동하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick("Breath in and out")}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick("호흡 운동하기")}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
