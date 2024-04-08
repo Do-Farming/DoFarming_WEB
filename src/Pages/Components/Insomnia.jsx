@@ -122,23 +122,23 @@ export const Insomnia = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>아로마 오일 + 가습기 켜기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Aroma Oil + Humidifier')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('아로마 오일 + 가습기 켜기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>조명 어둡게</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('In a dim light')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('조명 어둡게')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>따뜻한 차 마시기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drinking hot tea')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('따뜻한 차 마시기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>가벼운 스트레칭</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Light stretching')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('가벼운 스트레칭')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>ASMR 듣기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Listening to ASMR')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('ASMR 듣기')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

@@ -102,23 +102,23 @@ export const Family = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>가족들과 포옹하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Hugging your family')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('가족들과 포옹하기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>오늘 어땠어? 물어보기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Sharing a day')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('오늘 어땠어? 물어보기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>저녁 식사</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Preparing dinner')}>추가</SelectboxBtn>
+        <Txtbox>저녁 식사 준비하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('저녁 식사 준비하기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
-        <Txtbox>저녁 식사</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Dinner with family')}>추가</SelectboxBtn>
+        <Txtbox>가족들과 저녁 식사하기</Txtbox>
+        <SelectboxBtn onClick={() => handleAddClick('가족들과 저녁 식사하기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>고마움 표현하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Expressing gratitude')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('고마움 표현하기')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>

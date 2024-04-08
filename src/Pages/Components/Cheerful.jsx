@@ -100,23 +100,23 @@ export const Cheerful = () => {
       </MTxt2>
       <Selectbox>
         <Txtbox>비타민 섭취</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking vitamins')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('비타민 섭취')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>햇빛 보기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Getting sunlight')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('햇빛 보기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>스트레칭 하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Stretching')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('스트레칭 하기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>오늘 할 일 체크하기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Check to do')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('오늘 할 일 체크하기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>밖으로 나가기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Go outside')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('밖으로 나가기')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
