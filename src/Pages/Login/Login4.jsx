@@ -97,7 +97,7 @@ const Login4 = () => {
 
   const NicknameCheck = (e) => {
     const input = e.target.value;
-    const valid = /^[A-Za-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); 
+    const valid = /^[A-Za-z1-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{0,12}$/.test(input); 
     
     if (valid) {
       setNickname(input);
@@ -120,6 +120,11 @@ const Login4 = () => {
       setAge(input);
     } else {
       alert("The age must be no more than three digits.");
+    }
+
+    if (input === "0") {
+      alert("The age cannot be set to 0.");
+      return;
     }
   };
   
@@ -177,7 +182,7 @@ const Login4 = () => {
       <InputContainer1>
         <form id="myInfo">
           <Input type="text" placeholder="닉네임" value={Nickname} onChange={NicknameCheck} onBlur={NicknameCheck} /><br />
-          <Input type="text" placeholder="나이" value={Age} onChange={AgeCheck} />
+          <Input type="text" placeholder="나이" value={Age} onChange={AgeCheck} onBlur={AgeCheck} />
         </form>
       </InputContainer1>
 

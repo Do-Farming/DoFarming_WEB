@@ -193,7 +193,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
   const addRoutine = async () => {
     const token = localStorage.getItem("authToken");
     const content = "";
-  
+
     try {
       const response = await axios.post(
         `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}?trackId=${encodeURIComponent(
@@ -207,9 +207,9 @@ const TodoSection2 = ({ selectedTrackId }) => {
           },
         }
       );
-  
+
       if (response.status === 200) {
-        fetchRoutines();
+        setRoutineList(prevRoutines => [...prevRoutines, response.data]);
       } else {
         console.error("루틴 추가 실패:", response.statusText);
       }
@@ -217,13 +217,13 @@ const TodoSection2 = ({ selectedTrackId }) => {
       console.error("루틴 추가 오류:", error);
     }
   };
-  
+
   const fetchRoutines = async () => {
     const token = localStorage.getItem("authToken");
   
     try {
       const response = await axios.get(
-        `https://dofagit resetrming.duckdns.org/api/v1/routine/${selectedTrackId}`,
+        `https://dofarming.duckdns.org/api/v1/routine/${selectedTrackId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -298,7 +298,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
   }, [selectedTrackId]);
 
   return (
-  <TodoSection2Wrap>
+  <TodoSection2Wrap style={{ fontWeight: 100 }}>
       {!hasRoutine && <Todoselect1 />}
       {hasRoutine && (
         <>
@@ -325,7 +325,7 @@ const TodoSection2 = ({ selectedTrackId }) => {
             </CheckboxContainer>
           ))}
           <TodoAddRoutineBtn onClick={addRoutine}>
-            + 루틴 추가하기
+            + Add Routine
           </TodoAddRoutineBtn>
         </>
       )}
