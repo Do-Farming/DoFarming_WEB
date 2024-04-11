@@ -210,7 +210,7 @@ const Profile = () => {
             }
             
             if (age === "0") {
-                alert("The age cannot be set to 0.");
+                alert("사용자 나이를 0으로 설정할 수 없습니다.");
                 return;
             }
 
@@ -226,7 +226,7 @@ const Profile = () => {
         if (valid) {
           setnickname(input);
         } else {
-          alert("Nicknames must be at least 1 to 12 characters, including English, Korean, and numbers, and must not contain special symbols.");
+          alert("닉네임은 영문, 한글, 숫자를 포함하여 1~12자 이상이어야 하며, 특수기호를 포함할 수 없습니다.");
         }
     };
 
@@ -234,7 +234,7 @@ const Profile = () => {
         const input = e.target.value;
       
         if (isNaN(input)) {
-          alert("Only numbers can be entered.");
+          alert("숫자만 입력해주세요.");
           return;
         }
       
@@ -243,11 +243,11 @@ const Profile = () => {
         if (valid) {
           setage(input);
         } else {
-          alert("The age must be no more than three digits.");
+          alert("사용자 나이는 3자리 수 이상의 수를 가질 수 없습니다.");
         }
     
         if (input === "0") {
-          alert("The age cannot be set to 0.");
+          alert("사용자 나이를 0으로 설정할 수 없습니다.");
           return;
         }
     };

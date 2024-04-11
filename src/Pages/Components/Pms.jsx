@@ -96,31 +96,31 @@ export const Pms = () => {
       <MTxt2>소파에 누워 편안한 시간을 보내는 것도 좋아요.</MTxt2>
       <Selectbox>
         <Txtbox>물 한 잔 마시기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drinking a glass of water')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('물 한 잔 마시기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>진통제 먹기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking painkillers')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('진통제 먹기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>전화 알림 끄기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Turn off phone notifications')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('전화 알림 끄기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>핫초코 마시기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Drinking hot coco')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('핫초코 마시기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>낮잠 자기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Taking a nap')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('낮잠 자기')}>추가</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>간식 준비</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Geting snacks ready')}>준비</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('간식 준비')}>준비</SelectboxBtn>
       </Selectbox>
       <Selectbox>
         <Txtbox>영화 보기</Txtbox>
-        <SelectboxBtn onClick={() => handleAddClick('Watching movie')}>추가</SelectboxBtn>
+        <SelectboxBtn onClick={() => handleAddClick('영화 보기')}>추가</SelectboxBtn>
       </Selectbox>
       {showModal && <Modal selectedRoutine={selectedRoutine} onClose={handleCloseModal} />}
     </MainBox>
