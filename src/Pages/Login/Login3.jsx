@@ -110,7 +110,7 @@ const Login3 = () => {
 
       const apiUrl = 'https://dofarming.duckdns.org/api/v1/user/keywords';
 
-      await axios.patch(apiUrl, keywords, {
+      await axios.post(apiUrl, keywords, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
